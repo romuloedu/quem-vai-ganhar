@@ -93,7 +93,7 @@ body {{
 
 .number-hero {{
   line-height: 0.85;
-  margin-bottom: 18pt;
+  margin-bottom: 8pt;
 }}
 
 .number-big {{
@@ -107,6 +107,15 @@ body {{
   font-size: 84pt;
   font-weight: 700;
   color: #f5c518;
+}}
+
+.number-anchor {{
+  font-size: 28pt;
+  font-weight: 700;
+  color: #f0f0ee;
+  text-transform: uppercase;
+  letter-spacing: 2pt;
+  margin-bottom: 22pt;
 }}
 
 /* contexto: cinza claro legível */
@@ -198,6 +207,7 @@ body {{
   <div class="number-hero">
     <span class="number-big">23</span><span class="number-unit">%</span>
   </div>
+  <p class="number-anchor">de chance de chegar à final</p>
 
   <p class="number-context">
     Mais do que <strong>França</strong> ou <strong>Espanha.</strong><br>
