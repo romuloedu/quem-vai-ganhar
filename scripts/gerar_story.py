@@ -1,5 +1,5 @@
 import base64, os
-from weasyprint import HTML, CSS
+from weasyprint import HTML
 from pdf2image import convert_from_path
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -42,163 +42,132 @@ body {{
   font-family: 'Oswald', sans-serif;
   color: #f0f0ee;
   overflow: hidden;
-  position: relative;
 }}
 
-/* barra superior verde */
 .top-bar {{
   width: 100%;
-  height: 4pt;
+  height: 5pt;
   background: #00a84f;
 }}
 
 .inner {{
-  padding: 52pt 56pt 0 56pt;
+  padding: 64pt 60pt 0 60pt;
   display: flex;
   flex-direction: column;
-  height: calc(1440pt - 4pt);
+  height: calc(1440pt - 5pt);
 }}
 
-/* kicker */
 .kicker {{
-  font-size: 11pt;
+  font-size: 14pt;
   font-weight: 400;
-  letter-spacing: 5pt;
+  letter-spacing: 6pt;
   text-transform: uppercase;
   color: #00a84f;
-  margin-bottom: 18pt;
-  margin-top: 36pt;
+  margin-bottom: 28pt;
+  margin-top: 20pt;
 }}
 
-/* headline */
-.headline {{
-  font-size: 80pt;
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 0.92;
-  letter-spacing: -1pt;
-  color: #f0f0ee;
-  margin-bottom: 10pt;
-}}
-
-.headline span {{
-  color: #f5c518;
-}}
-
-/* subtítulo */
-.subtitle {{
-  font-size: 18pt;
+.intro {{
+  font-size: 22pt;
   font-weight: 400;
   color: #888;
   line-height: 1.5;
-  max-width: 580pt;
-  margin-top: 14pt;
+  margin-bottom: 56pt;
 }}
 
-/* divisor */
-.divider {{
-  width: 48pt;
-  height: 3pt;
-  background: #00a84f;
-  margin: 44pt 0;
+.number-block {{
+  margin-bottom: 20pt;
 }}
 
-/* bloco de stats */
-.stats {{
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  margin-bottom: 44pt;
+.number-label {{
+  font-size: 16pt;
+  font-weight: 400;
+  letter-spacing: 2pt;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 8pt;
 }}
 
-.stat-row {{
-  display: flex;
-  align-items: baseline;
-  gap: 16pt;
-  padding: 20pt 0;
-  border-bottom: 1pt solid #1e1e1e;
-}}
-
-.stat-row:first-child {{
-  border-top: 1pt solid #1e1e1e;
-}}
-
-.stat-num {{
-  font-size: 48pt;
+.number-big {{
+  font-size: 220pt;
   font-weight: 700;
-  line-height: 1;
-  min-width: 160pt;
+  line-height: 0.85;
+  color: #f5c518;
+  letter-spacing: -4pt;
 }}
 
-.stat-num.green {{ color: #00a84f; }}
-.stat-num.yellow {{ color: #f5c518; }}
-.stat-num.orange {{ color: #e07b39; }}
+.number-unit {{
+  font-size: 72pt;
+  font-weight: 700;
+  color: #f5c518;
+  letter-spacing: -2pt;
+}}
 
-.stat-desc {{
-  font-size: 15pt;
+.number-context {{
+  font-size: 26pt;
   font-weight: 400;
   color: #999;
   line-height: 1.4;
+  margin-top: 24pt;
+  max-width: 620pt;
 }}
 
-/* spacer */
+.number-context strong {{
+  color: #f0f0ee;
+  font-weight: 700;
+}}
+
+.divider {{
+  width: 56pt;
+  height: 4pt;
+  background: #00a84f;
+  margin: 52pt 0;
+}}
+
+.question {{
+  font-size: 38pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.05;
+  color: #f0f0ee;
+  max-width: 660pt;
+}}
+
+.question span {{
+  color: #f5c518;
+}}
+
 .spacer {{ flex: 1; }}
 
-/* CTA */
-.cta-block {{
-  background: #0d0d0d;
-  border: 1pt solid #1e1e1e;
-  border-left: 3pt solid #00a84f;
-  padding: 28pt 32pt;
-  margin-bottom: 0;
-}}
-
-.cta-label {{
-  font-size: 10pt;
-  font-weight: 400;
-  letter-spacing: 4pt;
-  text-transform: uppercase;
-  color: #555;
-  margin-bottom: 10pt;
-}}
-
-.cta-url {{
-  font-size: 18pt;
-  font-weight: 700;
-  color: #f0f0ee;
-  letter-spacing: 0.5pt;
-}}
-
-/* rodapé */
 .footer {{
-  padding: 28pt 0 44pt 0;
+  padding: 32pt 0 48pt 0;
+  border-top: 1pt solid #1e1e1e;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }}
 
 .author-name {{
-  font-size: 13pt;
+  font-size: 17pt;
   font-weight: 700;
   color: #f0f0ee;
-  letter-spacing: 1pt;
 }}
 
 .author-role {{
-  font-size: 10pt;
+  font-size: 13pt;
   font-weight: 400;
   color: #555;
-  margin-top: 4pt;
-  letter-spacing: 0.5pt;
+  margin-top: 5pt;
 }}
 
-.footer-badge {{
-  font-size: 9pt;
+.footer-tag {{
+  font-size: 12pt;
   font-weight: 400;
   letter-spacing: 3pt;
   text-transform: uppercase;
   color: #333;
   text-align: right;
+  line-height: 1.6;
 }}
 </style>
 </head>
@@ -210,44 +179,36 @@ body {{
 
   <p class="kicker">Copa do Mundo 2026</p>
 
-  <h1 class="headline">
-    Quem vai<br>ganhar a<br><span>Copa?</span>
-  </h1>
+  <p class="intro">
+    Rodei 100 mil simulações do torneio.<br>Um número me surpreendeu.
+  </p>
 
-  <p class="subtitle">
-    Rodei 100 mil simulações do torneio.<br>Os números dizem mais do que qualquer palpite.
+  <div class="number-block">
+    <p class="number-label">Chance do Brasil chegar à final</p>
+    <div>
+      <span class="number-big">23</span><span class="number-unit">%</span>
+    </div>
+  </div>
+
+  <p class="number-context">
+    Mais do que <strong>França</strong> ou <strong>Espanha.</strong><br>
+    Mas e a chance de ser campeão?<br>Essa é outra história.
   </p>
 
   <div class="divider"></div>
 
-  <div class="stats">
-    <div class="stat-row">
-      <span class="stat-num green">8,7%</span>
-      <span class="stat-desc">de chance do Brasil<br>ser hexacampeão</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-num yellow">23%</span>
-      <span class="stat-desc">de chance do Brasil<br>chegar à final</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-num orange">3%</span>
-      <span class="stat-desc">de chance de ter<br>Brasil x Argentina na final</span>
-    </div>
-  </div>
+  <p class="question">
+    Quem vai<br>ganhar a<br><span>Copa?</span>
+  </p>
 
   <div class="spacer"></div>
-
-  <div class="cta-block">
-    <p class="cta-label">Acesse o projeto</p>
-    <p class="cta-url">romuloedu.github.io/quem-vai-ganhar</p>
-  </div>
 
   <div class="footer">
     <div>
       <p class="author-name">Romulo Eduardo</p>
       <p class="author-role">Data Science &amp; Analytics · USP/Esalq</p>
     </div>
-    <p class="footer-badge">Monte Carlo<br>+ Regressão Logística</p>
+    <p class="footer-tag">Monte Carlo<br>Regressão Logística</p>
   </div>
 
 </div>
