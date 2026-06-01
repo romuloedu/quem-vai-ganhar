@@ -44,3 +44,7 @@ ehthumbs.db
 *.log
 *.tmp
 *.bak
+
+# Artefatos gerados pelo script de story
+story.pdf
+story.png
