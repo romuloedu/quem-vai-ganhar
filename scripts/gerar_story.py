@@ -10,242 +10,186 @@ def font_b64(path):
 BOLD = font_b64("/tmp/oswald-bold.woff2")
 REG  = font_b64("/tmp/oswald-regular.woff2")
 
-BASE_CSS = f"""
+FONTS = f"""
 @font-face {{
-  font-family: 'Oswald';
-  font-weight: 700;
+  font-family: 'Oswald'; font-weight: 700;
   src: url('data:font/woff2;base64,{BOLD}') format('woff2');
 }}
 @font-face {{
-  font-family: 'Oswald';
-  font-weight: 400;
+  font-family: 'Oswald'; font-weight: 400;
   src: url('data:font/woff2;base64,{REG}') format('woff2');
 }}
-@page {{ size: 810pt 1440pt; margin: 0; }}
-*, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
-body {{
+"""
+
+BASE_RESET = """
+@page { size: 810pt 1440pt; margin: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
   width: 810pt; height: 1440pt;
   background: #111111;
   font-family: 'Oswald', sans-serif;
-  color: #f0f0ee;
-  overflow: hidden;
+  color: #f0f0ee; overflow: hidden;
   display: flex; flex-direction: column;
-}}
-.top-bar {{ width: 100%; height: 5pt; background: #00a84f; margin-top: 187pt; flex-shrink: 0; }}
-.inner {{
-  flex: 1; display: flex; flex-direction: column;
-  padding: 44pt 64pt 0 64pt; min-height: 0;
-}}
-.kicker {{
+}
+.top-bar { width: 100%; height: 5pt; background: #00a84f; margin-top: 187pt; flex-shrink: 0; }
+.kicker {
   font-size: 14pt; font-weight: 400; letter-spacing: 6pt;
-  text-transform: uppercase; color: #00a84f; margin-bottom: 20pt;
-}}
-.intro {{ font-size: 23pt; font-weight: 400; color: #aaa; line-height: 1.45; margin-bottom: 44pt; }}
-.number-label {{ font-size: 22pt; font-weight: 400; color: #ccc; margin-bottom: 6pt; }}
-.number-hero {{ line-height: 0.85; margin-bottom: 8pt; }}
-.number-big {{ font-size: 240pt; font-weight: 700; color: #f5c518; letter-spacing: -6pt; }}
-.number-unit {{ font-size: 84pt; font-weight: 700; color: #f5c518; }}
-.number-anchor {{
-  font-size: 28pt; font-weight: 700; color: #f0f0ee;
-  text-transform: uppercase; letter-spacing: 2pt; margin-bottom: 22pt;
-}}
-.number-context {{ font-size: 25pt; font-weight: 400; color: #aaa; line-height: 1.45; }}
-.number-context strong {{ color: #f0f0ee; font-weight: 700; }}
-.flex-gap {{ flex: 1; min-height: 24pt; }}
-.divider {{ width: 56pt; height: 4pt; background: #00a84f; margin-bottom: 32pt; flex-shrink: 0; }}
-.question {{
-  font-size: 88pt; font-weight: 700; text-transform: uppercase;
-  line-height: 0.9; color: #f0f0ee; letter-spacing: -1pt; flex-shrink: 0;
-}}
-.question span {{ color: #f5c518; }}
-.cta-zone {{
-  flex-shrink: 0; margin: 32pt 64pt 187pt 64pt;
-  border: 1.5pt solid #2a2a2a; border-left: 3pt solid #00a84f;
-  padding: 22pt 28pt;
-  display: flex; align-items: center; justify-content: space-between; gap: 16pt;
-}}
-.cta-text {{ font-size: 20pt; font-weight: 400; color: #888; line-height: 1.4; }}
-.cta-text strong {{ display: block; font-size: 22pt; font-weight: 700; color: #f0f0ee; margin-bottom: 4pt; }}
-.cta-arrow {{ font-size: 32pt; font-weight: 700; color: #00a84f; flex-shrink: 0; }}
+  text-transform: uppercase; color: #00a84f; margin-bottom: 24pt;
+}
+.flex-gap { flex: 1; }
 """
 
 # ─────────────────────────────────────────────
-# STORY 1 — Brasil vai à final?
+# STORY 1 — O gancho: 23%
 # ─────────────────────────────────────────────
-S1 = f"""<!DOCTYPE html><html><head><meta charset="UTF-8">
-<style>{BASE_CSS}</style></head><body>
+S1 = f"""<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+{FONTS}{BASE_RESET}
+.inner {{
+  flex: 1; display: flex; flex-direction: column;
+  padding: 48pt 64pt 0 64pt;
+}}
+.intro {{
+  font-size: 26pt; font-weight: 400; color: #aaa;
+  line-height: 1.45; margin-bottom: 52pt;
+}}
+.number-label {{
+  font-size: 22pt; font-weight: 400; color: #ccc; margin-bottom: 6pt;
+}}
+.number-hero {{ line-height: 0.85; margin-bottom: 10pt; }}
+.number-big {{ font-size: 260pt; font-weight: 700; color: #f5c518; letter-spacing: -6pt; }}
+.number-unit {{ font-size: 90pt; font-weight: 700; color: #f5c518; }}
+.number-anchor {{
+  font-size: 28pt; font-weight: 700; color: #f0f0ee;
+  text-transform: uppercase; letter-spacing: 2pt;
+}}
+.teaser {{
+  font-size: 24pt; font-weight: 400; color: #555;
+  margin-top: 20pt; line-height: 1.4;
+}}
+.footer-bar {{
+  flex-shrink: 0; height: 187pt;
+  display: flex; align-items: center;
+  padding: 0 64pt;
+  border-top: 1pt solid #1e1e1e;
+}}
+.footer-label {{
+  font-size: 14pt; font-weight: 400; letter-spacing: 3pt;
+  text-transform: uppercase; color: #333;
+}}
+</style></head><body>
 <div class="top-bar"></div>
 <div class="inner">
   <p class="kicker">Copa do Mundo 2026</p>
-  <p class="intro">Rodei 100 mil simulações do torneio.<br>Um número me surpreendeu.</p>
+  <p class="intro">Rodei 100 mil simulações do torneio<br>e um número me surpreendeu.</p>
   <p class="number-label">O Brasil vai à final da Copa?</p>
   <div class="number-hero">
     <span class="number-big">23</span><span class="number-unit">%</span>
   </div>
   <p class="number-anchor">de chance de chegar à final</p>
-  <p class="number-context">
-    É mais do que <strong>França</strong> e <strong>Espanha.</strong><br>
-    Mas e a chance de ser campeão?<br>
-    Essa é outra história.
-  </p>
+  <p class="teaser">Mas será que chega lá para ganhar?</p>
   <div class="flex-gap"></div>
-  <div class="divider"></div>
-  <p class="question">Quem vai<br>ganhar a<br><span>Copa?</span></p>
 </div>
-<div class="cta-zone">
-  <div class="cta-text">
-    <strong>Ver as previsões completas</strong>
-    Toque na etiqueta para acessar
-  </div>
-  <div class="cta-arrow">&#8599;</div>
+<div class="footer-bar">
+  <p class="footer-label">Arraste para ver</p>
 </div>
 </body></html>"""
 
 # ─────────────────────────────────────────────
-# STORY 2 — E de ser hexacampeão?
+# STORY 2 — A tensão: Quem vai ganhar?
 # ─────────────────────────────────────────────
-S2 = f"""<!DOCTYPE html><html><head><meta charset="UTF-8">
-<style>{BASE_CSS}</style></head><body>
+S2 = f"""<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+{FONTS}{BASE_RESET}
+.inner {{
+  flex: 1; display: flex; flex-direction: column;
+  padding: 48pt 64pt 0 64pt;
+}}
+.setup {{
+  font-size: 26pt; font-weight: 400; color: #aaa;
+  line-height: 1.5; margin-bottom: 52pt;
+}}
+.divider {{ width: 56pt; height: 4pt; background: #00a84f; margin-bottom: 44pt; }}
+.question {{
+  font-size: 96pt; font-weight: 700; text-transform: uppercase;
+  line-height: 0.9; color: #f0f0ee; letter-spacing: -1pt;
+}}
+.question span {{ color: #f5c518; }}
+.footer-bar {{
+  flex-shrink: 0; height: 187pt;
+  display: flex; align-items: center;
+  padding: 0 64pt;
+  border-top: 1pt solid #1e1e1e;
+}}
+.footer-label {{
+  font-size: 14pt; font-weight: 400; letter-spacing: 3pt;
+  text-transform: uppercase; color: #333;
+}}
+</style></head><body>
 <div class="top-bar"></div>
 <div class="inner">
   <p class="kicker">Copa do Mundo 2026</p>
-  <p class="intro">Chegar à final é uma coisa.<br>Mas levantar a taça é outra.</p>
-  <p class="number-label">E de ser hexacampeão?</p>
-  <div class="number-hero">
-    <span class="number-big">8,7</span><span class="number-unit">%</span>
-  </div>
-  <p class="number-anchor">de chance de ser campeão</p>
-  <p class="number-context">
-    Em 100 simulações, o Brasil levanta<br>
-    menos de 9 vezes. Mas ainda é o<br>
-    <strong>3º maior favorito</strong> entre 48 seleções.
+  <p class="setup">
+    Mas qual a chance do Brasil<br>
+    vencer a final e ser campeão?<br>
+    Os dados têm uma resposta.
   </p>
-  <div class="flex-gap"></div>
   <div class="divider"></div>
   <p class="question">Quem vai<br>ganhar a<br><span>Copa?</span></p>
+  <div class="flex-gap"></div>
 </div>
-<div class="cta-zone">
-  <div class="cta-text">
-    <strong>Ver as previsões completas</strong>
-    Toque na etiqueta para acessar
-  </div>
-  <div class="cta-arrow">&#8599;</div>
+<div class="footer-bar">
+  <p class="footer-label">Arraste para ver</p>
 </div>
 </body></html>"""
 
 # ─────────────────────────────────────────────
-# STORY 3 — CTA puro
+# STORY 3 — O CTA: acesse as previsões
 # ─────────────────────────────────────────────
-CTA_CSS = f"""
-@font-face {{
-  font-family: 'Oswald';
-  font-weight: 700;
-  src: url('data:font/woff2;base64,{BOLD}') format('woff2');
-}}
-@font-face {{
-  font-family: 'Oswald';
-  font-weight: 400;
-  src: url('data:font/woff2;base64,{REG}') format('woff2');
-}}
-@page {{ size: 810pt 1440pt; margin: 0; }}
-*, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
-body {{
-  width: 810pt; height: 1440pt;
-  background: #111111;
-  font-family: 'Oswald', sans-serif;
-  color: #f0f0ee;
-  overflow: hidden;
-  display: flex; flex-direction: column;
-}}
-.top-bar {{ width: 100%; height: 5pt; background: #00a84f; margin-top: 187pt; flex-shrink: 0; }}
+S3 = f"""<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+{FONTS}{BASE_RESET}
 .inner {{
-  flex: 1; display: flex; flex-direction: column; justify-content: space-between;
-  padding: 52pt 64pt 0 64pt;
-}}
-.kicker {{
-  font-size: 14pt; font-weight: 400; letter-spacing: 6pt;
-  text-transform: uppercase; color: #00a84f; margin-bottom: 36pt;
+  flex: 1; display: flex; flex-direction: column;
+  padding: 48pt 64pt 0 64pt;
 }}
 .headline {{
-  font-size: 96pt; font-weight: 700; text-transform: uppercase;
-  line-height: 0.9; letter-spacing: -1pt;
+  font-size: 80pt; font-weight: 700; text-transform: uppercase;
+  line-height: 0.9; letter-spacing: -1pt; margin-bottom: 32pt;
 }}
-.headline span {{ color: #f5c518; }}
+.headline span {{ color: #00a84f; }}
 .sub {{
   font-size: 26pt; font-weight: 400; color: #aaa;
-  line-height: 1.5; margin-top: 32pt; max-width: 640pt;
+  line-height: 1.5; max-width: 620pt;
 }}
-.sub strong {{ color: #f0f0ee; font-weight: 700; }}
-.stats-row {{
-  display: flex; gap: 0;
-  border-top: 1pt solid #1e1e1e;
-  margin-top: 40pt;
-}}
-.stat {{
-  flex: 1; padding: 24pt 0;
-  border-right: 1pt solid #1e1e1e;
-}}
-.stat:last-child {{ border-right: none; }}
-.stat-n {{
-  font-size: 44pt; font-weight: 700;
-  color: #f5c518; line-height: 1;
-}}
-.stat-d {{
-  font-size: 14pt; font-weight: 400;
-  color: #666; margin-top: 6pt; line-height: 1.3;
-}}
-.spacer {{ flex: 1; }}
-/* zona de etiqueta — grande, ocupa o espaço central */
 .link-zone {{
   flex-shrink: 0;
   margin: 0 64pt 187pt 64pt;
+  background: #0d0d0d;
   border: 1.5pt solid #2a2a2a;
   border-left: 3pt solid #00a84f;
   padding: 36pt 36pt;
   display: flex; align-items: center;
   justify-content: space-between; gap: 16pt;
-  background: #0d0d0d;
 }}
 .link-label {{
   font-size: 13pt; font-weight: 400; letter-spacing: 4pt;
   text-transform: uppercase; color: #555; margin-bottom: 10pt;
 }}
 .link-title {{
-  font-size: 28pt; font-weight: 700; color: #f0f0ee; line-height: 1.2;
+  font-size: 30pt; font-weight: 700; color: #f0f0ee; line-height: 1.2;
 }}
 .link-arrow {{
-  font-size: 44pt; font-weight: 700; color: #00a84f; flex-shrink: 0;
+  font-size: 48pt; font-weight: 700; color: #00a84f; flex-shrink: 0;
 }}
-"""
-
-S3 = f"""<!DOCTYPE html><html><head><meta charset="UTF-8">
-<style>{CTA_CSS}</style></head><body>
+</style></head><body>
 <div class="top-bar"></div>
 <div class="inner">
-  <div>
-    <p class="kicker">Copa do Mundo 2026</p>
-    <h1 class="headline">As<br>previsões<br>estão no<br><span>ar.</span></h1>
-    <p class="sub">
-      <strong>72 jogos. 48 seleções.</strong><br>
-      100 mil simulações para calcular<br>
-      as chances de cada time em<br>cada fase do torneio.
-    </p>
-    <div class="stats-row">
-      <div class="stat">
-        <div class="stat-n">8,7%</div>
-        <div class="stat-d">Brasil<br>campeão</div>
-      </div>
-      <div class="stat" style="padding-left:20pt">
-        <div class="stat-n">23%</div>
-        <div class="stat-d">Brasil<br>na final</div>
-      </div>
-      <div class="stat" style="padding-left:20pt">
-        <div class="stat-n">3%</div>
-        <div class="stat-d">Clássico<br>na final</div>
-      </div>
-    </div>
-  </div>
-  <div class="spacer"></div>
+  <p class="kicker">Copa do Mundo 2026</p>
+  <h1 class="headline">As previsões<br>já estão<br><span>no ar.</span></h1>
+  <p class="sub">
+    72 jogos. 48 seleções.<br>
+    100 mil simulações.<br>
+    Tudo calculado antes<br>do apito inicial.
+  </p>
+  <div class="flex-gap"></div>
 </div>
 <div class="link-zone">
   <div>
