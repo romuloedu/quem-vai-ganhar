@@ -80,6 +80,7 @@ S1 = f"""<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
 <div class="top-bar"></div>
 <div class="inner">
   <p class="kicker">Copa do Mundo 2026</p>
+  <div class="flex-gap"></div>
   <p class="intro">Rodei 100 mil simulações do torneio<br>e um número me surpreendeu.</p>
   <p class="number-label">O Brasil vai à final da Copa?</p>
   <div class="number-hero">
@@ -127,6 +128,7 @@ S2 = f"""<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
 <div class="top-bar"></div>
 <div class="inner">
   <p class="kicker">Copa do Mundo 2026</p>
+  <div class="flex-gap"></div>
   <p class="setup">
     Mas qual a chance do Brasil<br>
     vencer a final e ser campeão?<br>
@@ -183,6 +185,7 @@ S3 = f"""<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
 <div class="top-bar"></div>
 <div class="inner">
   <p class="kicker">Copa do Mundo 2026</p>
+  <div class="flex-gap"></div>
   <h1 class="headline">As previsões<br>já estão<br><span>no ar.</span></h1>
   <p class="sub">
     72 jogos. 48 seleções.<br>
