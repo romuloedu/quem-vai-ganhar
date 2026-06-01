@@ -9,8 +9,11 @@ jobs:
     steps:
       - name: Verificar acesso à API
         run: |
-          echo "Testando endpoint de competições..."
-          curl -s -w "\nHTTP_STATUS:%{http_code}\n" \
-            "https://api.football-data.org/v4/competitions/WC/matches?status=SCHEDULED&limit=3" \
-            -H "X-Auth-Token: ${{ secrets.FOOTBALL_DATA_API_KEY }}" \
-            | python3 -m json.tool 2>/dev/null || echo "(resposta não é JSON válido)"
+          echo "=== RESPOSTA BRUTA ==="
+          RESPONSE=$(curl -s -w "\n---\nHTTP_STATUS:%{http_code}" \
+            "https://api.football-data.org/v4/competitions/WC/matches?limit=3" \
+            -H "X-Auth-Token: ${{ secrets.FOOTBALL_DATA_API_KEY }}")
+          echo "$RESPONSE"
+          echo ""
+          echo "=== STATUS ==="
+          echo "$RESPONSE" | grep "HTTP_STATUS"
