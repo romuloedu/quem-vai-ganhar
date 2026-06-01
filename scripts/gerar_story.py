@@ -12,6 +12,11 @@ def font_b64(path):
 BOLD = font_b64("/tmp/oswald-bold.woff2")
 REG  = font_b64("/tmp/oswald-regular.woff2")
 
+# Safe zone Instagram Story:
+# topo 250px (187pt) reservado para perfil/status
+# base 250px (187pt) reservado para resposta/botões
+# conteúdo útil: 1066pt de altura, com padding lateral de 60pt
+
 HTML_STORY = f"""<!DOCTYPE html>
 <html>
 <head>
@@ -46,35 +51,39 @@ body {{
   flex-direction: column;
 }}
 
-/* barra verde topo */
+/* barra decorativa no topo — dentro da safe zone visual */
 .top-bar {{
   width: 100%;
   height: 5pt;
   background: #00a84f;
+  margin-top: 187pt;
   flex-shrink: 0;
 }}
 
-/* zona superior: kicker + intro + número */
-.zone-top {{
-  flex: 0 0 auto;
-  padding: 52pt 60pt 0 60pt;
+/* conteúdo principal — safe zone: 187pt top, 187pt bottom, 60pt lados */
+.inner {{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 44pt 64pt 0 64pt;
+  min-height: 0;
 }}
 
 .kicker {{
-  font-size: 13pt;
+  font-size: 14pt;
   font-weight: 400;
   letter-spacing: 6pt;
   text-transform: uppercase;
   color: #00a84f;
-  margin-bottom: 24pt;
+  margin-bottom: 20pt;
 }}
 
 .intro {{
-  font-size: 24pt;
+  font-size: 23pt;
   font-weight: 400;
   color: #777;
   line-height: 1.45;
-  margin-bottom: 52pt;
+  margin-bottom: 44pt;
 }}
 
 .number-label {{
@@ -83,33 +92,32 @@ body {{
   letter-spacing: 3pt;
   text-transform: uppercase;
   color: #444;
-  margin-bottom: 4pt;
+  margin-bottom: 2pt;
 }}
 
 .number-hero {{
   line-height: 0.85;
-  margin-bottom: 16pt;
+  margin-bottom: 18pt;
 }}
 
 .number-big {{
-  font-size: 260pt;
+  font-size: 240pt;
   font-weight: 700;
   color: #f5c518;
   letter-spacing: -6pt;
 }}
 
 .number-unit {{
-  font-size: 90pt;
+  font-size: 84pt;
   font-weight: 700;
   color: #f5c518;
 }}
 
 .number-context {{
-  font-size: 26pt;
+  font-size: 25pt;
   font-weight: 400;
   color: #888;
   line-height: 1.45;
-  max-width: 650pt;
 }}
 
 .number-context strong {{
@@ -117,46 +125,35 @@ body {{
   font-weight: 700;
 }}
 
-/* espaçador flexível entre zonas */
-.flex-gap {{ flex: 1; }}
-
-/* divisor */
-.divider-zone {{
-  flex: 0 0 auto;
-  padding: 0 60pt;
-}}
+.flex-gap {{ flex: 1; min-height: 32pt; }}
 
 .divider {{
   width: 56pt;
   height: 4pt;
   background: #00a84f;
-  margin-bottom: 44pt;
-}}
-
-/* zona inferior: pergunta grande */
-.zone-bottom {{
-  flex: 0 0 auto;
-  padding: 0 60pt 0 60pt;
+  margin-bottom: 36pt;
+  flex-shrink: 0;
 }}
 
 .question {{
-  font-size: 96pt;
+  font-size: 88pt;
   font-weight: 700;
   text-transform: uppercase;
   line-height: 0.9;
   color: #f0f0ee;
   letter-spacing: -1pt;
+  flex-shrink: 0;
 }}
 
 .question span {{
   color: #f5c518;
 }}
 
-/* rodapé */
+/* rodapé dentro da safe zone: margem inferior de 187pt */
 .footer {{
-  flex: 0 0 auto;
-  margin: 44pt 60pt 44pt 60pt;
-  padding-top: 24pt;
+  flex-shrink: 0;
+  margin: 36pt 64pt 187pt 64pt;
+  padding-top: 20pt;
   border-top: 1pt solid #1e1e1e;
   display: flex;
   align-items: center;
@@ -164,24 +161,24 @@ body {{
 }}
 
 .author-name {{
-  font-size: 18pt;
+  font-size: 20pt;
   font-weight: 700;
   color: #f0f0ee;
 }}
 
 .author-role {{
-  font-size: 13pt;
+  font-size: 15pt;
   font-weight: 400;
   color: #555;
   margin-top: 5pt;
 }}
 
 .footer-tag {{
-  font-size: 11pt;
+  font-size: 14pt;
   font-weight: 400;
-  letter-spacing: 3pt;
+  letter-spacing: 2pt;
   text-transform: uppercase;
-  color: #333;
+  color: #444;
   text-align: right;
   line-height: 1.7;
 }}
@@ -191,28 +188,28 @@ body {{
 
 <div class="top-bar"></div>
 
-<div class="zone-top">
+<div class="inner">
   <p class="kicker">Copa do Mundo 2026</p>
-  <p class="intro">Rodei 100 mil simulações do torneio.<br>Um número me surpreendeu.</p>
+
+  <p class="intro">
+    Rodei 100 mil simulações do torneio.<br>Um número me surpreendeu.
+  </p>
 
   <p class="number-label">Chance do Brasil chegar à final</p>
   <div class="number-hero">
     <span class="number-big">23</span><span class="number-unit">%</span>
   </div>
+
   <p class="number-context">
     Mais do que <strong>França</strong> ou <strong>Espanha.</strong><br>
     Mas e a chance de ser campeão?<br>
     Essa é outra história.
   </p>
-</div>
 
-<div class="flex-gap"></div>
+  <div class="flex-gap"></div>
 
-<div class="divider-zone">
   <div class="divider"></div>
-</div>
 
-<div class="zone-bottom">
   <p class="question">
     Quem vai<br>ganhar a<br><span>Copa?</span>
   </p>
