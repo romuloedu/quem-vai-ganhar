@@ -83,12 +83,12 @@ body {{
 
 /* label acima do número: um pouco mais claro que antes (#444 era ilegível) */
 .number-label {{
-  font-size: 14pt;
+  font-size: 22pt;
   font-weight: 400;
-  letter-spacing: 3pt;
-  text-transform: uppercase;
-  color: #666;
-  margin-bottom: 2pt;
+  letter-spacing: 1pt;
+  text-transform: none;
+  color: #ccc;
+  margin-bottom: 6pt;
 }}
 
 .number-hero {{
@@ -194,7 +194,7 @@ body {{
     Rodei 100 mil simulações do torneio.<br>Um número me surpreendeu.
   </p>
 
-  <p class="number-label">Chance do Brasil chegar à final</p>
+  <p class="number-label">O Brasil vai à final da Copa?</p>
   <div class="number-hero">
     <span class="number-big">23</span><span class="number-unit">%</span>
   </div>
