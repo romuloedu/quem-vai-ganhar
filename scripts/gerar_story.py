@@ -12,11 +12,6 @@ def font_b64(path):
 BOLD = font_b64("/tmp/oswald-bold.woff2")
 REG  = font_b64("/tmp/oswald-regular.woff2")
 
-# Safe zone Instagram Story:
-# topo 250px (187pt) reservado para perfil/status
-# base 250px (187pt) reservado para resposta/botões
-# conteúdo útil: 1066pt de altura, com padding lateral de 60pt
-
 HTML_STORY = f"""<!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +46,6 @@ body {{
   flex-direction: column;
 }}
 
-/* barra decorativa no topo — dentro da safe zone visual */
 .top-bar {{
   width: 100%;
   height: 5pt;
@@ -60,7 +54,6 @@ body {{
   flex-shrink: 0;
 }}
 
-/* conteúdo principal — safe zone: 187pt top, 187pt bottom, 60pt lados */
 .inner {{
   flex: 1;
   display: flex;
@@ -69,6 +62,7 @@ body {{
   min-height: 0;
 }}
 
+/* kicker: verde, leitura fácil */
 .kicker {{
   font-size: 14pt;
   font-weight: 400;
@@ -78,20 +72,22 @@ body {{
   margin-bottom: 20pt;
 }}
 
+/* intro: cinza claro suficiente para ler no fundo escuro */
 .intro {{
   font-size: 23pt;
   font-weight: 400;
-  color: #777;
+  color: #aaa;
   line-height: 1.45;
   margin-bottom: 44pt;
 }}
 
+/* label acima do número: um pouco mais claro que antes (#444 era ilegível) */
 .number-label {{
   font-size: 14pt;
   font-weight: 400;
   letter-spacing: 3pt;
   text-transform: uppercase;
-  color: #444;
+  color: #666;
   margin-bottom: 2pt;
 }}
 
@@ -113,10 +109,11 @@ body {{
   color: #f5c518;
 }}
 
+/* contexto: cinza claro legível */
 .number-context {{
   font-size: 25pt;
   font-weight: 400;
-  color: #888;
+  color: #aaa;
   line-height: 1.45;
 }}
 
@@ -125,13 +122,13 @@ body {{
   font-weight: 700;
 }}
 
-.flex-gap {{ flex: 1; min-height: 32pt; }}
+.flex-gap {{ flex: 1; min-height: 24pt; }}
 
 .divider {{
   width: 56pt;
   height: 4pt;
   background: #00a84f;
-  margin-bottom: 36pt;
+  margin-bottom: 32pt;
   flex-shrink: 0;
 }}
 
@@ -143,44 +140,46 @@ body {{
   color: #f0f0ee;
   letter-spacing: -1pt;
   flex-shrink: 0;
+  margin-bottom: 0;
 }}
 
 .question span {{
   color: #f5c518;
 }}
 
-/* rodapé dentro da safe zone: margem inferior de 187pt */
-.footer {{
+/* zona de etiqueta — espaço reservado para o link sticker do Instagram */
+.cta-zone {{
   flex-shrink: 0;
-  margin: 36pt 64pt 187pt 64pt;
-  padding-top: 20pt;
-  border-top: 1pt solid #1e1e1e;
+  margin: 32pt 64pt 187pt 64pt;
+  border: 1.5pt solid #2a2a2a;
+  border-left: 3pt solid #00a84f;
+  padding: 22pt 28pt;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16pt;
 }}
 
-.author-name {{
+.cta-text {{
   font-size: 20pt;
+  font-weight: 400;
+  color: #888;
+  line-height: 1.4;
+}}
+
+.cta-text strong {{
+  display: block;
+  font-size: 22pt;
   font-weight: 700;
   color: #f0f0ee;
+  margin-bottom: 4pt;
 }}
 
-.author-role {{
-  font-size: 15pt;
-  font-weight: 400;
-  color: #555;
-  margin-top: 5pt;
-}}
-
-.footer-tag {{
-  font-size: 14pt;
-  font-weight: 400;
-  letter-spacing: 2pt;
-  text-transform: uppercase;
-  color: #444;
-  text-align: right;
-  line-height: 1.7;
+.cta-arrow {{
+  font-size: 32pt;
+  font-weight: 700;
+  color: #00a84f;
+  flex-shrink: 0;
 }}
 </style>
 </head>
@@ -215,12 +214,12 @@ body {{
   </p>
 </div>
 
-<div class="footer">
-  <div>
-    <p class="author-name">Romulo Eduardo</p>
-    <p class="author-role">Data Science &amp; Analytics · USP/Esalq</p>
+<div class="cta-zone">
+  <div class="cta-text">
+    <strong>Ver as previsões completas</strong>
+    Toque na etiqueta para acessar
   </div>
-  <p class="footer-tag">Monte Carlo<br>Regressão Logística</p>
+  <div class="cta-arrow">&#8599;</div>
 </div>
 
 </body>
