@@ -42,74 +42,74 @@ body {{
   font-family: 'Oswald', sans-serif;
   color: #f0f0ee;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }}
 
+/* barra verde topo */
 .top-bar {{
   width: 100%;
   height: 5pt;
   background: #00a84f;
+  flex-shrink: 0;
 }}
 
-.inner {{
-  padding: 64pt 60pt 0 60pt;
-  display: flex;
-  flex-direction: column;
-  height: calc(1440pt - 5pt);
+/* zona superior: kicker + intro + número */
+.zone-top {{
+  flex: 0 0 auto;
+  padding: 52pt 60pt 0 60pt;
 }}
 
 .kicker {{
-  font-size: 14pt;
+  font-size: 13pt;
   font-weight: 400;
   letter-spacing: 6pt;
   text-transform: uppercase;
   color: #00a84f;
-  margin-bottom: 28pt;
-  margin-top: 20pt;
+  margin-bottom: 24pt;
 }}
 
 .intro {{
-  font-size: 22pt;
+  font-size: 24pt;
   font-weight: 400;
-  color: #888;
-  line-height: 1.5;
-  margin-bottom: 56pt;
-}}
-
-.number-block {{
-  margin-bottom: 20pt;
+  color: #777;
+  line-height: 1.45;
+  margin-bottom: 52pt;
 }}
 
 .number-label {{
-  font-size: 16pt;
+  font-size: 14pt;
   font-weight: 400;
-  letter-spacing: 2pt;
+  letter-spacing: 3pt;
   text-transform: uppercase;
-  color: #555;
-  margin-bottom: 8pt;
+  color: #444;
+  margin-bottom: 4pt;
+}}
+
+.number-hero {{
+  line-height: 0.85;
+  margin-bottom: 16pt;
 }}
 
 .number-big {{
-  font-size: 220pt;
+  font-size: 260pt;
   font-weight: 700;
-  line-height: 0.85;
   color: #f5c518;
-  letter-spacing: -4pt;
+  letter-spacing: -6pt;
 }}
 
 .number-unit {{
-  font-size: 72pt;
+  font-size: 90pt;
   font-weight: 700;
   color: #f5c518;
-  letter-spacing: -2pt;
 }}
 
 .number-context {{
   font-size: 26pt;
   font-weight: 400;
-  color: #999;
-  line-height: 1.4;
-  margin-top: 24pt;
-  max-width: 620pt;
+  color: #888;
+  line-height: 1.45;
+  max-width: 650pt;
 }}
 
 .number-context strong {{
@@ -117,30 +117,46 @@ body {{
   font-weight: 700;
 }}
 
+/* espaçador flexível entre zonas */
+.flex-gap {{ flex: 1; }}
+
+/* divisor */
+.divider-zone {{
+  flex: 0 0 auto;
+  padding: 0 60pt;
+}}
+
 .divider {{
   width: 56pt;
   height: 4pt;
   background: #00a84f;
-  margin: 52pt 0;
+  margin-bottom: 44pt;
+}}
+
+/* zona inferior: pergunta grande */
+.zone-bottom {{
+  flex: 0 0 auto;
+  padding: 0 60pt 0 60pt;
 }}
 
 .question {{
-  font-size: 38pt;
+  font-size: 96pt;
   font-weight: 700;
   text-transform: uppercase;
-  line-height: 1.05;
+  line-height: 0.9;
   color: #f0f0ee;
-  max-width: 660pt;
+  letter-spacing: -1pt;
 }}
 
 .question span {{
   color: #f5c518;
 }}
 
-.spacer {{ flex: 1; }}
-
+/* rodapé */
 .footer {{
-  padding: 32pt 0 48pt 0;
+  flex: 0 0 auto;
+  margin: 44pt 60pt 44pt 60pt;
+  padding-top: 24pt;
   border-top: 1pt solid #1e1e1e;
   display: flex;
   align-items: center;
@@ -148,7 +164,7 @@ body {{
 }}
 
 .author-name {{
-  font-size: 17pt;
+  font-size: 18pt;
   font-weight: 700;
   color: #f0f0ee;
 }}
@@ -161,13 +177,13 @@ body {{
 }}
 
 .footer-tag {{
-  font-size: 12pt;
+  font-size: 11pt;
   font-weight: 400;
   letter-spacing: 3pt;
   text-transform: uppercase;
   color: #333;
   text-align: right;
-  line-height: 1.6;
+  line-height: 1.7;
 }}
 </style>
 </head>
@@ -175,43 +191,41 @@ body {{
 
 <div class="top-bar"></div>
 
-<div class="inner">
-
+<div class="zone-top">
   <p class="kicker">Copa do Mundo 2026</p>
+  <p class="intro">Rodei 100 mil simulações do torneio.<br>Um número me surpreendeu.</p>
 
-  <p class="intro">
-    Rodei 100 mil simulações do torneio.<br>Um número me surpreendeu.
-  </p>
-
-  <div class="number-block">
-    <p class="number-label">Chance do Brasil chegar à final</p>
-    <div>
-      <span class="number-big">23</span><span class="number-unit">%</span>
-    </div>
+  <p class="number-label">Chance do Brasil chegar à final</p>
+  <div class="number-hero">
+    <span class="number-big">23</span><span class="number-unit">%</span>
   </div>
-
   <p class="number-context">
     Mais do que <strong>França</strong> ou <strong>Espanha.</strong><br>
-    Mas e a chance de ser campeão?<br>Essa é outra história.
+    Mas e a chance de ser campeão?<br>
+    Essa é outra história.
   </p>
+</div>
 
+<div class="flex-gap"></div>
+
+<div class="divider-zone">
   <div class="divider"></div>
+</div>
 
+<div class="zone-bottom">
   <p class="question">
     Quem vai<br>ganhar a<br><span>Copa?</span>
   </p>
-
-  <div class="spacer"></div>
-
-  <div class="footer">
-    <div>
-      <p class="author-name">Romulo Eduardo</p>
-      <p class="author-role">Data Science &amp; Analytics · USP/Esalq</p>
-    </div>
-    <p class="footer-tag">Monte Carlo<br>Regressão Logística</p>
-  </div>
-
 </div>
+
+<div class="footer">
+  <div>
+    <p class="author-name">Romulo Eduardo</p>
+    <p class="author-role">Data Science &amp; Analytics · USP/Esalq</p>
+  </div>
+  <p class="footer-tag">Monte Carlo<br>Regressão Logística</p>
+</div>
+
 </body>
 </html>
 """
