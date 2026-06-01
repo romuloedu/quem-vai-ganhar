@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jogos Copa 2026 · Previsões e Resultados</title>
+<meta name="description" content="Calendário de jogos da Copa do Mundo 2026 com previsões do modelo e resultados em tempo real.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{max-width:100%;overflow-x:hidden}
+body{
+  background:#111;color:#f0f0ee;
+  font-family:'Source Sans 3','Helvetica Neue',Arial,sans-serif;
+  font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{width:100%;max-width:880px;margin:0 auto;padding:0 24px}
+
+/* ── HEADER ── */
+header{background:#0d0d0d;border-bottom:3px solid #00a84f;padding:36px 0 30px}
+.back-link{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'Oswald',sans-serif;
+  font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;
+  color:#555;text-decoration:none;margin-bottom:18px;
+  transition:color .2s;
+}
+.back-link:hover{color:#999}
+.kicker{
+  font-family:'Oswald',sans-serif;
+  font-size:11px;font-weight:500;
+  letter-spacing:5px;text-transform:uppercase;
+  color:#00a84f;margin-bottom:12px;
+}
+header h1{
+  font-family:'Oswald',sans-serif;
+  font-weight:700;font-size:clamp(28px,5vw,52px);
+  line-height:1;text-transform:uppercase;letter-spacing:1px;
+}
+header h1 span{color:#f5c518}
+.header-sub{margin-top:10px;font-size:14px;color:#999;max-width:480px;line-height:1.6}
+.header-intro{
+  margin-top:18px;font-size:14px;color:#666;
+  max-width:540px;line-height:1.7;
+  border-left:2px solid #00a84f;padding-left:14px;
+}
+
+/* ── SCORE STRIP ── */
+.score-strip{
+  background:#0d0d0d;
+  border-bottom:1px solid #1e1e1e;
+  padding:10px 0;
+}
+.score-inner{
+  display:flex;align-items:center;gap:10px;
+  font-size:13px;color:#666;
+}
+.score-num{
+  font-family:'Oswald',sans-serif;
+  font-size:20px;font-weight:700;color:#00a84f;line-height:1;
+}
+
+/* ── DATE NAVIGATOR ── */
+.date-nav-outer{
+  position:sticky;top:0;z-index:20;
+  background:#111;
+  border-bottom:1px solid #1e1e1e;
+  padding:12px 0 8px;
+}
+.date-nav{
+  display:flex;align-items:center;gap:8px;
+}
+.date-arrow{
+  flex-shrink:0;width:44px;height:44px;
+  background:#1a1a1a;border:1px solid #2a2a2a;
+  color:#ccc;font-size:20px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .15s;line-height:1;
+  font-family:monospace;
+}
+.date-arrow:hover:not(:disabled){background:#252525}
+.date-arrow:disabled{color:#2e2e2e;cursor:default;border-color:#1e1e1e}
+.date-center{flex:1;text-align:center}
+.date-label{
+  font-family:'Oswald',sans-serif;
+  font-size:20px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.5px;
+  color:#f0f0ee;
+}
+.date-meta{font-size:11px;color:#555;margin-top:2px;letter-spacing:.5px}
+.hoje-row{text-align:center;margin-top:6px;height:18px}
+.hoje-btn{
+  font-family:'Oswald',sans-serif;
+  font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;
+  color:#444;cursor:pointer;background:none;border:none;padding:0;
+  transition:color .2s;
+}
+.hoje-btn:hover{color:#777}
+.hoje-btn.hidden{visibility:hidden}
+
+/* ── FILTRO TABS ── */
+.filter-bar{
+  border-bottom:1px solid #1e1e1e;
+  background:#111;
+  padding:12px 0 0;
+}
+.filter-tabs{
+  display:flex;gap:2px;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.filter-tabs::-webkit-scrollbar{display:none}
+.ftab{
+  flex-shrink:0;
+  font-family:'Oswald',sans-serif;
+  font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;
+  color:#555;background:none;border:none;cursor:pointer;
+  padding:8px 16px 10px;
+  border-bottom:2px solid transparent;
+  transition:color .15s,border-color .15s;
+}
+.ftab:hover{color:#999}
+.ftab.active{color:#f0f0ee;border-bottom-color:#00a84f}
+
+/* ── GRUPO GRID (modo Por Grupo) ── */
+.grupo-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:4px;padding:16px 0 0;
+}
+.grupo-chip{
+  font-family:'Oswald',sans-serif;
+  font-size:13px;font-weight:600;letter-spacing:1px;
+  text-transform:uppercase;text-align:center;
+  padding:10px 4px;background:#1a1a1a;border:1px solid #2a2a2a;
+  color:#777;cursor:pointer;
+  transition:background .15s,color .15s,border-color .15s;
+}
+.grupo-chip:hover{background:#222;color:#ccc}
+.grupo-chip.active{background:rgba(0,168,79,.12);color:#00a84f;border-color:rgba(0,168,79,.3)}
+
+/* ── TEAM SELECT (modo Por Seleção) ── */
+.team-select-wrap{padding:16px 0 0}
+.team-select{
+  width:100%;background:#1a1a1a;border:1px solid #2a2a2a;
+  color:#f0f0ee;padding:12px 14px;
+  font-family:'Source Sans 3',sans-serif;font-size:14px;
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23555' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  padding-right:36px;cursor:pointer;
+}
+.team-select:focus{outline:1px solid #00a84f}
+
+/* ── GAMES LIST ── */
+main{padding:16px 0 48px}
+.games-list{list-style:none;display:grid;gap:2px}
+
+/* ── LOG ITEMS ── */
+.log-item{background:#1a1a1a;overflow:hidden}
+.log-head{
+  display:grid;grid-template-columns:1fr auto;
+  align-items:start;gap:12px;padding:16px 18px 12px;
+}
+.log-fase{
+  font-family:'Oswald',sans-serif;font-size:10px;font-weight:500;
+  letter-spacing:3px;text-transform:uppercase;color:#f5c518;margin-bottom:5px;
+}
+.log-times{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.log-flag{font-size:20px;line-height:1;flex-shrink:0}
+.log-nome{
+  font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.5px;
+}
+.log-nome.brasil{color:#00a84f}
+.log-vs{
+  font-family:'Oswald',sans-serif;font-size:10px;color:#555;
+  letter-spacing:2px;text-transform:uppercase;
+}
+.log-venue{font-size:11px;color:#555;margin-top:4px}
+.log-badge{
+  flex-shrink:0;font-family:'Oswald',sans-serif;
+  font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  padding:5px 10px;border-radius:2px;white-space:nowrap;align-self:start;
+}
+.log-badge.pending{background:#1e1e1e;color:#444;border:1px solid #2a2a2a}
+.log-badge.hit{background:rgba(0,168,79,.15);color:#00a84f;border:1px solid rgba(0,168,79,.3)}
+.log-badge.miss{background:rgba(192,57,43,.12);color:#e74c3c;border:1px solid rgba(192,57,43,.25)}
+.log-body{padding:0 18px 14px}
+.log-probs{display:grid;gap:7px}
+.log-prow{display:grid;grid-template-columns:100px 1fr auto;align-items:center;gap:10px}
+.log-plabel{font-size:12px;color:#aaa}
+.log-plabel.hl{color:#ccc;font-weight:600}
+.log-track{height:5px;background:#222;border-radius:2px;overflow:hidden}
+.log-pfill{height:100%;border-radius:2px;transition:width .7s cubic-bezier(.4,0,.2,1)}
+.log-pfill.w{background:#00a84f}
+.log-pfill.d{background:#f5c518}
+.log-pfill.l{background:#c0392b}
+.log-pval{
+  font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;
+  color:#aaa;text-align:right;white-space:nowrap;
+}
+.log-resultado{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:10px 18px;background:#161616;
+  border-top:1px solid #222;
+}
+.log-placar-real{
+  font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;
+  color:#f0f0ee;letter-spacing:1px;flex-shrink:0;
+}
+.log-resultado-desc{font-size:12px;color:#999;line-height:1.4}
+.log-resultado-desc b{color:#aaa}
+
+/* ── FOOTER ── */
+footer{background:#0a0a0a;border-top:1px solid #1a1a1a;padding:28px 0}
+.fnota{font-size:12px;color:#888;line-height:1.7}
+.update-badge{
+  display:inline-block;background:#1a1a1a;
+  border:1px solid #2a2a2a;border-left:3px solid #00a84f;
+  padding:8px 14px;border-radius:2px;margin-top:16px;
+  font-size:12px;color:#888;
+}
+.update-badge b{color:#00a84f;font-weight:600}
+
+/* ── LABEL DE PROBABILIDADE ── */
+.log-probs-label{
+  font-family:'Oswald',sans-serif;font-size:9px;font-weight:500;
+  letter-spacing:3px;text-transform:uppercase;color:#333;margin-bottom:9px;
+}
+
+/* ── PREVISÃO DO TORNEIO ── */
+.prev-toggle-row{background:#0d0d0d;border-bottom:1px solid #1e1e1e}
+.prev-toggle-btn{
+  width:100%;font-family:'Oswald',sans-serif;
+  font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;
+  color:#555;background:none;border:none;cursor:pointer;
+  padding:13px 0;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:color .15s;
+}
+.prev-toggle-btn:hover{color:#888}
+.prev-toggle-btn.open{color:#00a84f}
+.prev-arrow{font-size:12px;transition:transform .25s;display:inline-block}
+.prev-toggle-btn.open .prev-arrow{transform:rotate(180deg)}
+.prev-panel{background:#0a0a0a;border-bottom:2px solid #1e1e1e;padding:20px 0 28px;display:none}
+.prev-note{font-size:12px;color:#444;margin-bottom:20px;line-height:1.6}
+.prev-stage{margin-bottom:22px}
+.prev-stage:last-child{margin-bottom:0}
+.prev-stage-hd{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.prev-stage-title{
+  font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;
+  letter-spacing:3px;text-transform:uppercase;color:#555;flex-shrink:0;
+}
+.prev-stage-sub{font-size:10px;color:#333;font-family:'Source Sans 3',sans-serif}
+.prev-stage-line{flex:1;height:1px;background:#1a1a1a}
+.prev-row{
+  display:grid;grid-template-columns:minmax(90px,140px) 1fr auto;
+  align-items:center;gap:10px;margin-bottom:7px;
+}
+.prev-team{
+  display:flex;align-items:center;gap:5px;
+  font-size:13px;color:#666;overflow:hidden;
+}
+.prev-team.brasil{color:#00a84f;font-weight:600}
+.prev-team-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prev-track{height:4px;background:#1a1a1a;border-radius:2px;overflow:hidden}
+.prev-fill{height:100%;border-radius:2px;background:#252525;transition:width .7s cubic-bezier(.4,0,.2,1)}
+.prev-fill.top1{background:#00a84f}
+.prev-fill.brasil{background:rgba(245,197,24,.55)}
+.prev-pval{
+  font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;
+  color:#3a3a3a;text-align:right;white-space:nowrap;
+}
+.prev-pval.top1{color:#00a84f}
+.prev-pval.brasil{color:rgba(245,197,24,.8)}
+
+/* ── AUTOR ── */
+.autor-sec{background:#0d0d0d;border-top:1px solid #1e1e1e;padding:52px 0}
+.autor-kicker{
+  font-family:'Oswald',sans-serif;font-size:11px;font-weight:500;
+  letter-spacing:5px;text-transform:uppercase;color:#888;margin-bottom:24px;text-align:center;
+}
+.autor-card{display:flex;align-items:center;gap:28px;justify-content:center}
+.autor-foto-anel{
+  flex-shrink:0;width:88px;height:88px;border-radius:50%;padding:3px;
+  background:linear-gradient(135deg,#00a84f 0%,#f5c518 100%);
+}
+.autor-foto{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;border:2px solid #0d0d0d}
+.autor-nome{
+  font-family:'Oswald',sans-serif;font-size:18px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.5px;color:#f0f0ee;line-height:1.2;margin-bottom:4px;
+}
+.autor-cargo{font-size:14px;color:#888;margin-bottom:3px;line-height:1.4}
+.autor-mba{font-size:12px;color:#f5c518;margin-bottom:18px;letter-spacing:.3px}
+.autor-links{display:flex;gap:8px;flex-wrap:wrap}
+.autor-link{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:'Oswald',sans-serif;font-size:10px;font-weight:500;letter-spacing:2px;
+  text-transform:uppercase;text-decoration:none;padding:8px 14px;border-radius:2px;
+  transition:color .2s,border-color .2s,background .2s;
+}
+.autor-link.gh{background:#1a1a1a;border:1px solid #2a2a2a;color:#aaa}
+.autor-link.gh:hover{background:#222;color:#f0f0ee;border-color:#444}
+.autor-link.li{background:rgba(0,119,181,.1);border:1px solid rgba(0,119,181,.35);color:#4da6d9}
+.autor-link.li:hover{background:rgba(0,119,181,.2);color:#6bbde6;border-color:rgba(0,119,181,.6)}
+
+@media(max-width:540px){
+  .log-prow{grid-template-columns:80px 1fr auto}
+  .log-head{padding:14px 14px 10px}
+  .log-body{padding:0 14px 12px}
+  .log-resultado{padding:10px 14px}
+  .date-label{font-size:17px}
+  .wrap{padding:0 16px}
+  .update-badge{display:block;text-align:center}
+  .autor-card{flex-direction:column;align-items:center;text-align:center;gap:20px}
+  .autor-links{justify-content:center}
+  .prev-row{grid-template-columns:minmax(70px,110px) 1fr auto}
+}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E4W69XPH2R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E4W69XPH2R');
+</script>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="index.html" class="back-link">Voltar à página principal</a>
+    <p class="kicker">Copa do Mundo 2026</p>
+    <h1>Fase de grupos.<br>Previsões e <span>resultados.</span></h1>
+    <p class="header-sub">Antes de cada jogo, estimamos a chance de cada resultado. Veja o que previmos e compare com o que aconteceu.</p>
+    <p class="header-intro">Os 72 jogos da fase de grupos, com as probabilidades calculadas antes do apito inicial. Conforme os resultados chegam, você vê onde o modelo acertou e onde o futebol resolveu fazer diferente.</p>
+  </div>
+</header>
+
+<div class="score-strip">
+  <div class="wrap">
+    <div class="score-inner" id="score-strip"></div>
+  </div>
+</div>
+
+<div class="prev-toggle-row">
+  <div class="wrap">
+    <button class="prev-toggle-btn" id="prev-toggle">
+      <span>Previsão do torneio</span>
+      <span class="prev-arrow">▾</span>
+    </button>
+  </div>
+</div>
+<div class="prev-panel" id="prev-panel">
+  <div class="wrap">
+    <p class="prev-note">Chance de cada seleção chegar a cada fase da Copa, calculada antes do torneio começar.</p>
+    <div id="prev-stages"></div>
+  </div>
+</div>
+
+<div class="date-nav-outer" id="date-nav-outer">
+  <div class="wrap">
+    <div class="date-nav">
+      <button class="date-arrow" id="prev-day" aria-label="Dia anterior" disabled>&#8592;</button>
+      <div class="date-center">
+        <div class="date-label" id="date-label"></div>
+        <div class="date-meta" id="date-meta"></div>
+      </div>
+      <button class="date-arrow" id="next-day" aria-label="Próximo dia">&#8594;</button>
+    </div>
+    <div class="hoje-row">
+      <button class="hoje-btn hidden" id="hoje-btn">ir para hoje</button>
+    </div>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <div class="wrap">
+    <div class="filter-tabs">
+      <button class="ftab active" data-mode="day" id="tab-day">Por Dia</button>
+      <button class="ftab" data-mode="group" id="tab-group">Por Grupo</button>
+      <button class="ftab" data-mode="team" id="tab-team">Por Seleção</button>
+    </div>
+    <div id="filter-group-extra" style="display:none">
+      <div class="grupo-grid" id="grupo-grid"></div>
+    </div>
+    <div id="filter-team-extra" style="display:none">
+      <div class="team-select-wrap">
+        <select class="team-select" id="team-select"><option value="">Escolha uma seleção</option></select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+    <ul class="games-list" id="games-list"></ul>
+  </div>
+</main>
+
+<section class="autor-sec">
+  <div class="wrap">
+    <p class="autor-kicker">Desenvolvido por</p>
+    <div class="autor-card">
+      <div class="autor-foto-anel">
+        <img class="autor-foto" src="https://avatars.githubusercontent.com/u/22475482?v=4" alt="Romulo Eduardo Rodrigues Silva">
+      </div>
+      <div>
+        <p class="autor-nome">Romulo Eduardo Rodrigues Silva</p>
+        <p class="autor-cargo">Desenvolvedor Back-End &amp; Cientista de Dados</p>
+        <p class="autor-mba">MBA em Data Science e Analytics · USP/Esalq</p>
+        <div class="autor-links">
+          <a class="autor-link gh" href="https://github.com/romuloedu" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a class="autor-link li" href="https://br.linkedin.com/in/romuloeduardo" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="fnota">Chances calculadas com base no histórico das seleções e no ranking FIFA. São estimativas. O futebol sempre arruma um jeito de surpreender.</p>
+    <div class="update-badge">Dados atualizados em <b id="update-time">—</b></div>
+  </div>
+</footer>
+
+<script>
+const D_UPDATED_AT="2026-06-01T14:38:41.555310+00:00";
+const TEAMS=[
+  {t:"França",f:"🇫🇷",ga:86.8,r32:73.21,r16:46.63,qt:28.97,sm:17.99,fn:22.27,ch:11.29},
+  {t:"Espanha",f:"🇪🇸",ga:97.03,r32:60.61,r16:37.74,qt:23.22,sm:14.84,fn:18.06,ch:9.68},
+  {t:"Brasil",f:"🇧🇷",ga:88.55,r32:74.66,r16:48.8,qt:31.14,sm:16.91,fn:22.89,ch:8.67},
+  {t:"Bélgica",f:"🇧🇪",ga:92.02,r32:70.22,r16:42.67,qt:24.34,sm:13.84,fn:17.96,ch:7.46},
+  {t:"Argentina",f:"🇦🇷",ga:92.05,r32:49.02,r16:29.86,qt:18.45,sm:11.93,fn:13.13,ch:6.62},
+  {t:"Holanda",f:"🇳🇱",ga:84.7,r32:52.01,r16:33.96,qt:19.3,sm:10.92,fn:14.67,ch:6.29},
+  {t:"Portugal",f:"🇵🇹",ga:86.23,r32:71.62,r16:44.13,qt:21.94,sm:12.03,fn:15.95,ch:6.03},
+  {t:"México",f:"🇲🇽",ga:91.85,r32:67.91,r16:39.91,qt:21.52,sm:11.16,fn:16.08,ch:5.72},
+  {t:"Noruega",f:"🇳🇴",ga:86.18,r32:59.75,r16:31.47,qt:18.62,sm:10.41,fn:12.97,ch:4.76},
+  {t:"Croácia",f:"🇭🇷",ga:91.44,r32:47.74,r16:25.54,qt:11.72,sm:5.61,fn:8.89,ch:2.78},
+  {t:"Marrocos",f:"🇲🇦",ga:81.6,r32:49.88,r16:24.8,qt:12.06,sm:5.34,fn:9.02,ch:2.3},
+  {t:"Colômbia",f:"🇨🇴",ga:80.1,r32:51.27,r16:24.5,qt:10.47,sm:4.83,fn:7.87,ch:2.23},
+  {t:"Inglaterra",f:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",ga:90.53,r32:44.92,r16:22.4,qt:9.88,sm:4.75,fn:7.33,ch:2.2},
+  {t:"Alemanha",f:"🇩🇪",ga:91.61,r32:59.2,r16:28.75,qt:12.91,sm:5.24,fn:9.84,ch:2.17},
+  {t:"Coreia do Sul",f:"🇰🇷",ga:83.89,r32:49.56,r16:24.47,qt:10.88,sm:4.42,fn:8.25,ch:1.79},
+  {t:"Suíça",f:"🇨🇭",ga:77.3,r32:33.45,r16:17.14,qt:8.5,sm:4.08,fn:6.18,ch:1.76},
+  {t:"Equador",f:"🇪🇨",ga:79.3,r32:41.62,r16:19.74,qt:8.92,sm:3.64,fn:6.81,ch:1.53},
+  {t:"Senegal",f:"🇸🇳",ga:69.95,r32:35.38,r16:15.44,qt:7.45,sm:3.34,fn:5.54,ch:1.43},
+  {t:"Irã",f:"🇮🇷",ga:63.77,r32:33.14,r16:15.28,qt:6.85,sm:2.81,fn:5.37,ch:1.34},
+  {t:"Japão",f:"🇯🇵",ga:65.26,r32:28.93,r16:13.37,qt:6.4,sm:3.01,fn:4.66,ch:1.27},
+  {t:"Tunísia",f:"🇹🇳",ga:60.94,r32:27.14,r16:12.48,qt:5.91,sm:2.63,fn:4.4,ch:1.13},
+  {t:"Áustria",f:"🇦🇹",ga:86.98,r32:31.59,r16:11.47,qt:5.62,sm:2.62,fn:4.11,ch:1.11},
+  {t:"Escócia",f:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",ga:81.38,r32:41.27,r16:17.34,qt:7.07,sm:2.6,fn:5.57,ch:1.09},
+  {t:"Itália",f:"🇮🇹",ga:74.9,r32:32.32,r16:15.87,qt:7.17,sm:2.81,fn:5.39,ch:1.03},
+  {t:"Estados Unidos",f:"🇺🇸",ga:85.46,r32:33.37,r16:16.15,qt:8.66,sm:3.19,fn:6.46,ch:0.99},
+  {t:"Canadá",f:"🇨🇦",ga:66.19,r32:24.35,r16:10.95,qt:4.83,sm:2.11,fn:3.63,ch:0.91},
+  {t:"Uruguai",f:"🇺🇾",ga:73.77,r32:29.64,r16:12.5,qt:4.78,sm:1.89,fn:3.73,ch:0.84},
+  {t:"Turquia",f:"🇹🇷",ga:70.97,r32:26.09,r16:11.17,qt:5.21,sm:2.02,fn:4.0,ch:0.82},
+  {t:"Ucrânia",f:"🇺🇦",ga:61.86,r32:24.89,r16:11.39,qt:4.9,sm:1.95,fn:3.74,ch:0.78},
+  {t:"República Tcheca",f:"🇨🇿",ga:61.69,r32:27.33,r16:11.45,qt:4.83,sm:1.85,fn:3.74,ch:0.77},
+  {t:"Egito",f:"🇪🇬",ga:65.53,r32:29.39,r16:12.38,qt:4.81,sm:1.6,fn:3.93,ch:0.72},
+  {t:"Austrália",f:"🇦🇺",ga:70.8,r32:23.96,r16:9.58,qt:3.59,sm:1.64,fn:2.6,ch:0.65},
+  {t:"Catar",f:"🇶🇦",ga:64.77,r32:23.6,r16:9.99,qt:3.49,sm:1.41,fn:2.56,ch:0.48},
+  {t:"RD Congo",f:"🇨🇩",ga:45.19,r32:17.67,r16:6.59,qt:1.95,sm:0.69,fn:1.47,ch:0.22},
+  {t:"Costa do Marfim",f:"🇨🇮",ga:53.89,r32:18.59,r16:6.29,qt:2.2,sm:0.63,fn:1.74,ch:0.18},
+  {t:"Nova Zelândia",f:"🇳🇿",ga:48.33,r32:16.77,r16:5.48,qt:1.75,sm:0.56,fn:1.35,ch:0.15},
+  {t:"Argélia",f:"🇩🇿",ga:57.17,r32:13.94,r16:3.83,qt:1.35,sm:0.44,fn:1.04,ch:0.14},
+  {t:"Paraguai",f:"🇵🇾",ga:50.4,r32:13.21,r16:4.38,qt:1.36,sm:0.41,fn:1.08,ch:0.13},
+  {t:"Curaçao",f:"🇨🇼",ga:49.1,r32:14.13,r16:4.08,qt:1.35,sm:0.35,fn:1.11,ch:0.11},
+  {t:"Arábia Saudita",f:"🇸🇦",ga:49.34,r32:14.31,r16:3.74,qt:1.1,sm:0.3,fn:0.89,ch:0.09},
+  {t:"Uzbequistão",f:"🇺🇿",ga:38.32,r32:12.8,r16:3.81,qt:1.12,sm:0.33,fn:0.88,ch:0.09},
+  {t:"África do Sul",f:"🇿🇦",ga:42.78,r32:11.08,r16:3.06,qt:1.03,sm:0.29,fn:0.81,ch:0.08},
+  {t:"Cabo Verde",f:"🇨🇻",ga:36.95,r32:9.6,r16:2.23,qt:0.57,sm:0.13,fn:0.49,ch:0.05},
+  {t:"Haiti",f:"🇭🇹",ga:27.88,r32:7.24,r16:1.92,qt:0.55,sm:0.12,fn:0.46,ch:0.03},
+  {t:"Iraque",f:"🇮🇶",ga:17.53,r32:4.88,r16:1.21,qt:0.37,sm:0.1,fn:0.3,ch:0.03},
+  {t:"Panamá",f:"🇵🇦",ga:33.71,r32:8.39,r16:2.35,qt:0.52,sm:0.13,fn:0.42,ch:0.03},
+  {t:"Jordânia",f:"🇯🇴",ga:20.18,r32:3.1,r16:0.61,qt:0.19,sm:0.05,fn:0.14,ch:0.01},
+  {t:"Gana",f:"🇬🇭",ga:23.85,r32:5.23,r16:1.11,qt:0.22,sm:0.05,fn:0.18,ch:0.01}
+];
+const JOGOS=[{"id":1,"g":"A","s":"group","r":1,"date":"2026-06-11","venue":"Azteca (CDMX)","home":"México","hf":"🇲🇽","away":"África do Sul","af":"🇿🇦","ph":72.5,"pd":23.7,"pa":3.8,"res":null,"placar":null},{"id":2,"g":"A","s":"group","r":1,"date":"2026-06-11","venue":"Azteca (CDMX)","home":"Coreia do Sul","hf":"🇰🇷","away":"República Tcheca","af":"🇨🇿","ph":41.2,"pd":29.0,"pa":29.8,"res":null,"placar":null},{"id":3,"g":"A","s":"group","r":2,"date":"2026-06-17","venue":"Akron (Guadalajara)","home":"México","hf":"🇲🇽","away":"Coreia do Sul","af":"🇰🇷","ph":42.9,"pd":26.3,"pa":30.8,"res":null,"placar":null},{"id":4,"g":"A","s":"group","r":2,"date":"2026-06-17","venue":"BBVA (Monterrey)","home":"África do Sul","hf":"🇿🇦","away":"República Tcheca","af":"🇨🇿","ph":35.9,"pd":29.6,"pa":34.4,"res":null,"placar":null},{"id":5,"g":"A","s":"group","r":3,"date":"2026-06-24","venue":"Azteca (CDMX)","home":"República Tcheca","hf":"🇨🇿","away":"México","af":"🇲🇽","ph":23.6,"pd":20.0,"pa":56.4,"res":null,"placar":null},{"id":6,"g":"A","s":"group","r":3,"date":"2026-06-24","venue":"BBVA (Monterrey)","home":"África do Sul","hf":"🇿🇦","away":"Coreia do Sul","af":"🇰🇷","ph":12.0,"pd":22.4,"pa":65.6,"res":null,"placar":null},{"id":7,"g":"B","s":"group","r":1,"date":"2026-06-12","venue":"BMO Field (Toronto)","home":"Canadá","hf":"🇨🇦","away":"Catar","af":"🇶🇦","ph":28.4,"pd":32.4,"pa":39.1,"res":null,"placar":null},{"id":8,"g":"B","s":"group","r":1,"date":"2026-06-12","venue":"BC Place (Vancouver)","home":"Suíça","hf":"🇨🇭","away":"Itália","af":"🇮🇹","ph":42.3,"pd":31.4,"pa":26.2,"res":null,"placar":null},{"id":9,"g":"B","s":"group","r":2,"date":"2026-06-18","venue":"Levi's (San Francisco)","home":"Canadá","hf":"🇨🇦","away":"Suíça","af":"🇨🇭","ph":39.0,"pd":23.6,"pa":37.4,"res":null,"placar":null},{"id":10,"g":"B","s":"group","r":2,"date":"2026-06-18","venue":"SoFi (Los Angeles)","home":"Catar","hf":"🇶🇦","away":"Itália","af":"🇮🇹","ph":27.2,"pd":25.4,"pa":47.3,"res":null,"placar":null},{"id":11,"g":"B","s":"group","r":3,"date":"2026-06-24","venue":"Lumen Field (Seattle)","home":"Itália","hf":"🇮🇹","away":"Canadá","af":"🇨🇦","ph":40.4,"pd":33.7,"pa":25.9,"res":null,"placar":null},{"id":12,"g":"B","s":"group","r":3,"date":"2026-06-24","venue":"BC Place (Vancouver)","home":"Catar","hf":"🇶🇦","away":"Suíça","af":"🇨🇭","ph":26.5,"pd":28.4,"pa":45.1,"res":null,"placar":null},{"id":13,"g":"C","s":"group","r":1,"date":"2026-06-13","venue":"MetLife (Nova York)","home":"Brasil","hf":"🇧🇷","away":"Marrocos","af":"🇲🇦","ph":45.5,"pd":28.6,"pa":25.9,"res":null,"placar":null},{"id":14,"g":"C","s":"group","r":1,"date":"2026-06-13","venue":"Lincoln Fin. (Filadélfia)","home":"Haiti","hf":"🇭🇹","away":"Escócia","af":"🏴󠁧󠁢󠁳󠁣󠁴󠁿","ph":8.6,"pd":6.5,"pa":84.8,"res":null,"placar":null},{"id":15,"g":"C","s":"group","r":2,"date":"2026-06-19","venue":"Lincoln Fin. (Filadélfia)","home":"Brasil","hf":"🇧🇷","away":"Haiti","af":"🇭🇹","ph":59.5,"pd":23.6,"pa":17.0,"res":null,"placar":null},{"id":16,"g":"C","s":"group","r":2,"date":"2026-06-19","venue":"Hard Rock (Miami)","home":"Marrocos","hf":"🇲🇦","away":"Escócia","af":"🏴󠁧󠁢󠁳󠁣󠁴󠁿","ph":45.1,"pd":25.1,"pa":29.7,"res":null,"placar":null},{"id":17,"g":"C","s":"group","r":3,"date":"2026-06-24","venue":"Hard Rock (Miami)","home":"Escócia","hf":"🏴󠁧󠁢󠁳󠁣󠁴󠁿","away":"Brasil","af":"🇧🇷","ph":18.9,"pd":29.9,"pa":51.2,"res":null,"placar":null},{"id":18,"g":"C","s":"group","r":3,"date":"2026-06-24","venue":"MetLife (Nova York)","home":"Marrocos","hf":"🇲🇦","away":"Haiti","af":"🇭🇹","ph":61.1,"pd":24.3,"pa":14.6,"res":null,"placar":null},{"id":19,"g":"D","s":"group","r":1,"date":"2026-06-12","venue":"SoFi (Los Angeles)","home":"Estados Unidos","hf":"🇺🇸","away":"Paraguai","af":"🇵🇾","ph":63.5,"pd":21.1,"pa":15.5,"res":null,"placar":null},{"id":20,"g":"D","s":"group","r":1,"date":"2026-06-12","venue":"BC Place (Vancouver)","home":"Austrália","hf":"🇦🇺","away":"Turquia","af":"🇹🇷","ph":35.4,"pd":31.0,"pa":33.7,"res":null,"placar":null},{"id":21,"g":"D","s":"group","r":2,"date":"2026-06-18","venue":"Levi's (San Francisco)","home":"Estados Unidos","hf":"🇺🇸","away":"Austrália","af":"🇦🇺","ph":48.4,"pd":23.8,"pa":27.8,"res":null,"placar":null},{"id":22,"g":"D","s":"group","r":2,"date":"2026-06-18","venue":"Lumen Field (Seattle)","home":"Paraguai","hf":"🇵🇾","away":"Turquia","af":"🇹🇷","ph":25.4,"pd":34.5,"pa":40.1,"res":null,"placar":null},{"id":23,"g":"D","s":"group","r":3,"date":"2026-06-25","venue":"SoFi (Los Angeles)","home":"Turquia","hf":"🇹🇷","away":"Estados Unidos","af":"🇺🇸","ph":29.8,"pd":28.9,"pa":41.2,"res":null,"placar":null},{"id":24,"g":"D","s":"group","r":3,"date":"2026-06-25","venue":"BC Place (Vancouver)","home":"Paraguai","hf":"🇵🇾","away":"Austrália","af":"🇦🇺","ph":26.8,"pd":26.6,"pa":46.6,"res":null,"placar":null},{"id":25,"g":"E","s":"group","r":1,"date":"2026-06-14","venue":"Lincoln Fin. (Filadélfia)","home":"Alemanha","hf":"🇩🇪","away":"Curaçao","af":"🇨🇼","ph":73.6,"pd":20.6,"pa":5.8,"res":null,"placar":null},{"id":26,"g":"E","s":"group","r":1,"date":"2026-06-14","venue":"MetLife (Nova York)","home":"Costa do Marfim","hf":"🇨🇮","away":"Equador","af":"🇪🇨","ph":30.6,"pd":32.9,"pa":36.5,"res":null,"placar":null},{"id":27,"g":"E","s":"group","r":2,"date":"2026-06-20","venue":"MetLife (Nova York)","home":"Alemanha","hf":"🇩🇪","away":"Costa do Marfim","af":"🇨🇮","ph":58.8,"pd":29.6,"pa":11.6,"res":null,"placar":null},{"id":28,"g":"E","s":"group","r":2,"date":"2026-06-20","venue":"Lincoln Fin. (Filadélfia)","home":"Curaçao","hf":"🇨🇼","away":"Equador","af":"🇪🇨","ph":17.2,"pd":31.7,"pa":51.0,"res":null,"placar":null},{"id":29,"g":"E","s":"group","r":3,"date":"2026-06-25","venue":"Lincoln Fin. (Filadélfia)","home":"Equador","hf":"🇪🇨","away":"Alemanha","af":"🇩🇪","ph":37.3,"pd":28.6,"pa":34.1,"res":null,"placar":null},{"id":30,"g":"E","s":"group","r":3,"date":"2026-06-25","venue":"MetLife (Nova York)","home":"Curaçao","hf":"🇨🇼","away":"Costa do Marfim","af":"🇨🇮","ph":40.1,"pd":33.7,"pa":26.2,"res":null,"placar":null},{"id":31,"g":"F","s":"group","r":1,"date":"2026-06-14","venue":"AT&T (Dallas)","home":"Holanda","hf":"🇳🇱","away":"Japão","af":"🇯🇵","ph":54.2,"pd":28.6,"pa":17.3,"res":null,"placar":null},{"id":32,"g":"F","s":"group","r":1,"date":"2026-06-14","venue":"NRG (Houston)","home":"Tunísia","hf":"🇹🇳","away":"Ucrânia","af":"🇺🇦","ph":37.0,"pd":25.3,"pa":37.7,"res":null,"placar":null},{"id":33,"g":"F","s":"group","r":2,"date":"2026-06-20","venue":"AT&T (Dallas)","home":"Holanda","hf":"🇳🇱","away":"Tunísia","af":"🇹🇳","ph":50.4,"pd":29.0,"pa":20.6,"res":null,"placar":null},{"id":34,"g":"F","s":"group","r":2,"date":"2026-06-20","venue":"NRG (Houston)","home":"Japão","hf":"🇯🇵","away":"Ucrânia","af":"🇺🇦","ph":44.1,"pd":27.2,"pa":28.6,"res":null,"placar":null},{"id":35,"g":"F","s":"group","r":3,"date":"2026-06-26","venue":"NRG (Houston)","home":"Ucrânia","hf":"🇺🇦","away":"Holanda","af":"🇳🇱","ph":30.4,"pd":26.7,"pa":42.9,"res":null,"placar":null},{"id":36,"g":"F","s":"group","r":3,"date":"2026-06-26","venue":"AT&T (Dallas)","home":"Japão","hf":"🇯🇵","away":"Tunísia","af":"🇹🇳","ph":36.0,"pd":30.2,"pa":33.8,"res":null,"placar":null},{"id":37,"g":"G","s":"group","r":1,"date":"2026-06-15","venue":"Arrowhead (Kansas City)","home":"Bélgica","hf":"🇧🇪","away":"Egito","af":"🇪🇬","ph":48.3,"pd":43.5,"pa":8.2,"res":null,"placar":null},{"id":38,"g":"G","s":"group","r":1,"date":"2026-06-15","venue":"Arrowhead (Kansas City)","home":"Irã","hf":"🇮🇷","away":"Nova Zelândia","af":"🇳🇿","ph":49.9,"pd":27.9,"pa":22.3,"res":null,"placar":null},{"id":39,"g":"G","s":"group","r":2,"date":"2026-06-21","venue":"Arrowhead (Kansas City)","home":"Bélgica","hf":"🇧🇪","away":"Irã","af":"🇮🇷","ph":49.5,"pd":35.1,"pa":15.5,"res":null,"placar":null},{"id":40,"g":"G","s":"group","r":2,"date":"2026-06-21","venue":"Arrowhead (Kansas City)","home":"Egito","hf":"🇪🇬","away":"Nova Zelândia","af":"🇳🇿","ph":40.8,"pd":24.7,"pa":34.5,"res":null,"placar":null},{"id":41,"g":"G","s":"group","r":3,"date":"2026-06-26","venue":"Arrowhead (Kansas City)","home":"Nova Zelândia","hf":"🇳🇿","away":"Bélgica","af":"🇧🇪","ph":10.0,"pd":35.4,"pa":54.5,"res":null,"placar":null},{"id":42,"g":"G","s":"group","r":3,"date":"2026-06-26","venue":"Arrowhead (Kansas City)","home":"Egito","hf":"🇪🇬","away":"Irã","af":"🇮🇷","ph":42.2,"pd":31.9,"pa":25.9,"res":null,"placar":null},{"id":43,"g":"H","s":"group","r":1,"date":"2026-06-15","venue":"AT&T (Dallas)","home":"Espanha","hf":"🇪🇸","away":"Cabo Verde","af":"🇨🇻","ph":77.9,"pd":21.5,"pa":0.7,"res":null,"placar":null},{"id":44,"g":"H","s":"group","r":1,"date":"2026-06-15","venue":"NRG (Houston)","home":"Arábia Saudita","hf":"🇸🇦","away":"Uruguai","af":"🇺🇾","ph":25.2,"pd":34.2,"pa":40.5,"res":null,"placar":null},{"id":45,"g":"H","s":"group","r":2,"date":"2026-06-21","venue":"NRG (Houston)","home":"Espanha","hf":"🇪🇸","away":"Arábia Saudita","af":"🇸🇦","ph":79.1,"pd":17.0,"pa":3.9,"res":null,"placar":null},{"id":46,"g":"H","s":"group","r":2,"date":"2026-06-21","venue":"AT&T (Dallas)","home":"Cabo Verde","hf":"🇨🇻","away":"Uruguai","af":"🇺🇾","ph":20.6,"pd":26.9,"pa":52.5,"res":null,"placar":null},{"id":47,"g":"H","s":"group","r":3,"date":"2026-06-26","venue":"AT&T (Dallas)","home":"Uruguai","hf":"🇺🇾","away":"Espanha","af":"🇪🇸","ph":24.9,"pd":26.0,"pa":49.2,"res":null,"placar":null},{"id":48,"g":"H","s":"group","r":3,"date":"2026-06-26","venue":"NRG (Houston)","home":"Cabo Verde","hf":"🇨🇻","away":"Arábia Saudita","af":"🇸🇦","ph":28.7,"pd":30.7,"pa":40.6,"res":null,"placar":null},{"id":49,"g":"I","s":"group","r":1,"date":"2026-06-16","venue":"Mercedes-Benz (Atlanta)","home":"França","hf":"🇫🇷","away":"Senegal","af":"🇸🇳","ph":51.0,"pd":30.8,"pa":18.3,"res":null,"placar":null},{"id":50,"g":"I","s":"group","r":1,"date":"2026-06-16","venue":"Mercedes-Benz (Atlanta)","home":"Noruega","hf":"🇳🇴","away":"Iraque","af":"🇮🇶","ph":91.2,"pd":7.7,"pa":1.1,"res":null,"placar":null},{"id":51,"g":"I","s":"group","r":2,"date":"2026-06-22","venue":"Mercedes-Benz (Atlanta)","home":"França","hf":"🇫🇷","away":"Noruega","af":"🇳🇴","ph":44.1,"pd":28.1,"pa":27.8,"res":null,"placar":null},{"id":52,"g":"I","s":"group","r":2,"date":"2026-06-22","venue":"Mercedes-Benz (Atlanta)","home":"Senegal","hf":"🇸🇳","away":"Iraque","af":"🇮🇶","ph":58.2,"pd":27.9,"pa":14.0,"res":null,"placar":null},{"id":53,"g":"I","s":"group","r":3,"date":"2026-06-27","venue":"Mercedes-Benz (Atlanta)","home":"Iraque","hf":"🇮🇶","away":"França","af":"🇫🇷","ph":13.6,"pd":21.7,"pa":64.7,"res":null,"placar":null},{"id":54,"g":"I","s":"group","r":3,"date":"2026-06-27","venue":"Mercedes-Benz (Atlanta)","home":"Senegal","hf":"🇸🇳","away":"Noruega","af":"🇳🇴","ph":32.8,"pd":30.2,"pa":37.0,"res":null,"placar":null},{"id":55,"g":"J","s":"group","r":1,"date":"2026-06-16","venue":"Gillette (Boston)","home":"Argentina","hf":"🇦🇷","away":"Argélia","af":"🇩🇿","ph":65.0,"pd":30.1,"pa":4.8,"res":null,"placar":null},{"id":56,"g":"J","s":"group","r":1,"date":"2026-06-16","venue":"Gillette (Boston)","home":"Áustria","hf":"🇦🇹","away":"Jordânia","af":"🇯🇴","ph":96.4,"pd":2.4,"pa":1.2,"res":null,"placar":null},{"id":57,"g":"J","s":"group","r":2,"date":"2026-06-22","venue":"Gillette (Boston)","home":"Argentina","hf":"🇦🇷","away":"Áustria","af":"🇦🇹","ph":58.6,"pd":27.2,"pa":14.2,"res":null,"placar":null},{"id":58,"g":"J","s":"group","r":2,"date":"2026-06-22","venue":"Gillette (Boston)","home":"Argélia","hf":"🇩🇿","away":"Jordânia","af":"🇯🇴","ph":62.3,"pd":20.3,"pa":17.5,"res":null,"placar":null},{"id":59,"g":"J","s":"group","r":3,"date":"2026-06-27","venue":"Gillette (Boston)","home":"Jordânia","hf":"🇯🇴","away":"Argentina","af":"🇦🇷","ph":18.9,"pd":27.2,"pa":53.8,"res":null,"placar":null},{"id":60,"g":"J","s":"group","r":3,"date":"2026-06-27","venue":"Gillette (Boston)","home":"Argélia","hf":"🇩🇿","away":"Áustria","af":"🇦🇹","ph":23.6,"pd":24.6,"pa":51.7,"res":null,"placar":null},{"id":61,"g":"K","s":"group","r":1,"date":"2026-06-17","venue":"Levi's (San Francisco)","home":"Portugal","hf":"🇵🇹","away":"Uzbequistão","af":"🇺🇿","ph":64.2,"pd":32.0,"pa":3.7,"res":null,"placar":null},{"id":62,"g":"K","s":"group","r":1,"date":"2026-06-17","venue":"SoFi (Los Angeles)","home":"Colômbia","hf":"🇨🇴","away":"RD Congo","af":"🇨🇩","ph":50.4,"pd":32.8,"pa":16.8,"res":null,"placar":null},{"id":63,"g":"K","s":"group","r":2,"date":"2026-06-23","venue":"SoFi (Los Angeles)","home":"Portugal","hf":"🇵🇹","away":"Colômbia","af":"🇨🇴","ph":53.2,"pd":21.4,"pa":25.4,"res":null,"placar":null},{"id":64,"g":"K","s":"group","r":2,"date":"2026-06-23","venue":"Levi's (San Francisco)","home":"Uzbequistão","hf":"🇺🇿","away":"RD Congo","af":"🇨🇩","ph":42.1,"pd":35.4,"pa":22.5,"res":null,"placar":null},{"id":65,"g":"K","s":"group","r":3,"date":"2026-06-27","venue":"Levi's (San Francisco)","home":"RD Congo","hf":"🇨🇩","away":"Portugal","af":"🇵🇹","ph":29.6,"pd":23.0,"pa":47.4,"res":null,"placar":null},{"id":66,"g":"K","s":"group","r":3,"date":"2026-06-27","venue":"SoFi (Los Angeles)","home":"Uzbequistão","hf":"🇺🇿","away":"Colômbia","af":"🇨🇴","ph":10.4,"pd":22.5,"pa":67.0,"res":null,"placar":null},{"id":67,"g":"L","s":"group","r":1,"date":"2026-06-17","venue":"Gillette (Boston)","home":"Inglaterra","hf":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","away":"Croácia","af":"🇭🇷","ph":36.5,"pd":22.4,"pa":41.1,"res":null,"placar":null},{"id":68,"g":"L","s":"group","r":1,"date":"2026-06-17","venue":"Gillette (Boston)","home":"Gana","hf":"🇬🇭","away":"Panamá","af":"🇵🇦","ph":39.0,"pd":37.4,"pa":23.6,"res":null,"placar":null},{"id":69,"g":"L","s":"group","r":2,"date":"2026-06-23","venue":"Gillette (Boston)","home":"Inglaterra","hf":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","away":"Gana","af":"🇬🇭","ph":85.0,"pd":11.8,"pa":3.2,"res":null,"placar":null},{"id":70,"g":"L","s":"group","r":2,"date":"2026-06-23","venue":"Gillette (Boston)","home":"Croácia","hf":"🇭🇷","away":"Panamá","af":"🇵🇦","ph":62.6,"pd":24.5,"pa":12.8,"res":null,"placar":null},{"id":71,"g":"L","s":"group","r":3,"date":"2026-06-27","venue":"Gillette (Boston)","home":"Panamá","hf":"🇵🇦","away":"Inglaterra","af":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","ph":15.7,"pd":22.5,"pa":61.8,"res":null,"placar":null},{"id":72,"g":"L","s":"group","r":3,"date":"2026-06-27","venue":"Gillette (Boston)","home":"Croácia","hf":"🇭🇷","away":"Gana","af":"🇬🇭","ph":83.6,"pd":12.1,"pa":4.3,"res":null,"placar":null}]
+;
+
+const MONTHS=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+function fmtDate(d){const[y,m,day]=d.split('-');return`${parseInt(day)} de ${MONTHS[parseInt(m)-1]}`;}
+
+const today=new Date().toISOString().split('T')[0];
+const dates=[...new Set(JOGOS.map(j=>j.date))].sort();
+let idx=dates.findIndex(d=>d>=today);
+if(idx===-1)idx=dates.length-1;
+if(idx<0)idx=0;
+
+let mode='day'; // 'day' | 'group' | 'team'
+let activeGroup=null;
+let activeTeam=null;
+
+function previsao(j){return j.ph>j.pd&&j.ph>j.pa?'home':j.pa>j.pd?'away':'draw';}
+
+function buildCard(j){
+  const prev=previsao(j);
+  const prevLabel={home:j.home,draw:'Empate',away:j.away}[prev];
+  const temRes=j.res!==null;
+  let bClass='pending',bText='Aguardando';
+  if(temRes){bClass=j.res===prev?'hit':'miss';bText=j.res===prev?'Acertou':'Errou';}
+  const isH=j.home==='Brasil', isA=j.away==='Brasil';
+  const rLabel=j.r===1?'1ª Rodada':j.r===2?'2ª Rodada':'3ª Rodada';
+  let resHtml='';
+  if(temRes){
+    const resLabel={home:`Vitória ${j.home}`,draw:'Empate',away:`Vitória ${j.away}`}[j.res];
+    const txt=j.res===prev
+      ?`Previsão correta, modelo apontava <b>${prevLabel}</b>`
+      :`Previsão errada, modelo apontava <b>${prevLabel}</b>, aconteceu <b>${resLabel}</b>`;
+    resHtml=`<div class="log-resultado"><span class="log-placar-real">${j.placar||resLabel}</span><span class="log-resultado-desc">${txt}</span></div>`;
+  }
+  // In group/team modes, add the date as context
+  const extraCtx=(mode!=='day')?`<span style="font-size:10px;color:#444;margin-left:6px">${fmtDate(j.date)}</span>`:'';
+  const li=document.createElement('li');
+  li.className='log-item';
+  li.innerHTML=`
+    <div class="log-head">
+      <div>
+        <p class="log-fase">Grupo ${j.g} · ${rLabel}${extraCtx}</p>
+        <div class="log-times">
+          <span class="log-flag">${j.hf}</span>
+          <span class="log-nome${isH?' brasil':''}">${j.home}</span>
+          <span class="log-vs">vs</span>
+          <span class="log-nome${isA?' brasil':''}">${j.away}</span>
+          <span class="log-flag">${j.af}</span>
+        </div>
+        <p class="log-venue">${j.venue}</p>
+      </div>
+      <span class="log-badge ${bClass}">${bText}</span>
+    </div>
+    <div class="log-body">
+      <p class="log-probs-label">probabilidade pré-jogo</p>
+      <div class="log-probs">
+        <div class="log-prow">
+          <span class="log-plabel${isH?' hl':''}">${j.home}</span>
+          <div class="log-track"><div class="log-pfill w" data-w="${j.ph}%" style="width:0"></div></div>
+          <span class="log-pval">${j.ph}%</span>
+        </div>
+        <div class="log-prow">
+          <span class="log-plabel">Empate</span>
+          <div class="log-track"><div class="log-pfill d" data-w="${j.pd}%" style="width:0"></div></div>
+          <span class="log-pval">${j.pd}%</span>
+        </div>
+        <div class="log-prow">
+          <span class="log-plabel${isA?' hl':''}">${j.away}</span>
+          <div class="log-track"><div class="log-pfill l" data-w="${j.pa}%" style="width:0"></div></div>
+          <span class="log-pval">${j.pa}%</span>
+        </div>
+      </div>
+    </div>
+    ${resHtml}`;
+  return li;
+}
+
+function renderGames(games){
+  const el=document.getElementById('games-list');
+  el.innerHTML='';
+  if(!games.length){
+    el.innerHTML='<li style="padding:32px 0;text-align:center;color:#444;font-size:14px">Nenhum jogo encontrado.</li>';
+    return;
+  }
+  games.forEach(j=>el.appendChild(buildCard(j)));
+  requestAnimationFrame(()=>{el.querySelectorAll('[data-w]').forEach(b=>{b.style.width=b.dataset.w;});});
+}
+
+function renderDay(){
+  const games=JOGOS.filter(j=>j.date===dates[idx]);
+  renderGames(games);
+}
+
+function updateNav(){
+  const dateStr=dates[idx];
+  document.getElementById('date-label').textContent=fmtDate(dateStr);
+  const games=JOGOS.filter(j=>j.date===dateStr);
+  document.getElementById('date-meta').textContent=
+    `Fase de Grupos · ${games.length} jogo${games.length>1?'s':''}`;
+  document.getElementById('prev-day').disabled=idx===0;
+  document.getElementById('next-day').disabled=idx===dates.length-1;
+  const hojeBtn=document.getElementById('hoje-btn');
+  const tIdx=dates.findIndex(d=>d>=today);
+  const eff=tIdx===-1?dates.length-1:Math.max(0,tIdx);
+  hojeBtn.classList.toggle('hidden',idx===eff);
+}
+
+function setMode(m){
+  mode=m;
+  const isDay=m==='day';
+  document.getElementById('date-nav-outer').style.display=isDay?'':'none';
+  document.getElementById('filter-group-extra').style.display=m==='group'?'':'none';
+  document.getElementById('filter-team-extra').style.display=m==='team'?'':'none';
+  document.querySelectorAll('.ftab').forEach(t=>t.classList.toggle('active',t.dataset.mode===m));
+  if(m==='day'){renderDay();updateNav();}
+  else if(m==='group'){
+    if(!activeGroup)activeGroup='A';
+    document.querySelectorAll('.grupo-chip').forEach(c=>c.classList.toggle('active',c.dataset.g===activeGroup));
+    renderGames(JOGOS.filter(j=>j.g===activeGroup));
+  }
+  else if(m==='team'){
+    const sel=document.getElementById('team-select').value;
+    if(sel)renderGames(JOGOS.filter(j=>j.home===sel||j.away===sel));
+    else renderGames([]);
+  }
+}
+
+// Build group chips
+const grupos=['A','B','C','D','E','F','G','H','I','J','K','L'];
+const gc=document.getElementById('grupo-grid');
+grupos.forEach(g=>{
+  const btn=document.createElement('button');
+  btn.className='grupo-chip';btn.dataset.g=g;btn.textContent=g;
+  btn.addEventListener('click',()=>{
+    activeGroup=g;
+    document.querySelectorAll('.grupo-chip').forEach(c=>c.classList.toggle('active',c.dataset.g===g));
+    renderGames(JOGOS.filter(j=>j.g===g));
+  });
+  gc.appendChild(btn);
+});
+
+// Build team select
+const teams=[...new Set(JOGOS.flatMap(j=>[j.home,j.away]))].sort((a,b)=>a.localeCompare(b,'pt'));
+const sel=document.getElementById('team-select');
+teams.forEach(t=>{
+  const o=document.createElement('option');
+  const flag=JOGOS.find(j=>j.home===t||j.away===t);
+  o.value=t;o.textContent=(flag?(t===flag.home?flag.hf:flag.af):'')+' '+t;
+  sel.appendChild(o);
+});
+sel.addEventListener('change',()=>{
+  activeTeam=sel.value;
+  if(activeTeam)renderGames(JOGOS.filter(j=>j.home===activeTeam||j.away===activeTeam));
+  else renderGames([]);
+});
+
+// Tabs
+document.querySelectorAll('.ftab').forEach(t=>{
+  t.addEventListener('click',()=>setMode(t.dataset.mode));
+});
+
+function updateScore(){
+  let acc=0,played=0;
+  JOGOS.forEach(j=>{if(j.res!==null){played++;if(j.res===previsao(j))acc++;}});
+  const el=document.getElementById('score-strip');
+  if(played===0){
+    el.innerHTML='<span class="score-label">Copa começa em 11 de junho · 72 jogos com previsão do modelo</span>';
+  }else{
+    const pct=Math.round(acc/played*100);
+    el.innerHTML=`<span class="score-num">${acc}/${played}</span><span class="score-label">&nbsp;previsões corretas&nbsp;·&nbsp;${pct}% de acertos</span>`;
+  }
+}
+
+function displayUpdateTime(){
+  const el=document.getElementById('update-time');
+  if(D_UPDATED_AT){
+    el.textContent=new Intl.DateTimeFormat('pt-BR',{
+      year:'numeric',month:'2-digit',day:'2-digit',
+      hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'
+    }).format(new Date(D_UPDATED_AT));
+  }
+}
+
+document.getElementById('prev-day').addEventListener('click',()=>{if(idx>0){idx--;renderDay();updateNav();}});
+document.getElementById('next-day').addEventListener('click',()=>{if(idx<dates.length-1){idx++;renderDay();updateNav();}});
+document.getElementById('hoje-btn').addEventListener('click',()=>{
+  const tIdx=dates.findIndex(d=>d>=today);
+  idx=tIdx===-1?dates.length-1:Math.max(0,tIdx);
+  renderDay();updateNav();
+});
+document.addEventListener('keydown',e=>{
+  if(mode==='day'){
+    if(e.key==='ArrowLeft'&&idx>0){idx--;renderDay();updateNav();}
+    if(e.key==='ArrowRight'&&idx<dates.length-1){idx++;renderDay();updateNav();}
+  }
+});
+
+// ── Previsão do torneio ──
+const PREV_STAGES=[
+  {key:'ga', label:'Fase de Grupos',   sub:'48 para 32', n:8},
+  {key:'r32',label:'Rodada de 32',     sub:'32 para 16', n:7},
+  {key:'r16',label:'Oitavas de Final', sub:'16 para 8',  n:6},
+  {key:'qt', label:'Quartas de Final', sub:'8 para 4',   n:5},
+  {key:'sm', label:'Semifinal',        sub:'4 para 2',   n:4},
+  {key:'fn', label:'Final',            sub:'2 para 1',   n:3},
+  {key:'ch', label:'Campeão',          sub:'',           n:3},
+];
+
+function buildPrevStages(){
+  const container=document.getElementById('prev-stages');
+  PREV_STAGES.forEach(stage=>{
+    const sorted=[...TEAMS].sort((a,b)=>b[stage.key]-a[stage.key]);
+    let shown=sorted.slice(0,stage.n);
+    if(!shown.some(t=>t.t==='Brasil')){
+      const br=TEAMS.find(t=>t.t==='Brasil');
+      if(br)shown.push(br);
+    }
+    const maxVal=sorted[0][stage.key];
+    const div=document.createElement('div');
+    div.className='prev-stage';
+    div.innerHTML=`<div class="prev-stage-hd">
+      <span class="prev-stage-title">${stage.label}</span>
+      ${stage.sub?`<span class="prev-stage-sub">· ${stage.sub}</span>`:''}
+      <span class="prev-stage-line"></span>
+    </div>`;
+    shown.forEach((t,i)=>{
+      const isBr=t.t==='Brasil';
+      const isTop=i===0;
+      const barW=(t[stage.key]/maxVal*100).toFixed(1);
+      const fillCls=isBr?'brasil':isTop?'top1':'';
+      const valCls=isBr?'brasil':isTop?'top1':'';
+      const row=document.createElement('div');
+      row.className='prev-row';
+      row.innerHTML=`
+        <span class="prev-team${isBr?' brasil':''}"><span>${t.f}</span><span class="prev-team-name">${t.t}</span></span>
+        <div class="prev-track"><div class="prev-fill ${fillCls}" data-w="${barW}%" style="width:0"></div></div>
+        <span class="prev-pval ${valCls}">${t[stage.key]}%</span>`;
+      div.appendChild(row);
+    });
+    container.appendChild(div);
+  });
+}
+
+let prevBuilt=false;
+document.getElementById('prev-toggle').addEventListener('click',()=>{
+  const panel=document.getElementById('prev-panel');
+  const btn=document.getElementById('prev-toggle');
+  const isOpen=panel.style.display!=='none';
+  if(!isOpen&&!prevBuilt){buildPrevStages();prevBuilt=true;}
+  panel.style.display=isOpen?'none':'block';
+  btn.classList.toggle('open',!isOpen);
+  if(!isOpen){
+    requestAnimationFrame(()=>{
+      panel.querySelectorAll('[data-w]').forEach(b=>b.style.width=b.dataset.w);
+    });
+  }
+});
+
+updateScore();
+setMode('day');
+displayUpdateTime();
+</script>
+</body>
+</html>

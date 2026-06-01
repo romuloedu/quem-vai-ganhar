@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Copa do Mundo 2026 · Quem vai ganhar?</title>
+<meta name="title" content="Quem vai ganhar a Copa 2026? Veja as chances de cada seleção">
+<meta name="description" content="Quem tem mais chance de ganhar a Copa do Mundo 2026? Veja os favoritos, o caminho do Brasil e o que espera cada seleção.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Quem vai ganhar a Copa 2026?">
+<meta property="og:description" content="Quem tem mais chance de levantar a taça? Veja os favoritos, o caminho do Brasil e as chances de cada seleção. Dados atualizados diariamente.">
+<meta property="og:url" content="https://romuloedu.github.io/quem-vai-ganhar/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quem vai ganhar a Copa 2026?">
+<meta name="twitter:description" content="Quem tem mais chance de ganhar a Copa 2026? Veja as chances do Brasil e de todos os times.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ── reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+/* overflow nunca horizontal em nenhum elemento */
+html,body{max-width:100%;overflow-x:hidden}
+
+body{
+  background:#111;
+  color:#f0f0ee;
+  font-family:'Source Sans 3','Helvetica Neue',Arial,sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── layout ── */
+.wrap{width:100%;max-width:880px;margin:0 auto;padding:0 24px}
+
+/* ── HEADER ── */
+header{
+  background:#0d0d0d;
+  border-bottom:3px solid #00a84f;
+  padding:48px 0 40px;
+}
+.kicker{
+  font-family:'Oswald',sans-serif;
+  font-size:11px;font-weight:500;
+  letter-spacing:5px;text-transform:uppercase;
+  color:#00a84f;margin-bottom:14px;
+}
+header h1{
+  font-family:'Oswald',sans-serif;
+  font-weight:700;
+  font-size:clamp(36px,7vw,68px);
+  line-height:1;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+header h1 span{color:#f5c518}
+.header-sub{
+  margin-top:12px;font-size:16px;
+  color:#999;max-width:500px;line-height:1.6;
+}
+.header-intro{
+  margin-top:20px;
+  font-size:15px;color:#999;
+  max-width:560px;line-height:1.7;
+  border-left:2px solid #00a84f;
+  padding-left:14px;
+}
+
+/* ── seção ── */
+.sec{padding:52px 0;border-bottom:1px solid #1e1e1e}
+.sec:last-of-type{border-bottom:none}
+.sec-kicker{
+  font-family:'Oswald',sans-serif;
+  font-size:11px;font-weight:500;
+  letter-spacing:4px;text-transform:uppercase;
+  color:#888;margin-bottom:6px;
+}
+.sec-kicker.verde{color:#00a84f}
+.sec-title{
+  font-family:'Oswald',sans-serif;
+  font-weight:700;
+  font-size:clamp(22px,4vw,36px);
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  line-height:1.1;
+  margin-bottom:8px;
+}
+.sec-body{
+  font-size:15px;color:#999;
+  max-width:560px;line-height:1.65;
+  margin-bottom:32px;
+}
+
+/* ── RANKING ── */
+.rank-list{list-style:none}
+.rank-row{
+  display:grid;
+  grid-template-columns:32px 32px 1fr 72px 56px;
+  align-items:center;
+  gap:10px;
+  padding:13px 0;
+  border-bottom:1px solid #1e1e1e;
+}
+.rank-row:last-child{border-bottom:none}
+.rpos{
+  font-family:'Oswald',sans-serif;
+  font-size:13px;font-weight:600;
+  color:#777;text-align:center;
+}
+.rpos.p1{color:#f5c518;font-size:17px}
+.rpos.p2{color:#999;font-size:15px}
+.rpos.p3{color:#b87333;font-size:14px}
+.rflag{font-size:22px;text-align:center;line-height:1}
+.rinfo{min-width:0}
+.rname{
+  font-family:'Oswald',sans-serif;
+  font-size:15px;font-weight:500;
+  text-transform:uppercase;letter-spacing:.5px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.rname.brasil{color:#00a84f}
+.rsub{font-size:11px;color:#aaa;margin-top:1px}
+.rbar{height:5px;background:#1e1e1e;border-radius:2px;overflow:hidden}
+.rbar-fill{height:100%;background:#383838;border-radius:2px;transition:width 1s cubic-bezier(.4,0,.2,1)}
+.rbar-fill.top{background:#f5c518}
+.rbar-fill.brasil{background:#00a84f}
+.rpct{
+  font-family:'Oswald',sans-serif;
+  font-size:18px;font-weight:700;
+  text-align:right;color:#f0f0ee;
+}
+.rpct.brasil{color:#00a84f}
+.callout{
+  margin-top:24px;padding:16px 18px;
+  background:#1a1a1a;border-left:3px solid #00a84f;
+}
+.callout p{font-size:14px;color:#999;line-height:1.65}
+.callout b{color:#f0f0ee}
+
+/* ── CONF ── */
+.conf-list{list-style:none}
+.conf-row{
+  display:grid;
+  grid-template-columns:80px 1fr 52px;
+  align-items:center;
+  gap:14px;
+  padding:13px 0;
+  border-bottom:1px solid #1e1e1e;
+}
+.conf-row:last-child{border-bottom:none}
+.cname{
+  font-family:'Oswald',sans-serif;
+  font-size:13px;font-weight:500;
+  text-transform:uppercase;letter-spacing:1px;
+  color:#ccc;
+}
+.ccontinent{
+  font-size:11px;color:#aaa;margin-top:2px;
+}
+.cbar{height:8px;background:#1e1e1e;border-radius:2px;overflow:hidden}
+.cbar-fill{height:100%;border-radius:2px;transition:width 1s cubic-bezier(.4,0,.2,1)}
+.cpct{
+  font-family:'Oswald',sans-serif;
+  font-size:17px;font-weight:700;
+  text-align:right;color:#f0f0ee;
+}
+
+/* ── TIMESTAMP ── */
+.update-badge{
+  display:inline-block;
+  background:#1a1a1a;
+  border:1px solid #2a2a2a;
+  border-left:3px solid #00a84f;
+  padding:8px 14px;
+  border-radius:2px;
+  margin-top:16px;
+  font-size:12px;
+  color:#888;
+}
+.update-badge b{
+  color:#00a84f;
+  font-weight:600;
+}
+
+/* ── JOGOS DO BRASIL ── */
+.jogos{display:grid;gap:2px}
+.jogo{background:#1a1a1a;padding:22px}
+.jogo-head{margin-bottom:18px}
+.jogo-rodada{
+  font-family:'Oswald',sans-serif;
+  font-size:11px;font-weight:500;
+  letter-spacing:3px;text-transform:uppercase;
+  color:#f5c518;margin-bottom:6px;
+}
+.jogo-times{
+  display:flex;align-items:center;gap:8px;
+  flex-wrap:wrap;
+}
+.jflag{font-size:26px;line-height:1;flex-shrink:0}
+.jnome{
+  font-family:'Oswald',sans-serif;
+  font-size:18px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.5px;
+}
+.jnome.brasil{color:#00a84f}
+.jvs{
+  font-family:'Oswald',sans-serif;
+  font-size:11px;font-weight:400;
+  color:#666;text-transform:uppercase;letter-spacing:2px;
+}
+.jlocal{font-size:12px;color:#888;margin-top:4px}
+/* barras probabilidade */
+.prob-rows{display:grid;gap:9px}
+.prow{display:grid;grid-template-columns:110px 1fr 42px;align-items:center;gap:10px}
+.plabel{font-size:13px;color:#999}
+.plabel.hl{color:#ccc;font-weight:600}
+.ptrack{height:6px;background:#222;border-radius:2px;overflow:hidden}
+.pfill{height:100%;border-radius:2px;transition:width .9s cubic-bezier(.4,0,.2,1)}
+.pfill.w{background:#00a84f}
+.pfill.d{background:#f5c518}
+.pfill.l{background:#c0392b}
+.pval{
+  font-family:'Oswald',sans-serif;
+  font-size:15px;font-weight:700;
+  text-align:right;color:#ccc;
+}
+.pval.w{color:#00a84f}
+.pval.l{color:#c0392b}
+.jverdict{
+  margin-top:14px;padding-top:14px;
+  border-top:1px solid #222;
+  font-size:13px;color:#bbb;
+  font-style:italic;line-height:1.5;
+}
+
+/* ── CAMINHO DO BRASIL ── */
+.caminho{list-style:none}
+.citem{
+  display:grid;
+  grid-template-columns:150px 1fr auto;
+  align-items:center;
+  gap:16px;
+  padding:14px 0;
+  border-bottom:1px solid #1e1e1e;
+}
+.citem:last-child{border-bottom:none}
+.cfase{
+  font-family:'Oswald',sans-serif;
+  font-size:13px;font-weight:500;
+  text-transform:uppercase;letter-spacing:.5px;
+  color:#888;
+}
+.cfase.hexa{color:#f5c518;font-size:15px}
+.ctrack{height:8px;background:#1e1e1e;border-radius:2px;overflow:hidden}
+.cfill{height:100%;background:#2e2e2e;border-radius:2px;transition:width 1.1s cubic-bezier(.4,0,.2,1)}
+.cfill.ativo{background:#00a84f}
+.cfill.hexa{background:linear-gradient(90deg,#00a84f,#f5c518)}
+.cpct{
+  font-family:'Oswald',sans-serif;
+  font-size:20px;font-weight:700;
+  text-align:right;color:#ccc;
+}
+.cpct.hexa{color:#f5c518;font-size:26px}
+.cpct.warn{color:#e07b39}
+.crisco-div{
+  padding:16px 0 4px;
+}
+.crisco-titulo{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Oswald',sans-serif;
+  font-size:10px;font-weight:600;
+  letter-spacing:3px;text-transform:uppercase;
+  color:#e07b39;
+}
+.crisco-titulo::before,.crisco-titulo::after{
+  content:'';flex:1;height:1px;
+  background:rgba(224,123,57,.25);
+}
+.crisco-sub{
+  text-align:center;font-size:12px;color:#888;
+  margin-top:6px;font-style:italic;
+}
+.cinsight{
+  grid-column:1/-1;
+  font-size:12px;color:#777;
+  padding-bottom:2px;margin-top:-6px;
+}
+
+/* ── GRUPOS ── */
+.grupos{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.grupo{background:#1a1a1a;overflow:hidden}
+.grupo-head{
+  padding:9px 13px 7px;
+  background:#1f1f1f;
+  border-bottom:1px solid #111;
+}
+.gletra{
+  font-family:'Oswald',sans-serif;
+  font-size:10px;font-weight:500;
+  letter-spacing:3px;text-transform:uppercase;
+  color:#888;margin-bottom:2px;
+}
+.gfav{
+  font-family:'Oswald',sans-serif;
+  font-size:15px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.5px;
+  color:#f0f0ee;
+}
+.gfav.brasil{color:#00a84f}
+.gtime{
+  padding:9px 13px;
+  border-top:1px solid #111;
+}
+.gtime.fav{background:#252525}
+.gtime.brow{background:rgba(0,168,79,.07)}
+.gtop{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.gflag{font-size:14px;flex-shrink:0;line-height:1}
+.gnome{
+  font-size:13px;font-weight:400;
+  color:#aaa;flex:1;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.gnome.brasil{color:#00a84f;font-weight:600}
+.gnome.fav{color:#f0f0ee;font-weight:600}
+.gpct{
+  font-family:'Oswald',sans-serif;
+  font-size:11px;font-weight:500;
+  flex-shrink:0;color:#888;
+}
+.gpct.brasil{color:#00a84f}
+.gpct.fav{color:#ccc}
+.gbar{height:4px;background:#252525;border-radius:2px;overflow:hidden}
+.gbar-fill{height:100%;background:#333;border-radius:2px;transition:width 1s cubic-bezier(.4,0,.2,1)}
+.gbar-fill.fav{background:#f5c518}
+.gbar-fill.brasil{background:#00a84f}
+
+/* ── CLÁSSICO DAS AMÉRICAS ── */
+.clasico-card{
+  background:#0d0d0d;border:1px solid #1e1e1e;
+  border-left:3px solid #f5c518;
+  padding:24px;display:flex;align-items:center;
+  gap:28px;flex-wrap:wrap;margin:24px 0;
+}
+.clasico-num{
+  flex-shrink:0;
+}
+.clasico-pct-big{
+  font-family:'Oswald',sans-serif;
+  font-size:52px;font-weight:700;
+  color:#f5c518;line-height:1;
+}
+.clasico-pct-desc{font-size:12px;color:#888;margin-top:5px;max-width:110px;line-height:1.4}
+.clasico-detail{flex:1;min-width:180px;display:grid;gap:0}
+.clasico-detail-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 0;border-bottom:1px solid #1a1a1a;
+  font-size:13px;color:#999;
+}
+.clasico-detail-row:last-child{border-bottom:none}
+.clasico-detail-pct{
+  font-family:'Oswald',sans-serif;
+  font-size:15px;font-weight:700;color:#ccc;
+}
+@media(max-width:540px){
+  .clasico-card{flex-direction:column;gap:16px}
+  .clasico-pct-big{font-size:40px}
+  .clasico-detail{width:100%}
+}
+
+/* ── CTA RESULTADOS ── */
+.res-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Oswald',sans-serif;
+  font-size:12px;font-weight:600;letter-spacing:2px;
+  text-transform:uppercase;text-decoration:none;
+  padding:12px 20px;
+  background:#1a1a1a;
+  border:1px solid #2a2a2a;
+  border-left:3px solid #00a84f;
+  color:#f0f0ee;
+  transition:background .2s;
+}
+.res-cta:hover{background:#252525}
+
+/* ── AUTOR ── */
+.autor-sec{
+  background:#0d0d0d;
+  border-top:1px solid #1e1e1e;
+  padding:52px 0;
+}
+.autor-kicker{
+  font-family:'Oswald',sans-serif;
+  font-size:11px;font-weight:500;
+  letter-spacing:5px;text-transform:uppercase;
+  color:#888;margin-bottom:24px;
+  text-align:center;
+}
+.autor-card{
+  display:flex;align-items:center;gap:28px;
+  justify-content:center;
+}
+.autor-foto-anel{
+  flex-shrink:0;
+  width:88px;height:88px;
+  border-radius:50%;
+  padding:3px;
+  background:linear-gradient(135deg,#00a84f 0%,#f5c518 100%);
+}
+.autor-foto{
+  width:100%;height:100%;
+  border-radius:50%;
+  object-fit:cover;
+  display:block;
+  border:2px solid #0d0d0d;
+}
+.autor-nome{
+  font-family:'Oswald',sans-serif;
+  font-size:18px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.5px;
+  color:#f0f0ee;line-height:1.2;
+  margin-bottom:4px;
+}
+.autor-cargo{
+  font-size:14px;color:#888;
+  margin-bottom:3px;line-height:1.4;
+}
+.autor-mba{
+  font-size:12px;color:#f5c518;
+  margin-bottom:18px;letter-spacing:.3px;
+}
+.autor-links{display:flex;gap:8px;flex-wrap:wrap;}
+.autor-link{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:'Oswald',sans-serif;
+  font-size:10px;font-weight:500;letter-spacing:2px;
+  text-transform:uppercase;text-decoration:none;
+  padding:8px 14px;border-radius:2px;
+  transition:color .2s,border-color .2s,background .2s;
+}
+.autor-link.gh{
+  background:#1a1a1a;border:1px solid #2a2a2a;color:#aaa;
+}
+.autor-link.gh:hover{background:#222;color:#f0f0ee;border-color:#444}
+.autor-link.li{
+  background:rgba(0,119,181,.1);
+  border:1px solid rgba(0,119,181,.35);
+  color:#4da6d9;
+}
+.autor-link.li:hover{background:rgba(0,119,181,.2);color:#6bbde6;border-color:rgba(0,119,181,.6)}
+@media(max-width:540px){
+  .autor-card{flex-direction:column;align-items:center;text-align:center;gap:20px}
+  .autor-links{justify-content:center}
+}
+
+/* ── FOOTER ── */
+footer{
+  background:#0a0a0a;
+  border-top:1px solid #1a1a1a;
+  padding:28px 0;
+}
+.fnota{font-size:12px;color:#888;line-height:1.7}
+
+/* ── LOG DE PREVISÕES ── */
+.log-placar{
+  display:flex;align-items:center;gap:20px;
+  padding:20px 24px;
+  background:#1a1a1a;
+  border-left:3px solid #00a84f;
+  margin-bottom:32px;
+  flex-wrap:wrap;
+}
+.log-placar-num{
+  font-family:'Oswald',sans-serif;
+  font-size:42px;font-weight:700;
+  color:#00a84f;line-height:1;
+}
+.log-placar-label{font-size:14px;color:#999;line-height:1.5}
+.log-placar-label b{color:#f0f0ee;display:block;font-size:16px;margin-bottom:2px}
+
+.log-list{list-style:none;display:grid;gap:2px}
+
+.log-item{
+  background:#1a1a1a;
+  overflow:hidden;
+}
+/* cabeçalho do item */
+.log-head{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:start;
+  gap:12px;
+  padding:16px 18px 12px;
+}
+.log-fase{
+  font-family:'Oswald',sans-serif;
+  font-size:10px;font-weight:500;
+  letter-spacing:3px;text-transform:uppercase;
+  color:#f5c518;margin-bottom:5px;
+}
+.log-times{
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+}
+.log-flag{font-size:20px;line-height:1;flex-shrink:0}
+.log-nome{
+  font-family:'Oswald',sans-serif;
+  font-size:16px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.5px;
+}
+.log-nome.brasil{color:#00a84f}
+.log-vs{
+  font-family:'Oswald',sans-serif;
+  font-size:10px;color:#444;
+  letter-spacing:2px;text-transform:uppercase;
+}
+/* badge de status */
+.log-badge{
+  flex-shrink:0;
+  font-family:'Oswald',sans-serif;
+  font-size:11px;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;
+  padding:5px 10px;border-radius:2px;
+  white-space:nowrap;align-self:start;
+}
+.log-badge.pending{background:#1e1e1e;color:#555;border:1px solid #2a2a2a}
+.log-badge.hit{background:rgba(0,168,79,.15);color:#00a84f;border:1px solid rgba(0,168,79,.3)}
+.log-badge.miss{background:rgba(192,57,43,.12);color:#e74c3c;border:1px solid rgba(192,57,43,.25)}
+
+/* corpo: barras de probabilidade */
+.log-body{padding:0 18px 14px}
+.log-probs{display:grid;gap:7px}
+.log-prow{display:grid;grid-template-columns:100px 1fr auto;align-items:center;gap:10px}
+.log-plabel{font-size:12px;color:#aaa}
+.log-plabel.hl{color:#aaa;font-weight:600}
+.log-track{height:5px;background:#222;border-radius:2px;overflow:hidden}
+.log-pfill{height:100%;border-radius:2px;transition:width .9s cubic-bezier(.4,0,.2,1)}
+.log-pfill.w{background:#00a84f}
+.log-pfill.d{background:#f5c518}
+.log-pfill.l{background:#c0392b}
+.log-pval{
+  font-family:'Oswald',sans-serif;
+  font-size:13px;font-weight:600;
+  color:#aaa;text-align:right;white-space:nowrap;
+}
+/* linha do resultado real */
+.log-resultado{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 18px;
+  background:#161616;
+  border-top:1px solid #222;
+  margin-top:4px;
+}
+.log-placar-real{
+  font-family:'Oswald',sans-serif;
+  font-size:20px;font-weight:700;
+  color:#f0f0ee;letter-spacing:1px;
+}
+.log-resultado-desc{font-size:13px;color:#999}
+.log-resultado-desc b{color:#aaa}
+
+/* MOBILE ── */
+@media(max-width:540px){
+  .log-prow{grid-template-columns:84px 1fr auto}
+  .log-head{padding:14px 14px 10px}
+  .log-body{padding:0 14px 12px}
+  .log-resultado{padding:10px 14px}
+  .rank-row{grid-template-columns:26px 26px 1fr 52px}
+  .rbar{display:none}
+  .citem{grid-template-columns:120px 1fr auto;gap:12px}
+  .cinsight{display:none}
+  .prow{grid-template-columns:90px 1fr 38px;gap:8px}
+  .plabel{font-size:12px}
+  .grupos{grid-template-columns:1fr;gap:12px}
+  .gtime{padding:11px 16px}
+  .grupo-head{padding:11px 16px 9px}
+  .gnome{font-size:14px}
+  .gpct{font-size:12px}
+  .wrap{padding:0 16px}
+  header h1{letter-spacing:0}
+  .update-badge{display:block;text-align:center}
+}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E4W69XPH2R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E4W69XPH2R');
+</script>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">Copa do Mundo 2026</p>
+    <h1>Quem vai ganhar<br>a <span>Copa?</span></h1>
+    <p class="header-sub">Calculamos as chances de cada seleção levantar a taça. Veja quem está por cima e o que espera o Brasil.</p>
+    <p class="header-intro">A Copa de 2026 vai ser a maior da história: 48 seleções, 12 grupos e partidas espalhadas pelos EUA, México e Canadá. França entra como favorita, mas Brasil, Espanha e Bélgica estão logo atrás. A briga pelo título está mais aberta do que parece.</p>
+  </div>
+</header>
+
+<section class="sec" id="s1">
+  <div class="wrap">
+    <p class="sec-kicker">Os maiores favoritos</p>
+    <h2 class="sec-title">França e Espanha lideram.<br>Brasil é 3º favorito.</h2>
+    <p class="sec-body">Esses são os times com mais chance de levantar a taça. França lidera com vantagem real, mas Espanha e Brasil estão logo atrás com chances genuínas de título.</p>
+    <ul class="rank-list" id="rank-list"></ul>
+    <div class="callout">
+      <p>O Brasil é o time com <b>mais chance de chegar à final</b>, quase 1 em cada 4 simulações. Na maioria delas, quem para o Brasil é França, Espanha ou Argentina.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="s2">
+  <div class="wrap">
+    <p class="sec-kicker">Por continente</p>
+    <h2 class="sec-title">Europa tem 60% de chance.<br>América do Sul é a 2ª força.</h2>
+    <p class="sec-body">A Europa manda 16 seleções para a Copa e concentra a maior parte das chances. A América do Sul, com apenas 6 times, tem 1 em cada 5 chances de ser campeã.</p>
+    <ul class="conf-list" id="conf-list"></ul>
+  </div>
+</section>
+
+<section class="sec" id="s3">
+  <div class="wrap">
+    <p class="sec-kicker verde">🇧🇷 Brasil · Grupo C</p>
+    <h2 class="sec-title">Haiti é o mais fácil.<br>Marrocos e Escócia preocupam.</h2>
+    <p class="sec-body">O Brasil enfrenta três adversários bem diferentes. Contra o Haiti, é favorito claro. Marrocos (semifinalista em 2022) e Escócia são jogos equilibrados, sem vitória garantida.</p>
+    <div class="jogos" id="jogos"></div>
+  </div>
+</section>
+
+<section class="sec" id="s4">
+  <div class="wrap">
+    <p class="sec-kicker verde">🇧🇷 Brasil · Passo a passo até o título</p>
+    <h2 class="sec-title">Se essa Copa fosse jogada<br>100 vezes, o Brasil venceria 9.</h2>
+    <p class="sec-body">A cada fase que passa, os adversários ficam mais pesados. As chances de continuar vão caindo.</p>
+    <ul class="caminho" id="caminho"></ul>
+  </div>
+</section>
+
+<section class="sec" id="s4b">
+  <div class="wrap">
+    <p class="sec-kicker verde">🇧🇷 Brasil × 🇦🇷 Argentina</p>
+    <h2 class="sec-title">Para ter clássico,<br>precisa de final.</h2>
+    <p class="sec-body">Pelo chaveamento da Copa 2026, Brasil e Argentina estão em lados completamente opostos da chave. A única forma de se encontrarem é na grande decisão.</p>
+    <div class="clasico-card">
+      <div class="clasico-num">
+        <div class="clasico-pct-big" id="clasico-pct">—</div>
+        <div class="clasico-pct-desc">de chance de ter o clássico na final</div>
+      </div>
+      <div class="clasico-detail">
+        <div class="clasico-detail-row">
+          <span>🇧🇷 Brasil chega à final</span>
+          <span class="clasico-detail-pct" id="clasico-br-pct">—</span>
+        </div>
+        <div class="clasico-detail-row">
+          <span>🇦🇷 Argentina chega à final</span>
+          <span class="clasico-detail-pct" id="clasico-arg-pct">—</span>
+        </div>
+      </div>
+    </div>
+    <div class="callout">
+      <p>Se acontecer, será a final mais aguardada das Américas. Prometemos acompanhar com toda a imparcialidade que um brasileiro consegue ter.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="s5">
+  <div class="wrap">
+    <p class="sec-kicker">Fase de grupos</p>
+    <h2 class="sec-title">12 grupos. 48 seleções.<br>1 campeão.</h2>
+    <p class="sec-body">A barra ao lado de cada seleção mostra a chance dela passar de fase. O time com mais chance em cada grupo aparece em destaque.</p>
+    <div class="grupos" id="grupos"></div>
+  </div>
+</section>
+
+<section class="sec" id="s6">
+  <div class="wrap">
+    <p class="sec-kicker">Resultados</p>
+    <h2 class="sec-title">Como as previsões<br>estão indo?</h2>
+    <p class="sec-body">Acompanhe o que previmos antes de cada jogo e o que de fato aconteceu em campo. Atualizado a cada rodada.</p>
+    <a href="resultados.html" class="res-cta">Ver todos os resultados</a>
+  </div>
+</section>
+
+<section class="autor-sec">
+  <div class="wrap">
+    <p class="autor-kicker">Desenvolvido por</p>
+    <div class="autor-card">
+      <div class="autor-foto-anel">
+        <img class="autor-foto" src="https://avatars.githubusercontent.com/u/22475482?v=4" alt="Romulo Eduardo Rodrigues Silva">
+      </div>
+      <div>
+        <p class="autor-nome">Romulo Eduardo Rodrigues Silva</p>
+        <p class="autor-cargo">Desenvolvedor Back-End &amp; Cientista de Dados</p>
+        <p class="autor-mba">MBA em Data Science e Analytics · USP/Esalq</p>
+        <div class="autor-links">
+          <a class="autor-link gh" href="https://github.com/romuloedu" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a class="autor-link li" href="https://br.linkedin.com/in/romuloeduardo" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="fnota">As chances foram calculadas com base no histórico de cada seleção, ranking FIFA e forma recente. São estimativas. Nada é garantido no futebol.</p>
+    <div class="update-badge">Dados atualizados em <b id="update-time">—</b></div>
+  </div>
+</footer>
+
+<script>
+const D={"teams":[{"team":"França","group":"I","confederation":"UEFA","fifa_rank":1,"flag":"🇫🇷","p_champion":11.29,"p_final":22.27,"p_semi":17.99,"p_quarter":28.97,"p_round16":46.63,"p_round32":73.21,"p_group_adv":86.8},{"team":"Espanha","group":"H","confederation":"UEFA","fifa_rank":2,"flag":"🇪🇸","p_champion":9.68,"p_final":18.06,"p_semi":14.84,"p_quarter":23.22,"p_round16":37.74,"p_round32":60.61,"p_group_adv":97.03},{"team":"Brasil","group":"C","confederation":"CONMEBOL","fifa_rank":6,"flag":"🇧🇷","p_champion":8.67,"p_final":22.89,"p_semi":16.91,"p_quarter":31.14,"p_round16":48.8,"p_round32":74.66,"p_group_adv":88.55},{"team":"Bélgica","group":"G","confederation":"UEFA","fifa_rank":3,"flag":"🇧🇪","p_champion":7.46,"p_final":17.96,"p_semi":13.84,"p_quarter":24.34,"p_round16":42.67,"p_round32":70.22,"p_group_adv":92.02},{"team":"Argentina","group":"J","confederation":"CONMEBOL","fifa_rank":3,"flag":"🇦🇷","p_champion":6.62,"p_final":13.13,"p_semi":11.93,"p_quarter":18.45,"p_round16":29.86,"p_round32":49.02,"p_group_adv":92.05},{"team":"Holanda","group":"F","confederation":"UEFA","fifa_rank":7,"flag":"🇳🇱","p_champion":6.29,"p_final":14.67,"p_semi":10.92,"p_quarter":19.3,"p_round16":33.96,"p_round32":52.01,"p_group_adv":84.7},{"team":"Portugal","group":"K","confederation":"UEFA","fifa_rank":5,"flag":"🇵🇹","p_champion":6.03,"p_final":15.95,"p_semi":12.03,"p_quarter":21.94,"p_round16":44.13,"p_round32":71.62,"p_group_adv":86.23},{"team":"México","group":"A","confederation":"CONCACAF","fifa_rank":16,"flag":"🇲🇽","p_champion":5.72,"p_final":16.08,"p_semi":11.16,"p_quarter":21.52,"p_round16":39.91,"p_round32":67.91,"p_group_adv":91.85},{"team":"Noruega","group":"I","confederation":"UEFA","fifa_rank":11,"flag":"🇳🇴","p_champion":4.76,"p_final":12.97,"p_semi":10.41,"p_quarter":18.62,"p_round16":31.47,"p_round32":59.75,"p_group_adv":86.18},{"team":"Croácia","group":"L","confederation":"UEFA","fifa_rank":10,"flag":"🇭🇷","p_champion":2.78,"p_final":8.89,"p_semi":5.61,"p_quarter":11.72,"p_round16":25.54,"p_round32":47.74,"p_group_adv":91.44},{"team":"Marrocos","group":"C","confederation":"CAF","fifa_rank":14,"flag":"🇲🇦","p_champion":2.3,"p_final":9.02,"p_semi":5.34,"p_quarter":12.06,"p_round16":24.8,"p_round32":49.88,"p_group_adv":81.6},{"team":"Colômbia","group":"K","confederation":"CONMEBOL","fifa_rank":15,"flag":"🇨🇴","p_champion":2.23,"p_final":7.87,"p_semi":4.83,"p_quarter":10.47,"p_round16":24.5,"p_round32":51.27,"p_group_adv":80.1},{"team":"Inglaterra","group":"L","confederation":"UEFA","fifa_rank":4,"flag":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","p_champion":2.2,"p_final":7.33,"p_semi":4.75,"p_quarter":9.88,"p_round16":22.4,"p_round32":44.92,"p_group_adv":90.53},{"team":"Alemanha","group":"E","confederation":"UEFA","fifa_rank":12,"flag":"🇩🇪","p_champion":2.17,"p_final":9.84,"p_semi":5.24,"p_quarter":12.91,"p_round16":28.75,"p_round32":59.2,"p_group_adv":91.61},{"team":"Coreia do Sul","group":"A","confederation":"AFC","fifa_rank":22,"flag":"🇰🇷","p_champion":1.79,"p_final":8.25,"p_semi":4.42,"p_quarter":10.88,"p_round16":24.47,"p_round32":49.56,"p_group_adv":83.89},{"team":"Suíça","group":"B","confederation":"UEFA","fifa_rank":18,"flag":"🇨🇭","p_champion":1.76,"p_final":6.18,"p_semi":4.08,"p_quarter":8.5,"p_round16":17.14,"p_round32":33.45,"p_group_adv":77.3},{"team":"Equador","group":"E","confederation":"CONMEBOL","fifa_rank":34,"flag":"🇪🇨","p_champion":1.53,"p_final":6.81,"p_semi":3.64,"p_quarter":8.92,"p_round16":19.74,"p_round32":41.62,"p_group_adv":79.3},{"team":"Senegal","group":"I","confederation":"CAF","fifa_rank":19,"flag":"🇸🇳","p_champion":1.43,"p_final":5.54,"p_semi":3.34,"p_quarter":7.45,"p_round16":15.44,"p_round32":35.38,"p_group_adv":69.95},{"team":"Irã","group":"G","confederation":"AFC","fifa_rank":21,"flag":"🇮🇷","p_champion":1.34,"p_final":5.37,"p_semi":2.81,"p_quarter":6.85,"p_round16":15.28,"p_round32":33.14,"p_group_adv":63.77},{"team":"Japão","group":"F","confederation":"AFC","fifa_rank":17,"flag":"🇯🇵","p_champion":1.27,"p_final":4.66,"p_semi":3.01,"p_quarter":6.4,"p_round16":13.37,"p_round32":28.93,"p_group_adv":65.26},{"team":"Tunísia","group":"F","confederation":"CAF","fifa_rank":32,"flag":"🇹🇳","p_champion":1.13,"p_final":4.4,"p_semi":2.63,"p_quarter":5.91,"p_round16":12.48,"p_round32":27.14,"p_group_adv":60.94},{"team":"Áustria","group":"J","confederation":"UEFA","fifa_rank":26,"flag":"🇦🇹","p_champion":1.11,"p_final":4.11,"p_semi":2.62,"p_quarter":5.62,"p_round16":11.47,"p_round32":31.59,"p_group_adv":86.98},{"team":"Escócia","group":"C","confederation":"UEFA","fifa_rank":30,"flag":"🏴󠁧󠁢󠁳󠁣󠁴󠁿","p_champion":1.09,"p_final":5.57,"p_semi":2.6,"p_quarter":7.07,"p_round16":17.34,"p_round32":41.27,"p_group_adv":81.38},{"team":"Itália","group":"B","confederation":"UEFA","fifa_rank":9,"flag":"🇮🇹","p_champion":1.03,"p_final":5.39,"p_semi":2.81,"p_quarter":7.17,"p_round16":15.87,"p_round32":32.32,"p_group_adv":74.9},{"team":"Estados Unidos","group":"D","confederation":"CONCACAF","fifa_rank":13,"flag":"🇺🇸","p_champion":0.99,"p_final":6.46,"p_semi":3.19,"p_quarter":8.66,"p_round16":16.15,"p_round32":33.37,"p_group_adv":85.46},{"team":"Canadá","group":"B","confederation":"CONCACAF","fifa_rank":44,"flag":"🇨🇦","p_champion":0.91,"p_final":3.63,"p_semi":2.11,"p_quarter":4.83,"p_round16":10.95,"p_round32":24.35,"p_group_adv":66.19},{"team":"Uruguai","group":"H","confederation":"CONMEBOL","fifa_rank":20,"flag":"🇺🇾","p_champion":0.84,"p_final":3.73,"p_semi":1.89,"p_quarter":4.78,"p_round16":12.5,"p_round32":29.64,"p_group_adv":73.77},{"team":"Turquia","group":"D","confederation":"UEFA","fifa_rank":29,"flag":"🇹🇷","p_champion":0.82,"p_final":4.0,"p_semi":2.02,"p_quarter":5.21,"p_round16":11.17,"p_round32":26.09,"p_group_adv":70.97},{"team":"Ucrânia","group":"F","confederation":"UEFA","fifa_rank":24,"flag":"🇺🇦","p_champion":0.78,"p_final":3.74,"p_semi":1.95,"p_quarter":4.9,"p_round16":11.39,"p_round32":24.89,"p_group_adv":61.86},{"team":"República Tcheca","group":"A","confederation":"UEFA","fifa_rank":40,"flag":"🇨🇿","p_champion":0.77,"p_final":3.74,"p_semi":1.85,"p_quarter":4.83,"p_round16":11.45,"p_round32":27.33,"p_group_adv":61.69},{"team":"Egito","group":"G","confederation":"CAF","fifa_rank":38,"flag":"🇪🇬","p_champion":0.72,"p_final":3.93,"p_semi":1.6,"p_quarter":4.81,"p_round16":12.38,"p_round32":29.39,"p_group_adv":65.53},{"team":"Austrália","group":"D","confederation":"AFC","fifa_rank":23,"flag":"🇦🇺","p_champion":0.65,"p_final":2.6,"p_semi":1.64,"p_quarter":3.59,"p_round16":9.58,"p_round32":23.96,"p_group_adv":70.8},{"team":"Catar","group":"B","confederation":"AFC","fifa_rank":58,"flag":"🇶🇦","p_champion":0.48,"p_final":2.56,"p_semi":1.41,"p_quarter":3.49,"p_round16":9.99,"p_round32":23.6,"p_group_adv":64.77},{"team":"RD Congo","group":"K","confederation":"CAF","fifa_rank":53,"flag":"🇨🇩","p_champion":0.22,"p_final":1.47,"p_semi":0.69,"p_quarter":1.95,"p_round16":6.59,"p_round32":17.67,"p_group_adv":45.19},{"team":"Costa do Marfim","group":"E","confederation":"CAF","fifa_rank":48,"flag":"🇨🇮","p_champion":0.18,"p_final":1.74,"p_semi":0.63,"p_quarter":2.2,"p_round16":6.29,"p_round32":18.59,"p_group_adv":53.89},{"team":"Nova Zelândia","group":"G","confederation":"OFC","fifa_rank":93,"flag":"🇳🇿","p_champion":0.15,"p_final":1.35,"p_semi":0.56,"p_quarter":1.75,"p_round16":5.48,"p_round32":16.77,"p_group_adv":48.33},{"team":"Argélia","group":"J","confederation":"CAF","fifa_rank":36,"flag":"🇩🇿","p_champion":0.14,"p_final":1.04,"p_semi":0.44,"p_quarter":1.35,"p_round16":3.83,"p_round32":13.94,"p_group_adv":57.17},{"team":"Paraguai","group":"D","confederation":"CONMEBOL","fifa_rank":63,"flag":"🇵🇾","p_champion":0.13,"p_final":1.08,"p_semi":0.41,"p_quarter":1.36,"p_round16":4.38,"p_round32":13.21,"p_group_adv":50.4},{"team":"Curaçao","group":"E","confederation":"CONCACAF","fifa_rank":76,"flag":"🇨🇼","p_champion":0.11,"p_final":1.11,"p_semi":0.35,"p_quarter":1.35,"p_round16":4.08,"p_round32":14.13,"p_group_adv":49.1},{"team":"Arábia Saudita","group":"H","confederation":"AFC","fifa_rank":56,"flag":"🇸🇦","p_champion":0.09,"p_final":0.89,"p_semi":0.3,"p_quarter":1.1,"p_round16":3.74,"p_round32":14.31,"p_group_adv":49.34},{"team":"Uzbequistão","group":"K","confederation":"AFC","fifa_rank":68,"flag":"🇺🇿","p_champion":0.09,"p_final":0.88,"p_semi":0.33,"p_quarter":1.12,"p_round16":3.81,"p_round32":12.8,"p_group_adv":38.32},{"team":"África do Sul","group":"A","confederation":"CAF","fifa_rank":66,"flag":"🇿🇦","p_champion":0.08,"p_final":0.81,"p_semi":0.29,"p_quarter":1.03,"p_round16":3.06,"p_round32":11.08,"p_group_adv":42.78},{"team":"Cabo Verde","group":"H","confederation":"CAF","fifa_rank":71,"flag":"🇨🇻","p_champion":0.05,"p_final":0.49,"p_semi":0.13,"p_quarter":0.57,"p_round16":2.23,"p_round32":9.6,"p_group_adv":36.95},{"team":"Haiti","group":"C","confederation":"CONCACAF","fifa_rank":83,"flag":"🇭🇹","p_champion":0.03,"p_final":0.46,"p_semi":0.12,"p_quarter":0.55,"p_round16":1.92,"p_round32":7.24,"p_group_adv":27.88},{"team":"Iraque","group":"I","confederation":"AFC","fifa_rank":62,"flag":"🇮🇶","p_champion":0.03,"p_final":0.3,"p_semi":0.1,"p_quarter":0.37,"p_round16":1.21,"p_round32":4.88,"p_group_adv":17.53},{"team":"Panamá","group":"L","confederation":"CONCACAF","fifa_rank":77,"flag":"🇵🇦","p_champion":0.03,"p_final":0.42,"p_semi":0.13,"p_quarter":0.52,"p_round16":2.35,"p_round32":8.39,"p_group_adv":33.71},{"team":"Jordânia","group":"J","confederation":"AFC","fifa_rank":87,"flag":"🇯🇴","p_champion":0.01,"p_final":0.14,"p_semi":0.05,"p_quarter":0.19,"p_round16":0.61,"p_round32":3.1,"p_group_adv":20.18},{"team":"Gana","group":"L","confederation":"CAF","fifa_rank":60,"flag":"🇬🇭","p_champion":0.01,"p_final":0.18,"p_semi":0.05,"p_quarter":0.22,"p_round16":1.11,"p_round32":5.23,"p_group_adv":23.85}],"groups_info":{"A":[{"team":"México","flag":"🇲🇽","p_champion":5.72,"p_group_adv":91.85,"fifa_rank":16},{"team":"África do Sul","flag":"🇿🇦","p_champion":0.08,"p_group_adv":42.78,"fifa_rank":66},{"team":"Coreia do Sul","flag":"🇰🇷","p_champion":1.79,"p_group_adv":83.89,"fifa_rank":22},{"team":"República Tcheca","flag":"🇨🇿","p_champion":0.77,"p_group_adv":61.69,"fifa_rank":40}],"B":[{"team":"Canadá","flag":"🇨🇦","p_champion":0.91,"p_group_adv":66.19,"fifa_rank":44},{"team":"Catar","flag":"🇶🇦","p_champion":0.48,"p_group_adv":64.77,"fifa_rank":58},{"team":"Suíça","flag":"🇨🇭","p_champion":1.76,"p_group_adv":77.3,"fifa_rank":18},{"team":"Itália","flag":"🇮🇹","p_champion":1.03,"p_group_adv":74.9,"fifa_rank":9}],"C":[{"team":"Brasil","flag":"🇧🇷","p_champion":8.67,"p_group_adv":88.55,"fifa_rank":6},{"team":"Marrocos","flag":"🇲🇦","p_champion":2.3,"p_group_adv":81.6,"fifa_rank":14},{"team":"Haiti","flag":"🇭🇹","p_champion":0.03,"p_group_adv":27.88,"fifa_rank":83},{"team":"Escócia","flag":"🏴󠁧󠁢󠁳󠁣󠁴󠁿","p_champion":1.09,"p_group_adv":81.38,"fifa_rank":30}],"D":[{"team":"Estados Unidos","flag":"🇺🇸","p_champion":0.99,"p_group_adv":85.46,"fifa_rank":13},{"team":"Paraguai","flag":"🇵🇾","p_champion":0.13,"p_group_adv":50.4,"fifa_rank":63},{"team":"Austrália","flag":"🇦🇺","p_champion":0.65,"p_group_adv":70.8,"fifa_rank":23},{"team":"Turquia","flag":"🇹🇷","p_champion":0.82,"p_group_adv":70.97,"fifa_rank":29}],"E":[{"team":"Alemanha","flag":"🇩🇪","p_champion":2.17,"p_group_adv":91.61,"fifa_rank":12},{"team":"Curaçao","flag":"🇨🇼","p_champion":0.11,"p_group_adv":49.1,"fifa_rank":76},{"team":"Costa do Marfim","flag":"🇨🇮","p_champion":0.18,"p_group_adv":53.89,"fifa_rank":48},{"team":"Equador","flag":"🇪🇨","p_champion":1.53,"p_group_adv":79.3,"fifa_rank":34}],"F":[{"team":"Holanda","flag":"🇳🇱","p_champion":6.29,"p_group_adv":84.7,"fifa_rank":7},{"team":"Japão","flag":"🇯🇵","p_champion":1.27,"p_group_adv":65.26,"fifa_rank":17},{"team":"Tunísia","flag":"🇹🇳","p_champion":1.13,"p_group_adv":60.94,"fifa_rank":32},{"team":"Ucrânia","flag":"🇺🇦","p_champion":0.78,"p_group_adv":61.86,"fifa_rank":24}],"G":[{"team":"Bélgica","flag":"🇧🇪","p_champion":7.46,"p_group_adv":92.02,"fifa_rank":3},{"team":"Egito","flag":"🇪🇬","p_champion":0.72,"p_group_adv":65.53,"fifa_rank":38},{"team":"Irã","flag":"🇮🇷","p_champion":1.34,"p_group_adv":63.77,"fifa_rank":21},{"team":"Nova Zelândia","flag":"🇳🇿","p_champion":0.15,"p_group_adv":48.33,"fifa_rank":93}],"H":[{"team":"Espanha","flag":"🇪🇸","p_champion":9.68,"p_group_adv":97.03,"fifa_rank":2},{"team":"Cabo Verde","flag":"🇨🇻","p_champion":0.05,"p_group_adv":36.95,"fifa_rank":71},{"team":"Arábia Saudita","flag":"🇸🇦","p_champion":0.09,"p_group_adv":49.34,"fifa_rank":56},{"team":"Uruguai","flag":"🇺🇾","p_champion":0.84,"p_group_adv":73.77,"fifa_rank":20}],"I":[{"team":"França","flag":"🇫🇷","p_champion":11.29,"p_group_adv":86.8,"fifa_rank":1},{"team":"Senegal","flag":"🇸🇳","p_champion":1.43,"p_group_adv":69.95,"fifa_rank":19},{"team":"Noruega","flag":"🇳🇴","p_champion":4.76,"p_group_adv":86.18,"fifa_rank":11},{"team":"Iraque","flag":"🇮🇶","p_champion":0.03,"p_group_adv":17.53,"fifa_rank":62}],"J":[{"team":"Argentina","flag":"🇦🇷","p_champion":6.62,"p_group_adv":92.05,"fifa_rank":3},{"team":"Argélia","flag":"🇩🇿","p_champion":0.14,"p_group_adv":57.17,"fifa_rank":36},{"team":"Áustria","flag":"🇦🇹","p_champion":1.11,"p_group_adv":86.98,"fifa_rank":26},{"team":"Jordânia","flag":"🇯🇴","p_champion":0.01,"p_group_adv":20.18,"fifa_rank":87}],"K":[{"team":"Portugal","flag":"🇵🇹","p_champion":6.03,"p_group_adv":86.23,"fifa_rank":5},{"team":"Uzbequistão","flag":"🇺🇿","p_champion":0.09,"p_group_adv":38.32,"fifa_rank":68},{"team":"Colômbia","flag":"🇨🇴","p_champion":2.23,"p_group_adv":80.1,"fifa_rank":15},{"team":"RD Congo","flag":"🇨🇩","p_champion":0.22,"p_group_adv":45.19,"fifa_rank":53}],"L":[{"team":"Inglaterra","flag":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","p_champion":2.2,"p_group_adv":90.53,"fifa_rank":4},{"team":"Croácia","flag":"🇭🇷","p_champion":2.78,"p_group_adv":91.44,"fifa_rank":10},{"team":"Gana","flag":"🇬🇭","p_champion":0.01,"p_group_adv":23.85,"fifa_rank":60},{"team":"Panamá","flag":"🇵🇦","p_champion":0.03,"p_group_adv":33.71,"fifa_rank":77}]},"brasil_games":[{"date":"2026-06-13","home_team":"Brasil","away_team":"Marrocos","venue":"MetLife (Nova York)","opponent":"Marrocos","p_brasil_win":45.5,"p_draw":28.6,"p_brasil_lose":25.9},{"date":"2026-06-19","home_team":"Brasil","away_team":"Haiti","venue":"Lincoln Fin. (Filadélfia)","opponent":"Haiti","p_brasil_win":59.5,"p_draw":23.6,"p_brasil_lose":17.0},{"date":"2026-06-24","home_team":"Escócia","away_team":"Brasil","venue":"Hard Rock (Miami)","opponent":"Escócia","p_brasil_win":51.2,"p_draw":29.9,"p_brasil_lose":18.9}],"brasil_path":{"group_adv":88.55,"round32":74.66,"round16":48.8,"quarter":31.14,"semi":16.91,"final":22.89,"champion":8.67},"conf_summary":[{"name":"UEFA","continent":"Europa","teams":16,"p_total":60.0,"color":"#4fc3f7"},{"name":"CONMEBOL","continent":"América do Sul","teams":6,"p_total":20.0,"color":"#81c784"},{"name":"CONCACAF","continent":"América do Norte/Central","teams":6,"p_total":7.8,"color":"#ffb74d"},{"name":"CAF","continent":"África","teams":10,"p_total":6.3,"color":"#f06292"},{"name":"AFC","continent":"Ásia","teams":9,"p_total":5.8,"color":"#ce93d8"},{"name":"OFC","continent":"Oceania","teams":1,"p_total":0.1,"color":"#90a4ae"}],"updated_at":"2026-06-01T14:38:41.555310+00:00"};
+
+/* ── flags fallback ── */
+function flag(name){
+  const t=D.teams.find(x=>x.team===name);
+  return t&&t.flag?t.flag:({
+    'Brasil':'🇧🇷','Marrocos':'🇲🇦','Haiti':'🇭🇹','Escócia':'🏴󠁧󠁢󠁳󠁣󠁴󠁿',
+    'França':'🇫🇷','Espanha':'🇪🇸','Bélgica':'🇧🇪','Holanda':'🇳🇱',
+    'Argentina':'🇦🇷','Portugal':'🇵🇹','México':'🇲🇽','Noruega':'🇳🇴',
+    'Alemanha':'🇩🇪','Inglaterra':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','Colômbia':'🇨🇴','Suíça':'🇨🇭',
+    'Equador':'🇪🇨','Uruguai':'🇺🇾','Itália':'🇮🇹','Estados Unidos':'🇺🇸',
+    'Canadá':'🇨🇦','Croácia':'🇭🇷','Japão':'🇯🇵','Coreia do Sul':'🇰🇷',
+    'Senegal':'🇸🇳','Tunísia':'🇹🇳','Áustria':'🇦🇹','Austrália':'🇦🇺',
+    'Turquia':'🇹🇷','Costa do Marfim':'🇨🇮','Egito':'🇪🇬','Gana':'🇬🇭',
+    'Irã':'🇮🇷','Argélia':'🇩🇿','Arábia Saudita':'🇸🇦','Paraguai':'🇵🇾',
+    'Catar':'🇶🇦','Jordânia':'🇯🇴','Uzbequistão':'🇺🇿','RD Congo':'🇨🇩',
+    'África do Sul':'🇿🇦','República Tcheca':'🇨🇿',
+    'Nova Zelândia':'🇳🇿','Panamá':'🇵🇦','Curaçao':'🇨🇼',
+    'Iraque':'🇮🇶','Ucrânia':'🇺🇦','Cabo Verde':'🇨🇻',
+  }[name]||'🏳️');
+}
+
+/* ── ranking ── */
+function buildRanking(){
+  const el=document.getElementById('rank-list');
+  const max=D.teams[0].p_champion;
+  D.teams.slice(0,10).forEach((t,i)=>{
+    const pos=i+1;
+    const pc=pos===1?'p1':pos===2?'p2':pos===3?'p3':'';
+    const isBr=t.team==='Brasil';
+    const bw=(t.p_champion/max*100).toFixed(1);
+    const bc=pos<=2?'top':isBr?'brasil':'';
+    const li=document.createElement('li');
+    li.className='rank-row';
+    li.innerHTML=`
+      <span class="rpos ${pc}">${pos}º</span>
+      <span class="rflag">${t.flag}</span>
+      <div class="rinfo">
+        <div class="rname${isBr?' brasil':''}">${t.team}</div>
+        <div class="rsub">Grupo ${t.group}</div>
+      </div>
+      <div class="rbar"><div class="rbar-fill ${bc}" data-w="${bw}%" style="width:0"></div></div>
+      <div class="rpct${isBr?' brasil':''}">${t.p_champion}%</div>`;
+    el.appendChild(li);
+  });
+}
+
+/* ── conf ── */
+function buildConf(){
+  const el=document.getElementById('conf-list');
+  const max=D.conf_summary[0].p_total;
+  D.conf_summary.forEach(c=>{
+    const bw=(c.p_total/max*100).toFixed(1);
+    const li=document.createElement('li');
+    li.className='conf-row';
+    li.innerHTML=`
+      <div style="min-width:0">
+        <span class="cname">${c.name}</span>
+        <div class="ccontinent">${c.continent}</div>
+      </div>
+      <div class="cbar"><div class="cbar-fill" data-w="${bw}%" style="width:0;background:${c.color}"></div></div>
+      <span class="cpct">${c.p_total}%</span>`;
+    el.appendChild(li);
+  });
+}
+
+/* ── jogos brasil ── */
+function buildJogos(){
+  const el=document.getElementById('jogos');
+  const rodadas=['1ª Rodada · 13 Jun','2ª Rodada · 19 Jun','3ª Rodada · 24 Jun'];
+  const locais=['MetLife Stadium, Nova York','Lincoln Financial Field, Filadélfia','Hard Rock Stadium, Miami'];
+  const verdicts=[
+    'Jogo mais difícil do grupo. Marrocos foi semifinalista em 2022 e está entre os 15 melhores do mundo.',
+    'Brasil favorito claro. Haiti (ranking 83) é o adversário mais fraco do grupo, a diferença de nível é grande.',
+    'Jogo equilibrado. Escócia (ranking 30) é experiente e organizada, mas o Brasil larga na frente por pouco.'
+  ];
+  D.brasil_games.forEach((g,i)=>{
+    let pw=g.p_brasil_win,pl=g.p_brasil_lose,pd=g.p_draw;
+    if(pw<=1)pw=+(pw*100).toFixed(1);
+    if(pl<=1)pl=+(pl*100).toFixed(1);
+    if(pd<=1)pd=+(pd*100).toFixed(1);
+    const hf=flag(g.home_team),af=flag(g.away_team);
+    const hbr=g.home_team==='Brasil',abr=g.away_team==='Brasil';
+    el.innerHTML+=`
+    <div class="jogo">
+      <div class="jogo-head">
+        <p class="jogo-rodada">${rodadas[i]}</p>
+        <div class="jogo-times">
+          <span class="jflag">${hf}</span>
+          <span class="jnome${hbr?' brasil':''}">${g.home_team}</span>
+          <span class="jvs">vs</span>
+          <span class="jnome${abr?' brasil':''}">${g.away_team}</span>
+          <span class="jflag">${af}</span>
+        </div>
+        <p class="jlocal">${locais[i]}</p>
+      </div>
+      <div class="prob-rows">
+        <div class="prow">
+          <span class="plabel hl">Vitória Brasil</span>
+          <div class="ptrack"><div class="pfill w" data-w="${pw}%" style="width:0"></div></div>
+          <span class="pval w">${pw}%</span>
+        </div>
+        <div class="prow">
+          <span class="plabel">Empate</span>
+          <div class="ptrack"><div class="pfill d" data-w="${pd}%" style="width:0"></div></div>
+          <span class="pval">${pd}%</span>
+        </div>
+        <div class="prow">
+          <span class="plabel">Derrota</span>
+          <div class="ptrack"><div class="pfill l" data-w="${pl}%" style="width:0"></div></div>
+          <span class="pval l">${pl}%</span>
+        </div>
+      </div>
+      <p class="jverdict">${verdicts[i]}</p>
+    </div>`;
+  });
+}
+
+/* ── caminho brasil ── */
+function buildCaminho(){
+  const el=document.getElementById('caminho');
+  const bp=D.brasil_path;
+  const fases=[
+    {key:'group_adv',label:'Fase de grupos',insight:'Quase 9 em cada 10, o Brasil sai da fase de grupos. Mas Marrocos e Escócia não são moleza.'},
+    {key:'round32',  label:'Rodada de 32',  insight:'Adversário do Grupo F: Holanda, Japão, Tunísia ou Ucrânia.'},
+    {key:'round16',  label:'Oitavas',       insight:'Maior queda de chances. Aqui o Brasil deixa de ser favorito pela primeira vez.'},
+    {key:'quarter',  label:'Quartas',       insight:'Zona de perigo. Argentina, Espanha e Portugal são possíveis adversários.'},
+    {key:'semi',     label:'Semifinal',     insight:'1 em cada 6 Copas, o Brasil chega até aqui.'},
+    {key:'final',    label:'Final',         insight:'O Brasil chega à final mais vezes que França ou Espanha nas simulações.'},
+    {key:'champion', label:'Hexacampeão',insight:'',hexa:true},
+  ];
+  let sepAdded=false;
+  fases.forEach(f=>{
+    const p=bp[f.key];
+    const isH=!!f.hexa;
+    const isWarn=!isH&&p<50&&!sepAdded;
+    const fc=isH?'hexa':p>=50?'ativo':'';
+    if(isWarn){
+      sepAdded=true;
+      const sep=document.createElement('li');
+      sep.className='crisco-div';
+      sep.innerHTML='<span class="crisco-titulo">zona de risco</span><p class="crisco-sub">A partir daqui, o Brasil tem mais chance de ser eliminado do que de avançar</p>';
+      el.appendChild(sep);
+    }
+    const li=document.createElement('li');
+    li.className='citem';
+    li.innerHTML=`
+      <span class="cfase${isH?' hexa':''}">${f.label}</span>
+      <div class="ctrack"><div class="cfill ${fc}" data-w="${p}%" style="width:0"></div></div>
+      <span class="cpct${isH?' hexa':isWarn?' warn':''}">${p}%</span>
+      ${f.insight?`<p class="cinsight">${f.insight}</p>`:''}`;
+    el.appendChild(li);
+  });
+}
+
+/* ── grupos ── */
+function buildClassico(){
+  const brFinal = D.brasil_path.final;
+  const argTeam = D.teams.find(t => t.team === 'Argentina');
+  if(!argTeam) return;
+  const argFinal = argTeam.p_final;
+  const pClass = (brFinal * argFinal / 100).toFixed(1);
+  document.getElementById('clasico-pct').textContent = pClass + '%';
+  document.getElementById('clasico-br-pct').textContent = brFinal + '%';
+  document.getElementById('clasico-arg-pct').textContent = argFinal + '%';
+}
+
+function buildGrupos(){
+  const el=document.getElementById('grupos');
+  Object.entries(D.groups_info).forEach(([letra,times])=>{
+    const sorted=[...times].sort((a,b)=>b.p_group_adv-a.p_group_adv);
+    const fav=sorted[0];
+    const isFavBr=fav.team==='Brasil';
+    let rows=sorted.map((t,idx)=>{
+      const isBr=t.team==='Brasil';
+      const isFav=idx===0;
+      const rowCls=isBr?'brow':isFav?'fav':'';
+      const nomeCls=isBr?'brasil':isFav?'fav':'';
+      const pctCls=isBr?'brasil':isFav?'fav':'';
+      const barCls=isBr?'brasil':isFav?'fav':'';
+      return `
+      <div class="gtime ${rowCls}">
+        <div class="gtop">
+          <span class="gflag">${flag(t.team)}</span>
+          <span class="gnome ${nomeCls}">${t.team}</span>
+          <span class="gpct ${pctCls}">${t.p_group_adv}%</span>
+        </div>
+        <div class="gbar"><div class="gbar-fill ${barCls}" data-w="${t.p_group_adv}%" style="width:0"></div></div>
+      </div>`;
+    }).join('');
+    el.innerHTML+=`
+    <div class="grupo">
+      <div class="grupo-head">
+        <p class="gletra">Grupo ${letra}</p>
+        <p class="gfav${isFavBr?' brasil':''}">${fav.flag} ${fav.team}</p>
+      </div>
+      ${rows}
+    </div>`;
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LOG DE PREVISÕES — EDITE AQUI APÓS CADA RODADA
+   
+   Para cada jogo, preencha após o apito final:
+     resultado: "home" | "draw" | "away"
+     placar:    "2-1"  (home-away)
+   
+   Deixe resultado:null e placar:null enquanto o jogo não aconteceu.
+   O campo "previsao" é calculado automaticamente (maior probabilidade).
+═══════════════════════════════════════════════════════════ */
+const LOG = [
+  // ── FASE DE GRUPOS ──────────────────────────────────────
+  {
+    fase:      'Grupo C · 1ª Rodada · 13 Jun',
+    home:      'Brasil',    hflag: '🇧🇷',
+    away:      'Marrocos',  aflag: '🇲🇦',
+    p_home:    46.3,
+    p_draw:    28.7,
+    p_away:    25.0,
+    resultado: null,   // preencher: "home" | "draw" | "away"
+    placar:    null,   // preencher: "2-1"
+  },
+  {
+    fase:      'Grupo C · 2ª Rodada · 19 Jun',
+    home:      'Brasil',  hflag: '🇧🇷',
+    away:      'Haiti',   aflag: '🇭🇹',
+    p_home:    55.6,
+    p_draw:    24.6,
+    p_away:    19.8,
+    resultado: null,
+    placar:    null,
+  },
+  {
+    fase:      'Grupo C · 3ª Rodada · 24 Jun',
+    home:      'Escócia', hflag: '🏴󠁧󠁢󠁳󠁣󠁴󠁿',
+    away:      'Brasil',  aflag: '🇧🇷',
+    p_home:    16.4,
+    p_draw:    29.4,
+    p_away:    54.2,
+    resultado: null,
+    placar:    null,
+  },
+  // ── ACRESCENTE JOGOS DO MATA-MATA À MEDIDA QUE OCORREREM ──
+  // {
+  //   fase:      'Rodada de 32 · 29 Jun',
+  //   home:      'Brasil',   hflag: '🇧🇷',
+  //   away:      'Holanda',  aflag: '🇳🇱',
+  //   p_home:    47.2,
+  //   p_draw:    27.3,   // em mata-mata: empate vai p/ prorrogação
+  //   p_away:    25.5,
+  //   resultado: null,
+  //   placar:    null,
+  // },
+];
+
+/* ── buildLog ── */
+function buildLog(){
+  const el = document.getElementById('log-list');
+  const scoreEl = document.getElementById('log-score');
+  const scoreLabelEl = document.getElementById('log-score-label');
+
+  const flags = {
+    'Brasil':'🇧🇷','Marrocos':'🇲🇦','Haiti':'🇭🇹','Escócia':'🏴󠁧󠁢󠁳󠁣󠁴󠁿',
+    'França':'🇫🇷','Espanha':'🇪🇸','Holanda':'🇳🇱','Argentina':'🇦🇷',
+    'Portugal':'🇵🇹','Alemanha':'🇩🇪','Inglaterra':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','Uruguai':'🇺🇾',
+  };
+
+  let acertos = 0, jogados = 0;
+
+  LOG.forEach(j => {
+    // previsão = resultado com maior probabilidade
+    const probs = {home: j.p_home, draw: j.p_draw, away: j.p_away};
+    const previsao = Object.entries(probs).reduce((a,b) => b[1]>a[1]?b:a)[0];
+    const previsaoLabel = {home:`${j.home}`, draw:'Empate', away:`${j.away}`}[previsao];
+
+    const temResultado = j.resultado !== null;
+    if(temResultado) {
+      jogados++;
+      if(j.resultado === previsao) acertos++;
+    }
+
+    // badge
+    let badgeClass, badgeText;
+    if(!temResultado){
+      badgeClass = 'pending'; badgeText = 'Aguardando';
+    } else if(j.resultado === previsao){
+      badgeClass = 'hit';  badgeText = 'Acertou';
+    } else {
+      badgeClass = 'miss'; badgeText = 'Errou';
+    }
+
+    // cores das probabilidades
+    const pHome = j.p_home, pDraw = j.p_draw, pAway = j.p_away;
+    const isBrasilHome = j.home === 'Brasil';
+    const isBrasilAway = j.away === 'Brasil';
+    const pBrasil = isBrasilHome ? pHome : isBrasilAway ? pAway : null;
+
+    // bloco de resultado real
+    let resultadoHtml = '';
+    if(temResultado){
+      const resLabel = {home: `Vitória ${j.home}`, draw: 'Empate', away: `Vitória ${j.away}`}[j.resultado];
+      const acertouTexto = j.resultado === previsao
+        ? `Previsão correta, modelo apontava <b>${previsaoLabel}</b> como mais provável`
+        : `Previsão errada, modelo apontava <b>${previsaoLabel}</b>, aconteceu <b>${resLabel}</b>`;
+      resultadoHtml = `
+        <div class="log-resultado">
+          <span class="log-placar-real">${j.placar || resLabel}</span>
+          <span class="log-resultado-desc">${acertouTexto}</span>
+        </div>`;
+    }
+
+    const hflag = j.hflag || flags[j.home] || '🏳️';
+    const aflag = j.aflag || flags[j.away] || '🏳️';
+
+    const li = document.createElement('li');
+    li.className = 'log-item';
+    li.innerHTML = `
+      <div class="log-head">
+        <div>
+          <p class="log-fase">${j.fase}</p>
+          <div class="log-times">
+            <span class="log-flag">${hflag}</span>
+            <span class="log-nome${j.home==='Brasil'?' brasil':''}">${j.home}</span>
+            <span class="log-vs">vs</span>
+            <span class="log-nome${j.away==='Brasil'?' brasil':''}">${j.away}</span>
+            <span class="log-flag">${aflag}</span>
+          </div>
+        </div>
+        <span class="log-badge ${badgeClass}">${badgeText}</span>
+      </div>
+      <div class="log-body">
+        <div class="log-probs">
+          <div class="log-prow">
+            <span class="log-plabel${isBrasilHome?' hl':''}">${j.home}</span>
+            <div class="log-track"><div class="log-pfill w" data-w="${pHome}%" style="width:0"></div></div>
+            <span class="log-pval">${pHome}%</span>
+          </div>
+          <div class="log-prow">
+            <span class="log-plabel">Empate</span>
+            <div class="log-track"><div class="log-pfill d" data-w="${pDraw}%" style="width:0"></div></div>
+            <span class="log-pval">${pDraw}%</span>
+          </div>
+          <div class="log-prow">
+            <span class="log-plabel${isBrasilAway?' hl':''}">${j.away}</span>
+            <div class="log-track"><div class="log-pfill l" data-w="${pAway}%" style="width:0"></div></div>
+            <span class="log-pval">${pAway}%</span>
+          </div>
+        </div>
+      </div>
+      ${resultadoHtml}`;
+    el.appendChild(li);
+  });
+
+  // placar acumulado
+  if(jogados === 0){
+    scoreEl.textContent = '—';
+    scoreLabelEl.textContent = 'Aguardando jogos';
+  } else {
+    scoreEl.textContent = `${acertos}/${jogados}`;
+    scoreLabelEl.textContent = acertos === jogados
+      ? 'Todos acertados até agora'
+      : `${acertos} acerto${acertos!==1?'s':''} em ${jogados} jogo${jogados!==1?'s':''}`;
+  }
+}
+
+/* ── Timestamp ── */
+function displayUpdateTime(){
+  const el=document.getElementById('update-time');
+  if(D.updated_at){
+    const date=new Date(D.updated_at);
+    const fmt=new Intl.DateTimeFormat('pt-BR',{
+      year:'numeric',month:'2-digit',day:'2-digit',
+      hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'
+    });
+    el.textContent=fmt.format(date);
+  }
+}
+
+/* ── INIT ── */
+function animateIn(container){
+  container.querySelectorAll('[data-w]').forEach(el=>{el.style.width=el.dataset.w});
+}
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){animateIn(e.target);io.unobserve(e.target)}});
+},{threshold:0.08});
+
+buildRanking();
+buildConf();
+buildJogos();
+buildCaminho();
+buildClassico();
+buildGrupos();
+displayUpdateTime();
+
+document.querySelectorAll('.sec').forEach(s=>io.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.env
+.env.local
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Modelo grande (opcional — se quiser versionar remova esta linha)
+dados/model_calibrated.pkl
+
+# Cache interno do script
+dados/_log_cache.pkl
+dados/_prev_simulation.pkl
+dados/_prev_simulation.json
+
+# Odds brutas (regeneradas a cada execução)
+dados/odds_raw_games.json
+dados/odds_raw_winner.json
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+
+# Arquivos temporários
+*.log
+*.tmp
+*.bak
