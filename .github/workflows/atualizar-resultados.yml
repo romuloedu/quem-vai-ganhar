@@ -1,0 +1,50 @@
+name: Atualizar Resultados Copa 2026
+
+on:
+  schedule:
+    # Cobre o período de 14:45 a 03:15 UTC (janelas de jogos da Copa 2026)
+    # Partidas na América do Norte terminam, no pior caso, por volta das 03:00 UTC
+    - cron: '45 14 * * *'       # 14:45 UTC
+    - cron: '*/15 15-23 * * *'  # 15:00–23:45 UTC
+    - cron: '*/15 0-3 * * *'    # 00:00–03:45 UTC
+  workflow_dispatch:
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Buscar resultados finalizados
+        id: buscar
+        run: python scripts/buscar_resultados.py
+        env:
+          FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+
+      - name: Atualizar modelo e previsões
+        if: steps.buscar.outputs.new_results == 'true'
+        run: python scripts/atualizar.py
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+
+      - name: Commit e push das mudanças
+        if: steps.buscar.outputs.new_results == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dados/resultados_reais.json index.html resultados.html dados/
+          git diff --cached --quiet || git commit -m "Atualiza resultados e previsões"
+          git push
