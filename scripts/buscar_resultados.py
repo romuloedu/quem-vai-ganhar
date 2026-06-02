@@ -3,8 +3,11 @@
 Busca resultados finalizados da football-data.org e atualiza resultados_reais.json.
 Seta o output 'new_results=true' quando encontra jogos novos (para o GitHub Actions).
 """
-import os, sys, json, requests
+import os, sys, json, datetime, requests
 from pathlib import Path
+
+COPA_INICIO = datetime.date(2026, 6, 11)
+COPA_FIM    = datetime.date(2026, 7, 20)  # dia após a final (19/jul)
 
 ROOT  = Path(__file__).parent.parent
 DADOS = ROOT / "dados"
@@ -72,6 +75,12 @@ def parse_match(m):
 
 
 def main():
+    hoje = datetime.date.today()
+    if hoje < COPA_INICIO or hoje > COPA_FIM:
+        print(f"Fora do período da Copa ({hoje}). Nada a fazer.")
+        set_gha_output("new_results", "false")
+        return
+
     if not API_KEY:
         print("FOOTBALL_DATA_API_KEY não definida — abortando.")
         sys.exit(2)
