@@ -196,7 +196,7 @@ main{padding:16px 0 48px}
 .log-badge.hit{background:rgba(0,168,79,.15);color:#00a84f;border:1px solid rgba(0,168,79,.3)}
 .log-badge.miss{background:rgba(192,57,43,.12);color:#e74c3c;border:1px solid rgba(192,57,43,.25)}
 .log-badge.done{background:#1a1a1a;color:#666;border:1px solid #252525}
-.log-score{font-family:'Oswald',sans-serif;font-size:17px;font-weight:700;color:#f0f0ee;letter-spacing:2px;flex-shrink:0}
+.log-score{font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;color:#f0f0ee;letter-spacing:1px;flex-shrink:0;padding:0 3px;line-height:1}
 .log-body{padding:0 18px 14px}
 .log-probs{display:grid;gap:7px}
 .log-prow{display:grid;grid-template-columns:100px 1fr auto;align-items:center;gap:10px}
@@ -495,11 +495,12 @@ function buildCard(j){
   const vsHtml=temRes&&j.placar?`<span class="log-score">${j.placar}</span>`:`<span class="log-vs">vs</span>`;
   let resHtml='';
   if(temRes){
-    const resLabel={home:`Vitória ${j.home}`,draw:'Empate',away:`Vitória ${j.away}`}[j.res];
+    const pDesc=prev==='draw'?'Empate':prevLabel;
+    const rDesc=j.res==='draw'?'Empate':(j.res==='home'?j.home:j.away);
     const txt=j.res===prev
-      ?`Previsão correta, modelo apontava <b>${prevLabel}</b>`
-      :`Previsão errada, modelo apontava <b>${prevLabel}</b>, aconteceu <b>${resLabel}</b>`;
-    resHtml=`<div class="log-resultado"><span class="log-placar-real">${j.placar||resLabel}</span><span class="log-resultado-desc">${txt}</span></div>`;
+      ?`Modelo acertou · previa <b>${pDesc}</b>`
+      :`Modelo errou · previa <b>${pDesc}</b>, saiu <b>${rDesc}</b>`;
+    resHtml=`<div class="log-resultado"><span class="log-resultado-desc">${txt}</span></div>`;
   }
   // In group/team modes, add the date as context
   const extraCtx=(mode!=='day')?`<span style="font-size:10px;color:#888;margin-left:6px">${fmtDate(j.date)}</span>`:'';
