@@ -197,7 +197,8 @@ main{padding:16px 0 48px}
 .log-badge.miss{background:rgba(192,57,43,.12);color:#e74c3c;border:1px solid rgba(192,57,43,.25)}
 .log-badge.done{background:#1a1a1a;color:#666;border:1px solid #252525}
 .log-score{font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;color:#f0f0ee;letter-spacing:1px;flex-shrink:0;padding:0 3px;line-height:1}
-.log-score-prev{font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;color:#555;letter-spacing:1px;flex-shrink:0;padding:0 3px;line-height:1}
+.log-prev{font-size:12px;color:#777;margin-top:5px;letter-spacing:.3px}
+.log-prev b{font-family:'Oswald',sans-serif;font-size:15px;font-weight:700;color:#bbb;letter-spacing:1px}
 .log-body{padding:0 18px 14px}
 .log-probs{display:grid;gap:7px}
 .log-prow{display:grid;grid-template-columns:100px 1fr auto;align-items:center;gap:10px}
@@ -493,7 +494,8 @@ function buildCard(j){
   const koAttr=(!temRes&&koMs)?` data-ko="${koMs}"`:'';
   const isH=j.home==='Brasil', isA=j.away==='Brasil';
   const rLabel=j.r===1?'1ª Rodada':j.r===2?'2ª Rodada':'3ª Rodada';
-  const vsHtml=temRes&&j.placar?`<span class="log-score">${j.placar}</span>`:j.placar_prev?`<span class="log-score-prev">${j.placar_prev}</span>`:`<span class="log-vs">vs</span>`;
+  const vsHtml=temRes&&j.placar?`<span class="log-score">${j.placar}</span>`:`<span class="log-vs">vs</span>`;
+  const prevHtml=!temRes&&j.placar_prev?`<p class="log-prev">Previsão do modelo: <b>${j.placar_prev}</b></p>`:'';
   let resHtml='';
   if(temRes){
     const pScore=j.placar_prev||null,rScore=j.placar||null;
@@ -526,6 +528,7 @@ function buildCard(j){
           <span class="log-nome${isA?' brasil':''}">${j.away}</span>
           <span class="log-flag">${j.af}</span>
         </div>
+        ${prevHtml}
         <p class="log-venue">${fmtKickoff(j)?`<span class="log-time">${fmtKickoff(j)}</span> <span class="log-tz">Brasília</span> · `:''}${j.venue}</p>
       </div>
       <span class="log-badge ${bClass}"${koAttr}>${bText}</span>
