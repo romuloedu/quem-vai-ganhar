@@ -1,73 +1,73 @@
 match_id,group,stage,date,venue,home_team,away_team,kickoff_brt
 1,A,group,2026-06-11,Azteca (CDMX),México,África do Sul,16:00
 2,A,group,2026-06-11,Azteca (CDMX),Coreia do Sul,República Tcheca,23:00
-3,A,group,2026-06-17,Akron (Guadalajara),México,Coreia do Sul,22:00
-4,A,group,2026-06-17,BBVA (Monterrey),África do Sul,República Tcheca,14:00
+3,A,group,2026-06-18,Akron (Guadalajara),México,Coreia do Sul,22:00
+4,A,group,2026-06-18,BBVA (Monterrey),República Tcheca,África do Sul,13:00
 5,A,group,2026-06-24,Azteca (CDMX),República Tcheca,México,22:00
 6,A,group,2026-06-24,BBVA (Monterrey),África do Sul,Coreia do Sul,22:00
 7,B,group,2026-06-12,BMO Field (Toronto),Canadá,Bósnia e Herzegovina,16:00
 8,B,group,2026-06-13,Levi's (San Francisco),Catar,Suíça,16:00
 9,B,group,2026-06-18,SoFi (Los Angeles),Suíça,Bósnia e Herzegovina,16:00
 10,B,group,2026-06-18,BC Place (Vancouver),Canadá,Catar,19:00
-11,B,group,2026-06-24,BC Place (Vancouver),Canadá,Suíça,16:00
+11,B,group,2026-06-24,BC Place (Vancouver),Suíça,Canadá,16:00
 12,B,group,2026-06-24,Lumen Field (Seattle),Bósnia e Herzegovina,Catar,16:00
 13,C,group,2026-06-13,MetLife (Nova York),Brasil,Marrocos,19:00
 14,C,group,2026-06-13,Lincoln Fin. (Filadélfia),Haiti,Escócia,22:00
-15,C,group,2026-06-19,Lincoln Fin. (Filadélfia),Brasil,Haiti,22:00
-16,C,group,2026-06-19,Hard Rock (Miami),Marrocos,Escócia,19:00
-17,C,group,2026-06-24,Hard Rock (Miami),Escócia,Brasil,22:00
-18,C,group,2026-06-24,MetLife (Nova York),Marrocos,Haiti,22:00
+15,C,group,2026-06-19,Lincoln Fin. (Filadélfia),Brasil,Haiti,21:30
+16,C,group,2026-06-19,Hard Rock (Miami),Escócia,Marrocos,19:00
+17,C,group,2026-06-24,Hard Rock (Miami),Escócia,Brasil,19:00
+18,C,group,2026-06-24,MetLife (Nova York),Marrocos,Haiti,19:00
 19,D,group,2026-06-12,SoFi (Los Angeles),Estados Unidos,Paraguai,22:00
-20,D,group,2026-06-12,BC Place (Vancouver),Austrália,Turquia,01:00
-21,D,group,2026-06-18,Levi's (San Francisco),Estados Unidos,Austrália,16:00
-22,D,group,2026-06-18,Lumen Field (Seattle),Paraguai,Turquia,22:00
-23,D,group,2026-06-25,SoFi (Los Angeles),Turquia,Estados Unidos,22:00
-24,D,group,2026-06-25,BC Place (Vancouver),Paraguai,Austrália,22:00
+20,D,group,2026-06-14,BC Place (Vancouver),Austrália,Turquia,01:00
+21,D,group,2026-06-19,Levi's (San Francisco),Estados Unidos,Austrália,16:00
+22,D,group,2026-06-20,Lumen Field (Seattle),Turquia,Paraguai,00:00
+23,D,group,2026-06-25,SoFi (Los Angeles),Turquia,Estados Unidos,23:00
+24,D,group,2026-06-25,BC Place (Vancouver),Paraguai,Austrália,23:00
 25,E,group,2026-06-14,Lincoln Fin. (Filadélfia),Alemanha,Curaçao,14:00
 26,E,group,2026-06-14,MetLife (Nova York),Costa do Marfim,Equador,20:00
 27,E,group,2026-06-20,MetLife (Nova York),Alemanha,Costa do Marfim,17:00
-28,E,group,2026-06-20,Lincoln Fin. (Filadélfia),Curaçao,Equador,19:00
+28,E,group,2026-06-20,Lincoln Fin. (Filadélfia),Equador,Curaçao,21:00
 29,E,group,2026-06-25,Lincoln Fin. (Filadélfia),Equador,Alemanha,17:00
 30,E,group,2026-06-25,MetLife (Nova York),Curaçao,Costa do Marfim,17:00
-31,F,group,2026-06-14,AT&T (Dallas),Holanda,Japão,16:00
+31,F,group,2026-06-14,AT&T (Dallas),Holanda,Japão,17:00
 32,F,group,2026-06-14,NRG (Houston),Suécia,Tunísia,23:00
 33,F,group,2026-06-20,AT&T (Dallas),Holanda,Suécia,14:00
-34,F,group,2026-06-20,NRG (Houston),Tunísia,Japão,23:00
-35,F,group,2026-06-25,NRG (Houston),Tunísia,Holanda,18:00
-36,F,group,2026-06-25,AT&T (Dallas),Japão,Suécia,18:00
+34,F,group,2026-06-21,NRG (Houston),Tunísia,Japão,01:00
+35,F,group,2026-06-25,NRG (Houston),Tunísia,Holanda,20:00
+36,F,group,2026-06-25,AT&T (Dallas),Japão,Suécia,20:00
 37,G,group,2026-06-15,Arrowhead (Kansas City),Bélgica,Egito,16:00
 38,G,group,2026-06-15,Arrowhead (Kansas City),Irã,Nova Zelândia,22:00
 39,G,group,2026-06-21,Arrowhead (Kansas City),Bélgica,Irã,16:00
-40,G,group,2026-06-21,Arrowhead (Kansas City),Egito,Nova Zelândia,22:00
-41,G,group,2026-06-26,Arrowhead (Kansas City),Nova Zelândia,Bélgica,22:00
-42,G,group,2026-06-26,Arrowhead (Kansas City),Egito,Irã,22:00
-43,H,group,2026-06-15,AT&T (Dallas),Espanha,Cabo Verde,14:00
+40,G,group,2026-06-21,Arrowhead (Kansas City),Nova Zelândia,Egito,22:00
+41,G,group,2026-06-27,Arrowhead (Kansas City),Nova Zelândia,Bélgica,00:00
+42,G,group,2026-06-27,Arrowhead (Kansas City),Egito,Irã,00:00
+43,H,group,2026-06-15,AT&T (Dallas),Espanha,Cabo Verde,13:00
 44,H,group,2026-06-15,NRG (Houston),Arábia Saudita,Uruguai,19:00
-45,H,group,2026-06-21,NRG (Houston),Espanha,Arábia Saudita,14:00
-46,H,group,2026-06-21,AT&T (Dallas),Cabo Verde,Uruguai,19:00
-47,H,group,2026-06-26,AT&T (Dallas),Uruguai,Espanha,19:00
-48,H,group,2026-06-26,NRG (Houston),Cabo Verde,Arábia Saudita,19:00
+45,H,group,2026-06-21,NRG (Houston),Espanha,Arábia Saudita,13:00
+46,H,group,2026-06-21,AT&T (Dallas),Uruguai,Cabo Verde,19:00
+47,H,group,2026-06-26,AT&T (Dallas),Uruguai,Espanha,21:00
+48,H,group,2026-06-26,NRG (Houston),Cabo Verde,Arábia Saudita,21:00
 49,I,group,2026-06-16,Mercedes-Benz (Atlanta),França,Senegal,16:00
-50,I,group,2026-06-16,Mercedes-Benz (Atlanta),Noruega,Iraque,19:00
-51,I,group,2026-06-22,Mercedes-Benz (Atlanta),França,Noruega,18:00
-52,I,group,2026-06-22,Mercedes-Benz (Atlanta),Senegal,Iraque,21:00
-53,I,group,2026-06-27,Mercedes-Benz (Atlanta),Iraque,França,23:00
-54,I,group,2026-06-27,Mercedes-Benz (Atlanta),Senegal,Noruega,23:00
+50,I,group,2026-06-16,Mercedes-Benz (Atlanta),Iraque,Noruega,19:00
+51,I,group,2026-06-26,Mercedes-Benz (Atlanta),Noruega,França,16:00
+52,I,group,2026-06-26,Mercedes-Benz (Atlanta),Senegal,Iraque,16:00
+53,I,group,2026-06-22,Mercedes-Benz (Atlanta),França,Iraque,18:00
+54,I,group,2026-06-22,Mercedes-Benz (Atlanta),Noruega,Senegal,21:00
 55,J,group,2026-06-16,Gillette (Boston),Argentina,Argélia,22:00
-56,J,group,2026-06-16,Gillette (Boston),Áustria,Jordânia,01:00
+56,J,group,2026-06-17,Gillette (Boston),Áustria,Jordânia,01:00
 57,J,group,2026-06-22,Gillette (Boston),Argentina,Áustria,14:00
-58,J,group,2026-06-22,Gillette (Boston),Argélia,Jordânia,22:00
+58,J,group,2026-06-23,Gillette (Boston),Jordânia,Argélia,00:00
 59,J,group,2026-06-27,Gillette (Boston),Jordânia,Argentina,23:00
 60,J,group,2026-06-27,Gillette (Boston),Argélia,Áustria,23:00
-61,K,group,2026-06-17,Levi's (San Francisco),Portugal,Uzbequistão,17:00
-62,K,group,2026-06-17,SoFi (Los Angeles),Colômbia,RD Congo,22:00
-63,K,group,2026-06-23,SoFi (Los Angeles),Portugal,Colômbia,17:00
-64,K,group,2026-06-23,Levi's (San Francisco),Uzbequistão,RD Congo,23:00
-65,K,group,2026-06-27,Levi's (San Francisco),RD Congo,Portugal,20:00
-66,K,group,2026-06-27,SoFi (Los Angeles),Uzbequistão,Colômbia,20:00
+61,K,group,2026-06-23,Levi's (San Francisco),Portugal,Uzbequistão,14:00
+62,K,group,2026-06-23,SoFi (Los Angeles),Colômbia,RD Congo,23:00
+63,K,group,2026-06-27,SoFi (Los Angeles),Colômbia,Portugal,20:30
+64,K,group,2026-06-27,Levi's (San Francisco),RD Congo,Uzbequistão,20:30
+65,K,group,2026-06-17,Levi's (San Francisco),Portugal,RD Congo,14:00
+66,K,group,2026-06-17,SoFi (Los Angeles),Uzbequistão,Colômbia,23:00
 67,L,group,2026-06-17,Gillette (Boston),Inglaterra,Croácia,17:00
 68,L,group,2026-06-17,Gillette (Boston),Gana,Panamá,20:00
 69,L,group,2026-06-23,Gillette (Boston),Inglaterra,Gana,17:00
-70,L,group,2026-06-23,Gillette (Boston),Croácia,Panamá,20:00
+70,L,group,2026-06-23,Gillette (Boston),Panamá,Croácia,20:00
 71,L,group,2026-06-27,Gillette (Boston),Panamá,Inglaterra,18:00
 72,L,group,2026-06-27,Gillette (Boston),Croácia,Gana,18:00
