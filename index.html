@@ -565,8 +565,12 @@ footer{
   .log-head{padding:14px 14px 10px}
   .log-body{padding:0 14px 12px}
   .log-resultado{padding:10px 14px}
-  .rank-row{grid-template-columns:26px 26px 1fr 52px}
-  .rbar{display:none}
+  .rank-row{grid-template-columns:26px 26px 1fr 52px;grid-template-rows:auto 4px}
+  .rpos{grid-column:1;grid-row:1}
+  .rflag{grid-column:2;grid-row:1}
+  .rinfo{grid-column:3;grid-row:1}
+  .rpct{grid-column:4;grid-row:1}
+  .rbar{grid-column:1/-1;grid-row:2;height:4px;margin-top:4px}
   .citem{grid-template-columns:120px 1fr auto;gap:12px}
   .cinsight{display:none}
   .prow{grid-template-columns:90px 1fr 38px;gap:8px}
@@ -749,7 +753,7 @@ function buildRanking(){
     const pc=pos===1?'p1':pos===2?'p2':pos===3?'p3':'';
     const isBr=t.team==='Brasil';
     const bw=(t.p_champion/max*100).toFixed(1);
-    const bc=pos<=2?'top':isBr?'brasil':'';
+    const bc=pos<=3?'top':isBr?'brasil':'';
     const li=document.createElement('li');
     li.className='rank-row';
     li.innerHTML=`
