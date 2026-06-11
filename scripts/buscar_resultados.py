@@ -127,6 +127,14 @@ def main():
     if agenda_changed:
         print("Agenda de horários atualizada.")
 
+    finished = [m for m in matches if m.get("status") == "FINISHED"]
+    print(f"  API: {len(matches)} jogos total, {len(finished)} FINISHED")
+    for m in finished:
+        ht = NAME_MAP.get(m["homeTeam"]["name"], m["homeTeam"]["name"])
+        at = NAME_MAP.get(m["awayTeam"]["name"], m["awayTeam"]["name"])
+        sc = m.get("score", {}).get("fullTime", {})
+        print(f"    {m['utcDate'][:10]} {ht} {sc.get('home')}x{sc.get('away')} {at}")
+
     new_entries = []
     for m in matches:
         if m.get("status") != "FINISHED":
