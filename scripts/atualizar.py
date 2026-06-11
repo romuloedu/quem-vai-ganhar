@@ -641,6 +641,7 @@ def step7_update_html(results, df_bl, mkt_champion):
             "pa": round(row["p_away_win"] * 100, 1),
             "res": real.get("res"),
             "placar": real.get("placar"),
+            "time": row.get("kickoff_brt", ""),
         })
 
     html_res_path = ROOT / "resultados.html"
