@@ -25,7 +25,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2016-03-24,Coreia do Sul,Lebanon,1.0,0.0,FIFA World Cup qualification,Ansan,South Korea,False
 2016-03-24,Catar,Hong Kong,2.0,0.0,FIFA World Cup qualification,Doha,Qatar,False
 2016-03-24,Arábia Saudita,Malaysia,2.0,0.0,FIFA World Cup qualification,Jeddah,Saudi Arabia,False
-2016-03-24,Turquia,Sweden,2.0,1.0,Friendly,Antalya,Turkey,False
+2016-03-24,Turquia,Suécia,2.0,1.0,Friendly,Antalya,Turkey,False
 2016-03-24,Ucrânia,Cyprus,1.0,0.0,Friendly,Odessa,Ukraine,False
 2016-03-24,Uzbequistão,Philippines,1.0,0.0,FIFA World Cup qualification,Tashkent,Uzbekistan,False
 2016-03-25,Argélia,Ethiopia,7.0,1.0,African Cup of Nations qualification,Blida,Algeria,False
@@ -75,8 +75,8 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2016-03-29,Escócia,Denmark,1.0,0.0,Friendly,Glasgow,Scotland,False
 2016-03-29,África do Sul,Cameroon,0.0,0.0,African Cup of Nations qualification,Durban,South Africa,False
 2016-03-29,Sudan,Costa do Marfim,1.0,1.0,African Cup of Nations qualification,Omdurman,Sudan,False
-2016-03-29,Sweden,República Tcheca,1.0,1.0,Friendly,Solna,Sweden,False
-2016-03-29,Suíça,Bosnia and Herzegovina,0.0,2.0,Friendly,Zürich,Switzerland,False
+2016-03-29,Suécia,República Tcheca,1.0,1.0,Friendly,Solna,Suécia,False
+2016-03-29,Suíça,Bósnia e Herzegovina,0.0,2.0,Friendly,Zürich,Switzerland,False
 2016-03-29,Togo,Tunísia,0.0,0.0,African Cup of Nations qualification,Lomé,Togo,False
 2016-03-29,United Arab Emirates,Arábia Saudita,1.0,1.0,FIFA World Cup qualification,Abu Dhabi,United Arab Emirates,False
 2016-03-29,Uruguai,Peru,1.0,0.0,FIFA World Cup qualification,Montevideo,Uruguay,False
@@ -98,7 +98,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2016-05-28,Rwanda,Senegal,0.0,2.0,Friendly,Kigali,Rwanda,False
 2016-05-28,Suíça,Bélgica,1.0,2.0,Friendly,Geneva,Switzerland,False
 2016-05-29,Albania,Catar,3.0,1.0,Friendly,Hartberg,Austria,True
-2016-05-29,Bosnia and Herzegovina,Espanha,1.0,3.0,Friendly,St. Gallen,Switzerland,True
+2016-05-29,Bósnia e Herzegovina,Espanha,1.0,3.0,Friendly,St. Gallen,Switzerland,True
 2016-05-29,Alemanha,Slovakia,1.0,3.0,Friendly,Augsburg,Germany,False
 2016-05-29,Itália,Escócia,1.0,0.0,Friendly,Attard,Malta,True
 2016-05-29,Portugal,Noruega,3.0,0.0,Friendly,Porto,Portugal,False
@@ -153,7 +153,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2016-06-07,Colômbia,Paraguai,2.0,1.0,Copa América,Pasadena,United States,True
 2016-06-07,Curaçao,United States Virgin Islands,7.0,0.0,CFU Caribbean Cup qualification,Willemstad,Curaçao,False
 2016-06-07,Irã,Kyrgyzstan,6.0,0.0,Friendly,Tehran,Iran,False
-2016-06-07,Japão,Bosnia and Herzegovina,1.0,2.0,Kirin Cup,Suita,Japan,False
+2016-06-07,Japão,Bósnia e Herzegovina,1.0,2.0,Kirin Cup,Suita,Japan,False
 2016-06-07,Espanha,Georgia,0.0,1.0,Friendly,Getafe,Spain,False
 2016-06-07,Estados Unidos,Costa Rica,4.0,0.0,Copa América,Chicago,United States,False
 2016-06-08,Brasil,Haiti,7.0,1.0,Copa América,Orlando,United States,True
@@ -188,7 +188,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2016-06-16,Ucrânia,Northern Ireland,0.0,2.0,UEFA Euro,Lyon,France,True
 2016-06-16,Estados Unidos,Equador,2.0,1.0,Copa América,Seattle,United States,False
 2016-06-17,República Tcheca,Croácia,2.0,2.0,UEFA Euro,Saint-Étienne,France,True
-2016-06-17,Itália,Sweden,1.0,0.0,UEFA Euro,Toulouse,France,True
+2016-06-17,Itália,Suécia,1.0,0.0,UEFA Euro,Toulouse,France,True
 2016-06-17,Peru,Colômbia,0.0,0.0,Copa América,East Rutherford,United States,True
 2016-06-17,Espanha,Turquia,3.0,0.0,UEFA Euro,Nice,France,True
 2016-06-18,Argentina,Venezuela,4.0,1.0,Copa América,Foxborough,United States,True
@@ -210,7 +210,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2016-06-22,Iceland,Áustria,2.0,1.0,UEFA Euro,Saint-Denis,France,True
 2016-06-22,Itália,Republic of Ireland,0.0,1.0,UEFA Euro,Villeneuve-d'Ascq,France,True
 2016-06-22,África do Sul,Eswatini,5.0,1.0,COSAFA Cup,Windhoek,Namibia,True
-2016-06-22,Sweden,Bélgica,0.0,1.0,UEFA Euro,Nice,France,True
+2016-06-22,Suécia,Bélgica,0.0,1.0,UEFA Euro,Nice,France,True
 2016-06-25,Croácia,Portugal,0.0,1.0,UEFA Euro,Lens,France,True
 2016-06-25,África do Sul,Botswana,3.0,2.0,COSAFA Cup,Windhoek,Namibia,True
 2016-06-25,Eswatini,RD Congo,1.0,0.0,COSAFA Cup,Windhoek,Namibia,True
@@ -293,7 +293,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2016-09-06,Catar,Uzbequistão,0.0,1.0,FIFA World Cup qualification,Doha,Qatar,False
 2016-09-06,Russia,Gana,1.0,0.0,Friendly,Moscow,Russia,False
 2016-09-06,África do Sul,Egito,1.0,0.0,Friendly,Johannesburg,South Africa,False
-2016-09-06,Sweden,Holanda,1.0,1.0,FIFA World Cup qualification,Solna,Sweden,False
+2016-09-06,Suécia,Holanda,1.0,1.0,FIFA World Cup qualification,Solna,Suécia,False
 2016-09-06,Suíça,Portugal,2.0,0.0,FIFA World Cup qualification,Basel,Switzerland,False
 2016-09-06,Syria,Coreia do Sul,0.0,0.0,FIFA World Cup qualification,Paroi,Malaysia,True
 2016-09-06,Thailand,Japão,0.0,2.0,FIFA World Cup qualification,Bangkok,Thailand,False
@@ -318,7 +318,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2016-10-06,Turquia,Ucrânia,2.0,2.0,FIFA World Cup qualification,Konya,Turkey,False
 2016-10-06,Uruguai,Venezuela,3.0,0.0,FIFA World Cup qualification,Montevideo,Uruguay,False
 2016-10-06,Uzbequistão,Irã,0.0,1.0,FIFA World Cup qualification,Tashkent,Uzbekistan,False
-2016-10-07,Bélgica,Bosnia and Herzegovina,4.0,0.0,FIFA World Cup qualification,Brussels,Belgium,False
+2016-10-07,Bélgica,Bósnia e Herzegovina,4.0,0.0,FIFA World Cup qualification,Brussels,Belgium,False
 2016-10-07,Cuba,Estados Unidos,0.0,2.0,Friendly,Havana,Cuba,False
 2016-10-07,França,Bulgaria,4.0,1.0,FIFA World Cup qualification,Saint-Denis,France,False
 2016-10-07,Gana,Uganda,0.0,0.0,FIFA World Cup qualification,Tamale,Ghana,False
@@ -380,7 +380,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2016-11-10,Uzbequistão,Jordânia,1.0,0.0,Friendly,Tashkent,Uzbekistan,False
 2016-11-11,República Tcheca,Noruega,2.0,1.0,FIFA World Cup qualification,Prague,Czech Republic,False
 2016-11-11,Inglaterra,Escócia,3.0,0.0,FIFA World Cup qualification,London,England,False
-2016-11-11,França,Sweden,2.0,1.0,FIFA World Cup qualification,Saint-Denis,France,False
+2016-11-11,França,Suécia,2.0,1.0,FIFA World Cup qualification,Saint-Denis,France,False
 2016-11-11,Honduras,Panamá,0.0,1.0,FIFA World Cup qualification,San Pedro Sula,Honduras,False
 2016-11-11,Japão,Oman,4.0,0.0,Kirin Challenge Cup,Kashima,Japan,False
 2016-11-11,Coreia do Sul,Canadá,2.0,0.0,Friendly,Cheonan,South Korea,False
@@ -437,7 +437,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2017-01-06,Suriname,Haiti,2.0,4.0,CFU Caribbean Cup qualification,Couva,Trinidad and Tobago,True
 2017-01-07,Argélia,Mauritania,3.0,1.0,Friendly,Blida,Algeria,False
 2017-01-08,Egito,Tunísia,1.0,0.0,Friendly,Cairo,Egypt,False
-2017-01-08,Costa do Marfim,Sweden,2.0,1.0,Friendly,Abu Dhabi,United Arab Emirates,True
+2017-01-08,Costa do Marfim,Suécia,2.0,1.0,Friendly,Abu Dhabi,United Arab Emirates,True
 2017-01-08,Libya,Senegal,1.0,2.0,Friendly,Brazzaville,Congo,True
 2017-01-08,Trinidad and Tobago,Haiti,3.0,4.0,CFU Caribbean Cup qualification,Couva,Trinidad and Tobago,False
 2017-01-09,Marrocos,Finland,0.0,1.0,Friendly,Al Ain,United Arab Emirates,True
@@ -543,7 +543,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2017-03-28,Nova Zelândia,Fiji,2.0,0.0,FIFA World Cup qualification,Wellington,New Zealand,False
 2017-03-28,Panamá,Estados Unidos,1.0,1.0,FIFA World Cup qualification,Panama City,Panama,False
 2017-03-28,Peru,Uruguai,2.0,1.0,FIFA World Cup qualification,Lima,Peru,False
-2017-03-28,Portugal,Sweden,2.0,3.0,Friendly,Funchal,Portugal,False
+2017-03-28,Portugal,Suécia,2.0,3.0,Friendly,Funchal,Portugal,False
 2017-03-28,Russia,Bélgica,3.0,3.0,Friendly,Sochi,Russia,False
 2017-03-28,Arábia Saudita,Iraque,1.0,0.0,FIFA World Cup qualification,Jeddah,Saudi Arabia,False
 2017-03-28,África do Sul,Angola,0.0,0.0,Friendly,East London,South Africa,False
@@ -592,7 +592,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2017-06-09,Faroe Islands,Suíça,0.0,2.0,FIFA World Cup qualification,Tórshavn,Faroe Islands,False
 2017-06-09,Latvia,Portugal,0.0,3.0,FIFA World Cup qualification,Riga,Latvia,False
 2017-06-09,Holanda,Luxembourg,5.0,0.0,FIFA World Cup qualification,Rotterdam,Netherlands,False
-2017-06-09,Sweden,França,2.0,1.0,FIFA World Cup qualification,Solna,Sweden,False
+2017-06-09,Suécia,França,2.0,1.0,FIFA World Cup qualification,Solna,Suécia,False
 2017-06-10,Cameroon,Marrocos,1.0,0.0,African Cup of Nations qualification,Yaoundé,Cameroon,False
 2017-06-10,RD Congo,Congo,3.0,1.0,African Cup of Nations qualification,Kinshasa,DR Congo,False
 2017-06-10,Alemanha,San Marino,7.0,0.0,FIFA World Cup qualification,Nuremberg,Germany,False
@@ -620,7 +620,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2017-06-13,El Salvador,Equador,0.0,3.0,Friendly,Harrison,United States,True
 2017-06-13,França,Inglaterra,3.0,2.0,Friendly,Saint-Denis,France,False
 2017-06-13,Iraque,Japão,1.0,1.0,FIFA World Cup qualification,Tehran,Iran,True
-2017-06-13,Noruega,Sweden,1.0,1.0,Friendly,Oslo,Norway,False
+2017-06-13,Noruega,Suécia,1.0,1.0,Friendly,Oslo,Norway,False
 2017-06-13,Panamá,Honduras,2.0,2.0,FIFA World Cup qualification,Panama City,Panama,False
 2017-06-13,Catar,Coreia do Sul,3.0,2.0,FIFA World Cup qualification,Doha,Qatar,False
 2017-06-13,Singapore,Argentina,0.0,6.0,Friendly,Kallang,Singapore,False
@@ -771,7 +771,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2017-10-06,Estados Unidos,Panamá,4.0,0.0,FIFA World Cup qualification,Orlando,United States,False
 2017-10-07,Andorra,Portugal,0.0,2.0,FIFA World Cup qualification,Sant Julià de Lòria,Andorra,False
 2017-10-07,Belarus,Holanda,1.0,3.0,FIFA World Cup qualification,Barysaw,Belarus,False
-2017-10-07,Bosnia and Herzegovina,Bélgica,3.0,4.0,FIFA World Cup qualification,Sarajevo,Bosnia and Herzegovina,False
+2017-10-07,Bósnia e Herzegovina,Bélgica,3.0,4.0,FIFA World Cup qualification,Sarajevo,Bósnia e Herzegovina,False
 2017-10-07,Bulgaria,França,0.0,1.0,FIFA World Cup qualification,Sofia,Bulgaria,False
 2017-10-07,Cameroon,Argélia,2.0,0.0,FIFA World Cup qualification,Yaoundé,Cameroon,False
 2017-10-07,Cabo Verde,Senegal,0.0,2.0,FIFA World Cup qualification,Praia,Cape Verde,False
@@ -804,7 +804,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2017-10-10,Honduras,México,3.0,2.0,FIFA World Cup qualification,San Pedro Sula,Honduras,False
 2017-10-10,Japão,Haiti,3.0,3.0,Kirin Challenge Cup,Yokohama,Japan,False
 2017-10-10,Coreia do Sul,Marrocos,1.0,3.0,Friendly,Biel,Switzerland,True
-2017-10-10,Holanda,Sweden,2.0,0.0,FIFA World Cup qualification,Amsterdam,Netherlands,False
+2017-10-10,Holanda,Suécia,2.0,0.0,FIFA World Cup qualification,Amsterdam,Netherlands,False
 2017-10-10,Panamá,Costa Rica,2.0,1.0,FIFA World Cup qualification,Panama City,Panama,False
 2017-10-10,Paraguai,Venezuela,0.0,1.0,FIFA World Cup qualification,Asunción,Paraguay,False
 2017-10-10,Peru,Colômbia,1.0,1.0,FIFA World Cup qualification,Lima,Peru,False
@@ -831,7 +831,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2017-11-10,Poland,Uruguai,0.0,0.0,Friendly,Warsaw,Poland,False
 2017-11-10,Portugal,Arábia Saudita,3.0,0.0,Friendly,Viseu,Portugal,False
 2017-11-10,África do Sul,Senegal,0.0,2.0,FIFA World Cup qualification,Polokwane,South Africa,False
-2017-11-10,Sweden,Itália,1.0,0.0,FIFA World Cup qualification,Solna,Sweden,False
+2017-11-10,Suécia,Itália,1.0,0.0,FIFA World Cup qualification,Solna,Suécia,False
 2017-11-10,Ucrânia,Slovakia,2.0,1.0,Friendly,Lviv,Ukraine,False
 2017-11-11,RD Congo,Guinea,3.0,1.0,FIFA World Cup qualification,Kinshasa,DR Congo,False
 2017-11-11,Costa do Marfim,Marrocos,0.0,2.0,FIFA World Cup qualification,Abidjan,Ivory Coast,False
@@ -847,7 +847,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2017-11-13,Bulgaria,Arábia Saudita,1.0,0.0,Friendly,Lisbon,Portugal,True
 2017-11-13,Irã,Venezuela,1.0,0.0,Friendly,Arnhem,Netherlands,True
 2017-11-13,Iraque,Syria,1.0,1.0,Friendly,Karbala,Iraq,False
-2017-11-13,Itália,Sweden,0.0,0.0,FIFA World Cup qualification,Milan,Italy,False
+2017-11-13,Itália,Suécia,0.0,0.0,FIFA World Cup qualification,Milan,Italy,False
 2017-11-13,Poland,México,0.0,1.0,Friendly,Gdańsk,Poland,False
 2017-11-13,Turquia,Albania,2.0,3.0,Friendly,Antalya,Turkey,False
 2017-11-14,Argélia,Central African Republic,3.0,0.0,Friendly,Algiers,Algeria,False
@@ -888,9 +888,9 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2018-01-02,Iraque,United Arab Emirates,0.0,0.0,Gulf Cup,Kuwait City,Kuwait,True
 2018-01-11,Jordânia,Finland,1.0,2.0,Friendly,Abu Dhabi,United Arab Emirates,True
 2018-01-27,Moldova,Coreia do Sul,0.0,1.0,Friendly,Antalya,Turkey,True
-2018-01-28,Estados Unidos,Bosnia and Herzegovina,0.0,0.0,Friendly,Carson,United States,False
+2018-01-28,Estados Unidos,Bósnia e Herzegovina,0.0,0.0,Friendly,Carson,United States,False
 2018-01-30,Jamaica,Coreia do Sul,2.0,2.0,Friendly,Antalya,Turkey,True
-2018-01-31,México,Bosnia and Herzegovina,1.0,0.0,Friendly,San Antonio,United States,True
+2018-01-31,México,Bósnia e Herzegovina,1.0,0.0,Friendly,San Antonio,United States,True
 2018-02-03,Latvia,Coreia do Sul,0.0,1.0,Friendly,Antalya,Turkey,True
 2018-02-26,Arábia Saudita,Moldova,3.0,0.0,Friendly,Jeddah,Saudi Arabia,False
 2018-02-28,Iraque,Arábia Saudita,4.0,1.0,Friendly,Basra,Iraq,False
@@ -933,7 +933,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2018-03-27,Argélia,Irã,1.0,2.0,Friendly,Graz,Austria,True
 2018-03-27,Austrália,Colômbia,0.0,0.0,Friendly,London,England,True
 2018-03-27,Bélgica,Arábia Saudita,4.0,0.0,Friendly,Brussels,Belgium,False
-2018-03-27,Bosnia and Herzegovina,Senegal,0.0,0.0,Friendly,Le Havre,France,True
+2018-03-27,Bósnia e Herzegovina,Senegal,0.0,0.0,Friendly,Le Havre,France,True
 2018-03-27,Inglaterra,Itália,1.0,1.0,Friendly,London,England,False
 2018-03-27,Alemanha,Brasil,0.0,1.0,Friendly,Berlin,Germany,False
 2018-03-27,Greece,Egito,1.0,0.0,Friendly,Zürich,Switzerland,True
@@ -978,7 +978,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2018-05-31,Slovakia,Holanda,1.0,1.0,Friendly,Trnava,Slovakia,False
 2018-06-01,França,Itália,3.0,1.0,Friendly,Nice,France,False
 2018-06-01,Turquia,Tunísia,2.0,2.0,Friendly,Geneva,Switzerland,True
-2018-06-01,Coreia do Sul,Bosnia and Herzegovina,1.0,3.0,Friendly,Jeonju,South Korea,False
+2018-06-01,Coreia do Sul,Bósnia e Herzegovina,1.0,3.0,Friendly,Jeonju,South Korea,False
 2018-06-01,República Tcheca,Austrália,0.0,4.0,Friendly,Sankt Pölten,Austria,True
 2018-06-01,Argélia,Cabo Verde,2.0,3.0,Friendly,Algiers,Algeria,False
 2018-06-01,Colômbia,Egito,0.0,0.0,Friendly,Bergamo,Italy,True
@@ -1032,7 +1032,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2018-06-16,Croácia,Nigeria,2.0,0.0,FIFA World Cup,Kaliningrad,Russia,True
 2018-06-17,Alemanha,México,0.0,1.0,FIFA World Cup,Moscow,Russia,True
 2018-06-17,Brasil,Suíça,1.0,1.0,FIFA World Cup,Rostov-on-Don,Russia,True
-2018-06-18,Sweden,Coreia do Sul,1.0,0.0,FIFA World Cup,Nizhny Novgorod,Russia,True
+2018-06-18,Suécia,Coreia do Sul,1.0,0.0,FIFA World Cup,Nizhny Novgorod,Russia,True
 2018-06-18,Bélgica,Panamá,3.0,0.0,FIFA World Cup,Sochi,Russia,True
 2018-06-18,Tunísia,Inglaterra,1.0,2.0,FIFA World Cup,Volgograd,Russia,True
 2018-06-19,Colômbia,Japão,1.0,2.0,FIFA World Cup,Saransk,Russia,True
@@ -1048,7 +1048,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2018-06-22,Serbia,Suíça,1.0,2.0,FIFA World Cup,Kaliningrad,Russia,True
 2018-06-23,Bélgica,Tunísia,5.0,2.0,FIFA World Cup,Moscow,Russia,True
 2018-06-23,Coreia do Sul,México,1.0,2.0,FIFA World Cup,Rostov-on-Don,Russia,True
-2018-06-23,Alemanha,Sweden,2.0,1.0,FIFA World Cup,Sochi,Russia,True
+2018-06-23,Alemanha,Suécia,2.0,1.0,FIFA World Cup,Sochi,Russia,True
 2018-06-24,Inglaterra,Panamá,6.0,1.0,FIFA World Cup,Nizhny Novgorod,Russia,True
 2018-06-24,Japão,Senegal,2.0,2.0,FIFA World Cup,Ekaterinburg,Russia,True
 2018-06-24,Poland,Colômbia,0.0,3.0,FIFA World Cup,Kazan,Russia,True
@@ -1061,7 +1061,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2018-06-26,Nigeria,Argentina,1.0,2.0,FIFA World Cup,Saint Petersburg,Russia,True
 2018-06-26,Iceland,Croácia,1.0,2.0,FIFA World Cup,Rostov-on-Don,Russia,True
 2018-06-27,Coreia do Sul,Alemanha,2.0,0.0,FIFA World Cup,Kazan,Russia,True
-2018-06-27,México,Sweden,0.0,3.0,FIFA World Cup,Ekaterinburg,Russia,True
+2018-06-27,México,Suécia,0.0,3.0,FIFA World Cup,Ekaterinburg,Russia,True
 2018-06-27,Serbia,Brasil,0.0,2.0,FIFA World Cup,Moscow,Russia,True
 2018-06-27,Suíça,Costa Rica,2.0,2.0,FIFA World Cup,Nizhny Novgorod,Russia,True
 2018-06-28,Japão,Poland,0.0,1.0,FIFA World Cup,Volgograd,Russia,True
@@ -1074,11 +1074,11 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2018-07-01,Croácia,Denmark,1.0,1.0,FIFA World Cup,Nizhny Novgorod,Russia,True
 2018-07-02,Brasil,México,2.0,0.0,FIFA World Cup,Samara,Russia,True
 2018-07-02,Bélgica,Japão,3.0,2.0,FIFA World Cup,Rostov-on-Don,Russia,True
-2018-07-03,Sweden,Suíça,1.0,0.0,FIFA World Cup,Saint Petersburg,Russia,True
+2018-07-03,Suécia,Suíça,1.0,0.0,FIFA World Cup,Saint Petersburg,Russia,True
 2018-07-03,Colômbia,Inglaterra,1.0,1.0,FIFA World Cup,Moscow,Russia,True
 2018-07-06,Uruguai,França,0.0,2.0,FIFA World Cup,Nizhny Novgorod,Russia,True
 2018-07-06,Brasil,Bélgica,1.0,2.0,FIFA World Cup,Kazan,Russia,True
-2018-07-07,Sweden,Inglaterra,0.0,2.0,FIFA World Cup,Samara,Russia,True
+2018-07-07,Suécia,Inglaterra,0.0,2.0,FIFA World Cup,Samara,Russia,True
 2018-07-07,Russia,Croácia,2.0,2.0,FIFA World Cup,Sochi,Russia,False
 2018-07-10,França,Bélgica,1.0,0.0,FIFA World Cup,Saint Petersburg,Russia,True
 2018-07-11,Croácia,Inglaterra,2.0,1.0,FIFA World Cup,Moscow,Russia,True
@@ -1088,7 +1088,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2018-09-06,Alemanha,França,0.0,0.0,UEFA Nations League,Munich,Germany,False
 2018-09-06,República Tcheca,Ucrânia,1.0,2.0,UEFA Nations League,Uherské Hradiště,Czech Republic,False
 2018-09-06,Noruega,Cyprus,2.0,0.0,UEFA Nations League,Oslo,Norway,False
-2018-09-06,Áustria,Sweden,2.0,0.0,Friendly,Vienna,Austria,False
+2018-09-06,Áustria,Suécia,2.0,0.0,Friendly,Vienna,Austria,False
 2018-09-06,Jordânia,Lebanon,0.0,1.0,Friendly,Amman,Jordan,False
 2018-09-06,Holanda,Peru,2.0,1.0,Friendly,Amsterdam,Netherlands,False
 2018-09-06,Portugal,Croácia,1.0,1.0,Friendly,Faro-Loulé,Portugal,False
@@ -1121,7 +1121,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2018-09-09,Lesotho,Cabo Verde,1.0,1.0,African Cup of Nations qualification,Maseru,Lesotho,False
 2018-09-09,Liberia,RD Congo,1.0,1.0,African Cup of Nations qualification,Monrovia,Liberia,False
 2018-09-10,Portugal,Itália,1.0,0.0,UEFA Nations League,Lisbon,Portugal,False
-2018-09-10,Sweden,Turquia,2.0,3.0,UEFA Nations League,Stockholm,Sweden,False
+2018-09-10,Suécia,Turquia,2.0,3.0,UEFA Nations League,Stockholm,Suécia,False
 2018-09-10,Escócia,Albania,2.0,0.0,UEFA Nations League,Glasgow,Scotland,False
 2018-09-10,Kuwait,Iraque,2.0,2.0,Friendly,Al Farwaniyah,Kuwait,False
 2018-09-10,Russia,República Tcheca,5.0,1.0,Friendly,Rostov-on-Don,Russia,False
@@ -1130,7 +1130,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2018-09-10,Curaçao,Grenada,10.0,0.0,CONCACAF Nations League qualification,Willemstad,Curaçao,False
 2018-09-11,Iceland,Bélgica,0.0,3.0,UEFA Nations League,Reykjavík,Iceland,False
 2018-09-11,Espanha,Croácia,6.0,0.0,UEFA Nations League,Elche,Spain,False
-2018-09-11,Bosnia and Herzegovina,Áustria,1.0,0.0,UEFA Nations League,Zenica,Bosnia and Herzegovina,False
+2018-09-11,Bósnia e Herzegovina,Áustria,1.0,0.0,UEFA Nations League,Zenica,Bósnia e Herzegovina,False
 2018-09-11,Colômbia,Argentina,0.0,0.0,Friendly,East Rutherford,United States,True
 2018-09-11,Equador,Guatemala,2.0,0.0,Friendly,Bridgeview,United States,True
 2018-09-11,Inglaterra,Suíça,1.0,0.0,Friendly,London,England,False
@@ -1149,7 +1149,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2018-10-11,Argentina,Iraque,4.0,0.0,Friendly,Riyadh,Saudi Arabia,True
 2018-10-11,França,Iceland,2.0,2.0,Friendly,Guingamp,France,False
 2018-10-11,México,Costa Rica,3.0,2.0,Friendly,San Nicolás de los Garza,Mexico,False
-2018-10-11,Turquia,Bosnia and Herzegovina,0.0,0.0,Friendly,Rize,Turkey,False
+2018-10-11,Turquia,Bósnia e Herzegovina,0.0,0.0,Friendly,Rize,Turkey,False
 2018-10-11,Estados Unidos,Colômbia,2.0,4.0,Friendly,Tampa,United States,False
 2018-10-11,Wales,Espanha,1.0,4.0,Friendly,Cardiff,Wales,False
 2018-10-12,Bélgica,Suíça,2.0,1.0,UEFA Nations League,Brussels,Belgium,False
@@ -1209,7 +1209,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2018-11-14,Suíça,Catar,0.0,1.0,Friendly,Lugano,Switzerland,False
 2018-11-15,Bélgica,Iceland,2.0,0.0,UEFA Nations League,Brussels,Belgium,False
 2018-11-15,Croácia,Espanha,3.0,2.0,UEFA Nations League,Zagreb,Croatia,False
-2018-11-15,Áustria,Bosnia and Herzegovina,0.0,0.0,UEFA Nations League,Vienna,Austria,False
+2018-11-15,Áustria,Bósnia e Herzegovina,0.0,0.0,UEFA Nations League,Vienna,Austria,False
 2018-11-15,Inglaterra,Estados Unidos,3.0,0.0,Friendly,London,England,False
 2018-11-15,Alemanha,Russia,3.0,0.0,Friendly,Leipzig,Germany,False
 2018-11-15,Irã,Trinidad and Tobago,1.0,0.0,Friendly,Tehran,Iran,False
@@ -1227,7 +1227,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2018-11-16,Marrocos,Cameroon,2.0,0.0,African Cup of Nations qualification,Casablanca,Morocco,False
 2018-11-16,Egito,Tunísia,3.0,2.0,African Cup of Nations qualification,Alexandria,Egypt,False
 2018-11-17,Itália,Portugal,0.0,0.0,UEFA Nations League,Milan,Italy,False
-2018-11-17,Turquia,Sweden,0.0,1.0,UEFA Nations League,Konya,Turkey,False
+2018-11-17,Turquia,Suécia,0.0,1.0,UEFA Nations League,Konya,Turkey,False
 2018-11-17,Albania,Escócia,0.0,4.0,UEFA Nations League,Shkodër,Albania,False
 2018-11-17,Austrália,Coreia do Sul,1.0,1.0,Friendly,Brisbane,Australia,False
 2018-11-17,Jordânia,India,2.0,1.0,Friendly,Amman,Jordan,False
@@ -1238,7 +1238,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2018-11-18,Suíça,Bélgica,5.0,2.0,UEFA Nations League,Lucerne,Switzerland,False
 2018-11-18,Inglaterra,Croácia,2.0,1.0,UEFA Nations League,London,England,False
 2018-11-18,Northern Ireland,Áustria,1.0,2.0,UEFA Nations League,Belfast,Northern Ireland,False
-2018-11-18,Espanha,Bosnia and Herzegovina,1.0,0.0,Friendly,Las Palmas,Spain,False
+2018-11-18,Espanha,Bósnia e Herzegovina,1.0,0.0,Friendly,Las Palmas,Spain,False
 2018-11-18,Ethiopia,Gana,0.0,2.0,African Cup of Nations qualification,Addis Ababa,Ethiopia,False
 2018-11-18,Congo,RD Congo,1.0,1.0,African Cup of Nations qualification,Brazzaville,Congo,False
 2018-11-18,Guinea,Costa do Marfim,1.0,1.0,African Cup of Nations qualification,Conakry,Guinea,False
@@ -1374,7 +1374,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2019-03-26,Estados Unidos,Chile,1.0,1.0,Friendly,Houston,United States,False
 2019-03-26,Suíça,Denmark,3.0,3.0,UEFA Euro qualification,Basel,Switzerland,False
 2019-03-26,Malta,Espanha,0.0,2.0,UEFA Euro qualification,Attard,Malta,False
-2019-03-26,Noruega,Sweden,3.0,3.0,UEFA Euro qualification,Oslo,Norway,False
+2019-03-26,Noruega,Suécia,3.0,3.0,UEFA Euro qualification,Oslo,Norway,False
 2019-03-26,Itália,Liechtenstein,6.0,0.0,UEFA Euro qualification,Parma,Italy,False
 2019-05-29,Panamá,Basque Country,0.0,0.0,Friendly,Panama City,Panama,False
 2019-05-30,Turquia,Greece,2.0,1.0,Friendly,Antalya,Turkey,False
@@ -1425,13 +1425,13 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2019-06-10,República Tcheca,Montenegro,3.0,0.0,UEFA Euro qualification,Olomouc,Czech Republic,False
 2019-06-10,Ucrânia,Luxembourg,1.0,0.0,UEFA Euro qualification,Lviv,Ukraine,False
 2019-06-10,Faroe Islands,Noruega,0.0,2.0,UEFA Euro qualification,Tórshavn,Faroe Islands,False
-2019-06-10,Espanha,Sweden,3.0,0.0,UEFA Euro qualification,Madrid,Spain,False
+2019-06-10,Espanha,Suécia,3.0,0.0,UEFA Euro qualification,Madrid,Spain,False
 2019-06-10,North Macedonia,Áustria,1.0,4.0,UEFA Euro qualification,Skopje,North Macedonia,False
 2019-06-11,Alemanha,Estonia,8.0,0.0,UEFA Euro qualification,Mainz,Germany,False
 2019-06-11,Iceland,Turquia,2.0,1.0,UEFA Euro qualification,Reykjavík,Iceland,False
 2019-06-11,Andorra,França,0.0,4.0,UEFA Euro qualification,Andorra la Vella,Andorra,False
 2019-06-11,Bélgica,Escócia,3.0,0.0,UEFA Euro qualification,Brussels,Belgium,False
-2019-06-11,Itália,Bosnia and Herzegovina,2.0,1.0,UEFA Euro qualification,Turin,Italy,False
+2019-06-11,Itália,Bósnia e Herzegovina,2.0,1.0,UEFA Euro qualification,Turin,Italy,False
 2019-06-11,Argélia,Burundi,1.0,1.0,Friendly,Doha,Qatar,True
 2019-06-11,Croácia,Tunísia,1.0,2.0,Friendly,Varaždin,Croatia,False
 2019-06-11,Jordânia,Indonesia,4.0,1.0,Friendly,Amman,Jordan,False
@@ -1576,7 +1576,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2019-09-07,Curaçao,Haiti,1.0,0.0,CONCACAF Nations League,Willemstad,Curaçao,False
 2019-09-08,Suíça,Gibraltar,4.0,0.0,UEFA Euro qualification,Sion,Switzerland,False
 2019-09-08,Espanha,Faroe Islands,4.0,0.0,UEFA Euro qualification,Gijon,Egypt,True
-2019-09-08,Sweden,Noruega,1.0,1.0,UEFA Euro qualification,Stockholm,Sweden,False
+2019-09-08,Suécia,Noruega,1.0,1.0,UEFA Euro qualification,Stockholm,Suécia,False
 2019-09-08,Finland,Itália,1.0,2.0,UEFA Euro qualification,Tampere,Finland,False
 2019-09-08,Panamá,Bermuda,0.0,2.0,CONCACAF Nations League,Panama City,Panama,False
 2019-09-09,Argélia,Benin,1.0,0.0,Friendly,Algiers,Algeria,False
@@ -1663,7 +1663,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2019-10-14,República Tcheca,Northern Ireland,2.0,3.0,Friendly,Prague,Czech Republic,False
 2019-10-14,Egito,Botswana,1.0,0.0,Friendly,Cairo,Egypt,False
 2019-10-15,Suíça,Republic of Ireland,2.0,0.0,UEFA Euro qualification,Geneva,Switzerland,False
-2019-10-15,Sweden,Espanha,1.0,1.0,UEFA Euro qualification,Stockholm,Sweden,False
+2019-10-15,Suécia,Espanha,1.0,1.0,UEFA Euro qualification,Stockholm,Suécia,False
 2019-10-15,Romania,Noruega,1.0,1.0,UEFA Euro qualification,Bucharest,Romania,False
 2019-10-15,Liechtenstein,Itália,0.0,5.0,UEFA Euro qualification,Vaduz,Liechtenstein,False
 2019-10-15,Argélia,Colômbia,3.0,0.0,Friendly,Villeneuve D'Ascq,Algeria,False
@@ -1711,7 +1711,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2019-11-15,Noruega,Faroe Islands,4.0,0.0,UEFA Euro qualification,Oslo,Norway,False
 2019-11-15,Espanha,Malta,7.0,0.0,UEFA Euro qualification,Cádiz,Spain,False
 2019-11-15,Brasil,Argentina,0.0,1.0,Superclásico de las Américas,Riyadh,Saudi Arabia,True
-2019-11-15,Bosnia and Herzegovina,Itália,0.0,3.0,UEFA Euro qualification,Zenica,Bosnia and Herzegovina,False
+2019-11-15,Bósnia e Herzegovina,Itália,0.0,3.0,UEFA Euro qualification,Zenica,Bósnia e Herzegovina,False
 2019-11-15,Estados Unidos,Canadá,4.0,1.0,CONCACAF Nations League,Orlando,United States,False
 2019-11-15,Panamá,México,0.0,3.0,CONCACAF Nations League,Panama City,Panama,False
 2019-11-15,Colômbia,Peru,1.0,0.0,Friendly,Miami Gardens,United States,True
@@ -1785,7 +1785,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2020-09-03,Alemanha,Espanha,1.0,1.0,UEFA Nations League,Stuttgart,Germany,False
 2020-09-03,Ucrânia,Suíça,2.0,1.0,UEFA Nations League,Lviv,Ukraine,False
 2020-09-03,Turquia,Hungary,0.0,1.0,UEFA Nations League,Sivas,Turkey,False
-2020-09-04,Itália,Bosnia and Herzegovina,1.0,1.0,UEFA Nations League,Florence,Italy,False
+2020-09-04,Itália,Bósnia e Herzegovina,1.0,1.0,UEFA Nations League,Florence,Italy,False
 2020-09-04,Holanda,Poland,1.0,0.0,UEFA Nations League,Amsterdam,Netherlands,False
 2020-09-04,Noruega,Áustria,1.0,2.0,UEFA Nations League,Oslo,Norway,False
 2020-09-04,Escócia,Israel,1.0,1.0,UEFA Nations League,Glasgow,Scotland,False
@@ -1793,7 +1793,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2020-09-05,Iceland,Inglaterra,0.0,1.0,UEFA Nations League,Reykjavík,Iceland,False
 2020-09-05,Denmark,Bélgica,0.0,2.0,UEFA Nations League,Copenhagen,Denmark,False
 2020-09-05,Portugal,Croácia,4.0,1.0,UEFA Nations League,Porto,Portugal,False
-2020-09-05,Sweden,França,0.0,1.0,UEFA Nations League,Stockholm,Sweden,False
+2020-09-05,Suécia,França,0.0,1.0,UEFA Nations League,Stockholm,Suécia,False
 2020-09-06,Espanha,Ucrânia,4.0,0.0,UEFA Nations League,Madrid,Spain,False
 2020-09-06,Suíça,Alemanha,1.0,1.0,UEFA Nations League,Basel,Switzerland,False
 2020-09-06,Serbia,Turquia,0.0,0.0,UEFA Nations League,Belgrade,Serbia,False
@@ -1804,7 +1804,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2020-09-08,Bélgica,Iceland,5.0,1.0,UEFA Nations League,Brussels,Belgium,False
 2020-09-08,Denmark,Inglaterra,0.0,0.0,UEFA Nations League,Copenhagen,Denmark,False
 2020-09-08,França,Croácia,4.0,2.0,UEFA Nations League,Paris,France,False
-2020-09-08,Sweden,Portugal,0.0,2.0,UEFA Nations League,Stockholm,Sweden,False
+2020-09-08,Suécia,Portugal,0.0,2.0,UEFA Nations League,Stockholm,Suécia,False
 2020-10-07,Andorra,Cabo Verde,1.0,2.0,Friendly,Andorra la Vella,Andorra,False
 2020-10-07,Áustria,Greece,2.0,1.0,Friendly,Klagenfurt,Austria,False
 2020-10-07,Cyprus,República Tcheca,1.0,2.0,Friendly,Larnaca,Cyprus,False
@@ -1835,10 +1835,10 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2020-10-10,Ucrânia,Alemanha,1.0,2.0,UEFA Nations League,Kyiv,Ukraine,False
 2020-10-10,Cabo Verde,Guinea,1.0,2.0,Friendly,Faro-Loulé,Portugal,True
 2020-10-10,Costa Rica,Panamá,0.0,1.0,Friendly,San José,Costa Rica,False
-2020-10-11,Bosnia and Herzegovina,Holanda,0.0,0.0,UEFA Nations League,Zenica,Bosnia and Herzegovina,False
+2020-10-11,Bósnia e Herzegovina,Holanda,0.0,0.0,UEFA Nations League,Zenica,Bósnia e Herzegovina,False
 2020-10-11,Poland,Itália,0.0,0.0,UEFA Nations League,Gdańsk,Poland,False
 2020-10-11,Inglaterra,Bélgica,2.0,1.0,UEFA Nations League,London,England,False
-2020-10-11,Croácia,Sweden,2.0,1.0,UEFA Nations League,Zagreb,Croatia,False
+2020-10-11,Croácia,Suécia,2.0,1.0,UEFA Nations League,Zagreb,Croatia,False
 2020-10-11,França,Portugal,0.0,0.0,UEFA Nations League,Paris,France,False
 2020-10-11,Noruega,Romania,4.0,0.0,UEFA Nations League,Oslo,Norway,False
 2020-10-11,Northern Ireland,Áustria,0.0,1.0,UEFA Nations League,Belfast,Northern Ireland,False
@@ -1863,7 +1863,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2020-10-14,Itália,Holanda,1.0,1.0,UEFA Nations League,Bergamo,Italy,False
 2020-10-14,Iceland,Bélgica,1.0,2.0,UEFA Nations League,Reykjavík,Iceland,False
 2020-10-14,Inglaterra,Denmark,0.0,1.0,UEFA Nations League,London,England,False
-2020-10-14,Portugal,Sweden,3.0,0.0,UEFA Nations League,Lisbon,Portugal,False
+2020-10-14,Portugal,Suécia,3.0,0.0,UEFA Nations League,Lisbon,Portugal,False
 2020-10-14,Croácia,França,1.0,2.0,UEFA Nations League,Zagreb,Croatia,False
 2020-10-14,Noruega,Northern Ireland,1.0,0.0,UEFA Nations League,Oslo,Norway,False
 2020-10-14,Romania,Áustria,0.0,1.0,UEFA Nations League,Ploiești,Romania,False
@@ -1880,7 +1880,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2020-11-11,Turquia,Croácia,3.0,3.0,Friendly,Istanbul,Turkey,False
 2020-11-11,Senegal,Guinea-Bissau,2.0,0.0,African Cup of Nations qualification,Thiès,Senegal,False
 2020-11-12,Serbia,Escócia,1.0,1.0,UEFA Euro qualification,Belgrade,Serbia,False
-2020-11-12,Bosnia and Herzegovina,Irã,0.0,2.0,Friendly,Sarajevo,Bosnia and Herzegovina,False
+2020-11-12,Bósnia e Herzegovina,Irã,0.0,2.0,Friendly,Sarajevo,Bósnia e Herzegovina,False
 2020-11-12,Inglaterra,Republic of Ireland,3.0,0.0,Friendly,London,England,False
 2020-11-12,Jordânia,Iraque,0.0,0.0,Friendly,Dubai,United Arab Emirates,True
 2020-11-12,Uzbequistão,Syria,0.0,1.0,Friendly,Sharjah,United Arab Emirates,True
@@ -1899,14 +1899,14 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2020-11-13,Marrocos,Central African Republic,4.0,1.0,African Cup of Nations qualification,Casablanca,Morocco,False
 2020-11-13,Tunísia,Tanzania,1.0,0.0,African Cup of Nations qualification,Radès,Tunisia,False
 2020-11-14,Portugal,França,0.0,1.0,UEFA Nations League,Lisbon,Portugal,False
-2020-11-14,Sweden,Croácia,2.0,1.0,UEFA Nations League,Stockholm,Sweden,False
+2020-11-14,Suécia,Croácia,2.0,1.0,UEFA Nations League,Stockholm,Suécia,False
 2020-11-14,Alemanha,Ucrânia,3.0,1.0,UEFA Nations League,Leipzig,Germany,False
 2020-11-14,Suíça,Espanha,1.0,1.0,UEFA Nations League,Basel,Switzerland,False
 2020-11-14,México,Coreia do Sul,3.0,2.0,Friendly,Wiener Neustadt,Austria,True
 2020-11-14,Arábia Saudita,Jamaica,3.0,0.0,Friendly,Riyadh,Saudi Arabia,False
 2020-11-14,RD Congo,Angola,0.0,0.0,African Cup of Nations qualification,Kinshasa,DR Congo,False
 2020-11-14,Egito,Togo,1.0,0.0,African Cup of Nations qualification,Cairo,Egypt,False
-2020-11-15,Holanda,Bosnia and Herzegovina,3.0,1.0,UEFA Nations League,Amsterdam,Netherlands,False
+2020-11-15,Holanda,Bósnia e Herzegovina,3.0,1.0,UEFA Nations League,Amsterdam,Netherlands,False
 2020-11-15,Itália,Poland,2.0,0.0,UEFA Nations League,Reggio Emilia,Italy,False
 2020-11-15,Bélgica,Inglaterra,2.0,0.0,UEFA Nations League,Leuven,Belgium,False
 2020-11-15,Áustria,Northern Ireland,2.0,1.0,UEFA Nations League,Vienna,Austria,False
@@ -1920,7 +1920,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2020-11-16,África do Sul,São Tomé and Príncipe,4.0,2.0,African Cup of Nations qualification,Port Elizabeth,South Africa,False
 2020-11-16,Zimbabwe,Argélia,2.0,2.0,African Cup of Nations qualification,Harare,Zimbabwe,False
 2020-11-17,Croácia,Portugal,2.0,3.0,UEFA Nations League,Split,Croatia,False
-2020-11-17,França,Sweden,4.0,2.0,UEFA Nations League,Paris,France,False
+2020-11-17,França,Suécia,4.0,2.0,UEFA Nations League,Paris,France,False
 2020-11-17,Espanha,Alemanha,6.0,0.0,UEFA Nations League,Seville,Spain,False
 2020-11-17,Suíça,Ucrânia,3.0,0.0,UEFA Nations League,Lucerne,Switzerland,False
 2020-11-17,Japão,México,0.0,2.0,Friendly,Graz,Austria,True
@@ -1938,7 +1938,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2020-11-17,Togo,Egito,1.0,3.0,African Cup of Nations qualification,Lomé,Togo,False
 2020-11-17,Tanzania,Tunísia,1.0,1.0,African Cup of Nations qualification,Dar es Salaam,Tanzania,False
 2020-11-17,Madagascar,Costa do Marfim,1.0,1.0,African Cup of Nations qualification,Toamasina,Madagascar,False
-2020-11-18,Bosnia and Herzegovina,Itália,0.0,2.0,UEFA Nations League,Sarajevo,Bosnia and Herzegovina,False
+2020-11-18,Bósnia e Herzegovina,Itália,0.0,2.0,UEFA Nations League,Sarajevo,Bósnia e Herzegovina,False
 2020-11-18,Poland,Holanda,1.0,2.0,UEFA Nations League,Chorzów,Poland,False
 2020-11-18,Inglaterra,Iceland,4.0,0.0,UEFA Nations League,London,England,False
 2020-11-18,Bélgica,Denmark,4.0,2.0,UEFA Nations League,Leuven,Belgium,False
@@ -2035,7 +2035,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2021-03-31,Suíça,Finland,3.0,2.0,Friendly,St. Gallen,Switzerland,False
 2021-03-31,Espanha,Kosovo,3.0,1.0,FIFA World Cup qualification,Seville,Spain,False
 2021-03-31,Lithuania,Itália,0.0,2.0,FIFA World Cup qualification,Vilnius,Lithuania,False
-2021-03-31,Bosnia and Herzegovina,França,0.0,1.0,FIFA World Cup qualification,Sarajevo,Bosnia and Herzegovina,False
+2021-03-31,Bósnia e Herzegovina,França,0.0,1.0,FIFA World Cup qualification,Sarajevo,Bósnia e Herzegovina,False
 2021-03-31,Ucrânia,Kazakhstan,1.0,1.0,FIFA World Cup qualification,Kyiv,Ukraine,False
 2021-03-31,Escócia,Faroe Islands,4.0,0.0,FIFA World Cup qualification,Glasgow,Scotland,False
 2021-03-31,Áustria,Denmark,0.0,4.0,FIFA World Cup qualification,Vienna,Austria,False
@@ -2141,7 +2141,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2021-06-13,Brasil,Venezuela,3.0,0.0,Copa América,Brasília,Brazil,False
 2021-06-13,Colômbia,Equador,1.0,0.0,Copa América,Cuiabá,Brazil,True
 2021-06-14,Escócia,República Tcheca,0.0,2.0,UEFA Euro,Glasgow,Scotland,False
-2021-06-14,Espanha,Sweden,0.0,0.0,UEFA Euro,Seville,Spain,False
+2021-06-14,Espanha,Suécia,0.0,0.0,UEFA Euro,Seville,Spain,False
 2021-06-14,Argentina,Chile,1.0,1.0,Copa América,Rio de Janeiro,Brazil,True
 2021-06-14,Paraguai,Bolivia,3.0,1.0,Copa América,Goiânia,Brazil,True
 2021-06-15,Austrália,Jordânia,1.0,0.0,FIFA World Cup qualification,Kuwait City,Kuwait,True
@@ -2194,7 +2194,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2021-06-28,Argentina,Bolivia,4.0,1.0,Copa América,Cuiabá,Brazil,True
 2021-06-28,Uruguai,Paraguai,1.0,0.0,Copa América,Rio de Janeiro,Brazil,True
 2021-06-29,Inglaterra,Alemanha,2.0,0.0,UEFA Euro,London,England,False
-2021-06-29,Sweden,Ucrânia,1.0,2.0,UEFA Euro,Glasgow,Scotland,True
+2021-06-29,Suécia,Ucrânia,1.0,2.0,UEFA Euro,Glasgow,Scotland,True
 2021-06-30,México,Panamá,3.0,0.0,Friendly,Nashville,United States,True
 2021-07-02,Suíça,Espanha,1.0,1.0,UEFA Euro,Saint Petersburg,Russia,True
 2021-07-02,Bélgica,Itália,1.0,2.0,UEFA Euro,Munich,Germany,True
@@ -2255,7 +2255,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2021-09-01,Senegal,Togo,2.0,0.0,FIFA World Cup qualification,Thiès,Senegal,False
 2021-09-01,Portugal,Republic of Ireland,2.0,1.0,FIFA World Cup qualification,Faro-Loulé,Portugal,False
 2021-09-01,Kazakhstan,Ucrânia,2.0,2.0,FIFA World Cup qualification,Nur-Sultan,Kazakhstan,False
-2021-09-01,França,Bosnia and Herzegovina,1.0,1.0,FIFA World Cup qualification,Strasbourg,France,False
+2021-09-01,França,Bósnia e Herzegovina,1.0,1.0,FIFA World Cup qualification,Strasbourg,France,False
 2021-09-01,Denmark,Escócia,2.0,0.0,FIFA World Cup qualification,Copenhagen,Denmark,False
 2021-09-01,Moldova,Áustria,0.0,2.0,FIFA World Cup qualification,Chișinău,Moldova,False
 2021-09-01,Noruega,Holanda,1.0,1.0,FIFA World Cup qualification,Oslo,Norway,False
@@ -2269,7 +2269,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2021-09-02,Japão,Oman,0.0,1.0,FIFA World Cup qualification,Suita,Japan,False
 2021-09-02,Austrália,China PR,3.0,0.0,FIFA World Cup qualification,Doha,Qatar,True
 2021-09-02,Arábia Saudita,Vietnam,3.0,1.0,FIFA World Cup qualification,Riyadh,Saudi Arabia,False
-2021-09-02,Sweden,Espanha,2.0,1.0,FIFA World Cup qualification,Stockholm,Sweden,False
+2021-09-02,Suécia,Espanha,2.0,1.0,FIFA World Cup qualification,Stockholm,Suécia,False
 2021-09-02,Itália,Bulgaria,1.0,1.0,FIFA World Cup qualification,Florence,Italy,False
 2021-09-02,República Tcheca,Belarus,1.0,0.0,FIFA World Cup qualification,Ostrava,Czech Republic,False
 2021-09-02,Estonia,Bélgica,2.0,5.0,FIFA World Cup qualification,Tallinn,Estonia,False
@@ -2297,7 +2297,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2021-09-04,Gibraltar,Turquia,0.0,3.0,FIFA World Cup qualification,Gibraltar,Gibraltar,False
 2021-09-04,Holanda,Montenegro,4.0,0.0,FIFA World Cup qualification,Eindhoven,Netherlands,False
 2021-09-04,Slovakia,Croácia,0.0,1.0,FIFA World Cup qualification,Bratislava,Slovakia,False
-2021-09-05,Sweden,Uzbequistão,2.0,1.0,Friendly,Stockholm,Sweden,False
+2021-09-05,Suécia,Uzbequistão,2.0,1.0,Friendly,Stockholm,Suécia,False
 2021-09-05,Gabon,Egito,1.0,1.0,FIFA World Cup qualification,Franceville,Gabon,False
 2021-09-05,Espanha,Georgia,4.0,0.0,FIFA World Cup qualification,Badajoz,Spain,False
 2021-09-05,Suíça,Itália,0.0,0.0,FIFA World Cup qualification,Basel,Switzerland,False
@@ -2412,7 +2412,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2021-10-12,Arábia Saudita,China PR,3.0,2.0,FIFA World Cup qualification,Jeddah,Saudi Arabia,False
 2021-10-12,Portugal,Luxembourg,5.0,0.0,FIFA World Cup qualification,Faro-Loulé,Portugal,False
 2021-10-12,Lithuania,Suíça,0.0,4.0,FIFA World Cup qualification,Vilnius,Lithuania,False
-2021-10-12,Ucrânia,Bosnia and Herzegovina,1.0,1.0,FIFA World Cup qualification,Lviv,Ukraine,False
+2021-10-12,Ucrânia,Bósnia e Herzegovina,1.0,1.0,FIFA World Cup qualification,Lviv,Ukraine,False
 2021-10-12,Faroe Islands,Escócia,0.0,1.0,FIFA World Cup qualification,Tórshavn,Faroe Islands,False
 2021-10-12,Denmark,Áustria,1.0,0.0,FIFA World Cup qualification,Copenhagen,Denmark,False
 2021-10-12,Inglaterra,Hungary,1.0,1.0,FIFA World Cup qualification,London,England,False
@@ -2476,7 +2476,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2021-11-14,Senegal,Congo,2.0,0.0,FIFA World Cup qualification,Thiès,Senegal,False
 2021-11-14,RD Congo,Benin,2.0,0.0,FIFA World Cup qualification,Kinshasa,DR Congo,False
 2021-11-14,Portugal,Serbia,1.0,2.0,FIFA World Cup qualification,Lisbon,Portugal,False
-2021-11-14,Espanha,Sweden,1.0,0.0,FIFA World Cup qualification,Seville,Spain,False
+2021-11-14,Espanha,Suécia,1.0,0.0,FIFA World Cup qualification,Seville,Spain,False
 2021-11-14,Croácia,Russia,1.0,0.0,FIFA World Cup qualification,Split,Croatia,False
 2021-11-14,Armenia,Alemanha,1.0,4.0,FIFA World Cup qualification,Yerevan,Armenia,False
 2021-11-15,Georgia,Uzbequistão,1.0,0.0,Friendly,Gori,Georgia,False
@@ -2501,7 +2501,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2021-11-16,Jamaica,Estados Unidos,1.0,1.0,FIFA World Cup qualification,Kingston,Jamaica,False
 2021-11-16,Canadá,México,2.0,1.0,FIFA World Cup qualification,Edmonton,Canada,False
 2021-11-16,Panamá,El Salvador,2.0,1.0,FIFA World Cup qualification,Panama City,Panama,False
-2021-11-16,Bosnia and Herzegovina,Ucrânia,0.0,2.0,FIFA World Cup qualification,Zenica,Bosnia and Herzegovina,False
+2021-11-16,Bósnia e Herzegovina,Ucrânia,0.0,2.0,FIFA World Cup qualification,Zenica,Bósnia e Herzegovina,False
 2021-11-16,Finland,França,0.0,2.0,FIFA World Cup qualification,Helsinki,Finland,False
 2021-11-16,Wales,Bélgica,1.0,1.0,FIFA World Cup qualification,Cardiff,Wales,False
 2021-11-16,República Tcheca,Estonia,2.0,0.0,FIFA World Cup qualification,Prague,Czech Republic,False
@@ -2540,7 +2540,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2021-12-15,Catar,Argélia,1.0,2.0,Arab Cup,Doha,Qatar,False
 2021-12-18,Catar,Egito,0.0,0.0,Arab Cup,Doha,Qatar,False
 2021-12-18,Tunísia,Argélia,0.0,2.0,Arab Cup,Al Khor,Qatar,True
-2021-12-18,Estados Unidos,Bosnia and Herzegovina,1.0,0.0,Friendly,Los Angeles,United States,False
+2021-12-18,Estados Unidos,Bósnia e Herzegovina,1.0,0.0,Friendly,Los Angeles,United States,False
 2022-01-05,Argélia,Gana,3.0,0.0,Friendly,Al Rayyan,Qatar,True
 2022-01-09,Ethiopia,Cabo Verde,0.0,1.0,African Cup of Nations,Yaoundé,Cameroon,True
 2022-01-10,Senegal,Zimbabwe,1.0,0.0,African Cup of Nations,Bafoussam,Cameroon,True
@@ -2628,7 +2628,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2022-03-24,Uruguai,Peru,1.0,0.0,FIFA World Cup qualification,Montevideo,Uruguay,False
 2022-03-24,Itália,North Macedonia,0.0,1.0,FIFA World Cup qualification,Palermo,Italy,False
 2022-03-24,Portugal,Turquia,3.0,1.0,FIFA World Cup qualification,Porto,Portugal,False
-2022-03-24,Sweden,República Tcheca,1.0,0.0,FIFA World Cup qualification,Stockholm,Sweden,False
+2022-03-24,Suécia,República Tcheca,1.0,0.0,FIFA World Cup qualification,Stockholm,Suécia,False
 2022-03-24,Wales,Áustria,2.0,1.0,FIFA World Cup qualification,Cardiff,Wales,False
 2022-03-24,Escócia,Poland,1.0,1.0,Friendly,Glasgow,Scotland,False
 2022-03-25,Cameroon,Argélia,0.0,1.0,FIFA World Cup qualification,Douala,Cameroon,False
@@ -2724,7 +2724,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2022-06-05,Botswana,Tunísia,0.0,0.0,African Cup of Nations qualification,Francistown,Botswana,False
 2022-06-05,Portugal,Suíça,4.0,0.0,UEFA Nations League,Lisbon,Portugal,False
 2022-06-05,República Tcheca,Espanha,2.0,2.0,UEFA Nations League,Prague,Czech Republic,False
-2022-06-05,Sweden,Noruega,1.0,2.0,UEFA Nations League,Stockholm,Sweden,False
+2022-06-05,Suécia,Noruega,1.0,2.0,UEFA Nations League,Stockholm,Suécia,False
 2022-06-05,Argentina,Estonia,5.0,0.0,Friendly,Pamplona,Spain,True
 2022-06-05,México,Equador,0.0,0.0,Friendly,Chicago,United States,True
 2022-06-05,Peru,Nova Zelândia,1.0,0.0,Friendly,Barcelona,Spain,True
@@ -2782,7 +2782,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2022-06-12,Martinique,Panamá,0.0,0.0,CONCACAF Nations League,Fort-de-France,Martinique,False
 2022-06-12,Espanha,República Tcheca,2.0,0.0,UEFA Nations League,Málaga,Spain,False
 2022-06-12,Suíça,Portugal,1.0,0.0,UEFA Nations League,Geneva,Switzerland,False
-2022-06-12,Noruega,Sweden,3.0,2.0,UEFA Nations League,Oslo,Norway,False
+2022-06-12,Noruega,Suécia,3.0,2.0,UEFA Nations League,Oslo,Norway,False
 2022-06-12,Irã,Argélia,1.0,2.0,Friendly,Doha,Qatar,True
 2022-06-13,Austrália,Peru,0.0,0.0,FIFA World Cup qualification,Al Rayyan,Qatar,True
 2022-06-13,Marrocos,Liberia,2.0,0.0,African Cup of Nations qualification,Casablanca,Morocco,False
@@ -2908,7 +2908,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2022-11-16,República Tcheca,Faroe Islands,5.0,0.0,Friendly,Olomouc,Czech Republic,False
 2022-11-16,Irã,Tunísia,0.0,2.0,Friendly,Doha,Qatar,True
 2022-11-16,Costa do Marfim,Burundi,4.0,0.0,Friendly,Marrakech,Morocco,True
-2022-11-16,México,Sweden,1.0,2.0,Friendly,Girona,Spain,True
+2022-11-16,México,Suécia,1.0,2.0,Friendly,Girona,Spain,True
 2022-11-16,Oman,Alemanha,0.0,1.0,Friendly,Muscat,Oman,False
 2022-11-16,Peru,Paraguai,1.0,0.0,Friendly,Lima,Peru,False
 2022-11-16,Arábia Saudita,Croácia,0.0,1.0,Friendly,Riyadh,Saudi Arabia,False
@@ -2926,7 +2926,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2022-11-18,Egito,Bélgica,2.0,1.0,Friendly,Kuwait City,Kuwait,True
 2022-11-19,Colômbia,Paraguai,2.0,0.0,Friendly,Fort Lauderdale,United States,True
 2022-11-19,Costa do Marfim,Burkina Faso,1.0,2.0,Friendly,Marrakech,Morocco,True
-2022-11-19,Sweden,Argélia,2.0,0.0,Friendly,Malmö,Sweden,False
+2022-11-19,Suécia,Argélia,2.0,0.0,Friendly,Malmö,Suécia,False
 2022-11-19,Turquia,República Tcheca,2.0,1.0,Friendly,Gaziantep,Turkey,False
 2022-11-20,Áustria,Itália,2.0,0.0,Friendly,Vienna,Austria,False
 2022-11-20,Noruega,Finland,1.0,1.0,Friendly,Oslo,Norway,False
@@ -3032,7 +3032,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2023-03-24,França,Holanda,4.0,0.0,UEFA Euro qualification,Paris,France,False
 2023-03-24,República Tcheca,Poland,3.0,1.0,UEFA Euro qualification,Prague,Czech Republic,False
 2023-03-24,Áustria,Azerbaijan,4.0,1.0,UEFA Euro qualification,Pasching,Austria,False
-2023-03-24,Sweden,Bélgica,0.0,3.0,UEFA Euro qualification,Stockholm,Sweden,False
+2023-03-24,Suécia,Bélgica,0.0,3.0,UEFA Euro qualification,Stockholm,Suécia,False
 2023-03-24,Grenada,Estados Unidos,1.0,7.0,CONCACAF Nations League,St. George's,Grenada,False
 2023-03-25,Alemanha,Peru,2.0,0.0,Friendly,Mainz,Germany,False
 2023-03-25,Marrocos,Brasil,2.0,1.0,Friendly,Tangier,Morocco,False
@@ -3106,7 +3106,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2023-06-16,Coreia do Sul,Peru,0.0,1.0,Friendly,Busan,South Korea,False
 2023-06-16,Poland,Alemanha,1.0,0.0,Friendly,Warsaw,Poland,False
 2023-06-16,Serbia,Jordânia,3.0,2.0,Friendly,Vienna,Austria,True
-2023-06-16,Sweden,Nova Zelândia,4.0,1.0,Friendly,Stockholm,Sweden,False
+2023-06-16,Suécia,Nova Zelândia,4.0,1.0,Friendly,Stockholm,Suécia,False
 2023-06-16,Gibraltar,França,0.0,3.0,UEFA Euro qualification,Faro-Loulé,Portugal,True
 2023-06-16,Malta,Inglaterra,0.0,4.0,UEFA Euro qualification,Ta' Qali,Malta,False
 2023-06-16,North Macedonia,Ucrânia,2.0,3.0,UEFA Euro qualification,Skopje,North Macedonia,False
@@ -3118,7 +3118,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2023-06-17,Noruega,Escócia,1.0,2.0,UEFA Euro qualification,Oslo,Norway,False
 2023-06-17,Faroe Islands,República Tcheca,0.0,3.0,UEFA Euro qualification,Tórshavn,Faroe Islands,False
 2023-06-17,Bélgica,Áustria,1.0,1.0,UEFA Euro qualification,Brussels,Belgium,False
-2023-06-17,Portugal,Bosnia and Herzegovina,3.0,0.0,UEFA Euro qualification,Lisbon,Portugal,False
+2023-06-17,Portugal,Bósnia e Herzegovina,3.0,0.0,UEFA Euro qualification,Lisbon,Portugal,False
 2023-06-17,Uzbequistão,Tajikistan,5.0,1.0,CAFA Nations Cup,Tashkent,Uzbekistan,False
 2023-06-17,Zambia,Costa do Marfim,3.0,0.0,African Cup of Nations qualification,Ndola,Zambia,False
 2023-06-17,Equatorial Guinea,Tunísia,1.0,0.0,African Cup of Nations qualification,Malabo,Equatorial Guinea,False
@@ -3152,7 +3152,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2023-06-20,Uruguai,Cuba,2.0,0.0,Friendly,Montevideo,Uruguay,False
 2023-06-20,Escócia,Georgia,2.0,0.0,UEFA Euro qualification,Glasgow,Scotland,False
 2023-06-20,Noruega,Cyprus,3.0,1.0,UEFA Euro qualification,Oslo,Norway,False
-2023-06-20,Áustria,Sweden,2.0,0.0,UEFA Euro qualification,Vienna,Austria,False
+2023-06-20,Áustria,Suécia,2.0,0.0,UEFA Euro qualification,Vienna,Austria,False
 2023-06-20,Estonia,Bélgica,0.0,3.0,UEFA Euro qualification,Tallinn,Estonia,False
 2023-06-20,Iceland,Portugal,0.0,1.0,UEFA Euro qualification,Reykjavík,Iceland,False
 2023-06-20,Uzbequistão,Irã,0.0,1.0,CAFA Nations Cup,Tashkent,Uzbekistan,False
@@ -3253,7 +3253,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2023-09-12,Espanha,Cyprus,6.0,0.0,UEFA Euro qualification,Granada,Spain,False
 2023-09-12,Itália,Ucrânia,2.0,1.0,UEFA Euro qualification,Milan,Italy,False
 2023-09-12,Bélgica,Estonia,5.0,0.0,UEFA Euro qualification,Brussels,Belgium,False
-2023-09-12,Sweden,Áustria,1.0,3.0,UEFA Euro qualification,Stockholm,Sweden,False
+2023-09-12,Suécia,Áustria,1.0,3.0,UEFA Euro qualification,Stockholm,Suécia,False
 2023-09-12,Suíça,Andorra,3.0,0.0,UEFA Euro qualification,Sion,Switzerland,False
 2023-10-12,Suriname,Haiti,1.0,1.0,CONCACAF Nations League,Paramaribo,Suriname,False
 2023-10-12,Colômbia,Uruguai,2.0,2.0,FIFA World Cup qualification,Barranquilla,Colombia,False
@@ -3294,8 +3294,8 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2023-10-16,Senegal,Cameroon,1.0,0.0,Friendly,Lens,France,True
 2023-10-16,Greece,Holanda,0.0,1.0,UEFA Euro qualification,Athens,Greece,False
 2023-10-16,Azerbaijan,Áustria,0.0,1.0,UEFA Euro qualification,Baku,Azerbaijan,False
-2023-10-16,Bélgica,Sweden,1.0,1.0,UEFA Euro qualification,Brussels,Belgium,False
-2023-10-16,Bosnia and Herzegovina,Portugal,0.0,5.0,UEFA Euro qualification,Zenica,Bosnia and Herzegovina,False
+2023-10-16,Bélgica,Suécia,1.0,1.0,UEFA Euro qualification,Brussels,Belgium,False
+2023-10-16,Bósnia e Herzegovina,Portugal,0.0,5.0,UEFA Euro qualification,Zenica,Bósnia e Herzegovina,False
 2023-10-17,Panamá,Guatemala,3.0,0.0,CONCACAF Nations League,Panama City,Panama,False
 2023-10-17,Curaçao,Trinidad and Tobago,5.0,3.0,CONCACAF Nations League,Willemstad,Curaçao,False
 2023-10-17,Equador,Colômbia,0.0,0.0,FIFA World Cup qualification,Quito,Ecuador,False
@@ -3500,7 +3500,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2024-03-21,Cabo Verde,Guyana,1.0,0.0,FIFA Series,Jeddah,Saudi Arabia,True
 2024-03-21,Panamá,México,0.0,3.0,CONCACAF Nations League,Arlington,United States,True
 2024-03-21,Estados Unidos,Jamaica,3.0,1.0,CONCACAF Nations League,Arlington,United States,False
-2024-03-21,Bosnia and Herzegovina,Ucrânia,1.0,2.0,UEFA Euro qualification,Zenica,Bosnia and Herzegovina,False
+2024-03-21,Bósnia e Herzegovina,Ucrânia,1.0,2.0,UEFA Euro qualification,Zenica,Bósnia e Herzegovina,False
 2024-03-21,Catar,Kuwait,3.0,0.0,FIFA World Cup qualification,Doha,Qatar,False
 2024-03-21,Japão,North Korea,1.0,0.0,FIFA World Cup qualification,Tokyo,Japan,False
 2024-03-21,Coreia do Sul,Thailand,1.0,1.0,FIFA World Cup qualification,Seoul,South Korea,False
@@ -3511,7 +3511,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2024-03-21,Arábia Saudita,Tajikistan,1.0,0.0,FIFA World Cup qualification,Riyadh,Saudi Arabia,False
 2024-03-21,Austrália,Lebanon,2.0,0.0,FIFA World Cup qualification,Sydney,Australia,False
 2024-03-21,Equador,Guatemala,2.0,0.0,Friendly,Harrison,United States,True
-2024-03-21,Portugal,Sweden,5.0,2.0,Friendly,Guimarães,Portugal,False
+2024-03-21,Portugal,Suécia,5.0,2.0,Friendly,Guimarães,Portugal,False
 2024-03-21,Venezuela,Itália,1.0,2.0,Friendly,Fort Lauderdale,United States,True
 2024-03-22,Argélia,Bolivia,3.0,2.0,FIFA Series,Algiers,Algeria,False
 2024-03-22,Egito,Nova Zelândia,1.0,0.0,FIFA Series,Cairo,Egypt,False
@@ -3567,7 +3567,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2024-05-31,Bolivia,México,0.0,1.0,Friendly,Chicago,United States,True
 2024-05-31,Costa Rica,Uruguai,0.0,0.0,Friendly,San José,Costa Rica,False
 2024-06-03,Croácia,North Macedonia,3.0,0.0,Friendly,Rijeka,Croatia,False
-2024-06-03,Inglaterra,Bosnia and Herzegovina,3.0,0.0,Friendly,Newcastle,England,False
+2024-06-03,Inglaterra,Bósnia e Herzegovina,3.0,0.0,Friendly,Newcastle,England,False
 2024-06-03,Alemanha,Ucrânia,0.0,0.0,Friendly,Nuremberg,Germany,False
 2024-06-03,Gibraltar,Escócia,0.0,2.0,Friendly,Faro-Loulé,Portugal,True
 2024-06-04,Áustria,Serbia,2.0,1.0,Friendly,Vienna,Austria,False
@@ -3617,7 +3617,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2024-06-08,Aruba,Curaçao,0.0,2.0,FIFA World Cup qualification,Oranjestad,Aruba,False
 2024-06-09,Argentina,Equador,1.0,0.0,Friendly,Chicago,United States,True
 2024-06-09,França,Canadá,0.0,0.0,Friendly,Bordeaux,France,False
-2024-06-09,Itália,Bosnia and Herzegovina,1.0,0.0,Friendly,Empoli,Italy,False
+2024-06-09,Itália,Bósnia e Herzegovina,1.0,0.0,Friendly,Empoli,Italy,False
 2024-06-09,Mauritania,Senegal,0.0,1.0,FIFA World Cup qualification,Nouakchott,Mauritania,False
 2024-06-09,RD Congo,Togo,1.0,0.0,FIFA World Cup qualification,Kinshasa,DR Congo,False
 2024-06-09,Namibia,Tunísia,0.0,0.0,FIFA World Cup qualification,Johannesburg,South Africa,True
@@ -3769,7 +3769,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2024-09-07,México,Nova Zelândia,3.0,0.0,Friendly,Pasadena,United States,True
 2024-09-07,Estados Unidos,Canadá,1.0,2.0,Friendly,Kansas City,United States,False
 2024-09-07,Alemanha,Hungary,5.0,0.0,UEFA Nations League,Düsseldorf,Germany,False
-2024-09-07,Holanda,Bosnia and Herzegovina,5.0,2.0,UEFA Nations League,Eindhoven,Netherlands,False
+2024-09-07,Holanda,Bósnia e Herzegovina,5.0,2.0,UEFA Nations League,Eindhoven,Netherlands,False
 2024-09-07,Georgia,República Tcheca,4.0,1.0,UEFA Nations League,Tbilisi,Georgia,False
 2024-09-07,Ucrânia,Albania,1.0,2.0,UEFA Nations League,Prague,Czech Republic,True
 2024-09-07,Republic of Ireland,Inglaterra,0.0,2.0,UEFA Nations League,Dublin,Republic of Ireland,False
@@ -3836,7 +3836,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2024-10-11,Senegal,Malawi,4.0,0.0,African Cup of Nations qualification,Diamniadio,Senegal,False
 2024-10-11,Grenada,Curaçao,0.0,0.0,CONCACAF Nations League,Gros Islet,Saint Lucia,True
 2024-10-11,Aruba,Haiti,1.0,3.0,CONCACAF Nations League,Oranjestad,Aruba,False
-2024-10-11,Bosnia and Herzegovina,Alemanha,1.0,2.0,UEFA Nations League,Zenica,Bosnia and Herzegovina,False
+2024-10-11,Bósnia e Herzegovina,Alemanha,1.0,2.0,UEFA Nations League,Zenica,Bósnia e Herzegovina,False
 2024-10-11,Hungary,Holanda,1.0,1.0,UEFA Nations League,Budapest,Hungary,False
 2024-10-11,República Tcheca,Albania,2.0,0.0,UEFA Nations League,Prague,Czech Republic,False
 2024-10-11,Ucrânia,Georgia,1.0,0.0,UEFA Nations League,Poznań,Poland,True
@@ -3920,7 +3920,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2024-11-15,Angola,Gana,1.0,1.0,African Cup of Nations qualification,Talatona,Angola,False
 2024-11-15,Zambia,Costa do Marfim,1.0,0.0,African Cup of Nations qualification,Ndola,Zambia,False
 2024-11-15,Uganda,África do Sul,0.0,2.0,African Cup of Nations qualification,Kampala,Uganda,False
-2024-11-16,Alemanha,Bosnia and Herzegovina,7.0,0.0,UEFA Nations League,Freiburg,Germany,False
+2024-11-16,Alemanha,Bósnia e Herzegovina,7.0,0.0,UEFA Nations League,Freiburg,Germany,False
 2024-11-16,Holanda,Hungary,4.0,0.0,UEFA Nations League,Amsterdam,Netherlands,False
 2024-11-16,Albania,República Tcheca,0.0,0.0,UEFA Nations League,Tirana,Albania,False
 2024-11-16,Georgia,Ucrânia,1.0,1.0,UEFA Nations League,Batumi,Georgia,False
@@ -3943,7 +3943,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2024-11-18,Tunísia,Gambia,0.0,1.0,African Cup of Nations qualification,Tunis,Tunisia,False
 2024-11-18,Marrocos,Lesotho,7.0,0.0,African Cup of Nations qualification,Oujda,Morocco,False
 2024-11-18,Gana,Niger,1.0,2.0,African Cup of Nations qualification,Accra,Ghana,False
-2024-11-19,Bosnia and Herzegovina,Holanda,1.0,1.0,UEFA Nations League,Zenica,Bosnia and Herzegovina,False
+2024-11-19,Bósnia e Herzegovina,Holanda,1.0,1.0,UEFA Nations League,Zenica,Bósnia e Herzegovina,False
 2024-11-19,Hungary,Alemanha,1.0,1.0,UEFA Nations League,Budapest,Hungary,False
 2024-11-19,Albania,Ucrânia,1.0,2.0,UEFA Nations League,Tirana,Albania,False
 2024-11-19,República Tcheca,Georgia,2.0,1.0,UEFA Nations League,Olomouc,Czech Republic,False
@@ -4110,7 +4110,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2025-06-10,Inglaterra,Senegal,1.0,3.0,Friendly,London,England,False
 2025-06-10,México,Turquia,1.0,0.0,Friendly,Chapel Hill,United States,True
 2025-06-10,África do Sul,Mozambique,2.0,0.0,Friendly,Polokwane,South Africa,False
-2025-06-10,Sweden,Argélia,4.0,3.0,Friendly,Solna,Sweden,False
+2025-06-10,Suécia,Argélia,4.0,3.0,Friendly,Solna,Suécia,False
 2025-06-10,Estados Unidos,Suíça,0.0,4.0,Friendly,Nashville,United States,False
 2025-06-10,Uruguai,Venezuela,2.0,0.0,FIFA World Cup qualification,Montevideo,Uruguay,False
 2025-06-10,Peru,Equador,0.0,0.0,FIFA World Cup qualification,Lima,Peru,False
@@ -4228,7 +4228,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2025-09-09,Azerbaijan,Ucrânia,1.0,1.0,FIFA World Cup qualification,Baku,Azerbaijan,False
 2025-09-09,França,Iceland,2.0,1.0,FIFA World Cup qualification,Paris,France,False
 2025-09-09,Hungary,Portugal,2.0,3.0,FIFA World Cup qualification,Budapest,Hungary,False
-2025-09-09,Bosnia and Herzegovina,Áustria,1.0,2.0,FIFA World Cup qualification,Zenica,Bosnia and Herzegovina,False
+2025-09-09,Bósnia e Herzegovina,Áustria,1.0,2.0,FIFA World Cup qualification,Zenica,Bósnia e Herzegovina,False
 2025-09-09,Noruega,Moldova,11.0,1.0,FIFA World Cup qualification,Oslo,Norway,False
 2025-09-09,Serbia,Inglaterra,0.0,5.0,FIFA World Cup qualification,Belgrade,Serbia,False
 2025-09-09,Curaçao,Bermuda,3.0,2.0,FIFA World Cup qualification,Willemstad,Curaçao,False
@@ -4262,7 +4262,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2025-10-10,Seychelles,Costa do Marfim,0.0,7.0,FIFA World Cup qualification,Saint Pierre,Mauritius,True
 2025-10-10,Tunísia,São Tomé and Príncipe,6.0,0.0,FIFA World Cup qualification,Radès,Tunisia,False
 2025-10-10,Alemanha,Luxembourg,4.0,0.0,FIFA World Cup qualification,Sinsheim,Germany,False
-2025-10-10,Sweden,Suíça,0.0,2.0,FIFA World Cup qualification,Solna,Sweden,False
+2025-10-10,Suécia,Suíça,0.0,2.0,FIFA World Cup qualification,Solna,Suécia,False
 2025-10-10,Iceland,Ucrânia,3.0,5.0,FIFA World Cup qualification,Reykjavík,Iceland,False
 2025-10-10,França,Azerbaijan,3.0,0.0,FIFA World Cup qualification,Paris,France,False
 2025-10-10,Bélgica,North Macedonia,0.0,0.0,FIFA World Cup qualification,Gent,Belgium,False
@@ -4346,7 +4346,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2025-11-15,México,Uruguai,0.0,0.0,Friendly,Torreón,Mexico,False
 2025-11-15,África do Sul,Zambia,3.0,1.0,Friendly,Gqeberha,South Africa,False
 2025-11-15,Estados Unidos,Paraguai,2.0,1.0,Friendly,Chester,United States,False
-2025-11-15,Suíça,Sweden,4.0,1.0,FIFA World Cup qualification,Geneva,Switzerland,False
+2025-11-15,Suíça,Suécia,4.0,1.0,FIFA World Cup qualification,Geneva,Switzerland,False
 2025-11-15,Greece,Escócia,3.0,2.0,FIFA World Cup qualification,Piraeus,Greece,False
 2025-11-15,Turquia,Bulgaria,2.0,0.0,FIFA World Cup qualification,Bursa,Turkey,False
 2025-11-15,Georgia,Espanha,0.0,4.0,FIFA World Cup qualification,Tbilisi,Georgia,False
@@ -4381,7 +4381,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2025-11-18,Kosovo,Suíça,1.0,1.0,FIFA World Cup qualification,Pristina,Kosovo,False
 2025-11-18,Escócia,Denmark,4.0,2.0,FIFA World Cup qualification,Glasgow,Scotland,False
 2025-11-18,Espanha,Turquia,2.0,2.0,FIFA World Cup qualification,Seville,Spain,False
-2025-11-18,Áustria,Bosnia and Herzegovina,1.0,1.0,FIFA World Cup qualification,Vienna,Austria,False
+2025-11-18,Áustria,Bósnia e Herzegovina,1.0,1.0,FIFA World Cup qualification,Vienna,Austria,False
 2025-11-18,Bélgica,Liechtenstein,7.0,0.0,FIFA World Cup qualification,Liège,Belgium,False
 2025-11-18,Irã,Uzbequistão,0.0,0.0,Al Ain International Cup,Al Ain,United Arab Emirates,True
 2025-11-18,Panamá,El Salvador,3.0,0.0,FIFA World Cup qualification,Panama City,Panama,False
@@ -4460,7 +4460,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2026-03-26,Brasil,França,1.0,2.0,Friendly,Foxborough,United States,True
 2026-03-26,Colômbia,Croácia,1.0,2.0,Friendly,Orlando,United States,True
 2026-03-26,Itália,Northern Ireland,2.0,0.0,FIFA World Cup qualification,Bergamo,Italy,False
-2026-03-26,Ucrânia,Sweden,1.0,3.0,FIFA World Cup qualification,Valencia,Spain,True
+2026-03-26,Ucrânia,Suécia,1.0,3.0,FIFA World Cup qualification,Valencia,Spain,True
 2026-03-26,Turquia,Romania,1.0,0.0,FIFA World Cup qualification,Istanbul,Turkey,False
 2026-03-26,República Tcheca,Republic of Ireland,2.0,2.0,FIFA World Cup qualification,Prague,Czech Republic,False
 2026-03-27,Argélia,Guatemala,7.0,0.0,Friendly,Genoa,Switzerland,True
@@ -4515,13 +4515,13 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2026-03-31,Estados Unidos,Portugal,0.0,2.0,Friendly,Atlanta,United States,False
 2026-03-31,RD Congo,Jamaica,1.0,0.0,FIFA World Cup qualification,Zapopan,Mexico,True
 2026-03-31,Iraque,Bolivia,2.0,1.0,FIFA World Cup qualification,Guadalupe,Mexico,True
-2026-03-31,Bosnia and Herzegovina,Itália,1.0,1.0,FIFA World Cup qualification,Zenica,Bosnia and Herzegovina,False
+2026-03-31,Bósnia e Herzegovina,Itália,1.0,1.0,FIFA World Cup qualification,Zenica,Bósnia e Herzegovina,False
 2026-03-31,Kosovo,Turquia,0.0,1.0,FIFA World Cup qualification,Pristina,Kosovo,False
 2026-03-31,República Tcheca,Denmark,2.0,2.0,FIFA World Cup qualification,Prague,Czech Republic,False
 2026-03-31,Austrália,Curaçao,5.0,1.0,FIFA Series,Melbourne,Australia,False
 2026-06-11,México,África do Sul,,,FIFA World Cup,Mexico City,Mexico,False
 2026-06-11,Coreia do Sul,República Tcheca,,,FIFA World Cup,Zapopan,Mexico,True
-2026-06-12,Canadá,Bosnia and Herzegovina,,,FIFA World Cup,Toronto,Canada,False
+2026-06-12,Canadá,Bósnia e Herzegovina,,,FIFA World Cup,Toronto,Canada,False
 2026-06-12,Estados Unidos,Paraguai,,,FIFA World Cup,Inglewood,United States,False
 2026-06-13,Catar,Suíça,,,FIFA World Cup,Santa Clara,United States,True
 2026-06-13,Brasil,Marrocos,,,FIFA World Cup,East Rutherford,United States,True
@@ -4530,7 +4530,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2026-06-14,Alemanha,Curaçao,,,FIFA World Cup,Houston,United States,True
 2026-06-14,Costa do Marfim,Equador,,,FIFA World Cup,Philadelphia,United States,True
 2026-06-14,Holanda,Japão,,,FIFA World Cup,Arlington,United States,True
-2026-06-14,Sweden,Tunísia,,,FIFA World Cup,Guadalupe,Mexico,True
+2026-06-14,Suécia,Tunísia,,,FIFA World Cup,Guadalupe,Mexico,True
 2026-06-15,Bélgica,Egito,,,FIFA World Cup,Seattle,United States,True
 2026-06-15,Irã,Nova Zelândia,,,FIFA World Cup,Inglewood,United States,True
 2026-06-15,Espanha,Cabo Verde,,,FIFA World Cup,Atlanta,United States,True
@@ -4545,7 +4545,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2026-06-17,Gana,Panamá,,,FIFA World Cup,Toronto,Canada,True
 2026-06-18,República Tcheca,África do Sul,,,FIFA World Cup,Atlanta,United States,True
 2026-06-18,México,Coreia do Sul,,,FIFA World Cup,Zapopan,Mexico,False
-2026-06-18,Suíça,Bosnia and Herzegovina,,,FIFA World Cup,Inglewood,United States,True
+2026-06-18,Suíça,Bósnia e Herzegovina,,,FIFA World Cup,Inglewood,United States,True
 2026-06-18,Canadá,Catar,,,FIFA World Cup,Vancouver,Canada,False
 2026-06-19,Escócia,Marrocos,,,FIFA World Cup,Foxborough,United States,True
 2026-06-19,Brasil,Haiti,,,FIFA World Cup,Philadelphia,United States,True
@@ -4553,7 +4553,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2026-06-19,Turquia,Paraguai,,,FIFA World Cup,Santa Clara,United States,True
 2026-06-20,Alemanha,Costa do Marfim,,,FIFA World Cup,Toronto,Canada,True
 2026-06-20,Equador,Curaçao,,,FIFA World Cup,Kansas City,United States,True
-2026-06-20,Holanda,Sweden,,,FIFA World Cup,Houston,United States,True
+2026-06-20,Holanda,Suécia,,,FIFA World Cup,Houston,United States,True
 2026-06-20,Tunísia,Japão,,,FIFA World Cup,Guadalupe,Mexico,True
 2026-06-21,Bélgica,Irã,,,FIFA World Cup,Inglewood,United States,True
 2026-06-21,Nova Zelândia,Egito,,,FIFA World Cup,Vancouver,Canada,True
@@ -4570,14 +4570,14 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 2026-06-24,México,República Tcheca,,,FIFA World Cup,Mexico City,Mexico,False
 2026-06-24,África do Sul,Coreia do Sul,,,FIFA World Cup,Guadalupe,Mexico,True
 2026-06-24,Canadá,Suíça,,,FIFA World Cup,Vancouver,Canada,False
-2026-06-24,Bosnia and Herzegovina,Catar,,,FIFA World Cup,Seattle,United States,True
+2026-06-24,Bósnia e Herzegovina,Catar,,,FIFA World Cup,Seattle,United States,True
 2026-06-24,Escócia,Brasil,,,FIFA World Cup,Miami Gardens,United States,True
 2026-06-24,Marrocos,Haiti,,,FIFA World Cup,Atlanta,United States,True
 2026-06-25,Estados Unidos,Turquia,,,FIFA World Cup,Inglewood,United States,False
 2026-06-25,Paraguai,Austrália,,,FIFA World Cup,Santa Clara,United States,True
 2026-06-25,Curaçao,Costa do Marfim,,,FIFA World Cup,Philadelphia,United States,True
 2026-06-25,Equador,Alemanha,,,FIFA World Cup,East Rutherford,United States,True
-2026-06-25,Japão,Sweden,,,FIFA World Cup,Arlington,United States,True
+2026-06-25,Japão,Suécia,,,FIFA World Cup,Arlington,United States,True
 2026-06-25,Tunísia,Holanda,,,FIFA World Cup,Kansas City,United States,True
 2026-06-26,Egito,Irã,,,FIFA World Cup,Seattle,United States,True
 2026-06-26,Nova Zelândia,Bélgica,,,FIFA World Cup,Vancouver,Canada,True

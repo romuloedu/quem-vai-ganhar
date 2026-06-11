@@ -1,73 +1,73 @@
 match_id,group,stage,date,venue,home_team,away_team,kickoff_brt,p_home_win,p_draw,p_away_win,p_home_win_model,source,blend_alpha
-1,A,group,2026-06-11,Azteca (CDMX),México,África do Sul,15:00,0.6644,0.2284,0.1072,0.6717,blend,0.65
-2,A,group,2026-06-11,Azteca (CDMX),Coreia do Sul,República Tcheca,23:00,0.3694,0.2897,0.3409,0.4012,blend,0.65
-3,A,group,2026-06-17,Akron (Guadalajara),México,Coreia do Sul,22:00,0.4831,0.2702,0.2466,0.4193,blend,0.65
-4,A,group,2026-06-17,BBVA (Monterrey),África do Sul,República Tcheca,14:00,0.2792,0.2976,0.4233,0.3572,blend,0.65
-5,A,group,2026-06-24,Azteca (CDMX),República Tcheca,México,22:00,0.2335,0.2585,0.508,0.2146,blend,0.65
-6,A,group,2026-06-24,BBVA (Monterrey),África do Sul,Coreia do Sul,22:00,0.2258,0.2577,0.5166,0.1746,blend,0.65
-7,B,group,2026-06-12,BMO Field (Toronto),Canadá,Catar,16:00,0.5683,0.2397,0.192,0.3202,blend,0.65
-8,B,group,2026-06-12,BC Place (Vancouver),Suíça,Itália,19:00,0.4375,0.3003,0.2622,0.4375,model_only,0.0
-9,B,group,2026-06-18,Levi's (San Francisco),Canadá,Suíça,19:00,0.2979,0.2755,0.4266,0.3771,blend,0.65
-10,B,group,2026-06-18,SoFi (Los Angeles),Catar,Itália,22:00,0.1862,0.2509,0.5629,0.1862,model_only,0.0
-11,B,group,2026-06-24,Lumen Field (Seattle),Itália,Canadá,16:00,0.4162,0.3411,0.2427,0.4162,model_only,0.0
-12,B,group,2026-06-24,BC Place (Vancouver),Catar,Suíça,16:00,0.1379,0.2095,0.6526,0.2442,blend,0.65
-13,C,group,2026-06-13,MetLife (Nova York),Brasil,Marrocos,19:00,0.5385,0.2621,0.1994,0.4496,blend,0.65
-14,C,group,2026-06-13,Lincoln Fin. (Filadélfia),Haiti,Escócia,22:00,0.1153,0.1842,0.7005,0.078,blend,0.65
-15,C,group,2026-06-19,Lincoln Fin. (Filadélfia),Brasil,Haiti,22:00,0.8132,0.1361,0.0506,0.6499,blend,0.65
-16,C,group,2026-06-19,Hard Rock (Miami),Marrocos,Escócia,19:00,0.4658,0.2759,0.2583,0.4752,blend,0.65
-17,C,group,2026-06-24,Hard Rock (Miami),Escócia,Brasil,22:00,0.1451,0.2373,0.6177,0.1865,blend,0.65
-18,C,group,2026-06-24,MetLife (Nova York),Marrocos,Haiti,22:00,0.6999,0.1826,0.1175,0.6747,blend,0.65
-19,D,group,2026-06-12,SoFi (Los Angeles),Estados Unidos,Paraguai,22:00,0.5328,0.2616,0.2057,0.6351,blend,0.65
-20,D,group,2026-06-12,BC Place (Vancouver),Austrália,Turquia,01:00,0.2619,0.28,0.4581,0.3667,blend,0.65
-21,D,group,2026-06-18,Levi's (San Francisco),Estados Unidos,Austrália,16:00,0.5206,0.2363,0.2431,0.482,blend,0.65
-22,D,group,2026-06-18,Lumen Field (Seattle),Paraguai,Turquia,22:00,0.2545,0.3249,0.4206,0.2118,blend,0.65
-23,D,group,2026-06-25,SoFi (Los Angeles),Turquia,Estados Unidos,22:00,0.3557,0.2833,0.3609,0.3718,blend,0.65
-24,D,group,2026-06-25,BC Place (Vancouver),Paraguai,Austrália,22:00,0.3845,0.2893,0.3262,0.2973,blend,0.65
-25,E,group,2026-06-14,Lincoln Fin. (Filadélfia),Alemanha,Curaçao,14:00,0.8774,0.0962,0.0264,0.7908,blend,0.65
-26,E,group,2026-06-14,MetLife (Nova York),Costa do Marfim,Equador,20:00,0.2805,0.3299,0.3896,0.3093,blend,0.65
-27,E,group,2026-06-20,MetLife (Nova York),Alemanha,Costa do Marfim,17:00,0.6066,0.2466,0.1468,0.5972,blend,0.65
-28,E,group,2026-06-20,Lincoln Fin. (Filadélfia),Curaçao,Equador,19:00,0.1295,0.2128,0.6577,0.2032,blend,0.65
-29,E,group,2026-06-25,Lincoln Fin. (Filadélfia),Equador,Alemanha,17:00,0.2546,0.2617,0.4837,0.3753,blend,0.65
-30,E,group,2026-06-25,MetLife (Nova York),Curaçao,Costa do Marfim,17:00,0.2027,0.2327,0.5646,0.3828,blend,0.65
-31,F,group,2026-06-14,AT&T (Dallas),Holanda,Japão,16:00,0.5117,0.2617,0.2266,0.5786,blend,0.65
-32,F,group,2026-06-14,NRG (Houston),Tunísia,Ucrânia,23:00,0.371,0.2638,0.3651,0.371,model_only,0.0
-33,F,group,2026-06-20,AT&T (Dallas),Holanda,Tunísia,14:00,0.5665,0.2489,0.1846,0.4918,blend,0.65
-34,F,group,2026-06-20,NRG (Houston),Japão,Ucrânia,23:00,0.4165,0.2792,0.3043,0.4165,model_only,0.0
-35,F,group,2026-06-26,NRG (Houston),Ucrânia,Holanda,18:00,0.2761,0.2902,0.4338,0.2761,model_only,0.0
-36,F,group,2026-06-26,AT&T (Dallas),Japão,Tunísia,18:00,0.4501,0.2815,0.2684,0.3446,blend,0.65
-37,G,group,2026-06-15,Arrowhead (Kansas City),Bélgica,Egito,16:00,0.5278,0.3088,0.1634,0.4408,blend,0.65
-38,G,group,2026-06-15,Arrowhead (Kansas City),Irã,Nova Zelândia,22:00,0.4999,0.2667,0.2334,0.4898,blend,0.65
-39,G,group,2026-06-21,Arrowhead (Kansas City),Bélgica,Irã,16:00,0.6103,0.2407,0.1491,0.5022,blend,0.65
-40,G,group,2026-06-21,Arrowhead (Kansas City),Egito,Nova Zelândia,22:00,0.5125,0.25,0.2375,0.4439,blend,0.65
-41,G,group,2026-06-26,Arrowhead (Kansas City),Nova Zelândia,Bélgica,22:00,0.1141,0.2095,0.6764,0.1439,blend,0.65
-42,G,group,2026-06-26,Arrowhead (Kansas City),Egito,Irã,22:00,0.4128,0.3086,0.2786,0.4259,blend,0.65
-43,H,group,2026-06-15,AT&T (Dallas),Espanha,Cabo Verde,14:00,0.822,0.1409,0.037,0.7194,blend,0.65
-44,H,group,2026-06-15,NRG (Houston),Arábia Saudita,Uruguai,19:00,0.1963,0.2469,0.5568,0.3076,blend,0.65
-45,H,group,2026-06-21,NRG (Houston),Espanha,Arábia Saudita,14:00,0.8056,0.1444,0.05,0.7177,blend,0.65
-46,H,group,2026-06-21,AT&T (Dallas),Cabo Verde,Uruguai,19:00,0.1571,0.2449,0.598,0.1997,blend,0.65
-47,H,group,2026-06-26,AT&T (Dallas),Uruguai,Espanha,19:00,0.2179,0.2372,0.5449,0.2843,blend,0.65
-48,H,group,2026-06-26,NRG (Houston),Cabo Verde,Arábia Saudita,19:00,0.3364,0.276,0.3876,0.293,blend,0.65
-49,I,group,2026-06-16,Mercedes-Benz (Atlanta),França,Senegal,16:00,0.5958,0.2362,0.168,0.4764,blend,0.65
-50,I,group,2026-06-16,Mercedes-Benz (Atlanta),Noruega,Iraque,19:00,0.7988,0.1455,0.0557,0.8466,blend,0.65
-51,I,group,2026-06-22,Mercedes-Benz (Atlanta),França,Noruega,18:00,0.5058,0.2718,0.2223,0.4208,blend,0.65
-52,I,group,2026-06-22,Mercedes-Benz (Atlanta),Senegal,Iraque,21:00,0.6338,0.242,0.1242,0.5994,blend,0.65
-53,I,group,2026-06-27,Mercedes-Benz (Atlanta),Iraque,França,23:00,0.1079,0.1342,0.7579,0.235,blend,0.65
-54,I,group,2026-06-27,Mercedes-Benz (Atlanta),Senegal,Noruega,23:00,0.2821,0.2816,0.4362,0.3006,blend,0.65
-55,J,group,2026-06-16,Gillette (Boston),Argentina,Argélia,22:00,0.6601,0.244,0.096,0.6373,blend,0.65
-56,J,group,2026-06-16,Gillette (Boston),Áustria,Jordânia,01:00,0.7881,0.1358,0.0761,0.9217,blend,0.65
-57,J,group,2026-06-22,Gillette (Boston),Argentina,Áustria,14:00,0.5898,0.2544,0.1558,0.6255,blend,0.65
-58,J,group,2026-06-22,Gillette (Boston),Argélia,Jordânia,22:00,0.5798,0.235,0.1852,0.5954,blend,0.65
-59,J,group,2026-06-27,Gillette (Boston),Jordânia,Argentina,23:00,0.1369,0.1732,0.6899,0.2618,blend,0.65
-60,J,group,2026-06-27,Gillette (Boston),Argélia,Áustria,23:00,0.263,0.2759,0.4611,0.2412,blend,0.65
-61,K,group,2026-06-17,Levi's (San Francisco),Portugal,Uzbequistão,17:00,0.7119,0.2234,0.0647,0.6191,blend,0.65
-62,K,group,2026-06-17,SoFi (Los Angeles),Colômbia,RD Congo,22:00,0.5949,0.2557,0.1494,0.5031,blend,0.65
-63,K,group,2026-06-23,SoFi (Los Angeles),Portugal,Colômbia,17:00,0.4775,0.2583,0.2642,0.5568,blend,0.65
-64,K,group,2026-06-23,Levi's (San Francisco),Uzbequistão,RD Congo,23:00,0.345,0.3147,0.3403,0.3665,blend,0.65
-65,K,group,2026-06-27,Levi's (San Francisco),RD Congo,Portugal,20:00,0.168,0.1804,0.6516,0.3194,blend,0.65
-66,K,group,2026-06-27,SoFi (Los Angeles),Uzbequistão,Colômbia,20:00,0.1132,0.2059,0.6809,0.1045,blend,0.65
-67,L,group,2026-06-17,Gillette (Boston),Inglaterra,Croácia,17:00,0.475,0.2483,0.2768,0.3443,blend,0.65
-68,L,group,2026-06-17,Gillette (Boston),Gana,Panamá,20:00,0.4367,0.291,0.2723,0.3651,blend,0.65
-69,L,group,2026-06-23,Gillette (Boston),Inglaterra,Gana,17:00,0.7388,0.1808,0.0804,0.7837,blend,0.65
-70,L,group,2026-06-23,Gillette (Boston),Croácia,Panamá,20:00,0.6452,0.2328,0.122,0.6907,blend,0.65
-71,L,group,2026-06-27,Gillette (Boston),Panamá,Inglaterra,18:00,0.1243,0.1607,0.715,0.2018,blend,0.65
-72,L,group,2026-06-27,Gillette (Boston),Croácia,Gana,18:00,0.6405,0.2135,0.146,0.82,blend,0.65
+1,A,group,2026-06-11,Azteca (CDMX),México,África do Sul,16:00,0.6462,0.2465,0.1073,0.6196,blend,0.65
+2,A,group,2026-06-11,Azteca (CDMX),Coreia do Sul,República Tcheca,23:00,0.3806,0.2864,0.333,0.4332,blend,0.65
+3,A,group,2026-06-17,Akron (Guadalajara),México,Coreia do Sul,22:00,0.4959,0.2686,0.2355,0.4557,blend,0.65
+4,A,group,2026-06-17,BBVA (Monterrey),África do Sul,República Tcheca,14:00,0.2887,0.2871,0.4242,0.3844,blend,0.65
+5,A,group,2026-06-24,Azteca (CDMX),República Tcheca,México,22:00,0.248,0.2622,0.4899,0.2561,blend,0.65
+6,A,group,2026-06-24,BBVA (Monterrey),África do Sul,Coreia do Sul,22:00,0.2479,0.2571,0.495,0.238,blend,0.65
+7,B,group,2026-06-12,BMO Field (Toronto),Canadá,Bósnia e Herzegovina,16:00,0.3387,0.3284,0.3329,0.3387,model_only,0.0
+8,B,group,2026-06-13,Levi's (San Francisco),Catar,Suíça,16:00,0.1183,0.1973,0.6844,0.1883,blend,0.65
+9,B,group,2026-06-18,SoFi (Los Angeles),Suíça,Bósnia e Herzegovina,16:00,0.4255,0.3393,0.2352,0.4255,model_only,0.0
+10,B,group,2026-06-18,BC Place (Vancouver),Canadá,Catar,19:00,0.5787,0.2295,0.1918,0.3501,blend,0.65
+11,B,group,2026-06-24,BC Place (Vancouver),Canadá,Suíça,16:00,0.3059,0.2776,0.4166,0.3999,blend,0.65
+12,B,group,2026-06-24,Lumen Field (Seattle),Bósnia e Herzegovina,Catar,16:00,0.4275,0.2507,0.3218,0.4275,model_only,0.0
+13,C,group,2026-06-13,MetLife (Nova York),Brasil,Marrocos,19:00,0.5481,0.255,0.1969,0.477,blend,0.65
+14,C,group,2026-06-13,Lincoln Fin. (Filadélfia),Haiti,Escócia,22:00,0.1231,0.2013,0.6756,0.1003,blend,0.65
+15,C,group,2026-06-19,Lincoln Fin. (Filadélfia),Brasil,Haiti,22:00,0.8292,0.1203,0.0505,0.6954,blend,0.65
+16,C,group,2026-06-19,Hard Rock (Miami),Marrocos,Escócia,19:00,0.4723,0.2796,0.2482,0.4938,blend,0.65
+17,C,group,2026-06-24,Hard Rock (Miami),Escócia,Brasil,22:00,0.1657,0.2277,0.6066,0.2453,blend,0.65
+18,C,group,2026-06-24,MetLife (Nova York),Marrocos,Haiti,22:00,0.6878,0.1987,0.1135,0.64,blend,0.65
+19,D,group,2026-06-12,SoFi (Los Angeles),Estados Unidos,Paraguai,22:00,0.5194,0.2673,0.2133,0.5969,blend,0.65
+20,D,group,2026-06-12,BC Place (Vancouver),Austrália,Turquia,01:00,0.2736,0.2666,0.4599,0.4,blend,0.65
+21,D,group,2026-06-18,Levi's (San Francisco),Estados Unidos,Austrália,16:00,0.5231,0.2386,0.2383,0.4893,blend,0.65
+22,D,group,2026-06-18,Lumen Field (Seattle),Paraguai,Turquia,22:00,0.2904,0.2957,0.414,0.3142,blend,0.65
+23,D,group,2026-06-25,SoFi (Los Angeles),Turquia,Estados Unidos,22:00,0.3473,0.2682,0.3845,0.3477,blend,0.65
+24,D,group,2026-06-25,BC Place (Vancouver),Paraguai,Austrália,22:00,0.3916,0.2829,0.3256,0.3176,blend,0.65
+25,E,group,2026-06-14,Lincoln Fin. (Filadélfia),Alemanha,Curaçao,14:00,0.8809,0.1002,0.0188,0.8009,blend,0.65
+26,E,group,2026-06-14,MetLife (Nova York),Costa do Marfim,Equador,20:00,0.2834,0.328,0.3886,0.3176,blend,0.65
+27,E,group,2026-06-20,MetLife (Nova York),Alemanha,Costa do Marfim,17:00,0.6196,0.244,0.1364,0.6341,blend,0.65
+28,E,group,2026-06-20,Lincoln Fin. (Filadélfia),Curaçao,Equador,19:00,0.1573,0.2346,0.6081,0.2827,blend,0.65
+29,E,group,2026-06-25,Lincoln Fin. (Filadélfia),Equador,Alemanha,17:00,0.247,0.2593,0.4937,0.3537,blend,0.65
+30,E,group,2026-06-25,MetLife (Nova York),Curaçao,Costa do Marfim,17:00,0.2112,0.236,0.5528,0.4071,blend,0.65
+31,F,group,2026-06-14,AT&T (Dallas),Holanda,Japão,16:00,0.516,0.2667,0.2174,0.5909,blend,0.65
+32,F,group,2026-06-14,NRG (Houston),Suécia,Tunísia,23:00,0.4511,0.2909,0.2581,0.3723,blend,0.65
+33,F,group,2026-06-20,AT&T (Dallas),Holanda,Suécia,14:00,0.5734,0.2482,0.1783,0.5869,blend,0.65
+34,F,group,2026-06-20,NRG (Houston),Tunísia,Japão,23:00,0.2624,0.2732,0.4644,0.3587,blend,0.65
+35,F,group,2026-06-25,NRG (Houston),Tunísia,Holanda,18:00,0.1924,0.2385,0.5691,0.2531,blend,0.65
+36,F,group,2026-06-25,AT&T (Dallas),Japão,Suécia,18:00,0.4205,0.2661,0.3134,0.3521,blend,0.65
+37,G,group,2026-06-15,Arrowhead (Kansas City),Bélgica,Egito,16:00,0.5382,0.2999,0.1619,0.4704,blend,0.65
+38,G,group,2026-06-15,Arrowhead (Kansas City),Irã,Nova Zelândia,22:00,0.5157,0.2693,0.215,0.5349,blend,0.65
+39,G,group,2026-06-21,Arrowhead (Kansas City),Bélgica,Irã,16:00,0.6012,0.2408,0.158,0.4762,blend,0.65
+40,G,group,2026-06-21,Arrowhead (Kansas City),Egito,Nova Zelândia,22:00,0.5154,0.2503,0.2344,0.4522,blend,0.65
+41,G,group,2026-06-26,Arrowhead (Kansas City),Nova Zelândia,Bélgica,22:00,0.104,0.2037,0.6923,0.1152,blend,0.65
+42,G,group,2026-06-26,Arrowhead (Kansas City),Egito,Irã,22:00,0.4142,0.3073,0.2785,0.4299,blend,0.65
+43,H,group,2026-06-15,AT&T (Dallas),Espanha,Cabo Verde,14:00,0.8202,0.1406,0.0391,0.7142,blend,0.65
+44,H,group,2026-06-15,NRG (Houston),Arábia Saudita,Uruguai,19:00,0.1675,0.27,0.5625,0.2251,blend,0.65
+45,H,group,2026-06-21,NRG (Houston),Espanha,Arábia Saudita,14:00,0.8216,0.1382,0.0402,0.7634,blend,0.65
+46,H,group,2026-06-21,AT&T (Dallas),Cabo Verde,Uruguai,19:00,0.1567,0.2479,0.5954,0.1986,blend,0.65
+47,H,group,2026-06-26,AT&T (Dallas),Uruguai,Espanha,19:00,0.2025,0.2304,0.5672,0.2401,blend,0.65
+48,H,group,2026-06-26,NRG (Houston),Cabo Verde,Arábia Saudita,19:00,0.3229,0.2746,0.4025,0.2546,blend,0.65
+49,I,group,2026-06-16,Mercedes-Benz (Atlanta),França,Senegal,16:00,0.584,0.2337,0.1824,0.4425,blend,0.65
+50,I,group,2026-06-16,Mercedes-Benz (Atlanta),Noruega,Iraque,19:00,0.79,0.1538,0.0562,0.8215,blend,0.65
+51,I,group,2026-06-22,Mercedes-Benz (Atlanta),França,Noruega,18:00,0.5083,0.2681,0.2236,0.4279,blend,0.65
+52,I,group,2026-06-22,Mercedes-Benz (Atlanta),Senegal,Iraque,21:00,0.6364,0.2395,0.1241,0.6069,blend,0.65
+53,I,group,2026-06-27,Mercedes-Benz (Atlanta),Iraque,França,23:00,0.0862,0.1362,0.7776,0.1728,blend,0.65
+54,I,group,2026-06-27,Mercedes-Benz (Atlanta),Senegal,Noruega,23:00,0.2838,0.2817,0.4345,0.3052,blend,0.65
+55,J,group,2026-06-16,Gillette (Boston),Argentina,Argélia,22:00,0.6434,0.2504,0.1062,0.5897,blend,0.65
+56,J,group,2026-06-16,Gillette (Boston),Áustria,Jordânia,01:00,0.7861,0.1313,0.0826,0.9158,blend,0.65
+57,J,group,2026-06-22,Gillette (Boston),Argentina,Áustria,14:00,0.5791,0.2637,0.1572,0.595,blend,0.65
+58,J,group,2026-06-22,Gillette (Boston),Argélia,Jordânia,22:00,0.598,0.2283,0.1737,0.6475,blend,0.65
+59,J,group,2026-06-27,Gillette (Boston),Jordânia,Argentina,23:00,0.1218,0.1784,0.6998,0.2186,blend,0.65
+60,J,group,2026-06-27,Gillette (Boston),Argélia,Áustria,23:00,0.2693,0.2779,0.4528,0.2593,blend,0.65
+61,K,group,2026-06-17,Levi's (San Francisco),Portugal,Uzbequistão,17:00,0.7219,0.2158,0.0623,0.6477,blend,0.65
+62,K,group,2026-06-17,SoFi (Los Angeles),Colômbia,RD Congo,22:00,0.6022,0.2488,0.149,0.524,blend,0.65
+63,K,group,2026-06-23,SoFi (Los Angeles),Portugal,Colômbia,17:00,0.4515,0.2589,0.2896,0.4825,blend,0.65
+64,K,group,2026-06-23,Levi's (San Francisco),Uzbequistão,RD Congo,23:00,0.352,0.3357,0.3124,0.3864,blend,0.65
+65,K,group,2026-06-27,Levi's (San Francisco),RD Congo,Portugal,20:00,0.1622,0.1681,0.6698,0.3027,blend,0.65
+66,K,group,2026-06-27,SoFi (Los Angeles),Uzbequistão,Colômbia,20:00,0.1047,0.2246,0.6706,0.0803,blend,0.65
+67,L,group,2026-06-17,Gillette (Boston),Inglaterra,Croácia,17:00,0.4654,0.2448,0.2897,0.3171,blend,0.65
+68,L,group,2026-06-17,Gillette (Boston),Gana,Panamá,20:00,0.4617,0.2761,0.2622,0.4368,blend,0.65
+69,L,group,2026-06-23,Gillette (Boston),Inglaterra,Gana,17:00,0.7445,0.1756,0.0799,0.8001,blend,0.65
+70,L,group,2026-06-23,Gillette (Boston),Croácia,Panamá,20:00,0.6845,0.2071,0.1084,0.8027,blend,0.65
+71,L,group,2026-06-27,Gillette (Boston),Panamá,Inglaterra,18:00,0.1329,0.165,0.7021,0.2265,blend,0.65
+72,L,group,2026-06-27,Gillette (Boston),Croácia,Gana,18:00,0.6549,0.1985,0.1466,0.8611,blend,0.65

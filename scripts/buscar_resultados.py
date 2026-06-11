@@ -36,7 +36,8 @@ NAME_MAP = {
     "Ivory Coast": "Costa do Marfim", "Curaçao": "Curaçao",
     "Uzbekistan": "Uzbequistão", "Cape Verde": "Cabo Verde",
     "Panama": "Panamá", "Ghana": "Gana", "Iraq": "Iraque",
-    "Jordan": "Jordânia",
+    "Jordan": "Jordânia", "Bosnia and Herzegovina": "Bósnia e Herzegovina",
+    "Sweden": "Suécia",
 }
 
 

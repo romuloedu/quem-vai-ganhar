@@ -5,12 +5,12 @@ match_id,group,stage,date,venue,home_team,away_team,kickoff_brt
 4,A,group,2026-06-17,BBVA (Monterrey),África do Sul,República Tcheca,14:00
 5,A,group,2026-06-24,Azteca (CDMX),República Tcheca,México,22:00
 6,A,group,2026-06-24,BBVA (Monterrey),África do Sul,Coreia do Sul,22:00
-7,B,group,2026-06-12,BMO Field (Toronto),Canadá,Catar,16:00
-8,B,group,2026-06-12,BC Place (Vancouver),Suíça,Itália,19:00
-9,B,group,2026-06-18,Levi's (San Francisco),Canadá,Suíça,19:00
-10,B,group,2026-06-18,SoFi (Los Angeles),Catar,Itália,22:00
-11,B,group,2026-06-24,Lumen Field (Seattle),Itália,Canadá,16:00
-12,B,group,2026-06-24,BC Place (Vancouver),Catar,Suíça,16:00
+7,B,group,2026-06-12,BMO Field (Toronto),Canadá,Bósnia e Herzegovina,16:00
+8,B,group,2026-06-13,Levi's (San Francisco),Catar,Suíça,16:00
+9,B,group,2026-06-18,SoFi (Los Angeles),Suíça,Bósnia e Herzegovina,16:00
+10,B,group,2026-06-18,BC Place (Vancouver),Canadá,Catar,19:00
+11,B,group,2026-06-24,BC Place (Vancouver),Canadá,Suíça,16:00
+12,B,group,2026-06-24,Lumen Field (Seattle),Bósnia e Herzegovina,Catar,16:00
 13,C,group,2026-06-13,MetLife (Nova York),Brasil,Marrocos,19:00
 14,C,group,2026-06-13,Lincoln Fin. (Filadélfia),Haiti,Escócia,22:00
 15,C,group,2026-06-19,Lincoln Fin. (Filadélfia),Brasil,Haiti,22:00
@@ -30,11 +30,11 @@ match_id,group,stage,date,venue,home_team,away_team,kickoff_brt
 29,E,group,2026-06-25,Lincoln Fin. (Filadélfia),Equador,Alemanha,17:00
 30,E,group,2026-06-25,MetLife (Nova York),Curaçao,Costa do Marfim,17:00
 31,F,group,2026-06-14,AT&T (Dallas),Holanda,Japão,16:00
-32,F,group,2026-06-14,NRG (Houston),Tunísia,Ucrânia,23:00
-33,F,group,2026-06-20,AT&T (Dallas),Holanda,Tunísia,14:00
-34,F,group,2026-06-20,NRG (Houston),Japão,Ucrânia,23:00
-35,F,group,2026-06-26,NRG (Houston),Ucrânia,Holanda,18:00
-36,F,group,2026-06-26,AT&T (Dallas),Japão,Tunísia,18:00
+32,F,group,2026-06-14,NRG (Houston),Suécia,Tunísia,23:00
+33,F,group,2026-06-20,AT&T (Dallas),Holanda,Suécia,14:00
+34,F,group,2026-06-20,NRG (Houston),Tunísia,Japão,23:00
+35,F,group,2026-06-25,NRG (Houston),Tunísia,Holanda,18:00
+36,F,group,2026-06-25,AT&T (Dallas),Japão,Suécia,18:00
 37,G,group,2026-06-15,Arrowhead (Kansas City),Bélgica,Egito,16:00
 38,G,group,2026-06-15,Arrowhead (Kansas City),Irã,Nova Zelândia,22:00
 39,G,group,2026-06-21,Arrowhead (Kansas City),Bélgica,Irã,16:00

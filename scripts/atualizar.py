@@ -63,7 +63,7 @@ NAME_MAP = {
     "South Africa":"África do Sul","Paraguay":"Paraguai","Saudi Arabia":"Arábia Saudita",
     "Ivory Coast":"Costa do Marfim","Curaçao":"Curaçao","Uzbekistan":"Uzbequistão",
     "Cape Verde":"Cabo Verde","Panama":"Panamá","Ghana":"Gana","Iraq":"Iraque",
-    "Jordan":"Jordânia",
+    "Jordan":"Jordânia","Bosnia and Herzegovina":"Bósnia e Herzegovina","Sweden":"Suécia",
 }
 
 
@@ -547,7 +547,7 @@ def step7_update_html(results, df_bl, mkt_champion):
     print("🖥️  Passo 7: Atualizando index.html...")
 
     df_teams = pd.read_csv(DADOS / "wc2026_groups.csv")
-    flags = {"Brasil":"🇧🇷","Marrocos":"🇲🇦","Haiti":"🇭🇹","Escócia":"🏴󠁧󠁢󠁳󠁣󠁴󠁿","França":"🇫🇷","Espanha":"🇪🇸","Bélgica":"🇧🇪","Holanda":"🇳🇱","Argentina":"🇦🇷","Portugal":"🇵🇹","México":"🇲🇽","Noruega":"🇳🇴","Croácia":"🇭🇷","Alemanha":"🇩🇪","Inglaterra":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","Colômbia":"🇨🇴","Suíça":"🇨🇭","Equador":"🇪🇨","Coreia do Sul":"🇰🇷","Japão":"🇯🇵","Irã":"🇮🇷","Senegal":"🇸🇳","Tunísia":"🇹🇳","Itália":"🇮🇹","Áustria":"🇦🇹","Egito":"🇪🇬","República Tcheca":"🇨🇿","Estados Unidos":"🇺🇸","Uruguai":"🇺🇾","Canadá":"🇨🇦","Turquia":"🇹🇷","Ucrânia":"🇺🇦","Austrália":"🇦🇺","Catar":"🇶🇦","RD Congo":"🇨🇩","Nova Zelândia":"🇳🇿","Argélia":"🇩🇿","África do Sul":"🇿🇦","Paraguai":"🇵🇾","Arábia Saudita":"🇸🇦","Costa do Marfim":"🇨🇮","Curaçao":"🇨🇼","Uzbequistão":"🇺🇿","Cabo Verde":"🇨🇻","Panamá":"🇵🇦","Gana":"🇬🇭","Iraque":"🇮🇶","Jordânia":"🇯🇴"}
+    flags = {"Brasil":"🇧🇷","Marrocos":"🇲🇦","Haiti":"🇭🇹","Escócia":"🏴󠁧󠁢󠁳󠁣󠁴󠁿","França":"🇫🇷","Espanha":"🇪🇸","Bélgica":"🇧🇪","Holanda":"🇳🇱","Argentina":"🇦🇷","Portugal":"🇵🇹","México":"🇲🇽","Noruega":"🇳🇴","Croácia":"🇭🇷","Alemanha":"🇩🇪","Inglaterra":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","Colômbia":"🇨🇴","Suíça":"🇨🇭","Equador":"🇪🇨","Coreia do Sul":"🇰🇷","Japão":"🇯🇵","Irã":"🇮🇷","Senegal":"🇸🇳","Tunísia":"🇹🇳","Itália":"🇮🇹","Áustria":"🇦🇹","Egito":"🇪🇬","República Tcheca":"🇨🇿","Estados Unidos":"🇺🇸","Uruguai":"🇺🇾","Canadá":"🇨🇦","Turquia":"🇹🇷","Ucrânia":"🇺🇦","Austrália":"🇦🇺","Catar":"🇶🇦","RD Congo":"🇨🇩","Nova Zelândia":"🇳🇿","Argélia":"🇩🇿","África do Sul":"🇿🇦","Paraguai":"🇵🇾","Arábia Saudita":"🇸🇦","Costa do Marfim":"🇨🇮","Curaçao":"🇨🇼","Uzbequistão":"🇺🇿","Cabo Verde":"🇨🇻","Panamá":"🇵🇦","Gana":"🇬🇭","Iraque":"🇮🇶","Jordânia":"🇯🇴","Bósnia e Herzegovina":"🇧🇦","Suécia":"🇸🇪"}
 
     teams_list = []
     for _, t in df_teams.iterrows():
