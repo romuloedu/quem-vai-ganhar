@@ -197,8 +197,9 @@ main{padding:16px 0 48px}
 .log-badge.miss{background:rgba(192,57,43,.12);color:#e74c3c;border:1px solid rgba(192,57,43,.25)}
 .log-badge.done{background:#1a1a1a;color:#666;border:1px solid #252525}
 .log-score{font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;color:#f0f0ee;letter-spacing:1px;flex-shrink:0;padding:0 3px;line-height:1}
-.log-prev{font-size:12px;color:#777;margin-top:5px;letter-spacing:.3px}
-.log-prev b{font-family:'Oswald',sans-serif;font-size:15px;font-weight:700;color:#bbb;letter-spacing:1px}
+.log-prev{margin-top:12px;padding-top:10px;border-top:1px solid #1e1e1e}
+.log-prev-label{font-family:'Oswald',sans-serif;font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#888;margin-bottom:4px}
+.log-prev-score{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;color:#bbb;letter-spacing:2px}
 .log-body{padding:0 18px 14px}
 .log-probs{display:grid;gap:7px}
 .log-prow{display:grid;grid-template-columns:100px 1fr auto;align-items:center;gap:10px}
@@ -495,22 +496,14 @@ function buildCard(j){
   const isH=j.home==='Brasil', isA=j.away==='Brasil';
   const rLabel=j.r===1?'1ª Rodada':j.r===2?'2ª Rodada':'3ª Rodada';
   const vsHtml=temRes&&j.placar?`<span class="log-score">${j.placar}</span>`:`<span class="log-vs">vs</span>`;
-  const prevHtml=!temRes&&j.placar_prev?`<p class="log-prev">Previsão do modelo: <b>${j.placar_prev}</b></p>`:'';
+  const prevHtml=!temRes&&j.placar_prev?`<div class="log-prev"><p class="log-prev-label">placar previsto</p><p class="log-prev-score">${j.placar_prev}</p></div>`:'';
   let resHtml='';
   if(temRes){
-    const pScore=j.placar_prev||null,rScore=j.placar||null;
-    let txt;
-    if(pScore&&rScore&&pScore===rScore){
-      txt=`Placar exato! Modelo previu <b>${pScore}</b>`;
-    }else if(j.res===prev){
-      txt=pScore&&rScore
-        ?`Modelo acertou · previu <b>${pScore}</b>, saiu <b>${rScore}</b>`
-        :`Modelo acertou · previa <b>${prev==='draw'?'Empate':prevLabel}</b>`;
-    }else{
-      txt=pScore&&rScore
-        ?`Modelo errou · previu <b>${pScore}</b>, saiu <b>${rScore}</b>`
-        :`Modelo errou · previa <b>${prev==='draw'?'Empate':prevLabel}</b>, saiu <b>${j.res==='draw'?'Empate':(j.res==='home'?j.home:j.away)}</b>`;
-    }
+    const pDesc=prev==='draw'?'Empate':prevLabel;
+    const rDesc=j.res==='draw'?'Empate':(j.res==='home'?j.home:j.away);
+    const txt=j.res===prev
+      ?`Modelo acertou · previa <b>${pDesc}</b>`
+      :`Modelo errou · previa <b>${pDesc}</b>, saiu <b>${rDesc}</b>`;
     resHtml=`<div class="log-resultado"><span class="log-resultado-desc">${txt}</span></div>`;
   }
   // In group/team modes, add the date as context
@@ -528,7 +521,6 @@ function buildCard(j){
           <span class="log-nome${isA?' brasil':''}">${j.away}</span>
           <span class="log-flag">${j.af}</span>
         </div>
-        ${prevHtml}
         <p class="log-venue">${fmtKickoff(j)?`<span class="log-time">${fmtKickoff(j)}</span> <span class="log-tz">Brasília</span> · `:''}${j.venue}</p>
       </div>
       <span class="log-badge ${bClass}"${koAttr}>${bText}</span>
@@ -551,6 +543,7 @@ function buildCard(j){
           <div class="log-track"><div class="log-pfill l" data-w="${j.pa}%" style="width:0"></div></div>
           <span class="log-pval">${j.pa}%</span>
         </div>
+        ${prevHtml}
       </div>
     </div>
     ${resHtml}`;
