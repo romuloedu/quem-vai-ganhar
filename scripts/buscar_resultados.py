@@ -132,8 +132,8 @@ def main():
     for m in finished:
         ht = NAME_MAP.get(m["homeTeam"]["name"], m["homeTeam"]["name"])
         at = NAME_MAP.get(m["awayTeam"]["name"], m["awayTeam"]["name"])
-        sc = m.get("score", {}).get("fullTime", {})
-        print(f"    {m['utcDate'][:10]} {ht} {sc.get('home')}x{sc.get('away')} {at}")
+        import json as _json
+        print(f"    {m['utcDate'][:10]} {ht} x {at} | score={_json.dumps(m.get('score'))}")
 
     new_entries = []
     for m in matches:
