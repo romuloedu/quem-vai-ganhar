@@ -44,24 +44,31 @@ import requests
 _POISSON_CACHE: dict = {}
 
 def _calibrate_poisson(ph: float, pd: float, pa: float, _max: int = 7) -> str:
-    """Retorna o placar mais provável (ex: '1-0') usando dois Poissons independentes
-    calibrados para reproduzir as probabilidades W/D/L do modelo blendado."""
+    """Retorna o placar mais provável consistente com o resultado previsto.
+    Calibra Poisson independentes às probabilidades W/D/L, depois busca o placar
+    mais provável dentro da categoria vencedora (home/draw/away)."""
     if _max not in _POISSON_CACHE:
-        lam = np.arange(0.05, 5.01, 0.05)          # 100 candidatos
+        lam = np.arange(0.05, 5.01, 0.05)
         g   = np.arange(_max, dtype=float)
         fac = np.array([math.factorial(int(k)) for k in g])
         pmf = np.exp(-lam[:, None]) * (lam[:, None] ** g) / fac  # (100, max_g)
-        H, A = np.meshgrid(g, g, indexing='ij')
-        # Matrizes de probabilidade para todas as combinações (lh, la): shape (100, 100)
+        H, A = np.meshgrid(np.arange(_max), np.arange(_max), indexing='ij')
         _pw  = (pmf @ (H > A).astype(float)) @ pmf.T
         _pd_ = (pmf @ (H == A).astype(float)) @ pmf.T
         _pa_ = (pmf @ (H < A).astype(float)) @ pmf.T
-        _POISSON_CACHE[_max] = (lam, pmf, _pw, _pd_, _pa_)
-    lam, pmf, _pw, _pd_, _pa_ = _POISSON_CACHE[_max]
+        _POISSON_CACHE[_max] = (lam, pmf, _pw, _pd_, _pa_, H, A)
+    lam, pmf, _pw, _pd_, _pa_, H, A = _POISSON_CACHE[_max]
     loss = (_pw - ph)**2 + (_pd_ - pd)**2 + (_pa_ - pa)**2
     i, j = divmod(int(np.argmin(loss)), len(lam))
-    joint = pmf[i, :, None] * pmf[j, None, :]   # (max_g, max_g)
-    bh, ba = divmod(int(np.argmax(joint)), _max)
+    joint = pmf[i, :, None] * pmf[j, None, :]  # (max_g, max_g)
+    # Restringir ao resultado previsto para evitar contradições
+    if ph >= pd and ph >= pa:
+        mask = H > A      # vitória do mandante
+    elif pa > ph and pa >= pd:
+        mask = H < A      # vitória do visitante
+    else:
+        mask = H == A     # empate
+    bh, ba = divmod(int(np.argmax(np.where(mask, joint, 0))), _max)
     return f"{bh}-{ba}"
 
 warnings.filterwarnings("ignore")
