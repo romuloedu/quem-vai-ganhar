@@ -32,11 +32,37 @@ Após rodar:
 O GitHub Pages atualiza automaticamente em ~1 minuto.
 """
 
-import os, sys, json, re, pickle, subprocess, warnings, datetime
+import os, sys, json, re, pickle, subprocess, warnings, datetime, math
 from pathlib import Path
 import pandas as pd
 import numpy as np
 import requests
+
+# ─────────────────────────────────────────────────────────
+# Previsão de placar via Poisson calibrado às probabilidades W/D/L
+# ─────────────────────────────────────────────────────────
+_POISSON_CACHE: dict = {}
+
+def _calibrate_poisson(ph: float, pd: float, pa: float, _max: int = 7) -> str:
+    """Retorna o placar mais provável (ex: '1-0') usando dois Poissons independentes
+    calibrados para reproduzir as probabilidades W/D/L do modelo blendado."""
+    if _max not in _POISSON_CACHE:
+        lam = np.arange(0.05, 5.01, 0.05)          # 100 candidatos
+        g   = np.arange(_max, dtype=float)
+        fac = np.array([math.factorial(int(k)) for k in g])
+        pmf = np.exp(-lam[:, None]) * (lam[:, None] ** g) / fac  # (100, max_g)
+        H, A = np.meshgrid(g, g, indexing='ij')
+        # Matrizes de probabilidade para todas as combinações (lh, la): shape (100, 100)
+        _pw  = (pmf @ (H > A).astype(float)) @ pmf.T
+        _pd_ = (pmf @ (H == A).astype(float)) @ pmf.T
+        _pa_ = (pmf @ (H < A).astype(float)) @ pmf.T
+        _POISSON_CACHE[_max] = (lam, pmf, _pw, _pd_, _pa_)
+    lam, pmf, _pw, _pd_, _pa_ = _POISSON_CACHE[_max]
+    loss = (_pw - ph)**2 + (_pd_ - pd)**2 + (_pa_ - pa)**2
+    i, j = divmod(int(np.argmin(loss)), len(lam))
+    joint = pmf[i, :, None] * pmf[j, None, :]   # (max_g, max_g)
+    bh, ba = divmod(int(np.argmax(joint)), _max)
+    return f"{bh}-{ba}"
 
 warnings.filterwarnings("ignore")
 
@@ -649,6 +675,9 @@ def step7_update_html(results, df_bl, mkt_champion):
         group_counter[g] = group_counter.get(g, 0) + 1
         r_num = (group_counter[g] + 1) // 2
         real = result_map.get((h, a), {})
+        placar_prev = _calibrate_poisson(
+            row["p_home_win"], row["p_draw"], row["p_away_win"]
+        )
         group_games.append({
             "id": int(row["match_id"]),
             "g": g, "s": row["stage"], "r": r_num,
@@ -660,6 +689,7 @@ def step7_update_html(results, df_bl, mkt_champion):
             "pa": round(row["p_away_win"] * 100, 1),
             "res": real.get("res"),
             "placar": real.get("placar"),
+            "placar_prev": placar_prev,
             "time": row.get("kickoff_brt", ""),
             "utc": agenda.get(frozenset((h, a)), ""),
         })
