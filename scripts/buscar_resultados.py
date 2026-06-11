@@ -114,23 +114,18 @@ def main():
 
     existing_keys = {(r["home_team"], r["away_team"], r["date"]) for r in existing}
 
-    matches = fetch_all_matches()
+    try:
+        matches = fetch_all_matches()
+    except Exception as e:
+        print(f"Erro ao acessar API: {e}")
+        set_gha_output("new_results", "false")
+        set_gha_output("agenda_changed", "false")
+        return
 
     agenda_changed = update_agenda(matches)
     set_gha_output("agenda_changed", "true" if agenda_changed else "false")
     if agenda_changed:
         print("Agenda de horários atualizada.")
-
-    # Debug: mostrar status dos jogos do dia
-    import collections
-    status_counts = collections.Counter(m.get("status") for m in matches)
-    print(f"  Status na API: {dict(status_counts)}")
-    today_str = str(hoje)
-    today_matches = [m for m in matches if m.get("utcDate","")[:10] == today_str]
-    for m in today_matches[:4]:
-        ht = m.get("homeTeam",{}).get("name","?")
-        at = m.get("awayTeam",{}).get("name","?")
-        print(f"  {ht} x {at}: {m.get('status')} | score={m.get('score',{}).get('fullTime')}")
 
     new_entries = []
     for m in matches:
