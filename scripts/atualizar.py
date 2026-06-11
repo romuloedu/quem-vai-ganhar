@@ -289,6 +289,14 @@ def step4_parse_odds(games_data, outrights_raw):
             with open(path) as f: games_data = json.load(f)
             print("   ℹ️  Usando odds salvas de chamada anterior")
         else:
+            parsed_path = DADOS / "market_probs_parsed.json"
+            if parsed_path.exists():
+                with open(parsed_path) as f: parsed = json.load(f)
+                market_probs = {tuple(k.split("|")): v
+                                for k, v in parsed.get("match_odds", {}).items()}
+                mkt_champion = parsed.get("champion_odds", {})
+                print(f"   ℹ️  Usando odds parseadas salvas ({len(market_probs)} jogos)")
+                return market_probs, mkt_champion
             print("ℹ️  Passo 4: sem odds disponíveis — blend usará apenas modelo")
             return {}, {}
 
@@ -515,10 +523,11 @@ def step6_monte_carlo(model, FEAT_COLS, log, rank_map, elo_map, df_bl, n_sims=No
         sw=[]
         for i in range(0,len(qw),2):
             if i+1<len(qw):
-                w=sim_m(qw[i],qw[i+1],DATES["sf"],True); sw.append(w); sf[w]+=1; fn[qw[i if w==qw[i+1] else i+1]]+=1
+                # fn conta os dois finalistas (vencedores das semis)
+                w=sim_m(qw[i],qw[i+1],DATES["sf"],True); sw.append(w); sf[w]+=1; fn[w]+=1
                 if {qw[i],qw[i+1]}=={BR,ARG}: clasico["semi"]+=1; clasico["any"]+=1
         if len(sw)>=2:
-            c=sim_m(sw[0],sw[1],DATES["final"],True); ch[c]+=1; fn[c]+=1
+            c=sim_m(sw[0],sw[1],DATES["final"],True); ch[c]+=1
             if {sw[0],sw[1]}=={BR,ARG}: clasico["final"]+=1; clasico["any"]+=1
 
     def pct(d): return {k:round(v/n*100,2) for k,v in d.items()}
@@ -592,7 +601,9 @@ def step7_update_html(results, df_bl, mkt_champion):
 
     updated_at = datetime.datetime.now(datetime.timezone.utc).isoformat()
     slim = {"teams":teams_list,"groups_info":groups_info,"brasil_games":brasil_games,
-            "brasil_path":brasil_path,"conf_summary":conf_summary,"updated_at":updated_at}
+            "brasil_path":brasil_path,"conf_summary":conf_summary,
+            "clasico_final":results.get("brasil_argentina",{}).get("final",0),
+            "updated_at":updated_at}
 
     with open(DADOS / "slim_data.json","w",encoding="utf-8") as f:
         json.dump(slim, f, ensure_ascii=False, separators=(",",":"))

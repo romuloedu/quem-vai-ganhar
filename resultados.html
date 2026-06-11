@@ -25,7 +25,7 @@ header{background:#0d0d0d;border-bottom:3px solid #00a84f;padding:36px 0 30px}
   display:inline-flex;align-items:center;gap:6px;
   font-family:'Oswald',sans-serif;
   font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;
-  color:#555;text-decoration:none;margin-bottom:18px;
+  color:#888;text-decoration:none;margin-bottom:18px;
   transition:color .2s;
 }
 .back-link:hover{color:#999}
@@ -43,7 +43,7 @@ header h1{
 header h1 span{color:#f5c518}
 .header-sub{margin-top:10px;font-size:14px;color:#999;max-width:480px;line-height:1.6}
 .header-intro{
-  margin-top:18px;font-size:14px;color:#666;
+  margin-top:18px;font-size:14px;color:#999;
   max-width:540px;line-height:1.7;
   border-left:2px solid #00a84f;padding-left:14px;
 }
@@ -56,7 +56,7 @@ header h1 span{color:#f5c518}
 }
 .score-inner{
   display:flex;align-items:center;gap:10px;
-  font-size:13px;color:#666;
+  font-size:13px;color:#999;
 }
 .score-num{
   font-family:'Oswald',sans-serif;
@@ -90,15 +90,15 @@ header h1 span{color:#f5c518}
   text-transform:uppercase;letter-spacing:.5px;
   color:#f0f0ee;
 }
-.date-meta{font-size:11px;color:#555;margin-top:2px;letter-spacing:.5px}
+.date-meta{font-size:11px;color:#888;margin-top:2px;letter-spacing:.5px}
 .hoje-row{text-align:center;margin-top:6px;height:18px}
 .hoje-btn{
   font-family:'Oswald',sans-serif;
   font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;
-  color:#444;cursor:pointer;background:none;border:none;padding:0;
+  color:#777;cursor:pointer;background:none;border:none;padding:0;
   transition:color .2s;
 }
-.hoje-btn:hover{color:#777}
+.hoje-btn:hover{color:#aaa}
 .hoje-btn.hidden{visibility:hidden}
 
 /* ── FILTRO TABS ── */
@@ -118,7 +118,7 @@ header h1 span{color:#f5c518}
   flex-shrink:0;
   font-family:'Oswald',sans-serif;
   font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;
-  color:#555;background:none;border:none;cursor:pointer;
+  color:#888;background:none;border:none;cursor:pointer;
   padding:8px 16px 10px;
   border-bottom:2px solid transparent;
   transition:color .15s,border-color .15s;
@@ -178,17 +178,17 @@ main{padding:16px 0 48px}
 }
 .log-nome.brasil{color:#00a84f}
 .log-vs{
-  font-family:'Oswald',sans-serif;font-size:10px;color:#555;
+  font-family:'Oswald',sans-serif;font-size:10px;color:#777;
   letter-spacing:2px;text-transform:uppercase;
 }
-.log-venue{font-size:11px;color:#555;margin-top:4px}
-.log-time{color:#888;font-weight:600}
+.log-venue{font-size:11px;color:#999;margin-top:4px}
+.log-time{color:#ccc;font-weight:600}
 .log-badge{
   flex-shrink:0;font-family:'Oswald',sans-serif;
   font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
   padding:5px 10px;border-radius:2px;white-space:nowrap;align-self:start;
 }
-.log-badge.pending{background:#1e1e1e;color:#444;border:1px solid #2a2a2a}
+.log-badge.pending{background:#1e1e1e;color:#888;border:1px solid #2a2a2a}
 .log-badge.hit{background:rgba(0,168,79,.15);color:#00a84f;border:1px solid rgba(0,168,79,.3)}
 .log-badge.miss{background:rgba(192,57,43,.12);color:#e74c3c;border:1px solid rgba(192,57,43,.25)}
 .log-body{padding:0 18px 14px}
@@ -231,7 +231,7 @@ footer{background:#0a0a0a;border-top:1px solid #1a1a1a;padding:28px 0}
 /* ── LABEL DE PROBABILIDADE ── */
 .log-probs-label{
   font-family:'Oswald',sans-serif;font-size:9px;font-weight:500;
-  letter-spacing:3px;text-transform:uppercase;color:#333;margin-bottom:9px;
+  letter-spacing:3px;text-transform:uppercase;color:#888;margin-bottom:9px;
 }
 
 /* ── PREVISÃO DO TORNEIO ── */
@@ -239,25 +239,25 @@ footer{background:#0a0a0a;border-top:1px solid #1a1a1a;padding:28px 0}
 .prev-toggle-btn{
   width:100%;font-family:'Oswald',sans-serif;
   font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;
-  color:#555;background:none;border:none;cursor:pointer;
+  color:#888;background:none;border:none;cursor:pointer;
   padding:13px 0;
   display:flex;align-items:center;justify-content:space-between;
   transition:color .15s;
 }
-.prev-toggle-btn:hover{color:#888}
+.prev-toggle-btn:hover{color:#bbb}
 .prev-toggle-btn.open{color:#00a84f}
 .prev-arrow{font-size:12px;transition:transform .25s;display:inline-block}
 .prev-toggle-btn.open .prev-arrow{transform:rotate(180deg)}
 .prev-panel{background:#0a0a0a;border-bottom:2px solid #1e1e1e;padding:20px 0 28px;display:none}
-.prev-note{font-size:12px;color:#444;margin-bottom:20px;line-height:1.6}
+.prev-note{font-size:12px;color:#888;margin-bottom:20px;line-height:1.6}
 .prev-stage{margin-bottom:22px}
 .prev-stage:last-child{margin-bottom:0}
 .prev-stage-hd{display:flex;align-items:center;gap:8px;margin-bottom:10px}
 .prev-stage-title{
   font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;
-  letter-spacing:3px;text-transform:uppercase;color:#555;flex-shrink:0;
+  letter-spacing:3px;text-transform:uppercase;color:#888;flex-shrink:0;
 }
-.prev-stage-sub{font-size:10px;color:#333;font-family:'Source Sans 3',sans-serif}
+.prev-stage-sub{font-size:10px;color:#777;font-family:'Source Sans 3',sans-serif}
 .prev-stage-line{flex:1;height:1px;background:#1a1a1a}
 .prev-row{
   display:grid;grid-template-columns:minmax(90px,140px) 1fr auto;
@@ -265,7 +265,7 @@ footer{background:#0a0a0a;border-top:1px solid #1a1a1a;padding:28px 0}
 }
 .prev-team{
   display:flex;align-items:center;gap:5px;
-  font-size:13px;color:#666;overflow:hidden;
+  font-size:13px;color:#aaa;overflow:hidden;
 }
 .prev-team.brasil{color:#00a84f;font-weight:600}
 .prev-team-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -525,7 +525,7 @@ function buildCard(j){
     resHtml=`<div class="log-resultado"><span class="log-placar-real">${j.placar||resLabel}</span><span class="log-resultado-desc">${txt}</span></div>`;
   }
   // In group/team modes, add the date as context
-  const extraCtx=(mode!=='day')?`<span style="font-size:10px;color:#444;margin-left:6px">${fmtDate(j.date)}</span>`:'';
+  const extraCtx=(mode!=='day')?`<span style="font-size:10px;color:#888;margin-left:6px">${fmtDate(j.date)}</span>`:'';
   const li=document.createElement('li');
   li.className='log-item';
   li.innerHTML=`
@@ -571,7 +571,7 @@ function renderGames(games){
   const el=document.getElementById('games-list');
   el.innerHTML='';
   if(!games.length){
-    el.innerHTML='<li style="padding:32px 0;text-align:center;color:#444;font-size:14px">Nenhum jogo encontrado.</li>';
+    el.innerHTML='<li style="padding:32px 0;text-align:center;color:#888;font-size:14px">Nenhum jogo encontrado.</li>';
     return;
   }
   games.forEach(j=>el.appendChild(buildCard(j)));
@@ -689,13 +689,12 @@ document.addEventListener('keydown',e=>{
 
 // ── Previsão do torneio ──
 const PREV_STAGES=[
-  {key:'ga', label:'Fase de Grupos',   sub:'48 para 32', n:8},
-  {key:'r32',label:'Rodada de 32',     sub:'32 para 16', n:7},
-  {key:'r16',label:'Oitavas de Final', sub:'16 para 8',  n:6},
-  {key:'qt', label:'Quartas de Final', sub:'8 para 4',   n:5},
-  {key:'sm', label:'Semifinal',        sub:'4 para 2',   n:4},
-  {key:'fn', label:'Final',            sub:'2 para 1',   n:3},
-  {key:'ch', label:'Campeão',          sub:'',           n:3},
+  {key:'ga', label:'Sair da Fase de Grupos', sub:'48 para 32',           n:8},
+  {key:'r32',label:'Chegar às Oitavas',      sub:'vencer na rodada de 32',n:7},
+  {key:'r16',label:'Chegar às Quartas',      sub:'vencer nas oitavas',   n:6},
+  {key:'qt', label:'Chegar à Semifinal',     sub:'vencer nas quartas',   n:5},
+  {key:'fn', label:'Chegar à Final',         sub:'vencer na semifinal',  n:4},
+  {key:'ch', label:'Campeão',                sub:'vencer a final',       n:3},
 ];
 
 function buildPrevStages(){

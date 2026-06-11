@@ -607,7 +607,7 @@ footer{
     <p class="sec-body">Esses são os times com mais chance de levantar a taça. França lidera com vantagem real, mas Espanha e Brasil estão logo atrás com chances genuínas de título.</p>
     <ul class="rank-list" id="rank-list"></ul>
     <div class="callout">
-      <p>O Brasil é o time com <b>mais chance de chegar à final</b>, quase 1 em cada 4 simulações. Na maioria delas, quem para o Brasil é França, Espanha ou Argentina.</p>
+      <p>Em chance de <b>chegar à final</b>, o Brasil aparece em 2º, atrás só da França: 1 em cada 6 simulações. Quem costuma parar o Brasil no caminho é França, Espanha ou Argentina.</p>
     </div>
   </div>
 </section>
@@ -841,12 +841,11 @@ function buildCaminho(){
   const el=document.getElementById('caminho');
   const bp=D.brasil_path;
   const fases=[
-    {key:'group_adv',label:'Fase de grupos',insight:'Quase 9 em cada 10, o Brasil sai da fase de grupos. Mas Marrocos e Escócia não são moleza.'},
-    {key:'round32',  label:'Rodada de 32',  insight:'Adversário do Grupo F: Holanda, Japão, Tunísia ou Ucrânia.'},
-    {key:'round16',  label:'Oitavas',       insight:'Maior queda de chances. Aqui o Brasil deixa de ser favorito pela primeira vez.'},
-    {key:'quarter',  label:'Quartas',       insight:'Zona de perigo. Argentina, Espanha e Portugal são possíveis adversários.'},
-    {key:'semi',     label:'Semifinal',     insight:'1 em cada 6 Copas, o Brasil chega até aqui.'},
-    {key:'final',    label:'Final',         insight:'O Brasil chega à final mais vezes que França ou Espanha nas simulações.'},
+    {key:'group_adv',label:'Sair dos grupos',    insight:'Quase 9 em cada 10, o Brasil sai da fase de grupos. Mas Marrocos e Escócia não são moleza.'},
+    {key:'round32',  label:'Chegar às oitavas',  insight:'Adversário provável do Grupo F: Holanda, Japão, Tunísia ou Ucrânia.'},
+    {key:'round16',  label:'Chegar às quartas',  insight:'Maior queda de chances. Aqui o Brasil deixa de ser favorito pela primeira vez.'},
+    {key:'quarter',  label:'Chegar à semifinal', insight:'Zona de perigo. Argentina, Espanha e Portugal são possíveis adversários.'},
+    {key:'final',    label:'Chegar à final',     insight:'1 em cada 6 Copas, o Brasil chega à decisão. Só a França chega mais vezes.'},
     {key:'champion', label:'Hexacampeão',insight:'',hexa:true},
   ];
   let sepAdded=false;
@@ -879,7 +878,8 @@ function buildClassico(){
   const argTeam = D.teams.find(t => t.team === 'Argentina');
   if(!argTeam) return;
   const argFinal = argTeam.p_final;
-  const pClass = (brFinal * argFinal / 100).toFixed(1);
+  // usa a probabilidade conjunta exata da simulação quando disponível
+  const pClass = (D.clasico_final || brFinal * argFinal / 100).toFixed(1);
   document.getElementById('clasico-pct').textContent = pClass + '%';
   document.getElementById('clasico-br-pct').textContent = brFinal + '%';
   document.getElementById('clasico-arg-pct').textContent = argFinal + '%';
