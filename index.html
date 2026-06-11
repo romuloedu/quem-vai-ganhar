@@ -624,8 +624,8 @@ footer{
 <section class="sec" id="s3">
   <div class="wrap">
     <p class="sec-kicker verde">🇧🇷 Brasil · Grupo C</p>
-    <h2 class="sec-title">Haiti é o mais fácil.<br>Marrocos e Escócia preocupam.</h2>
-    <p class="sec-body">O Brasil enfrenta três adversários bem diferentes. Contra o Haiti, é favorito claro. Marrocos (semifinalista em 2022) e Escócia são jogos equilibrados, sem vitória garantida.</p>
+    <h2 class="sec-title">Haiti é o mais fácil.<br>Só Marrocos preocupa de verdade.</h2>
+    <p class="sec-body">O Brasil enfrenta três adversários bem diferentes. Contra o Haiti, é favorito claro; contra a Escócia, larga na frente. Marrocos (semifinalista em 2022) é o único jogo de verdade preocupante — o mais equilibrado do grupo.</p>
     <div class="jogos" id="jogos"></div>
   </div>
 </section>
@@ -792,7 +792,7 @@ function buildJogos(){
   const verdicts=[
     'Jogo mais difícil do grupo. Marrocos foi semifinalista em 2022 e está entre os 15 melhores do mundo.',
     'Brasil favorito claro. Haiti (ranking 83) é o adversário mais fraco do grupo, a diferença de nível é grande.',
-    'Jogo equilibrado. Escócia (ranking 30) é experiente e organizada, mas o Brasil larga na frente por pouco.'
+    'Brasil favorito. Escócia (ranking 30) é organizada, mas o Brasil tem vantagem clara nesse confronto.'
   ];
   D.brasil_games.forEach((g,i)=>{
     let pw=g.p_brasil_win,pl=g.p_brasil_lose,pd=g.p_draw;
@@ -841,7 +841,7 @@ function buildCaminho(){
   const el=document.getElementById('caminho');
   const bp=D.brasil_path;
   const fases=[
-    {key:'group_adv',label:'Sair dos grupos',    insight:'O Brasil avança em 96 de cada 100 simulações. Marrocos e Escócia complicam, mas não costumam barrar.'},
+    {key:'group_adv',label:'Sair dos grupos',    insight:'O Brasil avança em 96 de cada 100 simulações. Marrocos é o único rival que complica, mas raramente barra o avanço.'},
     {key:'round32',  label:'Chegar às oitavas',  insight:'Adversário provável do Grupo F: Holanda, Japão, Suécia ou Tunísia.'},
     {key:'round16',  label:'Chegar às quartas',  insight:'Maior queda de chances do caminho. De 8 em 10 para pouco mais da metade.'},
     {key:'quarter',  label:'Chegar à semifinal', insight:'Zona de perigo. Argentina, Espanha e Portugal são possíveis adversários.'},
