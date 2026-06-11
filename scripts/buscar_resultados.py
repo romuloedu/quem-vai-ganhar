@@ -127,13 +127,16 @@ def main():
     if agenda_changed:
         print("Agenda de horários atualizada.")
 
-    finished = [m for m in matches if m.get("status") == "FINISHED"]
-    print(f"  API: {len(matches)} jogos total, {len(finished)} FINISHED")
-    for m in finished:
-        ht = NAME_MAP.get(m["homeTeam"]["name"], m["homeTeam"]["name"])
-        at = NAME_MAP.get(m["awayTeam"]["name"], m["awayTeam"]["name"])
-        import json as _json
-        print(f"    {m['utcDate'][:10]} {ht} x {at} | score={_json.dumps(m.get('score'))}")
+    import collections
+    status_dist = collections.Counter(m.get("status") for m in matches)
+    print(f"  API: {len(matches)} jogos | status: {dict(status_dist)}")
+    for m in matches:
+        if m.get("status") == "FINISHED":
+            ht = NAME_MAP.get(m["homeTeam"]["name"], m["homeTeam"]["name"])
+            at = NAME_MAP.get(m["awayTeam"]["name"], m["awayTeam"]["name"])
+            sc = m.get("score", {})
+            ft = sc.get("fullTime", {})
+            print(f"    FINISHED {m['utcDate'][:10]} {ht} {ft.get('home')}x{ft.get('away')} {at}")
 
     new_entries = []
     for m in matches:
