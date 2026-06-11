@@ -37,7 +37,8 @@ NAME_MAP = {
     "Uzbekistan": "Uzbequistão", "Cape Verde": "Cabo Verde",
     "Panama": "Panamá", "Ghana": "Gana", "Iraq": "Iraque",
     "Jordan": "Jordânia", "Bosnia and Herzegovina": "Bósnia e Herzegovina",
-    "Sweden": "Suécia",
+    "Bosnia-Herzegovina": "Bósnia e Herzegovina", "Sweden": "Suécia",
+    "Congo DR": "RD Congo", "Cape Verde Islands": "Cabo Verde",
 }
 
 
@@ -63,6 +64,8 @@ def update_agenda(matches):
     Retorna True se a agenda mudou."""
     agenda = []
     for m in matches:
+        if not m["homeTeam"].get("name") or not m["awayTeam"].get("name"):
+            continue  # mata-mata ainda sem times definidos
         home = NAME_MAP.get(m["homeTeam"]["name"], m["homeTeam"]["name"])
         away = NAME_MAP.get(m["awayTeam"]["name"], m["awayTeam"]["name"])
         agenda.append({"home_team": home, "away_team": away, "utc": m["utcDate"]})
