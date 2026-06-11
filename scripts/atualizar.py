@@ -633,6 +633,14 @@ def step7_update_html(results, df_bl, mkt_champion):
             "placar": f"{hs}-{as_}"
         }
 
+    # Horários oficiais (UTC) vindos da football-data.org, se já buscados
+    agenda_path = DADOS / "agenda.json"
+    agenda = {}
+    if agenda_path.exists():
+        with open(agenda_path) as f:
+            for m in json.load(f):
+                agenda[frozenset((m["home_team"], m["away_team"]))] = m["utc"]
+
     group_counter = {}
     group_games = []
     for _, row in df_bl.iterrows():
@@ -653,6 +661,7 @@ def step7_update_html(results, df_bl, mkt_champion):
             "res": real.get("res"),
             "placar": real.get("placar"),
             "time": row.get("kickoff_brt", ""),
+            "utc": agenda.get(frozenset((h, a)), ""),
         })
 
     html_res_path = ROOT / "resultados.html"
@@ -660,7 +669,8 @@ def step7_update_html(results, df_bl, mkt_champion):
         with open(html_res_path, encoding="utf-8") as f:
             html_res = f.read()
         jogos_json = json.dumps(group_games, ensure_ascii=False, separators=(",", ":"))
-        html_res = re.sub(r'const JOGOS=\[.*?\];', f'const JOGOS={jogos_json};', html_res, flags=re.DOTALL)
+        # [^\n] evita engolir linhas seguintes quando o ]; está em outra linha
+        html_res = re.sub(r'const JOGOS=\[[^\n]*\];', lambda m: f'const JOGOS={jogos_json};', html_res)
 
         teams_arr = []
         for t in df_teams.to_dict("records"):
@@ -677,7 +687,7 @@ def step7_update_html(results, df_bl, mkt_champion):
                 "ch": round(results["champion"].get(name, 0), 2),
             })
         teams_json = json.dumps(teams_arr, ensure_ascii=False, separators=(",", ":"))
-        html_res = re.sub(r'const TEAMS=\[.*?\];', f'const TEAMS={teams_json};', html_res, flags=re.DOTALL)
+        html_res = re.sub(r'const TEAMS=\[[^\n]*\];', lambda m: f'const TEAMS={teams_json};', html_res)
 
         html_res = re.sub(r'const D_UPDATED_AT="[^"]*";', f'const D_UPDATED_AT="{updated_at}";', html_res)
         with open(html_res_path, "w", encoding="utf-8") as f:

@@ -47,15 +47,33 @@ def set_gha_output(key, value):
             f.write(f"{key}={value}\n")
 
 
-def fetch_finished_matches():
+def fetch_all_matches():
     resp = requests.get(
         API_URL,
         headers={"X-Auth-Token": API_KEY},
-        params={"status": "FINISHED"},
         timeout=20,
     )
     resp.raise_for_status()
     return resp.json().get("matches", [])
+
+
+def update_agenda(matches):
+    """Grava dados/agenda.json com o horário UTC oficial de cada jogo.
+    Retorna True se a agenda mudou."""
+    agenda = []
+    for m in matches:
+        home = NAME_MAP.get(m["homeTeam"]["name"], m["homeTeam"]["name"])
+        away = NAME_MAP.get(m["awayTeam"]["name"], m["awayTeam"]["name"])
+        agenda.append({"home_team": home, "away_team": away, "utc": m["utcDate"]})
+    agenda.sort(key=lambda a: (a["utc"], a["home_team"]))
+
+    agenda_path = DADOS / "agenda.json"
+    old = json.load(open(agenda_path)) if agenda_path.exists() else None
+    if agenda == old:
+        return False
+    with open(agenda_path, "w", encoding="utf-8") as f:
+        json.dump(agenda, f, ensure_ascii=False, indent=2)
+    return True
 
 
 def parse_match(m):
@@ -79,6 +97,7 @@ def main():
     if hoje < COPA_INICIO or hoje > COPA_FIM:
         print(f"Fora do período da Copa ({hoje}). Nada a fazer.")
         set_gha_output("new_results", "false")
+        set_gha_output("agenda_changed", "false")
         return
 
     if not API_KEY:
@@ -91,9 +110,17 @@ def main():
 
     existing_keys = {(r["home_team"], r["away_team"], r["date"]) for r in existing}
 
-    finished = fetch_finished_matches()
+    matches = fetch_all_matches()
+
+    agenda_changed = update_agenda(matches)
+    set_gha_output("agenda_changed", "true" if agenda_changed else "false")
+    if agenda_changed:
+        print("Agenda de horários atualizada.")
+
     new_entries = []
-    for m in finished:
+    for m in matches:
+        if m.get("status") != "FINISHED":
+            continue
         score = m.get("score", {}).get("fullTime", {})
         if score.get("home") is None or score.get("away") is None:
             continue
