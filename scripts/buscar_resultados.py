@@ -121,6 +121,17 @@ def main():
     if agenda_changed:
         print("Agenda de horários atualizada.")
 
+    # Debug: mostrar status dos jogos do dia
+    import collections
+    status_counts = collections.Counter(m.get("status") for m in matches)
+    print(f"  Status na API: {dict(status_counts)}")
+    today_str = str(hoje)
+    today_matches = [m for m in matches if m.get("utcDate","")[:10] == today_str]
+    for m in today_matches[:4]:
+        ht = m.get("homeTeam",{}).get("name","?")
+        at = m.get("awayTeam",{}).get("name","?")
+        print(f"  {ht} x {at}: {m.get('status')} | score={m.get('score',{}).get('fullTime')}")
+
     new_entries = []
     for m in matches:
         if m.get("status") != "FINISHED":
