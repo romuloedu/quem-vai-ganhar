@@ -666,6 +666,15 @@ def step7_update_html(results, df_bl, mkt_champion):
             "placar": f"{hs}-{as_}"
         }
 
+    # Probabilidades pré-jogo congeladas: preserva os valores do momento da previsão
+    # para jogos já finalizados, garantindo imutabilidade histórica.
+    frozen_path = DADOS / "frozen_probs.json"
+    frozen_probs: dict = {}
+    if frozen_path.exists():
+        with open(frozen_path) as f:
+            frozen_probs = json.load(f)
+    frozen_changed = False
+
     # Horários oficiais (UTC) vindos da football-data.org, se já buscados
     agenda_path = DADOS / "agenda.json"
     agenda = {}
@@ -682,24 +691,44 @@ def step7_update_html(results, df_bl, mkt_champion):
         group_counter[g] = group_counter.get(g, 0) + 1
         r_num = (group_counter[g] + 1) // 2
         real = result_map.get((h, a), {})
-        placar_prev = _calibrate_poisson(
-            row["p_home_win"], row["p_draw"], row["p_away_win"]
-        )
+        fkey = f"{h}|{a}"
+
+        if real and fkey in frozen_probs:
+            # Jogo finalizado com probabilidades já congeladas — usa valores históricos
+            fp = frozen_probs[fkey]
+            ph, pd_, pa = fp["ph"], fp["pd"], fp["pa"]
+            placar_prev = fp["placar_prev"]
+        else:
+            # Jogo futuro ou primeira vez que resultado chega — calcula normalmente
+            ph  = round(row["p_home_win"] * 100, 1)
+            pd_ = round(row["p_draw"] * 100, 1)
+            pa  = round(row["p_away_win"] * 100, 1)
+            placar_prev = _calibrate_poisson(
+                row["p_home_win"], row["p_draw"], row["p_away_win"]
+            )
+            if real and fkey not in frozen_probs:
+                # Congela ao detectar o resultado pela primeira vez
+                frozen_probs[fkey] = {"ph": ph, "pd": pd_, "pa": pa, "placar_prev": placar_prev}
+                frozen_changed = True
+
         group_games.append({
             "id": int(row["match_id"]),
             "g": g, "s": row["stage"], "r": r_num,
             "date": row["date"], "venue": row.get("venue", ""),
             "home": h, "hf": flags.get(h, "🏳️"),
             "away": a, "af": flags.get(a, "🏳️"),
-            "ph": round(row["p_home_win"] * 100, 1),
-            "pd": round(row["p_draw"] * 100, 1),
-            "pa": round(row["p_away_win"] * 100, 1),
+            "ph": ph, "pd": pd_, "pa": pa,
             "res": real.get("res"),
             "placar": real.get("placar"),
             "placar_prev": placar_prev,
             "time": row.get("kickoff_brt", ""),
             "utc": agenda.get(frozenset((h, a)), ""),
         })
+
+    if frozen_changed:
+        with open(frozen_path, "w", encoding="utf-8") as f:
+            json.dump(frozen_probs, f, ensure_ascii=False, indent=2)
+        print(f"   🧊 {sum(1 for _ in frozen_probs)} jogo(s) com probabilidades congeladas")
 
     html_res_path = ROOT / "resultados.html"
     if html_res_path.exists():
