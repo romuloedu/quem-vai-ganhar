@@ -7,5 +7,14 @@
     "away_score": 0,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-12",
+    "home_team": "Coreia do Sul",
+    "away_team": "República Tcheca",
+    "home_score": 2,
+    "away_score": 1,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]
