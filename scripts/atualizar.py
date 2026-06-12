@@ -167,7 +167,7 @@ def step1_update_history():
             continue
 
         new_row = {
-            "date":       r["date"],
+            "date":       pd.Timestamp(r["date"]),
             "home_team":  r["home_team"],
             "away_team":  r["away_team"],
             "home_score": r["home_score"],
