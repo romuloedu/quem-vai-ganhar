@@ -467,7 +467,7 @@ function fmtKickoff(j){
   return j.time||'';
 }
 
-const today=new Date().toISOString().split('T')[0];
+const today=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Sao_Paulo'}).format(new Date());
 const dates=[...new Set(JOGOS.map(j=>j.date))].sort();
 let idx=dates.findIndex(d=>d>=today);
 if(idx===-1)idx=dates.length-1;
