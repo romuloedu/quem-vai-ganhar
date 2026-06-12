@@ -103,6 +103,45 @@ NAME_MAP = {
 # ─────────────────────────────────────────────────────────
 # PASSO 1 — Incorporar resultados reais ao histórico
 # ─────────────────────────────────────────────────────────
+def step0_freeze_probs():
+    """Congela probabilidades pré-jogo ANTES de retreinar o modelo.
+    Usa o CSV da rodada anterior — valores calculados sem o resultado atual."""
+    blended_path = DADOS / "all_group_match_probs_blended.csv"
+    results_path = DADOS / "resultados_reais.json"
+    frozen_path  = DADOS / "frozen_probs.json"
+
+    if not blended_path.exists() or not results_path.exists():
+        return  # primeira execução, nada a congelar ainda
+
+    with open(results_path) as f:
+        real_results = json.load(f)
+    finished_keys = {(r["home_team"], r["away_team"]) for r in real_results}
+
+    frozen: dict = json.load(open(frozen_path)) if frozen_path.exists() else {}
+
+    df = pd.read_csv(blended_path)
+    added = 0
+    for _, row in df.iterrows():
+        h, a = row["home_team"], row["away_team"]
+        fkey = f"{h}|{a}"
+        if (h, a) in finished_keys and fkey not in frozen:
+            ph  = round(float(row["p_home_win"]) * 100, 1)
+            pd_ = round(float(row["p_draw"])     * 100, 1)
+            pa  = round(float(row["p_away_win"]) * 100, 1)
+            pp  = _calibrate_poisson(
+                float(row["p_home_win"]), float(row["p_draw"]), float(row["p_away_win"])
+            )
+            frozen[fkey] = {"ph": ph, "pd": pd_, "pa": pa, "placar_prev": pp}
+            added += 1
+
+    if added:
+        with open(frozen_path, "w", encoding="utf-8") as f:
+            json.dump(frozen, f, ensure_ascii=False, indent=2)
+        print(f"🧊 Passo 0: {added} jogo(s) com probabilidades pré-jogo congeladas")
+    else:
+        print("ℹ️  Passo 0: nenhum jogo novo para congelar")
+
+
 def step1_update_history():
     results_path = DADOS / "resultados_reais.json"
     if not results_path.exists():
@@ -666,14 +705,9 @@ def step7_update_html(results, df_bl, mkt_champion):
             "placar": f"{hs}-{as_}"
         }
 
-    # Probabilidades pré-jogo congeladas: preserva os valores do momento da previsão
-    # para jogos já finalizados, garantindo imutabilidade histórica.
-    frozen_path = DADOS / "frozen_probs.json"
-    frozen_probs: dict = {}
-    if frozen_path.exists():
-        with open(frozen_path) as f:
-            frozen_probs = json.load(f)
-    frozen_changed = False
+    # Probabilidades pré-jogo congeladas pelo step0 (antes do retreinamento)
+    frozen_path  = DADOS / "frozen_probs.json"
+    frozen_probs = json.load(open(frozen_path)) if frozen_path.exists() else {}
 
     # Horários oficiais (UTC) vindos da football-data.org, se já buscados
     agenda_path = DADOS / "agenda.json"
@@ -693,23 +727,19 @@ def step7_update_html(results, df_bl, mkt_champion):
         real = result_map.get((h, a), {})
         fkey = f"{h}|{a}"
 
-        if real and fkey in frozen_probs:
-            # Jogo finalizado com probabilidades já congeladas — usa valores históricos
+        if fkey in frozen_probs:
+            # Usa probabilidades pré-jogo congeladas antes do retreinamento
             fp = frozen_probs[fkey]
             ph, pd_, pa = fp["ph"], fp["pd"], fp["pa"]
             placar_prev = fp["placar_prev"]
         else:
-            # Jogo futuro ou primeira vez que resultado chega — calcula normalmente
+            # Jogo futuro — usa probabilidades recém-calculadas
             ph  = round(row["p_home_win"] * 100, 1)
             pd_ = round(row["p_draw"] * 100, 1)
             pa  = round(row["p_away_win"] * 100, 1)
             placar_prev = _calibrate_poisson(
                 row["p_home_win"], row["p_draw"], row["p_away_win"]
             )
-            if real and fkey not in frozen_probs:
-                # Congela ao detectar o resultado pela primeira vez
-                frozen_probs[fkey] = {"ph": ph, "pd": pd_, "pa": pa, "placar_prev": placar_prev}
-                frozen_changed = True
 
         group_games.append({
             "id": int(row["match_id"]),
@@ -724,11 +754,6 @@ def step7_update_html(results, df_bl, mkt_champion):
             "time": row.get("kickoff_brt", ""),
             "utc": agenda.get(frozenset((h, a)), ""),
         })
-
-    if frozen_changed:
-        with open(frozen_path, "w", encoding="utf-8") as f:
-            json.dump(frozen_probs, f, ensure_ascii=False, indent=2)
-        print(f"   🧊 {sum(1 for _ in frozen_probs)} jogo(s) com probabilidades congeladas")
 
     html_res_path = ROOT / "resultados.html"
     if html_res_path.exists():
@@ -787,6 +812,7 @@ def step7_update_html(results, df_bl, mkt_champion):
 # ─────────────────────────────────────────────────────────
 if __name__ == "__main__":
     print("\n🚀 ATUALIZAÇÃO COPA 2026\n")
+    step0_freeze_probs()   # congela probs pré-jogo ANTES de retreinar
     step1_update_history()
     model, FEAT_COLS, log, rank_map, elo_map = step2_retrain()
     games_data, outrights_raw = step3_fetch_odds()
