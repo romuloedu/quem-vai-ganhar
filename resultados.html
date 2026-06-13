@@ -496,7 +496,6 @@ function buildCard(j){
   const isH=j.home==='Brasil', isA=j.away==='Brasil';
   const rLabel=j.r===1?'1ª Rodada':j.r===2?'2ª Rodada':'3ª Rodada';
   const vsHtml=temRes&&j.placar?`<span class="log-score">${j.placar}</span>`:`<span class="log-vs">vs</span>`;
-  const prevHtml=!temRes&&j.placar_prev?`<div class="log-prev"><p class="log-prev-label">placar previsto</p><p class="log-prev-score">${j.placar_prev}</p></div>`:'';
   let resHtml='';
   if(temRes){
     const pDesc=prev==='draw'?'Empate':prevLabel;
@@ -543,7 +542,6 @@ function buildCard(j){
           <div class="log-track"><div class="log-pfill l" data-w="${j.pa}%" style="width:0"></div></div>
           <span class="log-pval">${j.pa}%</span>
         </div>
-        ${prevHtml}
       </div>
     </div>
     ${resHtml}`;
