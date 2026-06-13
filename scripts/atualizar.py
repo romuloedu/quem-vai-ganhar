@@ -126,9 +126,9 @@ def step0_freeze_probs():
         h, a = row["home_team"], row["away_team"]
         fkey = f"{h}|{a}"
         if (h, a) in finished_keys and fkey not in frozen:
-            ph  = round(float(row["p_home_win"]) * 100, 1)
-            pd_ = round(float(row["p_draw"])     * 100, 1)
-            pa  = round(float(row["p_away_win"]) * 100, 1)
+            ph  = round(float(row["p_home_win"]) * 100, 2)
+            pd_ = round(float(row["p_draw"])     * 100, 2)
+            pa  = round(float(row["p_away_win"]) * 100, 2)
             pp  = _calibrate_poisson(
                 float(row["p_home_win"]), float(row["p_draw"]), float(row["p_away_win"])
             )
@@ -670,7 +670,7 @@ def step7_update_html(results, df_bl, mkt_champion):
     conf_colors={"UEFA":"#4fc3f7","CONMEBOL":"#81c784","CONCACAF":"#ffb74d","CAF":"#f06292","AFC":"#ce93d8","OFC":"#90a4ae"}
     conf_teams_n={"UEFA":16,"CONMEBOL":6,"CONCACAF":6,"CAF":10,"AFC":9,"OFC":1}
     conf_continents={"UEFA":"Europa","CONMEBOL":"América do Sul","CONCACAF":"América do Norte/Central","CAF":"África","AFC":"Ásia","OFC":"Oceania"}
-    conf_summary=sorted([{"name":k,"continent":conf_continents.get(k,""),"teams":conf_teams_n.get(k,0),"p_total":round(v,1),"color":conf_colors.get(k,"#aaa")} for k,v in conf_tot.items()],key=lambda x:-x["p_total"])
+    conf_summary=sorted([{"name":k,"continent":conf_continents.get(k,""),"teams":conf_teams_n.get(k,0),"p_total":round(v,2),"color":conf_colors.get(k,"#aaa")} for k,v in conf_tot.items()],key=lambda x:-x["p_total"])
 
     updated_at = datetime.datetime.now(datetime.timezone.utc).isoformat()
     slim = {"teams":teams_list,"groups_info":groups_info,"brasil_games":brasil_games,
@@ -685,7 +685,7 @@ def step7_update_html(results, df_bl, mkt_champion):
     brasil_idx  = next((i for i, t in enumerate(teams_list) if t["team"] == "Brasil"), 5)
     brasil_pos  = brasil_idx + 1
     brasil_pct  = teams_list[brasil_idx]["p_champion"]
-    brasil_pct_str = f"{brasil_pct:.1f}".replace(".", ",") + "%"
+    brasil_pct_str = f"{brasil_pct:.2f}".replace(".", ",") + "%"
     top1, top2  = teams_list[0]["team"], teams_list[1]["team"]
     teams_ahead = [t["team"] for t in teams_list[:brasil_idx]]
 
@@ -723,11 +723,11 @@ def step7_update_html(results, df_bl, mkt_champion):
     second_c   = conf_summary[1] if len(conf_summary) > 1 else {"continent":"América do Sul"}
     conf_teams_n_map = {"UEFA":16,"CONMEBOL":6,"CONCACAF":6,"CAF":10,"AFC":9,"OFC":1}
     second_n   = conf_teams_n_map.get(conf_summary[1]["name"] if len(conf_summary)>1 else "CONMEBOL", 6)
-    s2_title   = f"Europa tem {europa['p_total']:.0f}% de chance.<br>{second_c['continent']} é a 2ª força."
-    second_pct_100 = round(second_c["p_total"]) if len(conf_summary) > 1 else 20
+    s2_title   = f"Europa tem {europa['p_total']:.2f}% de chance.<br>{second_c['continent']} é a 2ª força."
+    second_pct_str = f"{second_c['p_total']:.2f}" if len(conf_summary) > 1 else "20.00"
     s2_body    = (
         f"A Europa manda {conf_teams_n_map.get('UEFA',16)} seleções para a Copa e concentra a maior parte das chances. "
-        f"{second_c['continent']}, com apenas {second_n} times, tem {second_pct_100}% de chance de ser campeã."
+        f"{second_c['continent']}, com apenas {second_n} times, tem {second_pct_str}% de chance de ser campeã."
     )
 
     # s3 — jogos do Brasil
@@ -846,9 +846,9 @@ def step7_update_html(results, df_bl, mkt_champion):
             placar_prev = fp["placar_prev"]
         else:
             # Jogo futuro — usa probabilidades recém-calculadas
-            ph  = round(row["p_home_win"] * 100, 1)
-            pd_ = round(row["p_draw"] * 100, 1)
-            pa  = round(row["p_away_win"] * 100, 1)
+            ph  = round(row["p_home_win"] * 100, 2)
+            pd_ = round(row["p_draw"] * 100, 2)
+            pa  = round(row["p_away_win"] * 100, 2)
             placar_prev = _calibrate_poisson(
                 row["p_home_win"], row["p_draw"], row["p_away_win"]
             )
