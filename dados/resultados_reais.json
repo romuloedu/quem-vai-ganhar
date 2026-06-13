@@ -25,5 +25,14 @@
     "away_score": 1,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-13",
+    "home_team": "Estados Unidos",
+    "away_team": "Paraguai",
+    "home_score": 4,
+    "away_score": 1,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]
