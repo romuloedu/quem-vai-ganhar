@@ -680,11 +680,122 @@ def step7_update_html(results, df_bl, mkt_champion):
     with open(DADOS / "slim_data.json","w",encoding="utf-8") as f:
         json.dump(slim, f, ensure_ascii=False, separators=(",",":"))
 
+    # ── Textos dinâmicos ──
+    brasil_idx  = next((i for i, t in enumerate(teams_list) if t["team"] == "Brasil"), 5)
+    brasil_pos  = brasil_idx + 1
+    brasil_pct  = teams_list[brasil_idx]["p_champion"]
+    brasil_pct_str = f"{brasil_pct:.1f}".replace(".", ",") + "%"
+    top1, top2  = teams_list[0]["team"], teams_list[1]["team"]
+    teams_ahead = [t["team"] for t in teams_list[:brasil_idx]]
+
+    def _join(lst):
+        if not lst:   return ""
+        if len(lst)==1: return lst[0]
+        return ", ".join(lst[:-1]) + " e " + lst[-1]
+
+    # header-intro
+    near_brasil = [t for t in teams_ahead[2:5]]
+    header_intro = (
+        f'A Copa de 2026 vai ser a maior da história: 48 seleções, 12 grupos e partidas '
+        f'espalhadas pelos EUA, México e Canadá. {top1} e {top2} entram como favoritas, com '
+        f'{_join(near_brasil + ["Brasil"])} no pelotão logo atrás. '
+        f'A briga pelo título está mais aberta do que parece.'
+    )
+
+    # s1 — ranking de favoritos
+    s1_title = f"{top1} e {top2} lideram.<br>Brasil é {brasil_pos}º favorito."
+    between  = teams_ahead[2:]
+    s1_body  = (
+        f"Esses são os times com mais chance de levantar a taça. {top1} lidera com {top2} colada. "
+        + (f"{_join(between + ['Brasil'])} vêm logo atrás com chances reais de título." if between
+           else f"Brasil é o terceiro favorito com {brasil_pct_str}.")
+    )
+    ahead_str  = _join(teams_ahead)
+    s1_callout = (
+        f'No ranking de favoritos ao título, o Brasil aparece em <b>{brasil_pos}º com '
+        f'{brasil_pct_str}</b> — atrás de {ahead_str}. '
+        f'Quem costuma barrar o Brasil antes da final é a dupla {top1} e {top2}.'
+    )
+
+    # s2 — por continente
+    europa     = next((c for c in conf_summary if c["name"]=="UEFA"), {"p_total":0,"continent":"Europa"})
+    second_c   = conf_summary[1] if len(conf_summary) > 1 else {"continent":"América do Sul"}
+    conf_teams_n_map = {"UEFA":16,"CONMEBOL":6,"CONCACAF":6,"CAF":10,"AFC":9,"OFC":1}
+    second_n   = conf_teams_n_map.get(conf_summary[1]["name"] if len(conf_summary)>1 else "CONMEBOL", 6)
+    s2_title   = f"Europa tem {europa['p_total']:.0f}% de chance.<br>{second_c['continent']} é a 2ª força."
+    second_pct_100 = round(second_c["p_total"]) if len(conf_summary) > 1 else 20
+    s2_body    = (
+        f"A Europa manda {conf_teams_n_map.get('UEFA',16)} seleções para a Copa e concentra a maior parte das chances. "
+        f"{second_c['continent']}, com apenas {second_n} times, tem {second_pct_100}% de chance de ser campeã."
+    )
+
+    # s3 — jogos do Brasil
+    brasil_row  = df_teams[df_teams["team"]=="Brasil"]
+    brasil_grp  = brasil_row["group"].iloc[0] if len(brasil_row) > 0 else "C"
+    flags_pt    = flags  # já definido acima
+    bg_sorted   = sorted(brasil_games, key=lambda g: g["p_brasil_win"], reverse=True)
+    easiest_opp = bg_sorted[0]["opponent"]  if bg_sorted else "adversário"
+    hardest_opp = bg_sorted[-1]["opponent"] if bg_sorted else "adversário"
+    s3_kicker   = f'🇧🇷 Brasil · Grupo {brasil_grp}'
+
+    def _diff(pw):
+        if pw >= 68: return "favorito claro"
+        elif pw >= 55: return "larga na frente"
+        elif pw >= 45: return "jogo equilibrado"
+        else: return "como azarão"
+
+    s3_title = f"{easiest_opp} é o mais fácil.<br>Só {hardest_opp} preocupa de verdade."
+    body_parts = [f"contra {g['opponent']}, {_diff(g['p_brasil_win'])}" for g in bg_sorted]
+    if len(brasil_games) > 1:
+        # capitalize only the first char, preserving opponent names
+        joined = "; ".join(body_parts[:-1])
+        joined = joined[0].upper() + joined[1:]
+        s3_body = (
+            f"O Brasil enfrenta {len(brasil_games)} adversários bem diferentes. "
+            f"{joined}. "
+            f"{hardest_opp} é o jogo mais preocupante — o mais equilibrado do grupo."
+        )
+    else:
+        s3_body = f"O Brasil enfrenta {easiest_opp} com {_diff(bg_sorted[0]['p_brasil_win'])}."
+
+    # s4 — caminho do Brasil (p_champion já é percentual, ex: 6.65)
+    brasil_wins = round(brasil_pct)
+    s4_title    = f"Se essa Copa fosse jogada<br>100 vezes, o Brasil venceria {brasil_wins}."
+
+    def _dyn_replace(html_str, key, content):
+        return re.sub(
+            rf'<!-- DYN:{key} -->.*?<!-- /DYN -->',
+            f'<!-- DYN:{key} -->{content}<!-- /DYN -->',
+            html_str, flags=re.DOTALL
+        )
+
     # Injetar no index.html
     html_path = ROOT / "index.html"
     with open(html_path, encoding="utf-8") as f: html = f.read()
     new_data = json.dumps(slim, ensure_ascii=False, separators=(",",":"))
     new_html = re.sub(r'(const D=)(\{.*?\})(;)', lambda m: m.group(1)+new_data+m.group(3), html, flags=re.DOTALL)
+
+    new_html = _dyn_replace(new_html, "header_intro",
+        f'<p class="header-intro">{header_intro}</p>')
+    new_html = _dyn_replace(new_html, "s1_title",
+        f'<h2 class="sec-title">{s1_title}</h2>')
+    new_html = _dyn_replace(new_html, "s1_body",
+        f'<p class="sec-body">{s1_body}</p>')
+    new_html = _dyn_replace(new_html, "s1_callout",
+        f'<p>{s1_callout}</p>')
+    new_html = _dyn_replace(new_html, "s2_title",
+        f'<h2 class="sec-title">{s2_title}</h2>')
+    new_html = _dyn_replace(new_html, "s2_body",
+        f'<p class="sec-body">{s2_body}</p>')
+    new_html = _dyn_replace(new_html, "s3_kicker",
+        f'<p class="sec-kicker verde">{s3_kicker}</p>')
+    new_html = _dyn_replace(new_html, "s3_title",
+        f'<h2 class="sec-title">{s3_title}</h2>')
+    new_html = _dyn_replace(new_html, "s3_body",
+        f'<p class="sec-body">{s3_body}</p>')
+    new_html = _dyn_replace(new_html, "s4_title",
+        f'<h2 class="sec-title">{s4_title}</h2>')
+
     with open(html_path,"w",encoding="utf-8") as f: f.write(new_html)
 
     print(f"   ✅ index.html atualizado")
