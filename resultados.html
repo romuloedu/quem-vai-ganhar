@@ -487,11 +487,7 @@ function buildCard(j){
   const koMs=ko?ko.getTime():null;
   let bClass='pending',bText='Aguardando';
   if(temRes){bClass=j.res===prev?'hit':'miss';bText=j.res===prev?'Acertou':'Errou';}
-  else if(koMs){
-    const now=Date.now();
-    if(now>=koMs&&now<koMs+90*60000){bClass='live';bText='Em andamento';}
-    else if(now>=koMs+90*60000){bClass='done';bText='Finalizado';}
-  }
+  else if(koMs&&Date.now()>=koMs){bClass='live';bText='Em andamento';}
   const koAttr=(!temRes&&koMs)?` data-ko="${koMs}"`:'';
   const isH=j.home==='Brasil', isA=j.away==='Brasil';
   const rLabel=j.r===1?'1ª Rodada':j.r===2?'2ª Rodada':'3ª Rodada';
@@ -733,10 +729,8 @@ function tickBadges(){
     const koMs=+el.dataset.ko,now=Date.now();
     let nc,nt;
     if(now<koMs){nc='pending';nt='Aguardando';}
-    else if(now<koMs+90*60000){nc='live';nt='Em andamento';}
-    else{nc='done';nt='Finalizado';}
+    else{nc='live';nt='Em andamento';}
     if(el.className!==`log-badge ${nc}`){el.className=`log-badge ${nc}`;el.textContent=nt;}
-    if(nc==='done')el.removeAttribute('data-ko');
   });
 }
 setInterval(tickBadges,30000);

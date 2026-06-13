@@ -96,6 +96,33 @@ def parse_match(m):
     }
 
 
+def has_game_in_window(existing):
+    """Retorna True se há jogo na janela de interesse (KO+95min até KO+180min)
+    e sem resultado gravado ainda. Evita chamadas desnecessárias à API."""
+    agenda_path = DADOS / "agenda.json"
+    if not agenda_path.exists():
+        return True  # sem agenda, chama por segurança
+
+    existing_pairs = {(r["home_team"], r["away_team"]) for r in existing}
+    now = datetime.datetime.now(datetime.timezone.utc)
+
+    with open(agenda_path) as f:
+        agenda = json.load(f)
+
+    for m in agenda:
+        if (m["home_team"], m["away_team"]) in existing_pairs:
+            continue  # resultado já capturado
+        try:
+            ko = datetime.datetime.fromisoformat(m["utc"].replace("Z", "+00:00"))
+        except Exception:
+            continue
+        elapsed_min = (now - ko).total_seconds() / 60
+        if 95 <= elapsed_min <= 180:
+            return True
+
+    return False
+
+
 def main():
     hoje = datetime.date.today()
     if hoje < COPA_INICIO or hoje > COPA_FIM:
@@ -111,6 +138,12 @@ def main():
     results_path = DADOS / "resultados_reais.json"
     with open(results_path) as f:
         existing = json.load(f)
+
+    if not has_game_in_window(existing):
+        print("Nenhum jogo na janela de interesse (KO+95min a KO+180min). Pulando chamada à API.")
+        set_gha_output("new_results", "false")
+        set_gha_output("agenda_changed", "false")
+        return
 
     existing_keys = {(r["home_team"], r["away_team"], r["date"]) for r in existing}
 
