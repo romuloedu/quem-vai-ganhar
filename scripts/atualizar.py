@@ -32,7 +32,7 @@ Após rodar:
 O GitHub Pages atualiza automaticamente em ~1 minuto.
 """
 
-import os, sys, json, re, pickle, subprocess, warnings, datetime, math
+import os, sys, json, re, pickle, subprocess, warnings, datetime, math, random
 from pathlib import Path
 import pandas as pd
 import numpy as np
@@ -81,6 +81,7 @@ DADOS       = ROOT / "dados"
 ODDS_KEY    = os.getenv("ODDS_API_KEY", "")
 BLEND_ALPHA = 0.65   # peso do mercado (0 = só modelo, 1 = só mercado)
 N_SIMS      = 100_000  # simulações Monte Carlo
+SEED        = 42
 
 NAME_MAP = {
     "Brazil":"Brasil","Morocco":"Marrocos","Scotland":"Escócia","Haiti":"Haiti",
@@ -193,7 +194,7 @@ def step1_update_history():
 # ─────────────────────────────────────────────────────────
 def step2_retrain():
     print("🔧 Passo 2: Retreinando modelo...")
-    from sklearn.model_selection import TimeSeriesSplit, cross_val_score
+    from sklearn.model_selection import TimeSeriesSplit, cross_val_score, StratifiedKFold
     from sklearn.calibration import CalibratedClassifierCV
     from sklearn.metrics import log_loss
     import xgboost as xgb
@@ -300,9 +301,9 @@ def step2_retrain():
             objective="multi:softprob",num_class=3,n_estimators=400,
             learning_rate=0.04,max_depth=4,subsample=0.8,colsample_bytree=0.75,
             min_child_weight=3,gamma=0.1,use_label_encoder=False,
-            eval_metric="mlogloss",random_state=42,verbosity=0,
+            eval_metric="mlogloss",random_state=SEED,verbosity=0,
         ),
-        method="isotonic", cv=5
+        method="isotonic", cv=StratifiedKFold(n_splits=5, shuffle=True, random_state=SEED)
     )
     model.fit(X, y)
 
@@ -488,7 +489,7 @@ def step6_monte_carlo(model, FEAT_COLS, log, rank_map, elo_map, df_bl, n_sims=No
     n = n_sims if n_sims is not None else N_SIMS
     print(f"🎲 Passo 6: Monte Carlo ({n:,} simulações)...")
     if save:
-        np.random.seed(42)
+        np.random.seed(SEED)
 
     df_teams = pd.read_csv(DADOS / "wc2026_groups.csv")
     GROUP_TEAMS = {g: list(sub["team"]) for g, sub in df_teams.groupby("group")}
@@ -922,6 +923,8 @@ def step7_update_html(results, df_bl, mkt_champion):
 # MAIN
 # ─────────────────────────────────────────────────────────
 if __name__ == "__main__":
+    random.seed(SEED)
+    np.random.seed(SEED)
     print("\n🚀 ATUALIZAÇÃO COPA 2026\n")
     step0_freeze_probs()   # congela probs pré-jogo ANTES de retreinar
     step1_update_history()
