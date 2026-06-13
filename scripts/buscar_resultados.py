@@ -59,6 +59,8 @@ def fetch_all_matches():
     return resp.json().get("matches", [])
 
 
+GROUP_STAGES = {"GROUP_STAGE"}
+
 def update_agenda(matches):
     """Grava dados/agenda.json com o horário UTC oficial de cada jogo.
     Retorna True se a agenda mudou."""
@@ -68,7 +70,8 @@ def update_agenda(matches):
             continue  # mata-mata ainda sem times definidos
         home = NAME_MAP.get(m["homeTeam"]["name"], m["homeTeam"]["name"])
         away = NAME_MAP.get(m["awayTeam"]["name"], m["awayTeam"]["name"])
-        agenda.append({"home_team": home, "away_team": away, "utc": m["utcDate"]})
+        stage = m.get("stage", "GROUP_STAGE")
+        agenda.append({"home_team": home, "away_team": away, "utc": m["utcDate"], "stage": stage})
     agenda.sort(key=lambda a: (a["utc"], a["home_team"]))
 
     agenda_path = DADOS / "agenda.json"
@@ -97,8 +100,10 @@ def parse_match(m):
 
 
 def has_game_in_window(existing):
-    """Retorna True se há jogo na janela de interesse (KO+95min até KO+180min)
-    e sem resultado gravado ainda. Evita chamadas desnecessárias à API."""
+    """Retorna True se há jogo na janela de interesse sem resultado gravado ainda.
+    Fase de grupos:   KO+120min até KO+185min  (90+15+45 = 150min real + delay API)
+    Fases eliminat.:  KO+120min até KO+300min  (cobre prorrogação + pênaltis + delay)
+    """
     agenda_path = DADOS / "agenda.json"
     if not agenda_path.exists():
         return True  # sem agenda, chama por segurança
@@ -116,8 +121,10 @@ def has_game_in_window(existing):
             ko = datetime.datetime.fromisoformat(m["utc"].replace("Z", "+00:00"))
         except Exception:
             continue
+        stage = m.get("stage", "GROUP_STAGE")
+        max_min = 185 if stage in GROUP_STAGES else 300
         elapsed_min = (now - ko).total_seconds() / 60
-        if 95 <= elapsed_min <= 180:
+        if 120 <= elapsed_min <= max_min:
             return True
 
     return False

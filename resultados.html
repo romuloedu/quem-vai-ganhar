@@ -488,11 +488,13 @@ function buildCard(j){
   let bClass='pending',bText='Aguardando';
   if(temRes){bClass=j.res===prev?'hit':'miss';bText=j.res===prev?'Acertou':'Errou';}
   else if(koMs){
+    const maxMin=j.s==='group'?185:300;
     const now=Date.now();
-    if(now>=koMs&&now<koMs+180*60000){bClass='live';bText='Em andamento';}
-    else if(now>=koMs+180*60000){bClass='done';bText='Finalizado';}
+    if(now>=koMs&&now<koMs+maxMin*60000){bClass='live';bText='Em andamento';}
+    else if(now>=koMs+maxMin*60000){bClass='done';bText='Finalizado';}
   }
-  const koAttr=(!temRes&&koMs)?` data-ko="${koMs}"`:'';
+  const maxMin=j.s==='group'?185:300;
+  const koAttr=(!temRes&&koMs)?` data-ko="${koMs}" data-maxmin="${maxMin}"`:'';
   const isH=j.home==='Brasil', isA=j.away==='Brasil';
   const rLabel=j.r===1?'1ª Rodada':j.r===2?'2ª Rodada':'3ª Rodada';
   const vsHtml=temRes&&j.placar?`<span class="log-score">${j.placar}</span>`:`<span class="log-vs">vs</span>`;
@@ -730,10 +732,10 @@ document.getElementById('prev-toggle').addEventListener('click',()=>{
 
 function tickBadges(){
   document.querySelectorAll('.log-badge[data-ko]').forEach(el=>{
-    const koMs=+el.dataset.ko,now=Date.now();
+    const koMs=+el.dataset.ko,maxMin=+(el.dataset.maxmin||185),now=Date.now();
     let nc,nt;
     if(now<koMs){nc='pending';nt='Aguardando';}
-    else if(now<koMs+180*60000){nc='live';nt='Em andamento';}
+    else if(now<koMs+maxMin*60000){nc='live';nt='Em andamento';}
     else{nc='done';nt='Finalizado';el.removeAttribute('data-ko');}
     if(el.className!==`log-badge ${nc}`){el.className=`log-badge ${nc}`;el.textContent=nt;}
   });
