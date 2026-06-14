@@ -79,5 +79,14 @@
     "away_score": 1,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-14",
+    "home_team": "Holanda",
+    "away_team": "Japão",
+    "home_score": 2,
+    "away_score": 2,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]
