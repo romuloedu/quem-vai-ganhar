@@ -100,9 +100,15 @@ def parse_match(m):
 
 
 def has_game_in_window(existing):
-    """Retorna True se há jogo na janela de interesse sem resultado gravado ainda.
-    Fase de grupos:   KO+120min até KO+185min  (90+15+45 = 150min real + delay API)
-    Fases eliminat.:  KO+120min até KO+300min  (cobre prorrogação + pênaltis + delay)
+    """Retorna True se há jogo que precisa de resultado.
+
+    Janela principal (polling normal):
+      Fase de grupos:   KO+120min até KO+185min
+      Fases eliminat.:  KO+120min até KO+300min
+
+    Catch-up (resultado perdido por lacuna no cron):
+      Qualquer jogo sem resultado cujo KO+max_min já passou mas ocorreu
+      há menos de 36 horas — garante captura mesmo após a janela.
     """
     agenda_path = DADOS / "agenda.json"
     if not agenda_path.exists():
@@ -125,6 +131,11 @@ def has_game_in_window(existing):
         max_min = 185 if stage in GROUP_STAGES else 300
         elapsed_min = (now - ko).total_seconds() / 60
         if 120 <= elapsed_min <= max_min:
+            return True
+        # Catch-up: janela já encerrada mas jogo ocorreu nas últimas 36h
+        if max_min < elapsed_min <= 36 * 60:
+            print(f"  Catch-up: {m['home_team']} vs {m['away_team']} sem resultado "
+                  f"(KO+{elapsed_min:.0f}min)")
             return True
 
     return False

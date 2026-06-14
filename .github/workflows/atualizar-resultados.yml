@@ -2,11 +2,12 @@ name: Atualizar Resultados Copa 2026
 
 on:
   schedule:
-    # Cobre o período de 14:45 a 03:15 UTC (janelas de jogos da Copa 2026)
-    # Partidas na América do Norte terminam, no pior caso, por volta das 03:00 UTC
+    # Cobre 14:45–07:45 UTC (toda a janela de jogos da Copa 2026)
+    # Alguns jogos têm KO às 04:00 UTC (00:00 ET) com resultado disponível ~07:00 UTC
     - cron: '45 14 * * *'       # 14:45 UTC
     - cron: '*/15 15-23 * * *'  # 15:00–23:45 UTC
     - cron: '*/15 0-3 * * *'    # 00:00–03:45 UTC
+    - cron: '*/30 4-7 * * *'    # 04:00–07:30 UTC (jogos tarde na América)
   workflow_dispatch:
 
 jobs:
