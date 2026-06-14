@@ -34,5 +34,17 @@
     "pd": 25.82,
     "pa": 22.77,
     "placar_prev": "1-0"
+  },
+  "Haiti|Escócia": {
+    "ph": 15.68,
+    "pd": 18.84,
+    "pa": 65.48,
+    "placar_prev": "1-2"
+  },
+  "Austrália|Turquia": {
+    "ph": 25.1,
+    "pd": 26.91,
+    "pa": 47.98,
+    "placar_prev": "0-1"
   }
 }
