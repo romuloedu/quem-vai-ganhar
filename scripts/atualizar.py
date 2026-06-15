@@ -209,6 +209,13 @@ def step2_retrain():
     rank_map = dict(zip(df_teams["team"], df_teams["fifa_rank"]))
     elo_map  = dict(zip(df_teams["team"], df_teams["elo_approx"]))
 
+    CONF_STRENGTH   = {"UEFA": 6, "CONMEBOL": 5, "CONCACAF": 4, "AFC": 3, "CAF": 2, "OFC": 1}
+    conf_map        = {r["team"]: CONF_STRENGTH.get(r["confederation"], 3) for _, r in df_teams.iterrows()}
+    df_static       = pd.read_csv(DADOS / "wc2026_team_static.csv")
+    squad_value_map = dict(zip(df_static["team"], df_static["squad_value_m"]))
+    wc_apps_map     = dict(zip(df_static["team"], df_static["wc_appearances"]))
+    squad_age_map   = dict(zip(df_static["team"], df_static["squad_avg_age"]))
+
     def build_log(df):
         rows = []
         for _, r in df.iterrows():
@@ -256,6 +263,9 @@ def step2_retrain():
         "a_goals_conceded_avg","a_clean_sheets_rate","a_goal_diff_avg","a_form_pts",
         "a_fifa_rank","a_elo","rank_diff","elo_diff","elo_expected_home",
         "h2h_win_rate","h2h_goal_diff","h2h_games","neutral",
+        "h_confederation","a_confederation","h_squad_value","a_squad_value",
+        "h_wc_appearances","a_wc_appearances","h_squad_age","a_squad_age",
+        "squad_value_diff","wc_exp_diff",
     ]
 
     wc_teams = set(df_teams["team"])
@@ -276,6 +286,8 @@ def step2_retrain():
         hh = h2h_feats(log, r["home_team"], r["away_team"], r["date"])
         eh=elo_map.get(r["home_team"],1550); ea=elo_map.get(r["away_team"],1550)
         rh=rank_map.get(r["home_team"],80);  ra=rank_map.get(r["away_team"],80)
+        sv_h = squad_value_map.get(r["home_team"], 200)
+        sv_a = squad_value_map.get(r["away_team"], 200)
         row = {
             "h_win_rate":fh["win_rate"],"h_draw_rate":fh["draw_rate"],
             "h_goals_scored_avg":fh["goals_scored_avg"],"h_goals_conceded_avg":fh["goals_conceded_avg"],
@@ -288,6 +300,11 @@ def step2_retrain():
             "rank_diff":rh-ra,"elo_diff":eh-ea,"elo_expected_home":elo_exp(eh,ea),
             "h2h_win_rate":hh["h2h_win_rate"],"h2h_goal_diff":hh["h2h_goal_diff"],
             "h2h_games":hh["h2h_games"],"neutral":int(r["neutral"]),
+            "h_confederation":conf_map.get(r["home_team"],3),"a_confederation":conf_map.get(r["away_team"],3),
+            "h_squad_value":sv_h,"a_squad_value":sv_a,
+            "h_wc_appearances":wc_apps_map.get(r["home_team"],5),"a_wc_appearances":wc_apps_map.get(r["away_team"],5),
+            "h_squad_age":squad_age_map.get(r["home_team"],27.0),"a_squad_age":squad_age_map.get(r["away_team"],27.0),
+            "squad_value_diff":sv_h-sv_a,"wc_exp_diff":wc_apps_map.get(r["home_team"],5)-wc_apps_map.get(r["away_team"],5),
         }
         X_rows.append([row[c] for c in FEAT_COLS])
         hg,ag = r["home_score"],r["away_score"]
@@ -314,7 +331,7 @@ def step2_retrain():
     log.to_pickle(DADOS / "_log_cache.pkl")
 
     print(f"   ✅ Modelo retreinado com {len(X)} jogos")
-    return model, FEAT_COLS, log, rank_map, elo_map
+    return model, FEAT_COLS, log, rank_map, elo_map, conf_map, squad_value_map, wc_apps_map, squad_age_map
 
 
 # ─────────────────────────────────────────────────────────
@@ -433,6 +450,12 @@ def step5_blend(model, FEAT_COLS, log, rank_map, elo_map, market_probs):
 
     df_matches = pd.read_csv(DADOS / "wc2026_matches.csv")
     df_teams   = pd.read_csv(DADOS / "wc2026_groups.csv")
+    CONF_STRENGTH   = {"UEFA": 6, "CONMEBOL": 5, "CONCACAF": 4, "AFC": 3, "CAF": 2, "OFC": 1}
+    conf_map        = {r["team"]: CONF_STRENGTH.get(r["confederation"], 3) for _, r in df_teams.iterrows()}
+    df_static       = pd.read_csv(DADOS / "wc2026_team_static.csv")
+    squad_value_map = dict(zip(df_static["team"], df_static["squad_value_m"]))
+    wc_apps_map     = dict(zip(df_static["team"], df_static["wc_appearances"]))
+    squad_age_map   = dict(zip(df_static["team"], df_static["squad_avg_age"]))
 
     def build_row(home, away, date, neutral=1):
         def elo_exp(ea,eb): return 1/(1+10**((eb-ea)/400))
@@ -451,7 +474,8 @@ def step5_blend(model, FEAT_COLS, log, rank_map, elo_map, market_probs):
         d=pd.Timestamp(date); fh=rf(home,d); fa=rf(away,d); hh=h2h(home,away,d)
         eh=elo_map.get(home,1550); ea=elo_map.get(away,1550)
         rh=rank_map.get(home,80);  ra=rank_map.get(away,80)
-        row={"h_win_rate":fh["win_rate"],"h_draw_rate":fh["draw_rate"],"h_goals_scored_avg":fh["goals_scored_avg"],"h_goals_conceded_avg":fh["goals_conceded_avg"],"h_clean_sheets_rate":fh["clean_sheets_rate"],"h_goal_diff_avg":fh["goal_diff_avg"],"h_form_pts":fh["form_pts"],"h_fifa_rank":rh,"h_elo":eh,"h_elo_expected":elo_exp(eh,ea),"a_win_rate":fa["win_rate"],"a_draw_rate":fa["draw_rate"],"a_goals_scored_avg":fa["goals_scored_avg"],"a_goals_conceded_avg":fa["goals_conceded_avg"],"a_clean_sheets_rate":fa["clean_sheets_rate"],"a_goal_diff_avg":fa["goal_diff_avg"],"a_form_pts":fa["form_pts"],"a_fifa_rank":ra,"a_elo":ea,"rank_diff":rh-ra,"elo_diff":eh-ea,"elo_expected_home":elo_exp(eh,ea),"h2h_win_rate":hh["h2h_win_rate"],"h2h_goal_diff":hh["h2h_goal_diff"],"h2h_games":hh["h2h_games"],"neutral":neutral}
+        sv_h=squad_value_map.get(home,200); sv_a=squad_value_map.get(away,200)
+        row={"h_win_rate":fh["win_rate"],"h_draw_rate":fh["draw_rate"],"h_goals_scored_avg":fh["goals_scored_avg"],"h_goals_conceded_avg":fh["goals_conceded_avg"],"h_clean_sheets_rate":fh["clean_sheets_rate"],"h_goal_diff_avg":fh["goal_diff_avg"],"h_form_pts":fh["form_pts"],"h_fifa_rank":rh,"h_elo":eh,"h_elo_expected":elo_exp(eh,ea),"a_win_rate":fa["win_rate"],"a_draw_rate":fa["draw_rate"],"a_goals_scored_avg":fa["goals_scored_avg"],"a_goals_conceded_avg":fa["goals_conceded_avg"],"a_clean_sheets_rate":fa["clean_sheets_rate"],"a_goal_diff_avg":fa["goal_diff_avg"],"a_form_pts":fa["form_pts"],"a_fifa_rank":ra,"a_elo":ea,"rank_diff":rh-ra,"elo_diff":eh-ea,"elo_expected_home":elo_exp(eh,ea),"h2h_win_rate":hh["h2h_win_rate"],"h2h_goal_diff":hh["h2h_goal_diff"],"h2h_games":hh["h2h_games"],"neutral":neutral,"h_confederation":conf_map.get(home,3),"a_confederation":conf_map.get(away,3),"h_squad_value":sv_h,"a_squad_value":sv_a,"h_wc_appearances":wc_apps_map.get(home,5),"a_wc_appearances":wc_apps_map.get(away,5),"h_squad_age":squad_age_map.get(home,27.0),"a_squad_age":squad_age_map.get(away,27.0),"squad_value_diff":sv_h-sv_a,"wc_exp_diff":wc_apps_map.get(home,5)-wc_apps_map.get(away,5)}
         return [row[c] for c in FEAT_COLS]
 
     rows = []
@@ -492,6 +516,12 @@ def step6_monte_carlo(model, FEAT_COLS, log, rank_map, elo_map, df_bl, n_sims=No
         np.random.seed(SEED)
 
     df_teams = pd.read_csv(DADOS / "wc2026_groups.csv")
+    CONF_STRENGTH   = {"UEFA": 6, "CONMEBOL": 5, "CONCACAF": 4, "AFC": 3, "CAF": 2, "OFC": 1}
+    conf_map        = {r["team"]: CONF_STRENGTH.get(r["confederation"], 3) for _, r in df_teams.iterrows()}
+    df_static       = pd.read_csv(DADOS / "wc2026_team_static.csv")
+    squad_value_map = dict(zip(df_static["team"], df_static["squad_value_m"]))
+    wc_apps_map     = dict(zip(df_static["team"], df_static["wc_appearances"]))
+    squad_age_map   = dict(zip(df_static["team"], df_static["squad_avg_age"]))
     GROUP_TEAMS = {g: list(sub["team"]) for g, sub in df_teams.groupby("group")}
     GROUP_MATCHES = {}
     for g, t in GROUP_TEAMS.items():
@@ -523,7 +553,8 @@ def step6_monte_carlo(model, FEAT_COLS, log, rank_map, elo_map, df_bl, n_sims=No
             d2=pd.Timestamp(date); fh=rf(home,d2); fa=rf(away,d2); hh=h2h(home,away,d2)
             eh=elo_map.get(home,1550); ea=elo_map.get(away,1550)
             rh=rank_map.get(home,80);  ra=rank_map.get(away,80)
-            row={"h_win_rate":fh["win_rate"],"h_draw_rate":fh["draw_rate"],"h_goals_scored_avg":fh["goals_scored_avg"],"h_goals_conceded_avg":fh["goals_conceded_avg"],"h_clean_sheets_rate":fh["clean_sheets_rate"],"h_goal_diff_avg":fh["goal_diff_avg"],"h_form_pts":fh["form_pts"],"h_fifa_rank":rh,"h_elo":eh,"h_elo_expected":elo_exp(eh,ea),"a_win_rate":fa["win_rate"],"a_draw_rate":fa["draw_rate"],"a_goals_scored_avg":fa["goals_scored_avg"],"a_goals_conceded_avg":fa["goals_conceded_avg"],"a_clean_sheets_rate":fa["clean_sheets_rate"],"a_goal_diff_avg":fa["goal_diff_avg"],"a_form_pts":fa["form_pts"],"a_fifa_rank":ra,"a_elo":ea,"rank_diff":rh-ra,"elo_diff":eh-ea,"elo_expected_home":elo_exp(eh,ea),"h2h_win_rate":hh["h2h_win_rate"],"h2h_goal_diff":hh["h2h_goal_diff"],"h2h_games":hh["h2h_games"],"neutral":1}
+            sv_h=squad_value_map.get(home,200); sv_a=squad_value_map.get(away,200)
+            row={"h_win_rate":fh["win_rate"],"h_draw_rate":fh["draw_rate"],"h_goals_scored_avg":fh["goals_scored_avg"],"h_goals_conceded_avg":fh["goals_conceded_avg"],"h_clean_sheets_rate":fh["clean_sheets_rate"],"h_goal_diff_avg":fh["goal_diff_avg"],"h_form_pts":fh["form_pts"],"h_fifa_rank":rh,"h_elo":eh,"h_elo_expected":elo_exp(eh,ea),"a_win_rate":fa["win_rate"],"a_draw_rate":fa["draw_rate"],"a_goals_scored_avg":fa["goals_scored_avg"],"a_goals_conceded_avg":fa["goals_conceded_avg"],"a_clean_sheets_rate":fa["clean_sheets_rate"],"a_goal_diff_avg":fa["goal_diff_avg"],"a_form_pts":fa["form_pts"],"a_fifa_rank":ra,"a_elo":ea,"rank_diff":rh-ra,"elo_diff":eh-ea,"elo_expected_home":elo_exp(eh,ea),"h2h_win_rate":hh["h2h_win_rate"],"h2h_goal_diff":hh["h2h_goal_diff"],"h2h_games":hh["h2h_games"],"neutral":1,"h_confederation":conf_map.get(home,3),"a_confederation":conf_map.get(away,3),"h_squad_value":sv_h,"a_squad_value":sv_a,"h_wc_appearances":wc_apps_map.get(home,5),"a_wc_appearances":wc_apps_map.get(away,5),"h_squad_age":squad_age_map.get(home,27.0),"a_squad_age":squad_age_map.get(away,27.0),"squad_value_diff":sv_h-sv_a,"wc_exp_diff":wc_apps_map.get(home,5)-wc_apps_map.get(away,5)}
             proba=model.predict_proba([[row[c] for c in FEAT_COLS]])[0]
             _ko[k]=(float(proba[2]),float(proba[1]),float(proba[0]))
         return _ko[k]
@@ -928,7 +959,7 @@ if __name__ == "__main__":
     print("\n🚀 ATUALIZAÇÃO COPA 2026\n")
     step0_freeze_probs()   # congela probs pré-jogo ANTES de retreinar
     step1_update_history()
-    model, FEAT_COLS, log, rank_map, elo_map = step2_retrain()
+    model, FEAT_COLS, log, rank_map, elo_map, conf_map, squad_value_map, wc_apps_map, squad_age_map = step2_retrain()
     games_data, outrights_raw = step3_fetch_odds()
     market_probs, mkt_champion = step4_parse_odds(games_data, outrights_raw)
     df_bl = step5_blend(model, FEAT_COLS, log, rank_map, elo_map, market_probs)
