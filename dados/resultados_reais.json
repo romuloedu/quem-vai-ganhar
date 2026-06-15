@@ -115,5 +115,14 @@
     "away_score": 0,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-15",
+    "home_team": "Bélgica",
+    "away_team": "Egito",
+    "home_score": 1,
+    "away_score": 1,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]
