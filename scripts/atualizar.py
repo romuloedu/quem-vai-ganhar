@@ -212,7 +212,7 @@ def step2_retrain():
     CONF_STRENGTH   = {"UEFA": 6, "CONMEBOL": 5, "CONCACAF": 4, "AFC": 3, "CAF": 2, "OFC": 1}
     conf_map        = {r["team"]: CONF_STRENGTH.get(r["confederation"], 3) for _, r in df_teams.iterrows()}
     df_static       = pd.read_csv(DADOS / "wc2026_team_static.csv")
-    squad_value_map = dict(zip(df_static["team"], df_static["squad_value_m"]))
+    squad_value_map = {t: float(np.log1p(v)) for t, v in zip(df_static["team"], df_static["squad_value_m"])}
     wc_apps_map     = dict(zip(df_static["team"], df_static["wc_appearances"]))
     squad_age_map   = dict(zip(df_static["team"], df_static["squad_avg_age"]))
 
@@ -453,7 +453,7 @@ def step5_blend(model, FEAT_COLS, log, rank_map, elo_map, market_probs):
     CONF_STRENGTH   = {"UEFA": 6, "CONMEBOL": 5, "CONCACAF": 4, "AFC": 3, "CAF": 2, "OFC": 1}
     conf_map        = {r["team"]: CONF_STRENGTH.get(r["confederation"], 3) for _, r in df_teams.iterrows()}
     df_static       = pd.read_csv(DADOS / "wc2026_team_static.csv")
-    squad_value_map = dict(zip(df_static["team"], df_static["squad_value_m"]))
+    squad_value_map = {t: float(np.log1p(v)) for t, v in zip(df_static["team"], df_static["squad_value_m"])}
     wc_apps_map     = dict(zip(df_static["team"], df_static["wc_appearances"]))
     squad_age_map   = dict(zip(df_static["team"], df_static["squad_avg_age"]))
 
@@ -519,7 +519,7 @@ def step6_monte_carlo(model, FEAT_COLS, log, rank_map, elo_map, df_bl, n_sims=No
     CONF_STRENGTH   = {"UEFA": 6, "CONMEBOL": 5, "CONCACAF": 4, "AFC": 3, "CAF": 2, "OFC": 1}
     conf_map        = {r["team"]: CONF_STRENGTH.get(r["confederation"], 3) for _, r in df_teams.iterrows()}
     df_static       = pd.read_csv(DADOS / "wc2026_team_static.csv")
-    squad_value_map = dict(zip(df_static["team"], df_static["squad_value_m"]))
+    squad_value_map = {t: float(np.log1p(v)) for t, v in zip(df_static["team"], df_static["squad_value_m"])}
     wc_apps_map     = dict(zip(df_static["team"], df_static["wc_appearances"]))
     squad_age_map   = dict(zip(df_static["team"], df_static["squad_avg_age"]))
     GROUP_TEAMS = {g: list(sub["team"]) for g, sub in df_teams.groupby("group")}
@@ -649,6 +649,17 @@ def step6_monte_carlo(model, FEAT_COLS, log, rank_map, elo_map, df_bl, n_sims=No
 # ─────────────────────────────────────────────────────────
 def step7_update_html(results, df_bl, mkt_champion):
     print("🖥️  Passo 7: Atualizando index.html...")
+
+    # Blend champion odds (model + mercado) quando disponíveis
+    CHAMPION_BLEND = 0.45  # peso do mercado nas probabilidades de campeão
+    if mkt_champion:
+        blended_ch = {}
+        for team, model_p in results["champion"].items():
+            mkt_p = mkt_champion.get(team, model_p)
+            blended_ch[team] = CHAMPION_BLEND * mkt_p + (1 - CHAMPION_BLEND) * model_p
+        tot = sum(blended_ch.values())
+        results["champion"] = {t: round(p / tot * 100, 2) for t, p in blended_ch.items()}
+        print(f"   ℹ️  Champion odds blendadas com mercado (alpha={CHAMPION_BLEND})")
 
     df_teams = pd.read_csv(DADOS / "wc2026_groups.csv")
     flags = {"Brasil":"🇧🇷","Marrocos":"🇲🇦","Haiti":"🇭🇹","Escócia":"🏴󠁧󠁢󠁳󠁣󠁴󠁿","França":"🇫🇷","Espanha":"🇪🇸","Bélgica":"🇧🇪","Holanda":"🇳🇱","Argentina":"🇦🇷","Portugal":"🇵🇹","México":"🇲🇽","Noruega":"🇳🇴","Croácia":"🇭🇷","Alemanha":"🇩🇪","Inglaterra":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","Colômbia":"🇨🇴","Suíça":"🇨🇭","Equador":"🇪🇨","Coreia do Sul":"🇰🇷","Japão":"🇯🇵","Irã":"🇮🇷","Senegal":"🇸🇳","Tunísia":"🇹🇳","Itália":"🇮🇹","Áustria":"🇦🇹","Egito":"🇪🇬","República Tcheca":"🇨🇿","Estados Unidos":"🇺🇸","Uruguai":"🇺🇾","Canadá":"🇨🇦","Turquia":"🇹🇷","Ucrânia":"🇺🇦","Austrália":"🇦🇺","Catar":"🇶🇦","RD Congo":"🇨🇩","Nova Zelândia":"🇳🇿","Argélia":"🇩🇿","África do Sul":"🇿🇦","Paraguai":"🇵🇾","Arábia Saudita":"🇸🇦","Costa do Marfim":"🇨🇮","Curaçao":"🇨🇼","Uzbequistão":"🇺🇿","Cabo Verde":"🇨🇻","Panamá":"🇵🇦","Gana":"🇬🇭","Iraque":"🇮🇶","Jordânia":"🇯🇴","Bósnia e Herzegovina":"🇧🇦","Suécia":"🇸🇪"}
