@@ -61,13 +61,13 @@ def _calibrate_poisson(ph: float, pd: float, pa: float, _max: int = 7) -> str:
     loss = (_pw - ph)**2 + (_pd_ - pd)**2 + (_pa_ - pa)**2
     i, j = divmod(int(np.argmin(loss)), len(lam))
     joint = pmf[i, :, None] * pmf[j, None, :]  # (max_g, max_g)
-    # Restringir ao resultado previsto para evitar contradições
-    if ph >= pd and ph >= pa:
-        mask = H > A      # vitória do mandante
-    elif pa > ph and pa >= pd:
-        mask = H < A      # vitória do visitante
-    else:
+    # Prever empate quando P(draw) >= 25% — reflete a frequência real de empates no futebol
+    if pd >= 0.25:
         mask = H == A     # empate
+    elif ph >= pa:
+        mask = H > A      # vitória do mandante
+    else:
+        mask = H < A      # vitória do visitante
     bh, ba = divmod(int(np.argmax(np.where(mask, joint, 0))), _max)
     return f"{bh}-{ba}"
 
