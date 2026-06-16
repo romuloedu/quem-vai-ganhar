@@ -70,5 +70,35 @@
     "pd": 17.82,
     "pa": 16.73,
     "placar_prev": "2-1"
+  },
+  "Espanha|Cabo Verde": {
+    "ph": 84.81,
+    "pd": 11.56,
+    "pa": 3.62,
+    "placar_prev": "2-0"
+  },
+  "Bélgica|Egito": {
+    "ph": 58.18,
+    "pd": 28.75,
+    "pa": 13.08,
+    "placar_prev": "1-0"
+  },
+  "Arábia Saudita|Uruguai": {
+    "ph": 14.93,
+    "pd": 23.51,
+    "pa": 61.56,
+    "placar_prev": "0-1"
+  },
+  "Irã|Nova Zelândia": {
+    "ph": 50.27,
+    "pd": 26.66,
+    "pa": 23.06,
+    "placar_prev": "1-0"
+  },
+  "França|Senegal": {
+    "ph": 58.9,
+    "pd": 23.9,
+    "pa": 17.2,
+    "placar_prev": "1-0"
   }
 }
