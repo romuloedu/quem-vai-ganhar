@@ -133,5 +133,14 @@
     "away_score": 1,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-16",
+    "home_team": "Irã",
+    "away_team": "Nova Zelândia",
+    "home_score": 2,
+    "away_score": 2,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]
