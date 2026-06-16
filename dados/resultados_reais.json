@@ -124,5 +124,14 @@
     "away_score": 1,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-15",
+    "home_team": "Arábia Saudita",
+    "away_team": "Uruguai",
+    "home_score": 1,
+    "away_score": 1,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]
