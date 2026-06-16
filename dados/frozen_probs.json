@@ -1,74 +1,74 @@
 {
   "México|África do Sul": {
-    "ph": 64.6,
-    "pd": 24.6,
-    "pa": 10.7,
+    "ph": 68.97,
+    "pd": 22.92,
+    "pa": 8.11,
     "placar_prev": "1-0"
   },
   "Coreia do Sul|República Tcheca": {
-    "ph": 38.1,
-    "pd": 28.6,
-    "pa": 33.3,
-    "placar_prev": "1-0"
+    "ph": 56.45,
+    "pd": 22.1,
+    "pa": 21.46,
+    "placar_prev": "2-1"
   },
   "Canadá|Bósnia e Herzegovina": {
-    "ph": 30.8,
-    "pd": 34.7,
-    "pa": 34.5,
+    "ph": 34.82,
+    "pd": 40.47,
+    "pa": 24.71,
     "placar_prev": "0-0"
   },
   "Estados Unidos|Paraguai": {
-    "ph": 51.4,
-    "pd": 27.0,
-    "pa": 21.6,
-    "placar_prev": "1-0"
+    "ph": 67.66,
+    "pd": 17.73,
+    "pa": 14.61,
+    "placar_prev": "2-0"
   },
   "Catar|Suíça": {
-    "ph": 9.61,
-    "pd": 17.49,
-    "pa": 72.9,
+    "ph": 9.29,
+    "pd": 14.99,
+    "pa": 75.71,
     "placar_prev": "0-2"
   },
   "Brasil|Marrocos": {
-    "ph": 51.41,
-    "pd": 25.82,
-    "pa": 22.77,
-    "placar_prev": "1-0"
+    "ph": 49.12,
+    "pd": 24.0,
+    "pa": 26.88,
+    "placar_prev": "2-1"
   },
   "Haiti|Escócia": {
-    "ph": 15.68,
-    "pd": 18.84,
-    "pa": 65.48,
-    "placar_prev": "1-2"
+    "ph": 6.75,
+    "pd": 16.91,
+    "pa": 76.34,
+    "placar_prev": "0-2"
   },
   "Austrália|Turquia": {
-    "ph": 25.1,
-    "pd": 26.91,
-    "pa": 47.98,
-    "placar_prev": "0-1"
+    "ph": 55.36,
+    "pd": 26.46,
+    "pa": 18.18,
+    "placar_prev": "1-0"
   },
   "Alemanha|Curaçao": {
-    "ph": 90.56,
-    "pd": 6.56,
-    "pa": 2.89,
-    "placar_prev": "2-0"
+    "ph": 89.57,
+    "pd": 6.41,
+    "pa": 4.02,
+    "placar_prev": "3-0"
   },
   "Holanda|Japão": {
-    "ph": 51.75,
-    "pd": 26.79,
-    "pa": 21.46,
+    "ph": 52.39,
+    "pd": 25.34,
+    "pa": 22.27,
     "placar_prev": "1-0"
   },
   "Costa do Marfim|Equador": {
-    "ph": 28.78,
-    "pd": 33.45,
-    "pa": 37.77,
-    "placar_prev": "0-1"
+    "ph": 24.84,
+    "pd": 38.38,
+    "pa": 36.78,
+    "placar_prev": "0-0"
   },
   "Suécia|Tunísia": {
-    "ph": 72.86,
-    "pd": 14.35,
-    "pa": 12.79,
+    "ph": 65.44,
+    "pd": 17.82,
+    "pa": 16.73,
     "placar_prev": "2-1"
   }
 }

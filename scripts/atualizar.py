@@ -102,6 +102,168 @@ NAME_MAP = {
 
 
 # ─────────────────────────────────────────────────────────
+# HELPERS: Dixon-Coles + ensemble
+# ─────────────────────────────────────────────────────────
+
+def _dc_tau(x, y, lh, la, rho):
+    if x == 0 and y == 0: return max(1e-9, 1 - lh * la * rho)
+    if x == 0 and y == 1: return max(1e-9, 1 + lh * rho)
+    if x == 1 and y == 0: return max(1e-9, 1 + la * rho)
+    if x == 1 and y == 1: return max(1e-9, 1 - rho)
+    return 1.0
+
+
+def _dc_predict(home, away, attack_map, defense_map, rho, max_goals=7):
+    """Dixon-Coles 3-way probability (neutral venue)."""
+    from scipy.stats import poisson as _poi
+    lh = max(0.01, attack_map.get(home, 1.0) * defense_map.get(away, 1.0))
+    la = max(0.01, attack_map.get(away, 1.0) * defense_map.get(home, 1.0))
+    goals = np.arange(max_goals)
+    pmf_h = _poi.pmf(goals, lh)
+    pmf_a = _poi.pmf(goals, la)
+    grid = np.outer(pmf_h, pmf_a)  # grid[i,j] = P(home=i, away=j)
+    grid[0, 0] *= _dc_tau(0, 0, lh, la, rho)
+    grid[0, 1] *= _dc_tau(0, 1, lh, la, rho)
+    grid[1, 0] *= _dc_tau(1, 0, lh, la, rho)
+    grid[1, 1] *= _dc_tau(1, 1, lh, la, rho)
+    p_home = float(np.sum(np.tril(grid, -1)))   # home goals > away goals
+    p_draw = float(np.trace(grid))
+    p_away = float(np.sum(np.triu(grid,  1)))   # away goals > home goals
+    tot = p_home + p_draw + p_away
+    if tot <= 0: return 1/3, 1/3, 1/3
+    return p_home/tot, p_draw/tot, p_away/tot
+
+
+def _train_dc(df_hist, wc_teams, decay_days=365):
+    """MLE training for Dixon-Coles attack/defense params with time-decay weights."""
+    from scipy.optimize import minimize as _min
+
+    df = df_hist[
+        df_hist["home_team"].isin(wc_teams) &
+        df_hist["away_team"].isin(wc_teams) &
+        (df_hist["date"] >= "2018-01-01")
+    ].dropna(subset=["home_score","away_score"]).copy()
+    df["home_score"] = df["home_score"].astype(int)
+    df["away_score"] = df["away_score"].astype(int)
+
+    teams = sorted(wc_teams & (set(df["home_team"]) | set(df["away_team"])))
+    t_idx = {t: i for i, t in enumerate(teams)}
+    n = len(teams)
+
+    max_d = df["date"].max()
+    df["days_ago"] = (max_d - df["date"]).dt.days
+    w = np.exp(-df["days_ago"].values / decay_days)
+
+    hi = np.array([t_idx.get(t, -1) for t in df["home_team"]])
+    ai = np.array([t_idx.get(t, -1) for t in df["away_team"]])
+    gh = df["home_score"].values.astype(int)
+    ga = df["away_score"].values.astype(int)
+    neut = df["neutral"].values.astype(bool)
+    valid = (hi >= 0) & (ai >= 0)
+    hi, ai, gh, ga, w, neut = hi[valid], ai[valid], gh[valid], ga[valid], w[valid], neut[valid]
+
+    fac = np.array([math.lgamma(g + 1) for g in range(gh.max() + 1)])
+
+    def nll(params):
+        att  = np.exp(params[:n])
+        dfs  = np.exp(params[n:2*n])
+        rho  = params[2*n]
+        hadv = np.exp(params[2*n+1])
+        hm   = np.where(neut, 1.0, hadv)
+        lh_v = np.maximum(1e-6, hm * att[hi] * dfs[ai])
+        la_v = np.maximum(1e-6,       att[ai] * dfs[hi])
+        tau  = np.ones(len(gh))
+        m00  = (gh==0)&(ga==0); tau[m00] = np.maximum(1e-9, 1 - lh_v[m00]*la_v[m00]*rho)
+        m01  = (gh==0)&(ga==1); tau[m01] = np.maximum(1e-9, 1 + lh_v[m01]*rho)
+        m10  = (gh==1)&(ga==0); tau[m10] = np.maximum(1e-9, 1 + la_v[m10]*rho)
+        m11  = (gh==1)&(ga==1); tau[m11] = np.maximum(1e-9, 1 - rho)
+        log_p = (np.log(tau)
+                 + gh*np.log(lh_v) - lh_v - fac[gh]
+                 + ga*np.log(la_v) - la_v - fac[ga])
+        return -float(np.dot(w, log_p))
+
+    x0  = np.zeros(2*n + 2)
+    bds = [(-3, 3)]*n + [(-3, 3)]*n + [(-0.99, 0.5)] + [(-1, 1)]
+    res = _min(nll, x0, method="L-BFGS-B", bounds=bds,
+               options={"maxiter": 300, "ftol": 1e-7})
+    p = res.x
+    attack_map  = {t: float(np.exp(p[i]))     for i, t in enumerate(teams)}
+    defense_map = {t: float(np.exp(p[n + i])) for i, t in enumerate(teams)}
+    return attack_map, defense_map, float(p[2*n])
+
+
+def _build_feat_vec(home, away, date, log, rank_map, elo_map, conf_map,
+                    squad_value_map, wc_apps_map, squad_age_map, FEAT_COLS, neutral=1):
+    """Build 36-feature vector for a match (shared across steps 2b, 5, 6)."""
+    def _elo_exp(ea, eb): return 1 / (1 + 10 ** ((eb - ea) / 400))
+
+    def _rf(team, before):
+        past = log[(log["team"] == team) & (log["date"] < before)].tail(10)
+        if len(past) == 0:
+            return {"win_rate":0.5,"draw_rate":0.25,"goals_scored_avg":1.5,
+                    "goals_conceded_avg":1.2,"clean_sheets_rate":0.3,
+                    "goal_diff_avg":0.3,"form_pts":0.5}
+        n = len(past); wins = (past["result"]=="W").sum(); draws = (past["result"]=="D").sum()
+        wts = np.exp(np.linspace(-1, 0, n)); wts /= wts.sum()
+        gf = past["goals_for"].values; ga = past["goals_against"].values
+        return {"win_rate":wins/n,"draw_rate":draws/n,
+                "goals_scored_avg":np.average(gf, weights=wts),
+                "goals_conceded_avg":np.average(ga, weights=wts),
+                "clean_sheets_rate":(ga==0).sum()/n,
+                "goal_diff_avg":np.average(gf-ga, weights=wts),
+                "form_pts":(wins*3+draws)/(n*3)}
+
+    def _h2h(a, b, before):
+        cut = pd.Timestamp(before) - pd.DateOffset(years=5)
+        h = log[(log["team"]==a)&(log["opponent"]==b)&
+                (log["date"]>=cut)&(log["date"]<before)]
+        if len(h) == 0:
+            return {"h2h_win_rate":0.5,"h2h_goal_diff":0.0,"h2h_games":0}
+        return {"h2h_win_rate":(h["result"]=="W").sum()/len(h),
+                "h2h_goal_diff":(h["goals_for"]-h["goals_against"]).mean(),
+                "h2h_games":len(h)}
+
+    d = pd.Timestamp(date)
+    fh = _rf(home, d); fa = _rf(away, d); hh = _h2h(home, away, d)
+    eh = elo_map.get(home, 1550); ea = elo_map.get(away, 1550)
+    rh = rank_map.get(home, 80);  ra = rank_map.get(away, 80)
+    sv_h = squad_value_map.get(home, float(np.log1p(200)))
+    sv_a = squad_value_map.get(away, float(np.log1p(200)))
+    row = {
+        "h_win_rate":fh["win_rate"],"h_draw_rate":fh["draw_rate"],
+        "h_goals_scored_avg":fh["goals_scored_avg"],"h_goals_conceded_avg":fh["goals_conceded_avg"],
+        "h_clean_sheets_rate":fh["clean_sheets_rate"],"h_goal_diff_avg":fh["goal_diff_avg"],
+        "h_form_pts":fh["form_pts"],"h_fifa_rank":rh,"h_elo":eh,"h_elo_expected":_elo_exp(eh,ea),
+        "a_win_rate":fa["win_rate"],"a_draw_rate":fa["draw_rate"],
+        "a_goals_scored_avg":fa["goals_scored_avg"],"a_goals_conceded_avg":fa["goals_conceded_avg"],
+        "a_clean_sheets_rate":fa["clean_sheets_rate"],"a_goal_diff_avg":fa["goal_diff_avg"],
+        "a_form_pts":fa["form_pts"],"a_fifa_rank":ra,"a_elo":ea,
+        "rank_diff":rh-ra,"elo_diff":eh-ea,"elo_expected_home":_elo_exp(eh,ea),
+        "h2h_win_rate":hh["h2h_win_rate"],"h2h_goal_diff":hh["h2h_goal_diff"],
+        "h2h_games":hh["h2h_games"],"neutral":neutral,
+        "h_confederation":conf_map.get(home,3),"a_confederation":conf_map.get(away,3),
+        "h_squad_value":sv_h,"a_squad_value":sv_a,
+        "h_wc_appearances":wc_apps_map.get(home,5),"a_wc_appearances":wc_apps_map.get(away,5),
+        "h_squad_age":squad_age_map.get(home,27.0),"a_squad_age":squad_age_map.get(away,27.0),
+        "squad_value_diff":sv_h-sv_a,
+        "wc_exp_diff":wc_apps_map.get(home,5)-wc_apps_map.get(away,5),
+    }
+    return [row[c] for c in FEAT_COLS]
+
+
+def _ens_proba(home, away, feat_vec, xgb_model, rf_model, dc_attack, dc_defense, dc_rho):
+    """Ensemble (XGBoost + RandomForest + Dixon-Coles) → (p_home, p_draw, p_away)."""
+    xp = xgb_model.predict_proba([feat_vec])[0]   # [p_away, p_draw, p_home]
+    rp = rf_model.predict_proba([feat_vec])[0]     # [p_away, p_draw, p_home]
+    ph_dc, pd_dc, pa_dc = _dc_predict(home, away, dc_attack, dc_defense, dc_rho)
+    p_h = (xp[2] + rp[2] + ph_dc) / 3
+    p_d = (xp[1] + rp[1] + pd_dc) / 3
+    p_a = (xp[0] + rp[0] + pa_dc) / 3
+    tot = p_h + p_d + p_a
+    return p_h/tot, p_d/tot, p_a/tot
+
+
+# ─────────────────────────────────────────────────────────
 # PASSO 1 — Incorporar resultados reais ao histórico
 # ─────────────────────────────────────────────────────────
 def step0_freeze_probs():
@@ -196,6 +358,7 @@ def step2_retrain():
     print("🔧 Passo 2: Retreinando modelo...")
     from sklearn.model_selection import TimeSeriesSplit, cross_val_score, StratifiedKFold
     from sklearn.calibration import CalibratedClassifierCV
+    from sklearn.ensemble import RandomForestClassifier
     from sklearn.metrics import log_loss
     import xgboost as xgb
 
@@ -324,14 +487,79 @@ def step2_retrain():
     )
     model.fit(X, y)
 
+    rf_model = CalibratedClassifierCV(
+        RandomForestClassifier(
+            n_estimators=400, max_depth=8, min_samples_leaf=3,
+            max_features="sqrt", random_state=SEED, n_jobs=-1,
+        ),
+        method="isotonic", cv=StratifiedKFold(n_splits=5, shuffle=True, random_state=SEED)
+    )
+    rf_model.fit(X, y)
+
+    print("   🌲 Dixon-Coles treinando...")
+    dc_attack, dc_defense, dc_rho = _train_dc(df_hist, wc_teams)
+
     with open(DADOS / "model_calibrated.pkl","wb") as f: pickle.dump(model, f)
-    with open(DADOS / "feat_cols_v2.pkl","wb") as f:    pickle.dump(FEAT_COLS, f)
+    with open(DADOS / "rf_model.pkl","wb") as f:         pickle.dump(rf_model, f)
+    with open(DADOS / "dc_params.pkl","wb") as f:        pickle.dump((dc_attack, dc_defense, dc_rho), f)
+    with open(DADOS / "feat_cols_v2.pkl","wb") as f:     pickle.dump(FEAT_COLS, f)
 
     # Salvar log para uso nos próximos passos
     log.to_pickle(DADOS / "_log_cache.pkl")
 
-    print(f"   ✅ Modelo retreinado com {len(X)} jogos")
-    return model, FEAT_COLS, log, rank_map, elo_map, conf_map, squad_value_map, wc_apps_map, squad_age_map
+    print(f"   ✅ Ensemble treinado ({len(X)} jogos): XGBoost + RandomForest + Dixon-Coles (ρ={dc_rho:.3f})")
+    return (model, rf_model, dc_attack, dc_defense, dc_rho,
+            FEAT_COLS, log, rank_map, elo_map, conf_map, squad_value_map, wc_apps_map, squad_age_map)
+
+
+# ─────────────────────────────────────────────────────────
+# PASSO 2b — Recalcular probs dos jogos já realizados (ensemble)
+# ─────────────────────────────────────────────────────────
+def step2b_retrofreeze(model, rf_model, dc_attack, dc_defense, dc_rho,
+                       FEAT_COLS, log, rank_map, elo_map, conf_map,
+                       squad_value_map, wc_apps_map, squad_age_map):
+    """Recompute ensemble pre-match probabilities for all finished Copa 2026 group games.
+    Overwrites frozen_probs.json so past-game status uses the new ensemble model."""
+    results_path = DADOS / "resultados_reais.json"
+    frozen_path  = DADOS / "frozen_probs.json"
+    matches_path = DADOS / "wc2026_matches.csv"
+
+    if not results_path.exists() or not matches_path.exists():
+        print("ℹ️  Passo 2b: sem jogos realizados para retrocongelar")
+        return
+
+    with open(results_path) as f:
+        real_results = json.load(f)
+    finished_keys = {(r["home_team"], r["away_team"]) for r in real_results}
+
+    if not finished_keys:
+        print("ℹ️  Passo 2b: nenhum jogo realizado ainda")
+        return
+
+    frozen: dict = json.load(open(frozen_path)) if frozen_path.exists() else {}
+    df_matches = pd.read_csv(matches_path)
+    updated = 0
+
+    for _, m in df_matches[df_matches["stage"] == "group"].iterrows():
+        h, a = m["home_team"], m["away_team"]
+        if (h, a) not in finished_keys:
+            continue
+        fkey = f"{h}|{a}"
+        fv = _build_feat_vec(h, a, m["date"], log, rank_map, elo_map, conf_map,
+                             squad_value_map, wc_apps_map, squad_age_map, FEAT_COLS)
+        ph, pd_, pa = _ens_proba(h, a, fv, model, rf_model, dc_attack, dc_defense, dc_rho)
+        pp = _calibrate_poisson(ph, pd_, pa)
+        frozen[fkey] = {
+            "ph": round(ph * 100, 2),
+            "pd": round(pd_ * 100, 2),
+            "pa": round(pa * 100, 2),
+            "placar_prev": pp,
+        }
+        updated += 1
+
+    with open(frozen_path, "w", encoding="utf-8") as f:
+        json.dump(frozen, f, ensure_ascii=False, indent=2)
+    print(f"🔄 Passo 2b: {updated} jogo(s) passado(s) retrocongelados com ensemble")
 
 
 # ─────────────────────────────────────────────────────────
@@ -445,43 +673,21 @@ def step4_parse_odds(games_data, outrights_raw):
 # ─────────────────────────────────────────────────────────
 # PASSO 5 — Blend modelo + mercado para fase de grupos
 # ─────────────────────────────────────────────────────────
-def step5_blend(model, FEAT_COLS, log, rank_map, elo_map, market_probs):
-    print("🔀 Passo 5: Calculando probabilidades blendadas...")
+def step5_blend(model, rf_model, dc_attack, dc_defense, dc_rho,
+                FEAT_COLS, log, rank_map, elo_map, conf_map,
+                squad_value_map, wc_apps_map, squad_age_map, market_probs):
+    print("🔀 Passo 5: Calculando probabilidades blendadas (ensemble)...")
 
     df_matches = pd.read_csv(DADOS / "wc2026_matches.csv")
-    df_teams   = pd.read_csv(DADOS / "wc2026_groups.csv")
-    CONF_STRENGTH   = {"UEFA": 6, "CONMEBOL": 5, "CONCACAF": 4, "AFC": 3, "CAF": 2, "OFC": 1}
-    conf_map        = {r["team"]: CONF_STRENGTH.get(r["confederation"], 3) for _, r in df_teams.iterrows()}
-    df_static       = pd.read_csv(DADOS / "wc2026_team_static.csv")
-    squad_value_map = {t: float(np.log1p(v)) for t, v in zip(df_static["team"], df_static["squad_value_m"])}
-    wc_apps_map     = dict(zip(df_static["team"], df_static["wc_appearances"]))
-    squad_age_map   = dict(zip(df_static["team"], df_static["squad_avg_age"]))
-
-    def build_row(home, away, date, neutral=1):
-        def elo_exp(ea,eb): return 1/(1+10**((eb-ea)/400))
-        def rf(team, before):
-            past=log[(log["team"]==team)&(log["date"]<before)].tail(10)
-            if len(past)==0: return {"win_rate":0.5,"draw_rate":0.25,"goals_scored_avg":1.5,"goals_conceded_avg":1.2,"clean_sheets_rate":0.3,"goal_diff_avg":0.3,"form_pts":0.5,"games_played":1}
-            n=len(past); w=(past["result"]=="W").sum(); d=(past["result"]=="D").sum()
-            wts=np.exp(np.linspace(-1,0,n)); wts/=wts.sum()
-            gf=past["goals_for"].values; ga=past["goals_against"].values
-            return {"win_rate":w/n,"draw_rate":d/n,"goals_scored_avg":np.average(gf,weights=wts),"goals_conceded_avg":np.average(ga,weights=wts),"clean_sheets_rate":(ga==0).sum()/n,"goal_diff_avg":np.average(gf-ga,weights=wts),"form_pts":(w*3+d)/(n*3),"games_played":n}
-        def h2h(a,b,before):
-            cut=pd.Timestamp(before)-pd.DateOffset(years=5)
-            h=log[(log["team"]==a)&(log["opponent"]==b)&(log["date"]>=cut)&(log["date"]<before)]
-            if len(h)==0: return {"h2h_win_rate":0.5,"h2h_goal_diff":0.0,"h2h_games":0}
-            return {"h2h_win_rate":(h["result"]=="W").sum()/len(h),"h2h_goal_diff":(h["goals_for"]-h["goals_against"]).mean(),"h2h_games":len(h)}
-        d=pd.Timestamp(date); fh=rf(home,d); fa=rf(away,d); hh=h2h(home,away,d)
-        eh=elo_map.get(home,1550); ea=elo_map.get(away,1550)
-        rh=rank_map.get(home,80);  ra=rank_map.get(away,80)
-        sv_h=squad_value_map.get(home,200); sv_a=squad_value_map.get(away,200)
-        row={"h_win_rate":fh["win_rate"],"h_draw_rate":fh["draw_rate"],"h_goals_scored_avg":fh["goals_scored_avg"],"h_goals_conceded_avg":fh["goals_conceded_avg"],"h_clean_sheets_rate":fh["clean_sheets_rate"],"h_goal_diff_avg":fh["goal_diff_avg"],"h_form_pts":fh["form_pts"],"h_fifa_rank":rh,"h_elo":eh,"h_elo_expected":elo_exp(eh,ea),"a_win_rate":fa["win_rate"],"a_draw_rate":fa["draw_rate"],"a_goals_scored_avg":fa["goals_scored_avg"],"a_goals_conceded_avg":fa["goals_conceded_avg"],"a_clean_sheets_rate":fa["clean_sheets_rate"],"a_goal_diff_avg":fa["goal_diff_avg"],"a_form_pts":fa["form_pts"],"a_fifa_rank":ra,"a_elo":ea,"rank_diff":rh-ra,"elo_diff":eh-ea,"elo_expected_home":elo_exp(eh,ea),"h2h_win_rate":hh["h2h_win_rate"],"h2h_goal_diff":hh["h2h_goal_diff"],"h2h_games":hh["h2h_games"],"neutral":neutral,"h_confederation":conf_map.get(home,3),"a_confederation":conf_map.get(away,3),"h_squad_value":sv_h,"a_squad_value":sv_a,"h_wc_appearances":wc_apps_map.get(home,5),"a_wc_appearances":wc_apps_map.get(away,5),"h_squad_age":squad_age_map.get(home,27.0),"a_squad_age":squad_age_map.get(away,27.0),"squad_value_diff":sv_h-sv_a,"wc_exp_diff":wc_apps_map.get(home,5)-wc_apps_map.get(away,5)}
-        return [row[c] for c in FEAT_COLS]
 
     rows = []
     for _, m in df_matches[df_matches["stage"]=="group"].iterrows():
-        raw_proba = model.predict_proba([build_row(m["home_team"],m["away_team"],m["date"])])[0]
-        mp = {"home_win":float(raw_proba[2]),"draw":float(raw_proba[1]),"away_win":float(raw_proba[0])}
+        fv = _build_feat_vec(m["home_team"], m["away_team"], m["date"],
+                             log, rank_map, elo_map, conf_map,
+                             squad_value_map, wc_apps_map, squad_age_map, FEAT_COLS)
+        ph_e, pd_e, pa_e = _ens_proba(m["home_team"], m["away_team"], fv,
+                                       model, rf_model, dc_attack, dc_defense, dc_rho)
+        mp = {"home_win": ph_e, "draw": pd_e, "away_win": pa_e}
         key=(m["home_team"],m["away_team"]); keyI=(m["away_team"],m["home_team"])
         if key in market_probs:
             mk=market_probs[key]
@@ -509,19 +715,16 @@ def step5_blend(model, FEAT_COLS, log, rank_map, elo_map, market_probs):
 # ─────────────────────────────────────────────────────────
 # PASSO 6 — Monte Carlo completo
 # ─────────────────────────────────────────────────────────
-def step6_monte_carlo(model, FEAT_COLS, log, rank_map, elo_map, df_bl, n_sims=None, save=True):
+def step6_monte_carlo(model, rf_model, dc_attack, dc_defense, dc_rho,
+                      FEAT_COLS, log, rank_map, elo_map, conf_map,
+                      squad_value_map, wc_apps_map, squad_age_map,
+                      df_bl, n_sims=None, save=True):
     n = n_sims if n_sims is not None else N_SIMS
-    print(f"🎲 Passo 6: Monte Carlo ({n:,} simulações)...")
+    print(f"🎲 Passo 6: Monte Carlo ({n:,} simulações, ensemble)...")
     if save:
         np.random.seed(SEED)
 
     df_teams = pd.read_csv(DADOS / "wc2026_groups.csv")
-    CONF_STRENGTH   = {"UEFA": 6, "CONMEBOL": 5, "CONCACAF": 4, "AFC": 3, "CAF": 2, "OFC": 1}
-    conf_map        = {r["team"]: CONF_STRENGTH.get(r["confederation"], 3) for _, r in df_teams.iterrows()}
-    df_static       = pd.read_csv(DADOS / "wc2026_team_static.csv")
-    squad_value_map = {t: float(np.log1p(v)) for t, v in zip(df_static["team"], df_static["squad_value_m"])}
-    wc_apps_map     = dict(zip(df_static["team"], df_static["wc_appearances"]))
-    squad_age_map   = dict(zip(df_static["team"], df_static["squad_avg_age"]))
     GROUP_TEAMS = {g: list(sub["team"]) for g, sub in df_teams.groupby("group")}
     GROUP_MATCHES = {}
     for g, t in GROUP_TEAMS.items():
@@ -534,29 +737,13 @@ def step6_monte_carlo(model, FEAT_COLS, log, rank_map, elo_map, df_bl, n_sims=No
         prob_cache[(r["home_team"],r["away_team"])]=(r["p_home_win"],r["p_draw"],r["p_away_win"])
 
     _ko={}
-    def pred_ko(home,away,date):
-        k=(home,away,date)
+    def pred_ko(home, away, date):
+        k = (home, away, date)
         if k not in _ko:
-            def elo_exp(ea,eb): return 1/(1+10**((eb-ea)/400))
-            def rf(team, before):
-                past=log[(log["team"]==team)&(log["date"]<before)].tail(10)
-                if len(past)==0: return {"win_rate":0.5,"draw_rate":0.25,"goals_scored_avg":1.5,"goals_conceded_avg":1.2,"clean_sheets_rate":0.3,"goal_diff_avg":0.3,"form_pts":0.5,"games_played":1}
-                n=len(past); w=(past["result"]=="W").sum(); d=(past["result"]=="D").sum()
-                wts=np.exp(np.linspace(-1,0,n)); wts/=wts.sum()
-                gf=past["goals_for"].values; ga=past["goals_against"].values
-                return {"win_rate":w/n,"draw_rate":d/n,"goals_scored_avg":np.average(gf,weights=wts),"goals_conceded_avg":np.average(ga,weights=wts),"clean_sheets_rate":(ga==0).sum()/n,"goal_diff_avg":np.average(gf-ga,weights=wts),"form_pts":(w*3+d)/(n*3),"games_played":n}
-            def h2h(a,b,before):
-                cut=pd.Timestamp(before)-pd.DateOffset(years=5)
-                h=log[(log["team"]==a)&(log["opponent"]==b)&(log["date"]>=cut)&(log["date"]<before)]
-                if len(h)==0: return {"h2h_win_rate":0.5,"h2h_goal_diff":0.0,"h2h_games":0}
-                return {"h2h_win_rate":(h["result"]=="W").sum()/len(h),"h2h_goal_diff":(h["goals_for"]-h["goals_against"]).mean(),"h2h_games":len(h)}
-            d2=pd.Timestamp(date); fh=rf(home,d2); fa=rf(away,d2); hh=h2h(home,away,d2)
-            eh=elo_map.get(home,1550); ea=elo_map.get(away,1550)
-            rh=rank_map.get(home,80);  ra=rank_map.get(away,80)
-            sv_h=squad_value_map.get(home,200); sv_a=squad_value_map.get(away,200)
-            row={"h_win_rate":fh["win_rate"],"h_draw_rate":fh["draw_rate"],"h_goals_scored_avg":fh["goals_scored_avg"],"h_goals_conceded_avg":fh["goals_conceded_avg"],"h_clean_sheets_rate":fh["clean_sheets_rate"],"h_goal_diff_avg":fh["goal_diff_avg"],"h_form_pts":fh["form_pts"],"h_fifa_rank":rh,"h_elo":eh,"h_elo_expected":elo_exp(eh,ea),"a_win_rate":fa["win_rate"],"a_draw_rate":fa["draw_rate"],"a_goals_scored_avg":fa["goals_scored_avg"],"a_goals_conceded_avg":fa["goals_conceded_avg"],"a_clean_sheets_rate":fa["clean_sheets_rate"],"a_goal_diff_avg":fa["goal_diff_avg"],"a_form_pts":fa["form_pts"],"a_fifa_rank":ra,"a_elo":ea,"rank_diff":rh-ra,"elo_diff":eh-ea,"elo_expected_home":elo_exp(eh,ea),"h2h_win_rate":hh["h2h_win_rate"],"h2h_goal_diff":hh["h2h_goal_diff"],"h2h_games":hh["h2h_games"],"neutral":1,"h_confederation":conf_map.get(home,3),"a_confederation":conf_map.get(away,3),"h_squad_value":sv_h,"a_squad_value":sv_a,"h_wc_appearances":wc_apps_map.get(home,5),"a_wc_appearances":wc_apps_map.get(away,5),"h_squad_age":squad_age_map.get(home,27.0),"a_squad_age":squad_age_map.get(away,27.0),"squad_value_diff":sv_h-sv_a,"wc_exp_diff":wc_apps_map.get(home,5)-wc_apps_map.get(away,5)}
-            proba=model.predict_proba([[row[c] for c in FEAT_COLS]])[0]
-            _ko[k]=(float(proba[2]),float(proba[1]),float(proba[0]))
+            fv = _build_feat_vec(home, away, date, log, rank_map, elo_map, conf_map,
+                                 squad_value_map, wc_apps_map, squad_age_map, FEAT_COLS)
+            ph, pd_, pa = _ens_proba(home, away, fv, model, rf_model, dc_attack, dc_defense, dc_rho)
+            _ko[k] = (ph, pd_, pa)
         return _ko[k]
 
     def sim_m(home,away,date,ko=False):
@@ -970,10 +1157,19 @@ if __name__ == "__main__":
     print("\n🚀 ATUALIZAÇÃO COPA 2026\n")
     step0_freeze_probs()   # congela probs pré-jogo ANTES de retreinar
     step1_update_history()
-    model, FEAT_COLS, log, rank_map, elo_map, conf_map, squad_value_map, wc_apps_map, squad_age_map = step2_retrain()
+    (model, rf_model, dc_attack, dc_defense, dc_rho,
+     FEAT_COLS, log, rank_map, elo_map, conf_map,
+     squad_value_map, wc_apps_map, squad_age_map) = step2_retrain()
+    step2b_retrofreeze(model, rf_model, dc_attack, dc_defense, dc_rho,
+                       FEAT_COLS, log, rank_map, elo_map, conf_map,
+                       squad_value_map, wc_apps_map, squad_age_map)
     games_data, outrights_raw = step3_fetch_odds()
     market_probs, mkt_champion = step4_parse_odds(games_data, outrights_raw)
-    df_bl = step5_blend(model, FEAT_COLS, log, rank_map, elo_map, market_probs)
-    results = step6_monte_carlo(model, FEAT_COLS, log, rank_map, elo_map, df_bl)
+    df_bl = step5_blend(model, rf_model, dc_attack, dc_defense, dc_rho,
+                        FEAT_COLS, log, rank_map, elo_map, conf_map,
+                        squad_value_map, wc_apps_map, squad_age_map, market_probs)
+    results = step6_monte_carlo(model, rf_model, dc_attack, dc_defense, dc_rho,
+                                FEAT_COLS, log, rank_map, elo_map, conf_map,
+                                squad_value_map, wc_apps_map, squad_age_map, df_bl)
     step7_update_html(results, df_bl, mkt_champion)
     print("\n✅ Pronto! Faça git add . && git commit -m 'Atualiza rodada' && git push\n")
