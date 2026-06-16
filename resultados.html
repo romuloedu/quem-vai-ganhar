@@ -214,6 +214,13 @@ main{padding:16px 0 48px}
   font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;
   color:#aaa;text-align:right;white-space:nowrap;
 }
+.log-prev-tag{
+  font-family:'Oswald',sans-serif;font-size:9px;font-weight:500;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:#f5c518;margin-left:5px;white-space:nowrap;
+}
+.log-prow.is-prev .log-plabel{color:#f5c518}
+.log-prow.is-prev .log-pval{color:#f5c518}
 .log-resultado{
   display:flex;align-items:center;gap:10px;flex-wrap:wrap;
   padding:10px 18px;background:#161616;
@@ -529,20 +536,20 @@ function buildCard(j){
     <div class="log-body">
       <p class="log-probs-label">probabilidade pré-jogo</p>
       <div class="log-probs">
-        <div class="log-prow">
+        <div class="log-prow${prev==='home'?' is-prev':''}">
           <span class="log-plabel${isH?' hl':''}">${j.home}</span>
           <div class="log-track"><div class="log-pfill w" data-w="${(+j.ph).toFixed(2)}%" style="width:0"></div></div>
-          <span class="log-pval">${(+j.ph).toFixed(2)}%</span>
+          <span class="log-pval">${(+j.ph).toFixed(2)}%${prev==='home'?'<span class="log-prev-tag">previsto</span>':''}</span>
         </div>
-        <div class="log-prow">
+        <div class="log-prow${prev==='draw'?' is-prev':''}">
           <span class="log-plabel">Empate</span>
           <div class="log-track"><div class="log-pfill d" data-w="${(+j.pd).toFixed(2)}%" style="width:0"></div></div>
-          <span class="log-pval">${(+j.pd).toFixed(2)}%</span>
+          <span class="log-pval">${(+j.pd).toFixed(2)}%${prev==='draw'?'<span class="log-prev-tag">previsto</span>':''}</span>
         </div>
-        <div class="log-prow">
+        <div class="log-prow${prev==='away'?' is-prev':''}">
           <span class="log-plabel${isA?' hl':''}">${j.away}</span>
           <div class="log-track"><div class="log-pfill l" data-w="${(+j.pa).toFixed(2)}%" style="width:0"></div></div>
-          <span class="log-pval">${(+j.pa).toFixed(2)}%</span>
+          <span class="log-pval">${(+j.pa).toFixed(2)}%${prev==='away'?'<span class="log-prev-tag">previsto</span>':''}</span>
         </div>
       </div>
     </div>
