@@ -1,104 +1,110 @@
 {
   "México|África do Sul": {
-    "ph": 68.97,
-    "pd": 22.92,
-    "pa": 8.11,
+    "ph": 66.35,
+    "pd": 25.83,
+    "pa": 7.82,
     "placar_prev": "1-0"
   },
   "Coreia do Sul|República Tcheca": {
-    "ph": 56.45,
-    "pd": 22.1,
-    "pa": 21.46,
-    "placar_prev": "2-1"
+    "ph": 54.87,
+    "pd": 23.73,
+    "pa": 21.4,
+    "placar_prev": "1-0"
   },
   "Canadá|Bósnia e Herzegovina": {
-    "ph": 34.82,
-    "pd": 40.47,
-    "pa": 24.71,
+    "ph": 33.54,
+    "pd": 39.68,
+    "pa": 26.77,
     "placar_prev": "0-0"
   },
   "Estados Unidos|Paraguai": {
-    "ph": 67.66,
-    "pd": 17.73,
-    "pa": 14.61,
-    "placar_prev": "2-0"
+    "ph": 66.64,
+    "pd": 17.58,
+    "pa": 15.78,
+    "placar_prev": "2-1"
   },
   "Catar|Suíça": {
-    "ph": 9.29,
-    "pd": 14.99,
-    "pa": 75.71,
+    "ph": 9.84,
+    "pd": 16.36,
+    "pa": 73.79,
     "placar_prev": "0-2"
   },
   "Brasil|Marrocos": {
-    "ph": 49.12,
-    "pd": 24.0,
-    "pa": 26.88,
-    "placar_prev": "2-1"
+    "ph": 49.83,
+    "pd": 26.19,
+    "pa": 23.98,
+    "placar_prev": "1-0"
   },
   "Haiti|Escócia": {
-    "ph": 6.75,
-    "pd": 16.91,
-    "pa": 76.34,
-    "placar_prev": "0-2"
+    "ph": 6.33,
+    "pd": 19.86,
+    "pa": 73.8,
+    "placar_prev": "0-1"
   },
   "Austrália|Turquia": {
-    "ph": 55.36,
-    "pd": 26.46,
-    "pa": 18.18,
+    "ph": 54.08,
+    "pd": 26.45,
+    "pa": 19.47,
     "placar_prev": "1-0"
   },
   "Alemanha|Curaçao": {
-    "ph": 89.57,
-    "pd": 6.41,
-    "pa": 4.02,
-    "placar_prev": "3-0"
+    "ph": 85.92,
+    "pd": 10.41,
+    "pa": 3.67,
+    "placar_prev": "2-0"
   },
   "Holanda|Japão": {
-    "ph": 52.39,
-    "pd": 25.34,
-    "pa": 22.27,
+    "ph": 52.09,
+    "pd": 25.59,
+    "pa": 22.32,
     "placar_prev": "1-0"
   },
   "Costa do Marfim|Equador": {
-    "ph": 24.84,
-    "pd": 38.38,
-    "pa": 36.78,
+    "ph": 26.88,
+    "pd": 37.19,
+    "pa": 35.93,
     "placar_prev": "0-0"
   },
   "Suécia|Tunísia": {
-    "ph": 65.44,
-    "pd": 17.82,
-    "pa": 16.73,
-    "placar_prev": "2-1"
-  },
-  "Espanha|Cabo Verde": {
-    "ph": 84.81,
-    "pd": 11.56,
-    "pa": 3.62,
+    "ph": 63.53,
+    "pd": 19.83,
+    "pa": 16.65,
     "placar_prev": "2-0"
   },
+  "Espanha|Cabo Verde": {
+    "ph": 74.48,
+    "pd": 20.82,
+    "pa": 4.7,
+    "placar_prev": "1-0"
+  },
   "Bélgica|Egito": {
-    "ph": 58.18,
-    "pd": 28.75,
-    "pa": 13.08,
+    "ph": 59.3,
+    "pd": 29.57,
+    "pa": 11.13,
     "placar_prev": "1-0"
   },
   "Arábia Saudita|Uruguai": {
-    "ph": 14.93,
-    "pd": 23.51,
-    "pa": 61.56,
+    "ph": 15.55,
+    "pd": 28.44,
+    "pa": 56.01,
     "placar_prev": "0-1"
   },
   "Irã|Nova Zelândia": {
-    "ph": 50.27,
-    "pd": 26.66,
-    "pa": 23.06,
-    "placar_prev": "1-0"
+    "ph": 35.75,
+    "pd": 40.19,
+    "pa": 24.06,
+    "placar_prev": "0-0"
   },
   "França|Senegal": {
-    "ph": 58.9,
-    "pd": 23.9,
-    "pa": 17.2,
+    "ph": 58.52,
+    "pd": 24.7,
+    "pa": 16.78,
     "placar_prev": "1-0"
+  },
+  "Iraque|Noruega": {
+    "ph": 17.84,
+    "pd": 28.08,
+    "pa": 54.08,
+    "placar_prev": "0-1"
   }
 }
