@@ -1125,7 +1125,11 @@ def step7_update_html(results, df_bl, mkt_champion):
 
     # Probabilidades pré-jogo congeladas pelo step0 (antes do retreinamento)
     frozen_path  = DADOS / "frozen_probs.json"
-    frozen_probs = json.load(open(frozen_path)) if frozen_path.exists() else {}
+    if frozen_path.exists():
+        with open(frozen_path) as _fp: frozen_probs = json.load(_fp)
+    else:
+        frozen_probs = {}
+
 
     # Horários oficiais (UTC) vindos da football-data.org, se já buscados
     agenda_path = DADOS / "agenda.json"
