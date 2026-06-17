@@ -154,7 +154,7 @@ footer a:hover{color:#f0f0ee}
     <a href="resultados.html" class="back-link" style="margin-left:20px">Ver resultados</a>
     <p class="kicker">Copa do Mundo 2026</p>
     <h1>Como o modelo<br><span>funciona</span></h1>
-    <p class="header-sub">Uma explicação clara de como calculamos as probabilidades — sem precisar saber programação para entender.</p>
+    <p class="header-sub">O que está por baixo dos números do site, em linguagem humana.</p>
   </div>
 </header>
 
@@ -165,8 +165,8 @@ footer a:hover{color:#f0f0ee}
   <div class="section">
     <p class="section-num">Visão geral</p>
     <h2>O que estamos tentando prever?</h2>
-    <p>Antes de cada jogo, o modelo calcula três probabilidades: a chance de a seleção da casa vencer, a chance de empate e a chance de a seleção visitante vencer. É uma estimativa, não uma certeza — futebol tem muita aleatoriedade.</p>
-    <p>Para chegar a esses números, combinamos três abordagens diferentes (três "modelos") e depois ainda consultamos as cotações do mercado de apostas esportivas, que é uma fonte independente e bastante eficiente de informação. O resultado final é uma média ponderada entre o que o nosso modelo calcula e o que o mercado precifica.</p>
+    <p>Antes de cada jogo, o modelo calcula três probabilidades: a chance de a seleção da casa vencer, a chance de empate e a chance de a visitante vencer. É uma estimativa. Futebol tem muita aleatoriedade e qualquer modelo vai errar bastante.</p>
+    <p>Para chegar nesses números, combinamos três algoritmos diferentes e ainda consultamos as cotações do mercado de apostas. O número final que aparece no site é uma mistura entre o que o modelo calcula e o que o mercado precifica.</p>
   </div>
 
   <!-- 2. DADOS -->
@@ -234,72 +234,72 @@ footer a:hover{color:#f0f0ee}
     <div class="cards">
       <div class="card">
         <p class="card-title">XGBoost</p>
-        <p>Um algoritmo de machine learning que aprende padrões nos dados históricos combinando centenas de "árvores de decisão" pequenas. É muito bom para identificar combinações não-óbvias de variáveis. Por exemplo: pode aprender que uma seleção com boa forma recente <em>e</em> ranking alto <em>e</em> elenco valioso tem chance de vitória maior do que a soma das partes sugeriria.</p>
+        <p>Um algoritmo de machine learning que combina centenas de pequenas "árvores de decisão" para encontrar padrões nos dados históricos. O legal é que ele consegue capturar combinações que não são óbvias: por exemplo, pode aprender que uma seleção com boa forma recente, ranking alto e elenco valioso tem chance de vitória maior do que cada um desses fatores sugeriria separado.</p>
       </div>
       <div class="card">
         <p class="card-title">Random Forest</p>
-        <p>Funciona de forma parecida com o XGBoost — também usa múltiplas árvores de decisão — mas de maneira independente e com mais aleatoriedade intencional. Por ser construído diferente, tende a "errar" em casos diferentes do XGBoost. Combiná-los torna as previsões mais robustas.</p>
+        <p>Também usa árvores de decisão, mas construídas de forma mais independente e com mais aleatoriedade. Por ser diferente do XGBoost, tende a errar em jogos diferentes. Juntos, os dois se compensam.</p>
       </div>
       <div class="card">
         <p class="card-title">Dixon-Coles</p>
-        <p>Um modelo estatístico clássico de 1997, baseado na distribuição de Poisson (usada para modelar eventos raros). Em vez de prever o resultado diretamente, estima a probabilidade de cada placar possível (0-0, 1-0, 2-1, etc.) com base no poder de ataque e defesa histórico de cada seleção. A soma das probabilidades dos placares dá o resultado.</p>
+        <p>Um modelo estatístico de 1997 que funciona diferente dos dois acima. Em vez de prever o resultado direto, ele estima a probabilidade de cada placar possível (0-0, 1-0, 2-1...) com base no histórico de ataque e defesa de cada seleção. Soma as probabilidades dos placares de vitória, empate e derrota e pronto.</p>
       </div>
     </div>
-    <p style="margin-top:20px">Os dois primeiros (XGBoost e Random Forest) são modelos de machine learning "supervisionados": aprendem a partir de exemplos históricos com resultado conhecido. O Dixon-Coles é um modelo probabilístico tradicional, mais interpretável matematicamente.</p>
+    <p style="margin-top:20px">XGBoost e Random Forest são modelos de machine learning: aprendem olhando para resultados do passado. O Dixon-Coles é mais antigo e mais matemático, mas os três chegam a probabilidades parecidas na maioria dos jogos.</p>
   </div>
 
   <!-- 5. ENSEMBLE -->
   <div class="section">
     <p class="section-num">Etapa 4 · Combinação</p>
     <h2>Como combinamos os três modelos?</h2>
-    <p>Cada modelo gera três probabilidades: P(casa vence), P(empate), P(visitante vence). A probabilidade final do ensemble é simplesmente a <strong>média aritmética</strong> das três previsões.</p>
-    <p>Por exemplo: se o XGBoost diz que o Brasil tem 55% de chance de vencer, o Random Forest diz 50% e o Dixon-Coles diz 53%, o ensemble usa 52,7%. Simples, mas eficaz — pesquisas mostram que a média de vários modelos costuma superar qualquer modelo individual.</p>
-    <p>Esse princípio tem nome: <em>wisdom of crowds</em> (sabedoria das multidões). Quando os modelos discordam, a média é mais estável. Quando concordam, a confiança aumenta.</p>
+    <p>Cada modelo gera três probabilidades: casa vence, empate, visitante vence. A probabilidade final é a <strong>média dos três</strong>.</p>
+    <p>Exemplo: se o XGBoost diz que o Brasil tem 55% de chance de vencer, o Random Forest diz 50% e o Dixon-Coles diz 53%, o número final é 52,7%. Simples. E funciona: na prática, a média de modelos diferentes quase sempre supera qualquer modelo sozinho.</p>
+    <p>Quando os três concordam, há mais confiança. Quando discordam muito, é sinal de que o jogo é difícil de prever mesmo.</p>
   </div>
 
   <!-- 6. ODDS BLENDING -->
   <div class="section">
     <p class="section-num">Etapa 5 · Mercado</p>
     <h2>Por que misturamos com odds de apostas?</h2>
-    <p>Casas de apostas esportivas processam enormes volumes de apostas e ajustam suas cotações em tempo real. As odds resultantes tendem a refletir muito bem as probabilidades reais dos eventos — o mercado é, coletivamente, bastante eficiente.</p>
-    <p>Por isso, a probabilidade final que exibimos é uma mistura entre o nosso modelo e as odds do mercado, com peso de <strong>65% modelo / 35% mercado</strong> para os jogos da fase de grupos. Para a probabilidade de campeão, usamos <strong>55% modelo / 45% mercado</strong>.</p>
-    <p>Convertemos as odds em probabilidades e ajustamos para remover a margem da casa de apostas (o "vig") antes de misturar. Quando as odds não estão disponíveis, usamos apenas o modelo.</p>
+    <p>Casas de apostas recebem muita aposta e ajustam as cotações o tempo todo. Com tanto dinheiro em jogo, as odds acabam sendo uma referência razoável de probabilidade. Não é perfeito, mas é informação que vale considerar.</p>
+    <p>Por isso, o número final mistura o nosso modelo com o mercado: <strong>65% modelo / 35% mercado</strong> nos jogos da fase de grupos. Para a chance de campeão, o mercado pesa um pouco mais: <strong>55% modelo / 45% mercado</strong>.</p>
+    <p>Antes de misturar, retiramos a margem da casa de apostas das odds. Quando não temos odds disponíveis, usamos só o modelo.</p>
   </div>
 
   <!-- 7. MONTE CARLO -->
   <div class="section">
     <p class="section-num">Etapa 6 · Simulação</p>
     <h2>Como calculamos as chances de campeão?</h2>
-    <p>Para saber qual seleção tem mais chance de ganhar a Copa, precisamos simular todo o torneio — não só os jogos da fase de grupos, mas também as oitavas, quartas, semis e final. Isso é complicado porque dependências entre jogos: quem passa de um grupo afeta quem se encontra nas oitavas.</p>
-    <p>A solução é a <strong>simulação de Monte Carlo</strong>: simulamos o torneio inteiro <strong>100.000 vezes</strong>. Em cada simulação, os resultados dos jogos são sorteados de acordo com as probabilidades do modelo. Ao final, contamos em quantas simulações cada seleção ganhou — isso dá a probabilidade de título.</p>
+    <p>Para saber a chance de cada seleção ganhar a Copa, precisamos simular o torneio inteiro: fase de grupos, oitavas, quartas, semis e final. Não dá pra calcular isso diretamente porque tudo depende de tudo: quem passa do grupo A afeta quem enfrenta nas oitavas, e por aí vai.</p>
+    <p>A saída é a <strong>simulação de Monte Carlo</strong>: jogamos o torneio inteiro <strong>100 mil vezes</strong>. Em cada rodada, os resultados são sorteados conforme as probabilidades do modelo. No final, a chance de cada seleção ser campeã é simplesmente em quantas dessas 100 mil simulações ela ganhou.</p>
 
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-body">
           <p class="step-title">Simula a fase de grupos</p>
-          <p class="step-desc">Para cada jogo restante da fase de grupos, sorteia um resultado (casa vence / empate / visitante vence) de acordo com as probabilidades blendadas. Os jogos já disputados têm resultado fixo.</p>
+          <p class="step-desc">Para cada jogo que ainda não aconteceu, sorteia um resultado (vitória / empate / derrota) conforme as probabilidades calculadas. Jogos já jogados ficam com o resultado real.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-body">
           <p class="step-title">Classifica os grupos</p>
-          <p class="step-desc">Com todos os resultados simulados, calcula pontuação e saldo de gols de cada seleção em cada grupo. Determina o 1º e 2º colocado de cada grupo (com critérios de desempate).</p>
+          <p class="step-desc">Com todos os resultados em mãos, calcula pontuação e saldo de gols de cada seleção. Define quem passa em 1º e 2º de cada grupo, com critérios de desempate.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-body">
           <p class="step-title">Simula o mata-mata</p>
-          <p class="step-desc">Monta os confrontos das oitavas de final com base na tabela da FIFA (1º do Grupo A vs. 2º do Grupo B, etc.). Para cada jogo, calcula novas probabilidades entre as duas seleções e sorteia o vencedor.</p>
+          <p class="step-desc">Monta os confrontos do mata-mata conforme a chave da FIFA. Para cada jogo, calcula as probabilidades entre as duas seleções que chegaram até ali e sorteia o vencedor.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">4</div>
         <div class="step-body">
           <p class="step-title">Repete 100.000 vezes</p>
-          <p class="step-desc">O processo completo é repetido 100 mil vezes. Ao final, a probabilidade de cada seleção chegar a cada fase (ou ganhar o título) é simplesmente a fração das simulações em que isso aconteceu.</p>
+          <p class="step-desc">Os passos 1 a 3 se repetem 100 mil vezes. A chance de cada seleção ganhar o título é a proporção de simulações em que isso aconteceu.</p>
         </div>
       </div>
     </div>
@@ -310,10 +310,10 @@ footer a:hover{color:#f0f0ee}
     <p class="section-num">Contexto</p>
     <h2>Quão preciso é o modelo?</h2>
     <div class="accuracy-box">
-      <p>Prever resultados de futebol é inerentemente difícil. Mesmo os melhores modelos do mundo erram muitas vezes — o futebol tem muito mais aleatoriedade do que esportes como basquete ou baseball.</p>
-      <p>Para referência: um modelo que simplesmente chuta "casa vence sempre" acerta cerca de <strong>45% dos jogos</strong>. Um modelo aleatório que respeita as frequências históricas (vitória da casa, empate, vitória do visitante) acerta por volta de <strong>38%</strong>. Modelos mais sofisticados, como o nosso, costumam atingir entre <strong>55% e 60%</strong> de acertos em 3 resultados possíveis — e isso já é considerado bom.</p>
-      <p>O nosso ensemble foi treinado em ~979 jogos e, durante o torneio, você pode acompanhar em tempo real quantas previsões acertamos na <a href="resultados.html" style="color:#00a84f;text-decoration:none">página de resultados</a>.</p>
-      <p>Mais importante do que o acerto absoluto é a <strong>calibração</strong>: quando o modelo diz "70% de chance", isso deveria acontecer aproximadamente 7 vezes em 10. Um modelo bem calibrado é mais útil do que um modelo que apenas diz "sempre vai ganhar quem é favorito".</p>
+      <p>Prever futebol é difícil. O esporte tem muito mais aleatoriedade do que basquete ou baseball, e até os melhores modelos do mundo erram bastante.</p>
+      <p>Para ter uma referência: um modelo que chuta "casa vence sempre" acerta cerca de <strong>45% dos jogos</strong>. Um modelo aleatório que respeita as frequências históricas acerta por volta de <strong>38%</strong>. Modelos como o nosso costumam ficar entre <strong>55% e 60%</strong> de acertos com 3 opções possíveis, o que já é considerado bom.</p>
+      <p>Nosso ensemble foi treinado em ~979 jogos. Durante o torneio, você pode ver em tempo real quantas previsões acertamos na <a href="resultados.html" style="color:#00a84f;text-decoration:none">página de resultados</a>.</p>
+      <p>Mas acerto puro não é tudo. O que realmente importa é a <strong>calibração</strong>: quando o modelo diz "70% de chance", isso deveria acontecer perto de 7 vezes em 10. Um modelo bem calibrado é mais honesto do que um que só aponta o favorito e ignora a incerteza.</p>
     </div>
   </div>
 
@@ -332,11 +332,11 @@ footer a:hover{color:#f0f0ee}
       </div>
       <div class="gloss-item">
         <span class="gloss-term">Ensemble</span>
-        <span class="gloss-def">Combinação de vários modelos. A ideia é que a média de múltiplas previsões independentes tende a ser mais precisa do que qualquer previsão individual.</span>
+        <span class="gloss-def">Combinação de vários modelos. Na prática, a média de previsões diferentes costuma ser melhor do que qualquer uma delas sozinha.</span>
       </div>
       <div class="gloss-item">
         <span class="gloss-term">Calibração</span>
-        <span class="gloss-def">Qualidade de um modelo em que as probabilidades previstas correspondem às frequências observadas. Um modelo bem calibrado que diz "50%" acerta em ~50% dos casos.</span>
+        <span class="gloss-def">Quando as probabilidades previstas batem com o que acontece de verdade. Um modelo que diz "50% de chance" e acerta em metade dos casos está bem calibrado.</span>
       </div>
       <div class="gloss-item">
         <span class="gloss-term">Odds / Cotações</span>
@@ -348,7 +348,7 @@ footer a:hover{color:#f0f0ee}
       </div>
       <div class="gloss-item">
         <span class="gloss-term">Elo</span>
-        <span class="gloss-def">Sistema de classificação inventado pelo físico Arpad Elo para o xadrez, amplamente adaptado para outros esportes. Vencer adversários mais fortes dá mais pontos; perder para adversários mais fracos tira mais pontos.</span>
+        <span class="gloss-def">Sistema de classificação inventado pelo físico Arpad Elo para o xadrez e depois adaptado para vários outros esportes. Vencer adversários fortes dá mais pontos; perder para adversários fracos tira mais.</span>
       </div>
     </div>
   </div>
