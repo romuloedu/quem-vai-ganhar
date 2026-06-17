@@ -187,5 +187,14 @@
     "away_score": 1,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-17",
+    "home_team": "Inglaterra",
+    "away_team": "Croácia",
+    "home_score": 4,
+    "away_score": 2,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]
