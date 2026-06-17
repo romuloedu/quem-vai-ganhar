@@ -369,6 +369,22 @@ header h1 span{color:#f5c518}
   .clasico-detail{width:100%}
 }
 
+/* ── SITE NAV ── */
+.site-nav{background:#0a0a0a;border-bottom:1px solid #1a1a1a}
+.site-nav .wrap{display:flex;padding-top:0;padding-bottom:0}
+.nav-links{display:flex}
+.nav-link{
+  font-family:'Oswald',sans-serif;
+  font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;
+  color:#444;text-decoration:none;
+  padding:13px 14px;
+  border-bottom:2px solid transparent;
+  transition:color .15s,border-color .15s;
+  white-space:nowrap;
+}
+.nav-link:hover{color:#888}
+.nav-link.active{color:#f0f0ee;border-bottom-color:#00a84f}
+
 /* ── CTA RESULTADOS ── */
 .res-cta{
   display:inline-flex;align-items:center;gap:8px;
@@ -595,6 +611,16 @@ footer{
 </head>
 <body>
 
+<nav class="site-nav">
+  <div class="wrap">
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active">Início</a>
+      <a href="resultados.html" class="nav-link">Resultados</a>
+      <a href="modelo.html" class="nav-link">Como funciona</a>
+    </div>
+  </div>
+</nav>
+
 <header>
   <div class="wrap">
     <p class="kicker">Copa do Mundo 2026</p>
@@ -685,7 +711,6 @@ footer{
     <h2 class="sec-title">Como as previsões<br>estão indo?</h2>
     <p class="sec-body">Acompanhe o que previmos antes de cada jogo e o que de fato aconteceu em campo. Atualizado a cada rodada.</p>
     <a href="resultados.html" class="res-cta">Ver todos os resultados</a>
-    <a href="modelo.html" class="res-cta" style="margin-left:16px;background:transparent;border:2px solid #00a84f;color:#00a84f">Como o modelo funciona</a>
   </div>
 </section>
 

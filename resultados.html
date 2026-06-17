@@ -19,16 +19,24 @@ body{
 }
 .wrap{width:100%;max-width:880px;margin:0 auto;padding:0 24px}
 
+/* ── SITE NAV ── */
+.site-nav{background:#0a0a0a;border-bottom:1px solid #1a1a1a}
+.site-nav .wrap{display:flex;padding-top:0;padding-bottom:0}
+.nav-links{display:flex}
+.nav-link{
+  font-family:'Oswald',sans-serif;
+  font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;
+  color:#444;text-decoration:none;
+  padding:13px 14px;
+  border-bottom:2px solid transparent;
+  transition:color .15s,border-color .15s;
+  white-space:nowrap;
+}
+.nav-link:hover{color:#888}
+.nav-link.active{color:#f0f0ee;border-bottom-color:#00a84f}
+
 /* ── HEADER ── */
 header{background:#0d0d0d;border-bottom:3px solid #00a84f;padding:36px 0 30px}
-.back-link{
-  display:inline-flex;align-items:center;gap:6px;
-  font-family:'Oswald',sans-serif;
-  font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;
-  color:#888;text-decoration:none;margin-bottom:18px;
-  transition:color .2s;
-}
-.back-link:hover{color:#999}
 .kicker{
   font-family:'Oswald',sans-serif;
   font-size:11px;font-weight:500;
@@ -350,10 +358,18 @@ footer{background:#0a0a0a;border-top:1px solid #1a1a1a;padding:28px 0}
 </head>
 <body>
 
+<nav class="site-nav">
+  <div class="wrap">
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Início</a>
+      <a href="resultados.html" class="nav-link active">Resultados</a>
+      <a href="modelo.html" class="nav-link">Como funciona</a>
+    </div>
+  </div>
+</nav>
+
 <header>
   <div class="wrap">
-    <a href="index.html" class="back-link">Voltar à página principal</a>
-    <a href="modelo.html" class="back-link" style="margin-left:20px">Como o modelo funciona</a>
     <p class="kicker">Copa do Mundo 2026</p>
     <h1>Fase de grupos.<br>Previsões e <span>resultados.</span></h1>
     <p class="header-sub">Antes de cada jogo, estimamos a chance de cada resultado. Veja o que previmos e compare com o que aconteceu.</p>
