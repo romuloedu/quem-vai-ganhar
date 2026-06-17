@@ -476,23 +476,26 @@ def step2_retrain():
     X = np.array(X_rows, dtype=np.float32)
     y = np.array(y_rows)
 
+    cv2 = StratifiedKFold(n_splits=2, shuffle=True, random_state=SEED)
+
     model = CalibratedClassifierCV(
         xgb.XGBClassifier(
-            objective="multi:softprob",num_class=3,n_estimators=400,
-            learning_rate=0.04,max_depth=4,subsample=0.8,colsample_bytree=0.75,
-            min_child_weight=3,gamma=0.1,use_label_encoder=False,
-            eval_metric="mlogloss",random_state=SEED,verbosity=0,
+            objective="multi:softprob", num_class=3, n_estimators=400,
+            learning_rate=0.04, max_depth=4, subsample=0.8, colsample_bytree=0.75,
+            min_child_weight=3, gamma=0.1, use_label_encoder=False,
+            eval_metric="mlogloss", random_state=SEED, verbosity=0,
+            nthread=1, tree_method="hist",
         ),
-        method="isotonic", cv=StratifiedKFold(n_splits=5, shuffle=True, random_state=SEED)
+        method="isotonic", cv=cv2,
     )
     model.fit(X, y)
 
     rf_model = CalibratedClassifierCV(
         RandomForestClassifier(
-            n_estimators=400, max_depth=8, min_samples_leaf=3,
-            max_features="sqrt", random_state=SEED, n_jobs=-1,
+            n_estimators=100, max_depth=8, min_samples_leaf=3,
+            max_features="sqrt", random_state=SEED, n_jobs=1,
         ),
-        method="isotonic", cv=StratifiedKFold(n_splits=5, shuffle=True, random_state=SEED)
+        method="isotonic", cv=cv2,
     )
     rf_model.fit(X, y)
 
@@ -736,15 +739,89 @@ def step6_monte_carlo(model, rf_model, dc_attack, dc_defense, dc_rho,
     for _,r in df_bl.iterrows():
         prob_cache[(r["home_team"],r["away_team"])]=(r["p_home_win"],r["p_draw"],r["p_away_win"])
 
-    _ko={}
+    # Pre-compute KO cache in batch to avoid per-call model overhead during simulation
+    all_teams = df_teams["team"].tolist()
+    ko_dates_list = [DATES["round32"], DATES["r16"], DATES["qf"], DATES["sf"], DATES["final"]]
+
+    def _elo_exp_ko(ea, eb): return 1 / (1 + 10 ** ((eb - ea) / 400))
+
+    # Cache rolling form per (team, date) to avoid redundant log scans
+    _rf_ko = {}
+    def _rf_for(team, before_ts):
+        k = (team, before_ts)
+        if k not in _rf_ko:
+            past = log[(log["team"] == team) & (log["date"] < before_ts)].tail(10)
+            if len(past) == 0:
+                _rf_ko[k] = {"win_rate":0.5,"draw_rate":0.25,"goals_scored_avg":1.5,
+                              "goals_conceded_avg":1.2,"clean_sheets_rate":0.3,
+                              "goal_diff_avg":0.3,"form_pts":0.5}
+            else:
+                _n=len(past); wins=(past["result"]=="W").sum(); draws=(past["result"]=="D").sum()
+                wts=np.exp(np.linspace(-1,0,_n)); wts/=wts.sum()
+                gf=past["goals_for"].values; ga=past["goals_against"].values
+                _rf_ko[k]={"win_rate":wins/_n,"draw_rate":draws/_n,
+                            "goals_scored_avg":np.average(gf,weights=wts),
+                            "goals_conceded_avg":np.average(ga,weights=wts),
+                            "clean_sheets_rate":(ga==0).sum()/_n,
+                            "goal_diff_avg":np.average(gf-ga,weights=wts),
+                            "form_pts":(wins*3+draws)/(_n*3)}
+        return _rf_ko[k]
+
+    ko_keys = []; ko_fvs = []
+    for date_str in ko_dates_list:
+        before = pd.Timestamp(date_str)
+        for team in all_teams:
+            _rf_for(team, before)  # warm up cache
+        cut5 = before - pd.DateOffset(years=5)
+        for home in all_teams:
+            for away in all_teams:
+                if home == away: continue
+                fh = _rf_for(home, before); fa = _rf_for(away, before)
+                h = log[(log["team"]==home)&(log["opponent"]==away)&
+                        (log["date"]>=cut5)&(log["date"]<before)]
+                if len(h)==0: hh={"h2h_win_rate":0.5,"h2h_goal_diff":0.0,"h2h_games":0}
+                else: hh={"h2h_win_rate":(h["result"]=="W").sum()/len(h),
+                           "h2h_goal_diff":(h["goals_for"]-h["goals_against"]).mean(),
+                           "h2h_games":len(h)}
+                eh=elo_map.get(home,1550); ea=elo_map.get(away,1550)
+                rh=rank_map.get(home,80); ra=rank_map.get(away,80)
+                sv_h=squad_value_map.get(home,float(np.log1p(200)))
+                sv_a=squad_value_map.get(away,float(np.log1p(200)))
+                row={"h_win_rate":fh["win_rate"],"h_draw_rate":fh["draw_rate"],
+                     "h_goals_scored_avg":fh["goals_scored_avg"],"h_goals_conceded_avg":fh["goals_conceded_avg"],
+                     "h_clean_sheets_rate":fh["clean_sheets_rate"],"h_goal_diff_avg":fh["goal_diff_avg"],
+                     "h_form_pts":fh["form_pts"],"h_fifa_rank":rh,"h_elo":eh,
+                     "h_elo_expected":_elo_exp_ko(eh,ea),
+                     "a_win_rate":fa["win_rate"],"a_draw_rate":fa["draw_rate"],
+                     "a_goals_scored_avg":fa["goals_scored_avg"],"a_goals_conceded_avg":fa["goals_conceded_avg"],
+                     "a_clean_sheets_rate":fa["clean_sheets_rate"],"a_goal_diff_avg":fa["goal_diff_avg"],
+                     "a_form_pts":fa["form_pts"],"a_fifa_rank":ra,"a_elo":ea,
+                     "rank_diff":rh-ra,"elo_diff":eh-ea,"elo_expected_home":_elo_exp_ko(eh,ea),
+                     "h2h_win_rate":hh["h2h_win_rate"],"h2h_goal_diff":hh["h2h_goal_diff"],
+                     "h2h_games":hh["h2h_games"],"neutral":1,
+                     "h_confederation":conf_map.get(home,3),"a_confederation":conf_map.get(away,3),
+                     "h_squad_value":sv_h,"a_squad_value":sv_a,
+                     "h_wc_appearances":wc_apps_map.get(home,5),"a_wc_appearances":wc_apps_map.get(away,5),
+                     "h_squad_age":squad_age_map.get(home,27.0),"a_squad_age":squad_age_map.get(away,27.0),
+                     "squad_value_diff":sv_h-sv_a,
+                     "wc_exp_diff":wc_apps_map.get(home,5)-wc_apps_map.get(away,5)}
+                ko_keys.append((home, away, date_str))
+                ko_fvs.append([row[c] for c in FEAT_COLS])
+
+    X_ko = np.array(ko_fvs, dtype=np.float32)
+    xgb_ko = model.predict_proba(X_ko)
+    rf_ko  = rf_model.predict_proba(X_ko)
+    _ko = {}
+    for i, (home, away, date_str) in enumerate(ko_keys):
+        xp=xgb_ko[i]; rp=rf_ko[i]
+        ph_dc, pd_dc, pa_dc = _dc_predict(home, away, dc_attack, dc_defense, dc_rho)
+        ph=(xp[2]+rp[2]+ph_dc)/3; pd_=(xp[1]+rp[1]+pd_dc)/3; pa=(xp[0]+rp[0]+pa_dc)/3
+        s=ph+pd_+pa
+        _ko[(home, away, date_str)] = (ph/s, pd_/s, pa/s)
+    print(f"   ✅ {len(ko_keys):,} pares KO pré-computados em batch", flush=True)
+
     def pred_ko(home, away, date):
-        k = (home, away, date)
-        if k not in _ko:
-            fv = _build_feat_vec(home, away, date, log, rank_map, elo_map, conf_map,
-                                 squad_value_map, wc_apps_map, squad_age_map, FEAT_COLS)
-            ph, pd_, pa = _ens_proba(home, away, fv, model, rf_model, dc_attack, dc_defense, dc_rho)
-            _ko[k] = (ph, pd_, pa)
-        return _ko[k]
+        return _ko.get((home, away, date), (1/3, 1/3, 1/3))
 
     def sim_m(home,away,date,ko=False):
         key=(home,away)
