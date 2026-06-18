@@ -196,5 +196,14 @@
     "away_score": 2,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-17",
+    "home_team": "Gana",
+    "away_team": "Panamá",
+    "home_score": 1,
+    "away_score": 0,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]
