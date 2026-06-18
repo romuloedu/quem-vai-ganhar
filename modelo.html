@@ -242,15 +242,15 @@ footer a:hover{color:#f0f0ee}
     </div>
   </div>
 
-  <!-- 4. TRÊS MODELOS -->
+  <!-- 4. QUATRO MODELOS -->
   <div class="section">
-    <p class="section-num">Etapa 3 · Os três modelos</p>
-    <h2>Três formas de enxergar o jogo</h2>
-    <p>Em vez de depender de um único algoritmo, combinamos três abordagens complementares. Cada uma tem pontos fortes diferentes.</p>
+    <p class="section-num">Etapa 3 · Os quatro modelos</p>
+    <h2>Quatro formas de enxergar o jogo</h2>
+    <p>Em vez de depender de um único algoritmo, combinamos quatro abordagens complementares. Cada uma tem pontos fortes diferentes — incluindo um modelo dedicado a prever empates, que é o resultado mais difícil de capturar.</p>
     <div class="cards">
       <div class="card">
         <p class="card-title">XGBoost</p>
-        <p>Um algoritmo de machine learning que combina centenas de pequenas "árvores de decisão" para encontrar padrões nos dados históricos. O legal é que ele consegue capturar combinações que não são óbvias: por exemplo, pode aprender que uma seleção com boa forma recente, ranking alto e elenco valioso tem chance de vitória maior do que cada um desses fatores sugeriria separado.</p>
+        <p>Um algoritmo de machine learning que combina centenas de pequenas "árvores de decisão" para encontrar padrões nos dados históricos. Consegue capturar combinações que não são óbvias: uma seleção com boa forma recente, ranking alto e elenco valioso tem chance de vitória maior do que cada fator sugeriria separado.</p>
       </div>
       <div class="card">
         <p class="card-title">Random Forest</p>
@@ -258,19 +258,24 @@ footer a:hover{color:#f0f0ee}
       </div>
       <div class="card">
         <p class="card-title">Dixon-Coles</p>
-        <p>Um modelo estatístico de 1997 que funciona diferente dos dois acima. Em vez de prever o resultado direto, ele estima a probabilidade de cada placar possível (0-0, 1-0, 2-1...) com base no histórico de ataque e defesa de cada seleção. Soma as probabilidades dos placares de vitória, empate e derrota e pronto.</p>
+        <p>Um modelo estatístico de 1997 que funciona diferente dos dois acima. Em vez de prever o resultado direto, estima a probabilidade de cada placar possível (0-0, 1-0, 2-1...) com base no histórico de ataque e defesa de cada seleção. Soma as probabilidades dos placares de vitória, empate e derrota.</p>
+      </div>
+      <div class="card">
+        <p class="card-title">Cascata de empate</p>
+        <p>Um modelo em dois estágios focado nos empates. Primeiro pergunta: "a probabilidade desse jogo terminar empatado é alta ou baixa?" Só depois decide quem vence se não for empate. Times com histórico de muitos empates jogando entre si, e confrontos equilibrados no Elo, ativam mais esse componente.</p>
       </div>
     </div>
-    <p style="margin-top:20px">XGBoost e Random Forest são modelos de machine learning: aprendem olhando para resultados do passado. O Dixon-Coles é mais antigo e mais matemático, mas os três chegam a probabilidades parecidas na maioria dos jogos.</p>
+    <p style="margin-top:20px">XGBoost, Random Forest e a cascata de empate são modelos de machine learning. O Dixon-Coles é mais antigo e mais matemático. Os quatro chegam a probabilidades parecidas na maioria dos jogos — mas discordam justamente nos casos mais difíceis, e é nessa discordância que o ensemble ganha.</p>
   </div>
 
   <!-- 5. ENSEMBLE -->
   <div class="section">
     <p class="section-num">Etapa 4 · Combinação</p>
-    <h2>Como combinamos os três modelos?</h2>
-    <p>Cada modelo gera três probabilidades: casa vence, empate, visitante vence. A probabilidade final é a <strong>média dos três</strong>.</p>
-    <p>Exemplo: se o XGBoost diz que o Brasil tem 55% de chance de vencer, o Random Forest diz 50% e o Dixon-Coles diz 53%, o número final é 52,7%. Simples. E funciona: na prática, a média de modelos diferentes quase sempre supera qualquer modelo sozinho.</p>
-    <p>Quando os três concordam, há mais confiança. Quando discordam muito, é sinal de que o jogo é difícil de prever mesmo.</p>
+    <h2>Como combinamos os quatro modelos?</h2>
+    <p>Cada modelo gera três probabilidades: casa vence, empate, visitante vence. A probabilidade final é a <strong>média dos quatro</strong>.</p>
+    <p>Exemplo: se o XGBoost diz que o Brasil tem 55% de chance de vencer, o Random Forest diz 50%, o Dixon-Coles diz 53% e a cascata de empate diz 51%, o número final é 52,25%.</p>
+    <p>O modelo de cascata de empate existe porque empate é o resultado mais difícil de prever. Os modelos de 3 classes (vitória, empate, derrota) tendem a subestimá-lo, pois ele representa só ~25% dos jogos e aparece de forma diluída no treinamento. O classificador em cascata trata o empate separadamente — primeiro decide se o jogo tem perfil de empate, depois quem vence se não for — o que melhora a detecção desse resultado.</p>
+    <p>Quando os quatro concordam, há mais confiança. Quando discordam muito, é sinal de que o jogo é genuinamente difícil de prever.</p>
   </div>
 
   <!-- 6. ODDS BLENDING -->
