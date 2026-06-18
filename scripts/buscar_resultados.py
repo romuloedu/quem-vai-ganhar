@@ -100,11 +100,10 @@ def parse_match(m):
 
 
 def has_game_in_window(existing):
-    """Retorna True se há jogo que precisa de resultado.
+    """Retorna True se há jogo ativo ou recente que justifica chamada à API.
 
-    Janela principal (polling normal):
-      Fase de grupos:   KO+120min até KO+185min
-      Fases eliminat.:  KO+120min até KO+300min
+    Janela principal (ao vivo + resultado):
+      Do KO até KO+max_min (fase de grupos: 185min, eliminatórias: 300min).
 
     Catch-up (resultado perdido por lacuna no cron):
       Qualquer jogo sem resultado cujo KO+max_min já passou mas ocorreu
@@ -130,7 +129,7 @@ def has_game_in_window(existing):
         stage = m.get("stage", "GROUP_STAGE")
         max_min = 185 if stage in GROUP_STAGES else 300
         elapsed_min = (now - ko).total_seconds() / 60
-        if 120 <= elapsed_min <= max_min:
+        if 0 <= elapsed_min <= max_min:
             return True
         # Catch-up: janela já encerrada mas jogo ocorreu nas últimas 36h
         if max_min < elapsed_min <= 36 * 60:
@@ -147,6 +146,7 @@ def main():
         print(f"Fora do período da Copa ({hoje}). Nada a fazer.")
         set_gha_output("new_results", "false")
         set_gha_output("agenda_changed", "false")
+        set_gha_output("live_changed", "false")
         return
 
     if not API_KEY:
@@ -158,9 +158,10 @@ def main():
         existing = json.load(f)
 
     if not has_game_in_window(existing):
-        print("Nenhum jogo na janela de interesse (KO+95min a KO+180min). Pulando chamada à API.")
+        print("Nenhum jogo na janela de interesse. Pulando chamada à API.")
         set_gha_output("new_results", "false")
         set_gha_output("agenda_changed", "false")
+        set_gha_output("live_changed", "false")
         return
 
     existing_keys = {(r["home_team"], r["away_team"], r["date"]) for r in existing}
@@ -171,6 +172,7 @@ def main():
         print(f"Erro ao acessar API: {e}")
         set_gha_output("new_results", "false")
         set_gha_output("agenda_changed", "false")
+        set_gha_output("live_changed", "false")
         return
 
     agenda_changed = update_agenda(matches)
@@ -188,6 +190,35 @@ def main():
             sc = m.get("score", {})
             ft = sc.get("fullTime", {})
             print(f"    FINISHED {m['utcDate'][:10]} {ht} {ft.get('home')}x{ft.get('away')} {at}")
+
+    # ── Placares ao vivo ──────────────────────────────────────────────────────
+    LIVE_STATUSES = {"IN_PLAY", "HALFTIME", "PAUSED", "EXTRA_TIME", "PENALTY_SHOOTOUT"}
+    live_jogos = {}
+    for m in matches:
+        if m.get("status") not in LIVE_STATUSES:
+            continue
+        ht = NAME_MAP.get(m["homeTeam"].get("name", ""), m["homeTeam"].get("name", ""))
+        at = NAME_MAP.get(m["awayTeam"].get("name", ""), m["awayTeam"].get("name", ""))
+        if not ht or not at:
+            continue
+        ft = m.get("score", {}).get("fullTime", {})
+        h = ft.get("home") if ft.get("home") is not None else 0
+        a = ft.get("away") if ft.get("away") is not None else 0
+        live_jogos[f"{ht}|{at}"] = {"home_score": h, "away_score": a, "status": m.get("status")}
+        print(f"    {m.get('status')} {ht} {h}x{a} {at}")
+
+    live_path = DADOS / "placares_ao_vivo.json"
+    old_live = {}
+    if live_path.exists():
+        with open(live_path) as _f:
+            old_live = json.load(_f).get("jogos", {})
+    live_changed = live_jogos != old_live
+    with open(live_path, "w", encoding="utf-8") as _f:
+        json.dump({"jogos": live_jogos}, _f, ensure_ascii=False, indent=2)
+    set_gha_output("live_changed", "true" if live_changed else "false")
+    if live_jogos:
+        print(f"  {len(live_jogos)} jogo(s) ao vivo.")
+    # ─────────────────────────────────────────────────────────────────────────
 
     new_entries = []
     for m in matches:

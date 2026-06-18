@@ -2,12 +2,11 @@ name: Atualizar Resultados Copa 2026
 
 on:
   schedule:
-    # Cobre 14:45–07:45 UTC (toda a janela de jogos da Copa 2026)
-    # Alguns jogos têm KO às 04:00 UTC (00:00 ET) com resultado disponível ~07:00 UTC
-    - cron: '45 14 * * *'       # 14:45 UTC
-    - cron: '*/15 15-23 * * *'  # 15:00–23:45 UTC
-    - cron: '*/15 0-3 * * *'    # 00:00–03:45 UTC
-    - cron: '*/30 4-7 * * *'    # 04:00–07:30 UTC (jogos tarde na América)
+    # Cobre 14:50–07:50 UTC (toda a janela de jogos da Copa 2026)
+    # A cada 10 min para capturar placares ao vivo desde o KO
+    - cron: '50 14 * * *'       # 14:50 UTC (pré-abertura)
+    - cron: '*/10 15-23 * * *'  # 15:00–23:50 UTC (a cada 10 min)
+    - cron: '*/10 0-7 * * *'    # 00:00–07:50 UTC (a cada 10 min)
   workflow_dispatch:
 
 jobs:
@@ -45,11 +44,15 @@ jobs:
         if: steps.buscar.outputs.agenda_changed == 'true' || steps.buscar.outputs.new_results == 'true'
         run: python scripts/injetar_horarios.py
 
+      - name: Injetar placares ao vivo
+        if: steps.buscar.outputs.live_changed == 'true' || steps.buscar.outputs.new_results == 'true'
+        run: python scripts/injetar_ao_vivo.py
+
       - name: Commit e push das mudanças
-        if: steps.buscar.outputs.new_results == 'true' || steps.buscar.outputs.agenda_changed == 'true'
+        if: steps.buscar.outputs.new_results == 'true' || steps.buscar.outputs.agenda_changed == 'true' || steps.buscar.outputs.live_changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add dados/ index.html resultados.html
-          git diff --cached --quiet || git commit -m "Atualiza resultados e previsões"
+          git diff --cached --quiet || git commit -m "Atualiza placares e previsões"
           git push

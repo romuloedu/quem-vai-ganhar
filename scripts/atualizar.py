@@ -1203,6 +1203,7 @@ def step7_update_html(results, df_bl, mkt_champion):
         html_res = re.sub(r'const TEAMS=\[[^\n]*\];', lambda m: f'const TEAMS={teams_json};', html_res)
 
         html_res = re.sub(r'const D_UPDATED_AT="[^"]*";', f'const D_UPDATED_AT="{updated_at}";', html_res)
+        html_res = re.sub(r'const PLACARES_AO_VIVO=\{[^\n]*\};', 'const PLACARES_AO_VIVO={};', html_res)
         with open(html_res_path, "w", encoding="utf-8") as f:
             f.write(html_res)
         print(f"   ✅ resultados.html atualizado ({len(group_games)} jogos)")
