@@ -1,140 +1,146 @@
 {
   "México|África do Sul": {
-    "ph": 64.65,
-    "pd": 26.56,
-    "pa": 8.79,
+    "ph": 63.92,
+    "pd": 25.41,
+    "pa": 10.67,
     "placar_prev": "1-0"
   },
   "Coreia do Sul|República Tcheca": {
-    "ph": 51.06,
-    "pd": 23.84,
-    "pa": 25.1,
-    "placar_prev": "2-1"
-  },
-  "Canadá|Bósnia e Herzegovina": {
-    "ph": 38.41,
-    "pd": 36.47,
-    "pa": 25.12,
+    "ph": 50.56,
+    "pd": 26.23,
+    "pa": 23.21,
     "placar_prev": "1-0"
   },
+  "Canadá|Bósnia e Herzegovina": {
+    "ph": 34.02,
+    "pd": 36.78,
+    "pa": 29.19,
+    "placar_prev": "0-0"
+  },
   "Estados Unidos|Paraguai": {
-    "ph": 58.64,
-    "pd": 22.17,
-    "pa": 19.2,
+    "ph": 59.97,
+    "pd": 22.12,
+    "pa": 17.91,
     "placar_prev": "1-0"
   },
   "Catar|Suíça": {
-    "ph": 14.19,
-    "pd": 18.2,
-    "pa": 67.6,
-    "placar_prev": "0-2"
+    "ph": 18.55,
+    "pd": 17.1,
+    "pa": 64.35,
+    "placar_prev": "1-2"
   },
   "Brasil|Marrocos": {
-    "ph": 49.19,
-    "pd": 26.0,
-    "pa": 24.82,
+    "ph": 49.67,
+    "pd": 24.12,
+    "pa": 26.21,
     "placar_prev": "1-0"
   },
   "Haiti|Escócia": {
-    "ph": 14.92,
-    "pd": 27.65,
-    "pa": 57.44,
+    "ph": 12.42,
+    "pd": 25.86,
+    "pa": 61.72,
     "placar_prev": "0-1"
   },
   "Austrália|Turquia": {
-    "ph": 51.31,
-    "pd": 27.19,
-    "pa": 21.49,
+    "ph": 52.24,
+    "pd": 29.89,
+    "pa": 17.87,
     "placar_prev": "1-0"
   },
   "Alemanha|Curaçao": {
-    "ph": 81.64,
-    "pd": 12.6,
-    "pa": 5.76,
-    "placar_prev": "2-0"
+    "ph": 83.38,
+    "pd": 9.67,
+    "pa": 6.95,
+    "placar_prev": "3-0"
   },
   "Holanda|Japão": {
-    "ph": 52.71,
-    "pd": 26.85,
-    "pa": 20.45,
+    "ph": 52.35,
+    "pd": 27.44,
+    "pa": 20.22,
     "placar_prev": "1-0"
   },
   "Costa do Marfim|Equador": {
-    "ph": 30.51,
-    "pd": 34.3,
-    "pa": 35.19,
-    "placar_prev": "0-1"
+    "ph": 28.39,
+    "pd": 36.11,
+    "pa": 35.51,
+    "placar_prev": "0-0"
   },
   "Suécia|Tunísia": {
-    "ph": 59.08,
-    "pd": 21.84,
-    "pa": 19.08,
-    "placar_prev": "1-0"
+    "ph": 57.84,
+    "pd": 21.58,
+    "pa": 20.58,
+    "placar_prev": "2-1"
   },
   "Espanha|Cabo Verde": {
-    "ph": 71.29,
-    "pd": 22.36,
-    "pa": 6.36,
+    "ph": 73.73,
+    "pd": 20.63,
+    "pa": 5.65,
     "placar_prev": "1-0"
   },
   "Bélgica|Egito": {
-    "ph": 55.41,
-    "pd": 33.17,
-    "pa": 11.42,
+    "ph": 61.47,
+    "pd": 27.13,
+    "pa": 11.4,
     "placar_prev": "1-0"
   },
   "Arábia Saudita|Uruguai": {
-    "ph": 19.51,
-    "pd": 29.42,
-    "pa": 51.08,
+    "ph": 14.64,
+    "pd": 30.97,
+    "pa": 54.39,
     "placar_prev": "0-1"
   },
   "Irã|Nova Zelândia": {
-    "ph": 44.36,
-    "pd": 31.91,
-    "pa": 23.72,
+    "ph": 44.99,
+    "pd": 31.33,
+    "pa": 23.67,
     "placar_prev": "1-0"
   },
   "França|Senegal": {
-    "ph": 59.04,
-    "pd": 24.76,
-    "pa": 16.2,
+    "ph": 62.17,
+    "pd": 22.95,
+    "pa": 14.87,
     "placar_prev": "1-0"
   },
   "Iraque|Noruega": {
-    "ph": 20.03,
-    "pd": 28.46,
-    "pa": 51.5,
+    "ph": 22.73,
+    "pd": 28.43,
+    "pa": 48.84,
     "placar_prev": "0-1"
   },
   "Argentina|Argélia": {
-    "ph": 69.25,
-    "pd": 23.19,
-    "pa": 7.56,
+    "ph": 69.94,
+    "pd": 22.26,
+    "pa": 7.8,
     "placar_prev": "1-0"
   },
   "Áustria|Jordânia": {
-    "ph": 80.88,
-    "pd": 14.87,
-    "pa": 4.26,
+    "ph": 76.35,
+    "pd": 17.41,
+    "pa": 6.23,
     "placar_prev": "2-0"
   },
   "Portugal|RD Congo": {
-    "ph": 69.55,
-    "pd": 24.5,
-    "pa": 5.95,
+    "ph": 70.31,
+    "pd": 23.23,
+    "pa": 6.46,
     "placar_prev": "1-0"
   },
   "Inglaterra|Croácia": {
-    "ph": 35.86,
-    "pd": 26.79,
-    "pa": 37.35,
+    "ph": 36.15,
+    "pd": 27.43,
+    "pa": 36.42,
     "placar_prev": "0-1"
   },
   "Gana|Panamá": {
-    "ph": 40.66,
-    "pd": 29.39,
-    "pa": 29.95,
+    "ph": 37.74,
+    "pd": 31.84,
+    "pa": 30.42,
     "placar_prev": "1-0"
+  },
+  "Uzbequistão|Colômbia": {
+    "ph": 11.18,
+    "pd": 19.91,
+    "pa": 68.9,
+    "placar_prev": "0-1"
   }
 }
