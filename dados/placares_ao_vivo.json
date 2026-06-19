@@ -1,9 +1,9 @@
 {
   "jogos": {
     "Estados Unidos|Austrália": {
-      "home_score": 0,
+      "home_score": 2,
       "away_score": 0,
-      "status": "IN_PLAY"
+      "status": "PAUSED"
     }
   }
 }
