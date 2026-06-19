@@ -166,5 +166,11 @@
     "pd": 31.57,
     "pa": 22.06,
     "placar_prev": "1-0"
+  },
+  "Estados Unidos|Austrália": {
+    "ph": 37.83,
+    "pd": 24.42,
+    "pa": 37.76,
+    "placar_prev": "2-1"
   }
 }
