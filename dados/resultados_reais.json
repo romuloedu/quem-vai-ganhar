@@ -232,5 +232,14 @@
     "away_score": 1,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-18",
+    "home_team": "Canadá",
+    "away_team": "Catar",
+    "home_score": 6,
+    "away_score": 0,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]
