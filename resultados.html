@@ -166,17 +166,15 @@ header h1 span{color:#f5c518}
 
 /* ── GAMES LIST ── */
 main{padding:16px 0 48px}
-.games-list{list-style:none;display:grid;gap:2px}
+.games-list{list-style:none;display:grid;gap:12px}
 
 /* ── LOG ITEMS ── */
 .log-item{background:#1a1a1a;overflow:hidden}
-.log-head{
-  display:grid;grid-template-columns:1fr auto;
-  align-items:start;gap:12px;padding:16px 18px 12px;
-}
+.log-head{padding:16px 18px 12px}
+.log-fase-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
 .log-fase{
   font-family:'Oswald',sans-serif;font-size:10px;font-weight:500;
-  letter-spacing:3px;text-transform:uppercase;color:#f5c518;margin-bottom:5px;
+  letter-spacing:3px;text-transform:uppercase;color:#f5c518;
 }
 .log-times{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .log-flag{font-size:20px;line-height:1;flex-shrink:0}
@@ -216,9 +214,10 @@ main{padding:16px 0 48px}
 .log-plabel.hl{color:#ccc;font-weight:600}
 .log-track{height:5px;background:#222;border-radius:2px;overflow:hidden}
 .log-pfill{height:100%;border-radius:2px;transition:width .7s cubic-bezier(.4,0,.2,1)}
-.log-pfill.w{background:#00a84f}
-.log-pfill.d{background:#f5c518}
-.log-pfill.l{background:#c0392b}
+.log-pfill.w{background:#444}
+.log-pfill.d{background:#444}
+.log-pfill.l{background:#444}
+.log-prow.is-prev .log-pfill{background:#00a84f}
 .log-pval{
   font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;
   color:#aaa;text-align:right;white-space:nowrap;
@@ -227,10 +226,10 @@ main{padding:16px 0 48px}
   display:block;
   font-family:'Oswald',sans-serif;font-size:8px;font-weight:500;
   letter-spacing:1.5px;text-transform:uppercase;
-  color:#f5c518;line-height:1.4;
+  color:#00a84f;line-height:1.4;
 }
-.log-prow.is-prev .log-plabel{color:#f5c518}
-.log-prow.is-prev .log-pval{color:#f5c518}
+.log-prow.is-prev .log-plabel{color:#e0e0e0}
+.log-prow.is-prev .log-pval{color:#e0e0e0}
 .log-resultado{
   display:flex;align-items:center;gap:10px;flex-wrap:wrap;
   padding:10px 18px;background:#161616;
@@ -545,21 +544,20 @@ function buildCard(j){
   li.className='log-item';
   li.innerHTML=`
     <div class="log-head">
-      <div>
+      <div class="log-fase-row">
         <p class="log-fase">Grupo ${j.g} · ${rLabel}${extraCtx}</p>
-        <div class="log-times">
-          <span class="log-flag">${j.hf}</span>
-          <span class="log-nome${isH?' brasil':''}">${j.home}</span>
-          ${vsHtml}
-          <span class="log-nome${isA?' brasil':''}">${j.away}</span>
-          <span class="log-flag">${j.af}</span>
-        </div>
-        <p class="log-venue">${fmtKickoff(j)?`<span class="log-time">${fmtKickoff(j)}</span> <span class="log-tz">Brasília</span> · `:''}${j.venue}</p>
+        <span class="log-badge ${bClass}"${koAttr}>${bText}</span>
       </div>
-      <span class="log-badge ${bClass}"${koAttr}>${bText}</span>
+      <div class="log-times">
+        <span class="log-flag">${j.hf}</span>
+        <span class="log-nome${isH?' brasil':''}">${j.home}</span>
+        ${vsHtml}
+        <span class="log-nome${isA?' brasil':''}">${j.away}</span>
+        <span class="log-flag">${j.af}</span>
+      </div>
+      <p class="log-venue">${fmtKickoff(j)?`<span class="log-time">${fmtKickoff(j)}</span> <span class="log-tz">Brasília</span> · `:''}${j.venue}</p>
     </div>
     <div class="log-body">
-      <p class="log-probs-label">probabilidade pré-jogo</p>
       <div class="log-probs">
         <div class="log-prow${prev==='home'?' is-prev':''}">
           <div><span class="log-plabel${isH?' hl':''}">${j.home}</span>${prev==='home'?'<span class="log-prev-tag">previsto</span>':''}</div>
