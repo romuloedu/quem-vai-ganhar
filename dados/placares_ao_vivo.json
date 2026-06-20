@@ -1,3 +1,9 @@
 {
-  "jogos": {}
+  "jogos": {
+    "Turquia|Paraguai": {
+      "home_score": 0,
+      "away_score": 1,
+      "status": "IN_PLAY"
+    }
+  }
 }
