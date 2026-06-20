@@ -295,5 +295,14 @@
     "away_score": 1,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-20",
+    "home_team": "Alemanha",
+    "away_team": "Costa do Marfim",
+    "home_score": 2,
+    "away_score": 1,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]
