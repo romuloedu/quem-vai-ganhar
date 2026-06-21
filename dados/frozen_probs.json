@@ -214,5 +214,11 @@
     "pd": 31.01,
     "pa": 49.4,
     "placar_prev": "0-1"
+  },
+  "Espanha|Arábia Saudita": {
+    "ph": 73.61,
+    "pd": 23.89,
+    "pa": 2.51,
+    "placar_prev": "1-0"
   }
 }
