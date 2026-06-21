@@ -1,3 +1,9 @@
 {
-  "jogos": {}
+  "jogos": {
+    "Tunísia|Japão": {
+      "home_score": 0,
+      "away_score": 2,
+      "status": "PAUSED"
+    }
+  }
 }
