@@ -331,5 +331,14 @@
     "away_score": 0,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-21",
+    "home_team": "Bélgica",
+    "away_team": "Irã",
+    "home_score": 0,
+    "away_score": 0,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]
