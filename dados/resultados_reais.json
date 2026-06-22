@@ -358,5 +358,14 @@
     "away_score": 3,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-22",
+    "home_team": "Argentina",
+    "away_team": "Áustria",
+    "home_score": 2,
+    "away_score": 0,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]

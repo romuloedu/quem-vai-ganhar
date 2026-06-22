@@ -238,5 +238,11 @@
     "pd": 32.23,
     "pa": 52.78,
     "placar_prev": "0-1"
+  },
+  "Argentina|Áustria": {
+    "ph": 53.64,
+    "pd": 31.41,
+    "pa": 14.94,
+    "placar_prev": "1-0"
   }
 }
