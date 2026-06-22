@@ -349,5 +349,14 @@
     "away_score": 2,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-22",
+    "home_team": "Nova Zelândia",
+    "away_team": "Egito",
+    "home_score": 1,
+    "away_score": 3,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]
