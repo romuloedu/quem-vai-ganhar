@@ -1,3 +1,9 @@
 {
-  "jogos": {}
+  "jogos": {
+    "Nova Zelândia|Egito": {
+      "home_score": 1,
+      "away_score": 0,
+      "status": "PAUSED"
+    }
+  }
 }
