@@ -340,5 +340,14 @@
     "away_score": 0,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-21",
+    "home_team": "Uruguai",
+    "away_team": "Cabo Verde",
+    "home_score": 2,
+    "away_score": 2,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]
