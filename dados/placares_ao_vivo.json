@@ -1,3 +1,9 @@
 {
-  "jogos": {}
+  "jogos": {
+    "Portugal|Uzbequistão": {
+      "home_score": 3,
+      "away_score": 0,
+      "status": "IN_PLAY"
+    }
+  }
 }
