@@ -1,9 +1,14 @@
 {
   "jogos": {
     "França|Iraque": {
+      "home_score": 3,
+      "away_score": 0,
+      "status": "IN_PLAY"
+    },
+    "Noruega|Senegal": {
       "home_score": 1,
       "away_score": 0,
-      "status": "PAUSED"
+      "status": "IN_PLAY"
     }
   }
 }
