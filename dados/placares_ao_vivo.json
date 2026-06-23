@@ -1,3 +1,9 @@
 {
-  "jogos": {}
+  "jogos": {
+    "Inglaterra|Gana": {
+      "home_score": 0,
+      "away_score": 0,
+      "status": "PAUSED"
+    }
+  }
 }
