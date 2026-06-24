@@ -1052,7 +1052,7 @@ function buildLog(){
     if(temResultado){
       const resLabel = {home: `Vitória ${j.home}`, draw: 'Empate', away: `Vitória ${j.away}`}[j.resultado];
       const acertouTexto = j.resultado === previsao
-        ? `Previsão correta, modelo apontava <b>${previsaoLabel}</b> como mais provável`
+        ? `Previsão correta, modelo apontava <b>${previsaoLabel}</b>`
         : `Previsão errada, modelo apontava <b>${previsaoLabel}</b>, aconteceu <b>${resLabel}</b>`;
       resultadoHtml = `
         <div class="log-resultado">

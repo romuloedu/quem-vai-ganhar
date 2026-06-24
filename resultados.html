@@ -230,6 +230,8 @@ main{padding:16px 0 48px}
 }
 .log-prow.is-prev .log-plabel{color:#e0e0e0}
 .log-prow.is-prev .log-pval{color:#e0e0e0}
+.log-equilibrio{margin-top:11px;font-size:11px;color:#8a8a8a;line-height:1.4}
+.log-equilibrio b{color:#00a84f;font-weight:600}
 .log-resultado{
   display:flex;align-items:center;gap:10px;flex-wrap:wrap;
   padding:10px 18px;background:#161616;
@@ -576,6 +578,7 @@ function buildCard(j){
           <span class="log-pval">${(+j.pa).toFixed(2)}%</span>
         </div>
       </div>
+      ${(prev==='draw'&&(+j.pd)<Math.max(+j.ph,+j.pa))?'<p class="log-equilibrio"><b>Jogo equilibrado</b> · empate perto do favorito, o modelo aposta no empate</p>':''}
     </div>
     ${resHtml}`;
   return li;
