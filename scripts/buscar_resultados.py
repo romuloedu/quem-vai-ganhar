@@ -192,7 +192,7 @@ def main():
             print(f"    FINISHED {m['utcDate'][:10]} {ht} {ft.get('home')}x{ft.get('away')} {at}")
 
     # ── Placares ao vivo ──────────────────────────────────────────────────────
-    LIVE_STATUSES = {"IN_PLAY", "HALFTIME", "PAUSED", "EXTRA_TIME", "PENALTY_SHOOTOUT"}
+    LIVE_STATUSES = {"IN_PLAY", "HALFTIME", "PAUSED", "EXTRA_TIME", "PENALTY_SHOOTOUT", "LIVE"}
     live_jogos = {}
     for m in matches:
         if m.get("status") not in LIVE_STATUSES:
