@@ -1020,8 +1020,8 @@ function buildLog(){
   let acertos = 0, jogados = 0;
 
   LOG.forEach(j => {
-    // previsão = empate se p_empate >= k*max(p_casa,p_fora); senão o maior entre casa/fora (k calibrado por backtest)
-    const DRAW_K = 0.75;
+    // previsão = empate se p_empate >= k*max(p_casa,p_fora); calibrado automaticamente nos jogos da Copa
+    const DRAW_K = 0.70;
     const previsao = (j.p_draw >= DRAW_K*Math.max(j.p_home, j.p_away)) ? 'draw' : (j.p_home >= j.p_away ? 'home' : 'away');
     const previsaoLabel = {home:`${j.home}`, draw:'Empate', away:`${j.away}`}[previsao];
 

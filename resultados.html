@@ -507,7 +507,7 @@ let mode='day'; // 'day' | 'group' | 'team'
 let activeGroup=null;
 let activeTeam=null;
 
-const DRAW_K=0.75; // prevê empate se p_empate >= k*max(p_casa,p_fora) — calibrado por backtest
+const DRAW_K=0.70; // prevê empate se p_empate >= k*max(p_casa,p_fora) — calibrado automaticamente nos jogos da Copa
 function previsao(j){const ph=+j.ph,pd=+j.pd,pa=+j.pa;if(pd>=DRAW_K*Math.max(ph,pa))return 'draw';return ph>=pa?'home':'away';}
 
 function buildCard(j){

@@ -44,8 +44,41 @@ import requests
 _POISSON_CACHE: dict = {}
 
 # Limiar de decisão para empate: prevê empate se p_draw >= k * max(p_home, p_away).
-# Calibrado por backtest out-of-sample (RPS/F1) — ver scripts de validação.
+# Calibrado automaticamente nos jogos já jogados da Copa (fallback histórico: 0.75).
 DRAW_THRESHOLD = 0.75
+
+def calibrate_draw_threshold(frozen: dict, reais: list,
+                              fallback: float = 0.75, min_games: int = 10) -> float:
+    """Varre k ∈ [0.30, 1.00] e retorna o que maximiza acurácia nos jogos da Copa.
+    Usa fallback se houver menos de min_games jogos com resultado."""
+    result_map = {}
+    for r in reais:
+        key = f"{r['home_team']}|{r['away_team']}"
+        hs, as_ = r["home_score"], r["away_score"]
+        result_map[key] = "home" if hs > as_ else ("away" if as_ > hs else "draw")
+
+    games = [
+        {"ph": v["ph"] / 100, "pd": v["pd"] / 100, "pa": v["pa"] / 100, "res": result_map[k]}
+        for k, v in frozen.items() if k in result_map
+    ]
+
+    if len(games) < min_games:
+        print(f"   ⚠️  Apenas {len(games)} jogo(s) com resultado — usando k={fallback} (fallback)")
+        return fallback
+
+    best_k, best_acc = fallback, -1.0
+    for k in np.arange(0.30, 1.01, 0.05):
+        correct = sum(
+            1 for g in games
+            if (("draw" if g["pd"] >= k * max(g["ph"], g["pa"]) else ("home" if g["ph"] >= g["pa"] else "away")) == g["res"])
+        )
+        acc = correct / len(games)
+        if acc > best_acc:
+            best_acc, best_k = acc, round(float(k), 2)
+
+    draw_rate = sum(1 for g in games if g["res"] == "draw") / len(games)
+    print(f"   📐 k={best_k:.2f} (acc={best_acc*100:.1f}%, {len(games)} jogos, {draw_rate*100:.1f}% empates na Copa)")
+    return best_k
 
 def _predict_outcome(ph: float, pd: float, pa: float) -> str:
     """Resultado previsto com limiar de empate calibrado (k=DRAW_THRESHOLD)."""
@@ -1164,6 +1197,7 @@ def step7_update_html(results, df_bl, mkt_champion):
     new_html = _dyn_replace(new_html, "s4_title",
         f'<h2 class="sec-title">{s4_title}</h2>')
 
+    new_html = re.sub(r'const DRAW_K\s*=\s*[0-9.]+;', f'const DRAW_K={DRAW_THRESHOLD:.2f};', new_html)
     with open(html_path,"w",encoding="utf-8") as f: f.write(new_html)
 
     print(f"   ✅ index.html atualizado")
@@ -1265,6 +1299,7 @@ def step7_update_html(results, df_bl, mkt_champion):
 
         html_res = re.sub(r'const D_UPDATED_AT="[^"]*";', f'const D_UPDATED_AT="{updated_at}";', html_res)
         html_res = re.sub(r'const PLACARES_AO_VIVO=\{[^\n]*\};', 'const PLACARES_AO_VIVO={};', html_res)
+        html_res = re.sub(r'const DRAW_K=[0-9.]+;', f'const DRAW_K={DRAW_THRESHOLD:.2f};', html_res)
         with open(html_res_path, "w", encoding="utf-8") as f:
             f.write(html_res)
         print(f"   ✅ resultados.html atualizado ({len(group_games)} jogos)")
@@ -1299,6 +1334,18 @@ if __name__ == "__main__":
     np.random.seed(SEED)
     print("\n🚀 ATUALIZAÇÃO COPA 2026\n")
     step0_freeze_probs()   # congela probs pré-jogo ANTES de retreinar
+
+    # Calibrar limiar de empate nos jogos já jogados da Copa
+    print("📐 Calibrando limiar de empate...")
+    global DRAW_THRESHOLD
+    _frozen_now  = json.load(open(DADOS / "frozen_probs.json", encoding="utf-8"))
+    _reais_now   = json.load(open(DADOS / "resultados_reais.json", encoding="utf-8"))
+    DRAW_THRESHOLD = calibrate_draw_threshold(_frozen_now, _reais_now)
+    (DADOS / "draw_threshold.json").write_text(
+        json.dumps({"k": DRAW_THRESHOLD, "n_games": len([r for r in _reais_now])}, ensure_ascii=False),
+        encoding="utf-8"
+    )
+
     step1_update_history()
     (model, rf_model, dc_attack, dc_defense, dc_rho,
      FEAT_COLS, log, rank_map, elo_map, conf_map,
