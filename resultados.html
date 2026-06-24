@@ -550,7 +550,7 @@ function buildCard(j){
     const fav=+j.ph>=+j.pa?j.home:j.away;
     const thrV=(favP*DRAW_K).toFixed(1);
     const pdV=(+j.pd).toFixed(1),fpV=favP.toFixed(1);
-    equilHtml=`<p class="log-equilibrio">Empate com <b>${pdV}%</b> supera o limiar de <span class="thr-val">${thrV}%</span> (75% de ${fav} · ${fpV}%) — modelo prevê empate</p>`;
+    equilHtml=`<p class="log-equilibrio">Empate com <b>${pdV}%</b> supera o limiar de <span class="thr-val">${thrV}%</span> (${(DRAW_K*100).toFixed(0)}% de ${fav} · ${fpV}%) — modelo prevê empate</p>`;
     drawTrackExtra=` has-thr" style="--thr:${thrV}%`;
   }
   // In group/team modes, add the date as context
