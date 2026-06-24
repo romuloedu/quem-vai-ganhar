@@ -212,7 +212,8 @@ main{padding:16px 0 48px}
 .log-prow{display:grid;grid-template-columns:100px 1fr auto;align-items:center;gap:10px}
 .log-plabel{font-size:12px;color:#aaa}
 .log-plabel.hl{color:#ccc;font-weight:600}
-.log-track{height:5px;background:#222;border-radius:2px;overflow:hidden}
+.log-track{height:5px;background:#222;border-radius:2px;position:relative}
+.log-track.has-thr::after{content:'';position:absolute;top:-4px;bottom:-4px;left:var(--thr);width:2px;background:#f5c518;border-radius:1px;transform:translateX(-50%);z-index:2}
 .log-pfill{height:100%;border-radius:2px;transition:width .7s cubic-bezier(.4,0,.2,1)}
 .log-pfill.w{background:#444}
 .log-pfill.d{background:#444}
@@ -232,6 +233,7 @@ main{padding:16px 0 48px}
 .log-prow.is-prev .log-pval{color:#e0e0e0}
 .log-equilibrio{margin-top:11px;font-size:11px;color:#8a8a8a;line-height:1.4}
 .log-equilibrio b{color:#00a84f;font-weight:600}
+.log-equilibrio .thr-val{color:#f5c518;font-weight:600}
 .log-resultado{
   display:flex;align-items:center;gap:10px;flex-wrap:wrap;
   padding:10px 18px;background:#161616;
@@ -541,6 +543,16 @@ function buildCard(j){
       :`Modelo errou · previa <b>${pDesc}</b>, saiu <b>${rDesc}</b>`;
     resHtml=`<div class="log-resultado"><span class="log-resultado-desc">${txt}</span></div>`;
   }
+  const drawEquil=prev==='draw'&&(+j.pd)<Math.max(+j.ph,+j.pa);
+  let equilHtml='',drawTrackExtra='';
+  if(drawEquil){
+    const favP=Math.max(+j.ph,+j.pa);
+    const fav=+j.ph>=+j.pa?j.home:j.away;
+    const thrV=(favP*DRAW_K).toFixed(1);
+    const pdV=(+j.pd).toFixed(1),fpV=favP.toFixed(1);
+    equilHtml=`<p class="log-equilibrio">Empate com <b>${pdV}%</b> supera o limiar de <span class="thr-val">${thrV}%</span> (75% de ${fav} · ${fpV}%) — modelo prevê empate</p>`;
+    drawTrackExtra=` has-thr" style="--thr:${thrV}%`;
+  }
   // In group/team modes, add the date as context
   const extraCtx=(mode!=='day')?`<span style="font-size:10px;color:#888;margin-left:6px">${fmtDate(j.date)}</span>`:'';
   const li=document.createElement('li');
@@ -569,7 +581,7 @@ function buildCard(j){
         </div>
         <div class="log-prow${prev==='draw'?' is-prev':''}">
           <div><span class="log-plabel">Empate</span>${prev==='draw'?'<span class="log-prev-tag">previsto</span>':''}</div>
-          <div class="log-track"><div class="log-pfill d" data-w="${(+j.pd).toFixed(2)}%" style="width:0"></div></div>
+          <div class="log-track${drawTrackExtra}"><div class="log-pfill d" data-w="${(+j.pd).toFixed(2)}%" style="width:0"></div></div>
           <span class="log-pval">${(+j.pd).toFixed(2)}%</span>
         </div>
         <div class="log-prow${prev==='away'?' is-prev':''}">
@@ -578,7 +590,7 @@ function buildCard(j){
           <span class="log-pval">${(+j.pa).toFixed(2)}%</span>
         </div>
       </div>
-      ${(prev==='draw'&&(+j.pd)<Math.max(+j.ph,+j.pa))?'<p class="log-equilibrio"><b>Jogo equilibrado</b> · empate perto do favorito, o modelo aposta no empate</p>':''}
+      ${equilHtml}
     </div>
     ${resHtml}`;
   return li;
