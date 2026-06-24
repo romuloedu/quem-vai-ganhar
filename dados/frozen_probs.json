@@ -166,5 +166,119 @@
     "pd": 26.01,
     "pa": 25.27,
     "placar_prev": "1-0"
+  },
+  "Estados Unidos|Austrália": {
+    "ph": 39.25,
+    "pd": 26.07,
+    "pa": 34.68,
+    "placar_prev": "1-0"
+  },
+  "Escócia|Marrocos": {
+    "ph": 27.58,
+    "pd": 33.76,
+    "pa": 38.66,
+    "placar_prev": "0-1"
+  },
+  "Brasil|Haiti": {
+    "ph": 71.07,
+    "pd": 24.8,
+    "pa": 4.13,
+    "placar_prev": "1-0"
+  },
+  "Turquia|Paraguai": {
+    "ph": 35.8,
+    "pd": 30.76,
+    "pa": 33.44,
+    "placar_prev": "1-0"
+  },
+  "Holanda|Suécia": {
+    "ph": 56.28,
+    "pd": 24.35,
+    "pa": 19.37,
+    "placar_prev": "1-0"
+  },
+  "Alemanha|Costa do Marfim": {
+    "ph": 58.3,
+    "pd": 27.7,
+    "pa": 14.0,
+    "placar_prev": "1-0"
+  },
+  "Equador|Curaçao": {
+    "ph": 48.45,
+    "pd": 40.61,
+    "pa": 10.94,
+    "placar_prev": "1-0"
+  },
+  "Tunísia|Japão": {
+    "ph": 21.14,
+    "pd": 30.8,
+    "pa": 48.07,
+    "placar_prev": "0-1"
+  },
+  "Espanha|Arábia Saudita": {
+    "ph": 68.57,
+    "pd": 24.64,
+    "pa": 6.79,
+    "placar_prev": "1-0"
+  },
+  "Bélgica|Irã": {
+    "ph": 60.72,
+    "pd": 24.96,
+    "pa": 14.32,
+    "placar_prev": "1-0"
+  },
+  "Uruguai|Cabo Verde": {
+    "ph": 57.42,
+    "pd": 32.15,
+    "pa": 10.43,
+    "placar_prev": "1-0"
+  },
+  "Nova Zelândia|Egito": {
+    "ph": 22.43,
+    "pd": 30.25,
+    "pa": 47.32,
+    "placar_prev": "0-1"
+  },
+  "Argentina|Áustria": {
+    "ph": 53.07,
+    "pd": 32.5,
+    "pa": 14.43,
+    "placar_prev": "1-0"
+  },
+  "França|Iraque": {
+    "ph": 70.51,
+    "pd": 24.67,
+    "pa": 4.82,
+    "placar_prev": "1-0"
+  },
+  "Noruega|Senegal": {
+    "ph": 47.76,
+    "pd": 32.65,
+    "pa": 19.59,
+    "placar_prev": "1-0"
+  },
+  "Jordânia|Argélia": {
+    "ph": 19.35,
+    "pd": 26.78,
+    "pa": 53.87,
+    "placar_prev": "0-1"
+  },
+  "Portugal|Uzbequistão": {
+    "ph": 63.9,
+    "pd": 30.87,
+    "pa": 5.23,
+    "placar_prev": "1-0"
+  },
+  "Inglaterra|Gana": {
+    "ph": 62.04,
+    "pd": 29.16,
+    "pa": 8.8,
+    "placar_prev": "1-0"
+  },
+  "Panamá|Croácia": {
+    "ph": 13.24,
+    "pd": 27.44,
+    "pa": 59.33,
+    "placar_prev": "0-1"
   }
 }

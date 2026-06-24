@@ -250,5 +250,176 @@
     "away_score": 0,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-19",
+    "home_team": "Estados Unidos",
+    "away_team": "Austrália",
+    "home_score": 2,
+    "away_score": 0,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-19",
+    "home_team": "Escócia",
+    "away_team": "Marrocos",
+    "home_score": 0,
+    "away_score": 1,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-20",
+    "home_team": "Brasil",
+    "away_team": "Haiti",
+    "home_score": 3,
+    "away_score": 0,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-20",
+    "home_team": "Turquia",
+    "away_team": "Paraguai",
+    "home_score": 0,
+    "away_score": 1,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-20",
+    "home_team": "Holanda",
+    "away_team": "Suécia",
+    "home_score": 5,
+    "away_score": 1,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-20",
+    "home_team": "Alemanha",
+    "away_team": "Costa do Marfim",
+    "home_score": 2,
+    "away_score": 1,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-21",
+    "home_team": "Equador",
+    "away_team": "Curaçao",
+    "home_score": 0,
+    "away_score": 0,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-21",
+    "home_team": "Tunísia",
+    "away_team": "Japão",
+    "home_score": 0,
+    "away_score": 4,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-21",
+    "home_team": "Espanha",
+    "away_team": "Arábia Saudita",
+    "home_score": 5,
+    "away_score": 0,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-21",
+    "home_team": "Bélgica",
+    "away_team": "Irã",
+    "home_score": 0,
+    "away_score": 0,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-21",
+    "home_team": "Uruguai",
+    "away_team": "Cabo Verde",
+    "home_score": 2,
+    "away_score": 2,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-22",
+    "home_team": "Nova Zelândia",
+    "away_team": "Egito",
+    "home_score": 1,
+    "away_score": 3,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-22",
+    "home_team": "Argentina",
+    "away_team": "Áustria",
+    "home_score": 2,
+    "away_score": 0,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-22",
+    "home_team": "França",
+    "away_team": "Iraque",
+    "home_score": 3,
+    "away_score": 0,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-23",
+    "home_team": "Noruega",
+    "away_team": "Senegal",
+    "home_score": 3,
+    "away_score": 2,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-23",
+    "home_team": "Jordânia",
+    "away_team": "Argélia",
+    "home_score": 1,
+    "away_score": 2,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-23",
+    "home_team": "Portugal",
+    "away_team": "Uzbequistão",
+    "home_score": 5,
+    "away_score": 0,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-23",
+    "home_team": "Inglaterra",
+    "away_team": "Gana",
+    "home_score": 0,
+    "away_score": 0,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-23",
+    "home_team": "Panamá",
+    "away_team": "Croácia",
+    "home_score": 0,
+    "away_score": 1,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]
