@@ -185,7 +185,137 @@ footer a:hover{color:#f0f0ee}
     <p>Para chegar nesses números, combinamos três algoritmos diferentes e ainda consultamos as cotações do mercado de apostas. O número final que aparece no site é uma mistura entre o que o modelo calcula e o que o mercado precifica.</p>
   </div>
 
+  <!-- PIPELINE DIAGRAM -->
+  <div class="section">
+    <p class="section-num">Arquitetura</p>
+    <h2>Pipeline completo de atualização</h2>
+    <p>Cada vez que o script roda — após cada rodada, via <code style="background:#1a1a1a;color:#f5c518;padding:2px 6px;font-size:13px">python scripts/atualizar.py</code> — ele executa esta sequência de passos em ordem. Ao final, o site é atualizado automaticamente.</p>
+
+    <div style="overflow-x:auto;margin-top:24px">
+    <svg viewBox="0 0 580 865" width="100%" style="display:block;min-width:440px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fluxograma do pipeline de atualização">
+      <defs>
+        <marker id="arw" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="#555"/>
+        </marker>
+      </defs>
+
+      <!-- ─── ENTRADA ─── -->
+      <rect x="30" y="10" width="520" height="60" rx="4" fill="#1a1a1a" stroke="#f5c518" stroke-width="1.5"/>
+      <rect x="30" y="10" width="4" height="60" fill="#f5c518"/>
+      <text x="52" y="34" font-family="Oswald,sans-serif" font-size="9" fill="#f5c518" letter-spacing="2">ENTRADA DE DADOS</text>
+      <text x="52" y="53" font-family="'Source Sans 3',Arial,sans-serif" font-size="12.5" fill="#999">resultados_reais.json · historical_wc_teams.csv · frozen_probs.json</text>
+
+      <line x1="290" y1="70" x2="290" y2="88" stroke="#555" stroke-width="1.5" marker-end="url(#arw)"/>
+
+      <!-- ─── PASSO 0 ─── -->
+      <rect x="30" y="90" width="520" height="60" rx="4" fill="#1a1a1a" stroke="#252525"/>
+      <rect x="30" y="90" width="4" height="60" fill="#00a84f"/>
+      <rect x="44" y="107" width="24" height="24" rx="2" fill="#00a84f"/>
+      <text x="56" y="123" text-anchor="middle" font-family="Oswald,sans-serif" font-size="13" font-weight="700" fill="#111">0</text>
+      <text x="80" y="117" font-family="Oswald,sans-serif" font-size="9" fill="#00a84f" letter-spacing="2">PASSO 0</text>
+      <text x="80" y="134" font-family="'Source Sans 3',Arial,sans-serif" font-size="13.5" font-weight="600" fill="#f0f0ee">Congelar probabilidades pré-jogo antes de retreinar</text>
+
+      <line x1="290" y1="150" x2="290" y2="168" stroke="#555" stroke-width="1.5" marker-end="url(#arw)"/>
+
+      <!-- ─── CALIBRAR K ─── -->
+      <rect x="30" y="170" width="520" height="60" rx="4" fill="#1a1a1a" stroke="#252525"/>
+      <rect x="30" y="170" width="4" height="60" fill="#00a84f"/>
+      <rect x="44" y="187" width="24" height="24" rx="2" fill="#111" stroke="#00a84f" stroke-width="1.5"/>
+      <text x="56" y="203" text-anchor="middle" font-family="Oswald,sans-serif" font-size="11" fill="#00a84f">k</text>
+      <text x="80" y="197" font-family="Oswald,sans-serif" font-size="9" fill="#00a84f" letter-spacing="2">CALIBRACAO</text>
+      <text x="80" y="214" font-family="'Source Sans 3',Arial,sans-serif" font-size="13.5" font-weight="600" fill="#f0f0ee">Calibrar limiar de empate nos jogos já jogados da Copa</text>
+
+      <line x1="290" y1="230" x2="290" y2="248" stroke="#555" stroke-width="1.5" marker-end="url(#arw)"/>
+
+      <!-- ─── PASSO 1 ─── -->
+      <rect x="30" y="250" width="520" height="60" rx="4" fill="#1a1a1a" stroke="#252525"/>
+      <rect x="30" y="250" width="4" height="60" fill="#00a84f"/>
+      <rect x="44" y="267" width="24" height="24" rx="2" fill="#00a84f"/>
+      <text x="56" y="283" text-anchor="middle" font-family="Oswald,sans-serif" font-size="13" font-weight="700" fill="#111">1</text>
+      <text x="80" y="277" font-family="Oswald,sans-serif" font-size="9" fill="#00a84f" letter-spacing="2">PASSO 1</text>
+      <text x="80" y="294" font-family="'Source Sans 3',Arial,sans-serif" font-size="13.5" font-weight="600" fill="#f0f0ee">Incorporar resultados reais ao histórico de partidas</text>
+
+      <line x1="290" y1="310" x2="290" y2="328" stroke="#555" stroke-width="1.5" marker-end="url(#arw)"/>
+
+      <!-- ─── PASSO 2 (retreinar) ─── -->
+      <rect x="30" y="330" width="520" height="96" rx="4" fill="#1a1a1a" stroke="#252525"/>
+      <rect x="30" y="330" width="4" height="96" fill="#00a84f"/>
+      <rect x="44" y="347" width="24" height="24" rx="2" fill="#00a84f"/>
+      <text x="56" y="363" text-anchor="middle" font-family="Oswald,sans-serif" font-size="13" font-weight="700" fill="#111">2</text>
+      <text x="80" y="357" font-family="Oswald,sans-serif" font-size="9" fill="#00a84f" letter-spacing="2">PASSO 2</text>
+      <text x="80" y="374" font-family="'Source Sans 3',Arial,sans-serif" font-size="13.5" font-weight="600" fill="#f0f0ee">Retreinar os quatro modelos do ensemble</text>
+      <rect x="80" y="385" width="105" height="26" rx="3" fill="#141414" stroke="#2a2a2a"/>
+      <text x="132" y="402" text-anchor="middle" font-family="Oswald,sans-serif" font-size="10" fill="#bbb">XGBOOST</text>
+      <rect x="195" y="385" width="110" height="26" rx="3" fill="#141414" stroke="#2a2a2a"/>
+      <text x="250" y="402" text-anchor="middle" font-family="Oswald,sans-serif" font-size="10" fill="#bbb">RANDOM FOREST</text>
+      <rect x="315" y="385" width="110" height="26" rx="3" fill="#141414" stroke="#2a2a2a"/>
+      <text x="370" y="402" text-anchor="middle" font-family="Oswald,sans-serif" font-size="10" fill="#bbb">DIXON-COLES</text>
+      <rect x="435" y="385" width="102" height="26" rx="3" fill="#141414" stroke="#2a2a2a"/>
+      <text x="486" y="402" text-anchor="middle" font-family="Oswald,sans-serif" font-size="10" fill="#bbb">LOGIT ORD.</text>
+
+      <line x1="290" y1="426" x2="290" y2="444" stroke="#555" stroke-width="1.5" marker-end="url(#arw)"/>
+
+      <!-- ─── PASSO 2b ─── -->
+      <rect x="30" y="446" width="520" height="60" rx="4" fill="#1a1a1a" stroke="#252525"/>
+      <rect x="30" y="446" width="4" height="60" fill="#00a84f"/>
+      <rect x="44" y="463" width="24" height="24" rx="2" fill="#00a84f"/>
+      <text x="56" y="479" text-anchor="middle" font-family="Oswald,sans-serif" font-size="10" font-weight="700" fill="#111">2b</text>
+      <text x="80" y="473" font-family="Oswald,sans-serif" font-size="9" fill="#00a84f" letter-spacing="2">PASSO 2B</text>
+      <text x="80" y="490" font-family="'Source Sans 3',Arial,sans-serif" font-size="13.5" font-weight="600" fill="#f0f0ee">Retrocongelar jogos já jogados com o novo ensemble</text>
+
+      <line x1="290" y1="506" x2="290" y2="524" stroke="#555" stroke-width="1.5" marker-end="url(#arw)"/>
+
+      <!-- ─── PASSO 3+4 (opcional) ─── -->
+      <rect x="30" y="526" width="520" height="60" rx="4" fill="#151515" stroke="#383838" stroke-dasharray="6 3"/>
+      <rect x="30" y="526" width="4" height="60" fill="#444"/>
+      <rect x="44" y="543" width="24" height="24" rx="2" fill="#1e1e1e" stroke="#444"/>
+      <text x="56" y="558" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" fill="#666">3·4</text>
+      <text x="80" y="553" font-family="Oswald,sans-serif" font-size="9" fill="#555" letter-spacing="2">PASSO 3 + 4  ·  OPCIONAL</text>
+      <text x="80" y="570" font-family="'Source Sans 3',Arial,sans-serif" font-size="13.5" fill="#777">Buscar e parsear odds de mercado (requer ODDS_API_KEY)</text>
+
+      <line x1="290" y1="586" x2="290" y2="604" stroke="#555" stroke-width="1.5" marker-end="url(#arw)"/>
+
+      <!-- ─── PASSO 5 (blend) ─── -->
+      <rect x="30" y="606" width="520" height="60" rx="4" fill="#1a1a1a" stroke="#252525"/>
+      <rect x="30" y="606" width="4" height="60" fill="#00a84f"/>
+      <rect x="44" y="623" width="24" height="24" rx="2" fill="#00a84f"/>
+      <text x="56" y="639" text-anchor="middle" font-family="Oswald,sans-serif" font-size="13" font-weight="700" fill="#111">5</text>
+      <text x="80" y="633" font-family="Oswald,sans-serif" font-size="9" fill="#00a84f" letter-spacing="2">PASSO 5</text>
+      <text x="80" y="650" font-family="'Source Sans 3',Arial,sans-serif" font-size="13.5" font-weight="600" fill="#f0f0ee">Blend 65% modelo + 35% odds de mercado por partida</text>
+
+      <line x1="290" y1="666" x2="290" y2="684" stroke="#555" stroke-width="1.5" marker-end="url(#arw)"/>
+
+      <!-- ─── PASSO 6 (Monte Carlo) ─── -->
+      <rect x="30" y="686" width="520" height="60" rx="4" fill="#1a1a1a" stroke="#252525"/>
+      <rect x="30" y="686" width="4" height="60" fill="#00a84f"/>
+      <rect x="44" y="703" width="24" height="24" rx="2" fill="#00a84f"/>
+      <text x="56" y="719" text-anchor="middle" font-family="Oswald,sans-serif" font-size="13" font-weight="700" fill="#111">6</text>
+      <text x="80" y="713" font-family="Oswald,sans-serif" font-size="9" fill="#00a84f" letter-spacing="2">PASSO 6</text>
+      <text x="80" y="730" font-family="'Source Sans 3',Arial,sans-serif" font-size="13.5" font-weight="600" fill="#f0f0ee">Simulação Monte Carlo — 100.000 iterações do torneio</text>
+
+      <line x1="290" y1="746" x2="290" y2="764" stroke="#555" stroke-width="1.5" marker-end="url(#arw)"/>
+
+      <!-- ─── PASSO 7 (atualizar HTML) ─── -->
+      <rect x="30" y="766" width="520" height="60" rx="4" fill="#1a1a1a" stroke="#252525"/>
+      <rect x="30" y="766" width="4" height="60" fill="#00a84f"/>
+      <rect x="44" y="783" width="24" height="24" rx="2" fill="#00a84f"/>
+      <text x="56" y="799" text-anchor="middle" font-family="Oswald,sans-serif" font-size="13" font-weight="700" fill="#111">7</text>
+      <text x="80" y="793" font-family="Oswald,sans-serif" font-size="9" fill="#00a84f" letter-spacing="2">PASSO 7</text>
+      <text x="80" y="810" font-family="'Source Sans 3',Arial,sans-serif" font-size="13.5" font-weight="600" fill="#f0f0ee">Atualizar index.html + resultados.html com novos dados</text>
+
+      <!-- ─── LEGENDA ─── -->
+      <rect x="30" y="843" width="12" height="10" rx="1" fill="#00a84f"/>
+      <text x="48" y="852" font-family="'Source Sans 3',Arial,sans-serif" font-size="11" fill="#555">Passo obrigatório</text>
+      <rect x="175" y="843" width="12" height="10" rx="1" fill="#444" stroke="#555"/>
+      <text x="193" y="852" font-family="'Source Sans 3',Arial,sans-serif" font-size="11" fill="#555">Passo opcional</text>
+      <rect x="310" y="843" width="12" height="10" rx="1" fill="#f5c518"/>
+      <text x="328" y="852" font-family="'Source Sans 3',Arial,sans-serif" font-size="11" fill="#555">Entrada de dados</text>
+    </svg>
+    </div>
+  </div>
+
   <!-- 2. DADOS -->
+
   <div class="section">
     <p class="section-num">Etapa 1 · Dados</p>
     <h2>De onde vêm os dados?</h2>
