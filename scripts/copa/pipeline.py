@@ -5,7 +5,6 @@ PipelineAtualizacao — orquestra todos os passos da atualização pós-rodada:
 congelamento, calibração, retreinamento, blend, Monte Carlo e HTML.
 """
 
-import json
 import random
 import warnings
 

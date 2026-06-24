@@ -42,10 +42,6 @@ class RepositorioDados:
         with open(caminho, "w", encoding="utf-8") as f:
             json.dump(dados, f, **kwargs)
 
-    def escrever_texto(self, nome: str, texto: str) -> None:
-        """Escreve texto puro em um arquivo no diretório de dados."""
-        (self.dados / nome).write_text(texto, encoding="utf-8")
-
     # ── CSV ─────────────────────────────────────────────────
 
     def ler_csv(self, nome: str, **kwargs) -> pd.DataFrame:
@@ -57,11 +53,6 @@ class RepositorioDados:
         df.to_csv(self.dados / nome, index=False)
 
     # ── Pickle ──────────────────────────────────────────────
-
-    def ler_pickle(self, nome: str) -> Any:
-        """Desserializa um arquivo pickle do diretório de dados."""
-        with open(self.dados / nome, "rb") as f:
-            return pickle.load(f)
 
     def salvar_pickle(self, nome: str, obj: Any) -> None:
         """Serializa `obj` em pickle no diretório de dados."""

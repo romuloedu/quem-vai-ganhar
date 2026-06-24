@@ -6,7 +6,6 @@ a partir do histórico, rankings, elo e dados estáticos.
 """
 
 import numpy as np
-import pandas as pd
 from typing import Any
 
 from copa.config import FEAT_COLS
@@ -99,13 +98,3 @@ class ExtratordeFeaturas:
         }
         return [row[c] for c in self.feat_cols]
 
-    def construir_matriz(
-        self,
-        pares: list[tuple[str, str, Any]],
-        neutral: int = 1,
-    ) -> np.ndarray:
-        """Constrói a matriz de features para uma lista de (home, away, date)."""
-        return np.array(
-            [self.construir_vetor(h, a, d, neutral) for h, a, d in pares],
-            dtype=np.float32,
-        )

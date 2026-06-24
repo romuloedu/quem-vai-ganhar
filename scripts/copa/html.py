@@ -6,10 +6,10 @@ mais recentes das simulações, textos dinâmicos e dados dos jogos.
 """
 
 import json
+import math
 import re
 import datetime
 from collections import defaultdict
-from pathlib import Path
 
 import pandas as pd
 
@@ -237,7 +237,7 @@ class AtualizadorHTML:
         else:
             s3_body = f"O Brasil enfrenta {easiest_opp} com {_diff(bg_sorted[0]['p_brasil_win'])}."
 
-        brasil_wins = round(brasil_pct)
+        brasil_wins = math.floor(brasil_pct)
         s4_title = f"Se essa Copa fosse jogada<br>100 vezes, o Brasil venceria {brasil_wins}."
 
         # Injetar no index.html

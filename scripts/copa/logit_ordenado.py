@@ -47,9 +47,3 @@ class ModeloLogitOrdenado:
         """Retorna tupla (scaler, clf_gt0, clf_gt1) para persistência em pickle."""
         return (self.scaler, self.clf_gt0, self.clf_gt1)
 
-    @classmethod
-    def de_tupla(cls, tupla: tuple) -> "ModeloLogitOrdenado":
-        """Reconstrói o modelo a partir de uma tupla serializada em pickle."""
-        obj = cls()
-        obj.scaler, obj.clf_gt0, obj.clf_gt1 = tupla
-        return obj

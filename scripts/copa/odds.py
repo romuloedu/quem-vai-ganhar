@@ -5,10 +5,8 @@ ClienteOdds — busca odds de mercado via The Odds API.
 ParseadorOdds — converte a resposta bruta em probabilidades normalizadas.
 """
 
-import json
 import numpy as np
 import requests
-from pathlib import Path
 
 from copa.config import NAME_MAP, ODDS_KEY
 from copa.repositorio import RepositorioDados
