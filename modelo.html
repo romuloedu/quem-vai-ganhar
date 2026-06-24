@@ -261,11 +261,11 @@ footer a:hover{color:#f0f0ee}
         <p>Um modelo estatístico de 1997 que funciona diferente dos dois acima. Em vez de prever o resultado direto, estima a probabilidade de cada placar possível (0-0, 1-0, 2-1...) com base no histórico de ataque e defesa de cada seleção. Soma as probabilidades dos placares de vitória, empate e derrota.</p>
       </div>
       <div class="card">
-        <p class="card-title">Cascata de empate</p>
-        <p>Um modelo em dois estágios focado nos empates. Primeiro pergunta: "a probabilidade desse jogo terminar empatado é alta ou baixa?" Só depois decide quem vence se não for empate. Times com histórico de muitos empates jogando entre si, e confrontos equilibrados no Elo, ativam mais esse componente.</p>
+        <p class="card-title">Logit ordenado</p>
+        <p>Um modelo focado nos empates que trata o resultado como uma escala ordenada: derrota → empate → vitória. O empate é a "faixa do meio" dessa escala, e o modelo estima a largura dela a partir dos dados. Captura bem a intuição de que jogos entre times próximos (em Elo e em histórico de empates) terminam empatados com mais frequência.</p>
       </div>
     </div>
-    <p style="margin-top:20px">XGBoost, Random Forest e a cascata de empate são modelos de machine learning. O Dixon-Coles é mais antigo e mais matemático. Os quatro chegam a probabilidades parecidas na maioria dos jogos — mas discordam justamente nos casos mais difíceis, e é nessa discordância que o ensemble ganha.</p>
+    <p style="margin-top:20px">XGBoost, Random Forest e o logit ordenado são modelos de machine learning. O Dixon-Coles é mais antigo e mais matemático. Os quatro chegam a probabilidades parecidas na maioria dos jogos — mas discordam justamente nos casos mais difíceis, e é nessa discordância que o ensemble ganha.</p>
   </div>
 
   <!-- 5. ENSEMBLE -->
@@ -273,9 +273,10 @@ footer a:hover{color:#f0f0ee}
     <p class="section-num">Etapa 4 · Combinação</p>
     <h2>Como combinamos os quatro modelos?</h2>
     <p>Cada modelo gera três probabilidades: casa vence, empate, visitante vence. A probabilidade final é a <strong>média dos quatro</strong>.</p>
-    <p>Exemplo: se o XGBoost diz que o Brasil tem 55% de chance de vencer, o Random Forest diz 50%, o Dixon-Coles diz 53% e a cascata de empate diz 51%, o número final é 52,25%.</p>
-    <p>O modelo de cascata de empate existe porque empate é o resultado mais difícil de prever. Os modelos de 3 classes (vitória, empate, derrota) tendem a subestimá-lo, pois ele representa só ~25% dos jogos e aparece de forma diluída no treinamento. O classificador em cascata trata o empate separadamente — primeiro decide se o jogo tem perfil de empate, depois quem vence se não for — o que melhora a detecção desse resultado.</p>
+    <p>Exemplo: se o XGBoost diz que o Brasil tem 55% de chance de vencer, o Random Forest diz 50%, o Dixon-Coles diz 53% e o logit ordenado diz 51%, o número final é 52,25%.</p>
+    <p>O logit ordenado existe porque empate é o resultado mais difícil de prever. Os modelos de 3 classes (vitória, empate, derrota) tendem a subestimá-lo, pois ele representa só ~25% dos jogos e aparece de forma diluída no treinamento. Tratar o resultado como uma escala ordenada (derrota → empate → vitória) modela melhor essa faixa do meio — em testes fora da amostra, foi a abordagem com melhor calibração geral.</p>
     <p>Quando os quatro concordam, há mais confiança. Quando discordam muito, é sinal de que o jogo é genuinamente difícil de prever.</p>
+    <p style="margin-top:20px"><strong>Um detalhe sobre como anunciamos a previsão.</strong> Mesmo bem calibrado, o empate quase nunca é a probabilidade mais alta das três — então simplesmente escolher "a maior" praticamente nunca aponta empate. Para corrigir isso, anunciamos empate quando sua probabilidade chega perto da do favorito (a partir de 75% dela). Esse limiar foi calibrado em testes fora da amostra: é o ponto que mais acerta empates sem derrubar a acurácia geral.</p>
   </div>
 
   <!-- 6. ODDS BLENDING -->

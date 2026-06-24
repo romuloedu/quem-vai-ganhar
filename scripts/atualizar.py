@@ -43,6 +43,17 @@ import requests
 # ─────────────────────────────────────────────────────────
 _POISSON_CACHE: dict = {}
 
+# Limiar de decisão para empate: prevê empate se p_draw >= k * max(p_home, p_away).
+# Calibrado por backtest out-of-sample (RPS/F1) — ver scripts de validação.
+DRAW_THRESHOLD = 0.75
+
+def _predict_outcome(ph: float, pd: float, pa: float) -> str:
+    """Resultado previsto com limiar de empate calibrado (k=DRAW_THRESHOLD)."""
+    if pd >= DRAW_THRESHOLD * max(ph, pa):
+        return "draw"
+    return "home" if ph >= pa else "away"
+
+
 def _calibrate_poisson(ph: float, pd: float, pa: float, _max: int = 7) -> str:
     """Retorna o placar mais provável consistente com o resultado previsto.
     Calibra Poisson independentes às probabilidades W/D/L, depois busca o placar
@@ -61,10 +72,11 @@ def _calibrate_poisson(ph: float, pd: float, pa: float, _max: int = 7) -> str:
     loss = (_pw - ph)**2 + (_pd_ - pd)**2 + (_pa_ - pa)**2
     i, j = divmod(int(np.argmin(loss)), len(lam))
     joint = pmf[i, :, None] * pmf[j, None, :]  # (max_g, max_g)
-    # Restringir ao resultado com maior probabilidade (argmax)
-    if ph >= pd and ph >= pa:
+    # Restringir ao resultado previsto (com limiar de empate calibrado)
+    oc = _predict_outcome(ph, pd, pa)
+    if oc == "home":
         mask = H > A      # vitória do mandante
-    elif pa > ph and pa >= pd:
+    elif oc == "away":
         mask = H < A      # vitória do visitante
     else:
         mask = H == A     # empate
@@ -253,19 +265,31 @@ def _build_feat_vec(home, away, date, log, rank_map, elo_map, conf_map,
     return [row[c] for c in FEAT_COLS]
 
 
+def _ordinal_proba_batch(ordinal, X):
+    """Logit ordenado (Frank-Hall) → array [p_away, p_draw, p_home] por linha.
+    ordinal = (scaler, clf_gt0, clf_gt1) onde clf_gt0=P(y>away), clf_gt1=P(y=home)."""
+    sc, c1, c2 = ordinal
+    Xs = sc.transform(np.asarray(X, dtype=np.float32))
+    p_gt0 = c1.predict_proba(Xs)[:, 1]
+    p_gt1 = c2.predict_proba(Xs)[:, 1]
+    p_away = np.clip(1 - p_gt0, 1e-6, None)
+    p_draw = np.clip(p_gt0 - p_gt1, 1e-6, None)
+    p_home = np.clip(p_gt1, 1e-6, None)
+    P = np.vstack([p_away, p_draw, p_home]).T
+    return P / P.sum(axis=1, keepdims=True)
+
+
 def _ens_proba(home, away, feat_vec, xgb_model, rf_model, dc_attack, dc_defense, dc_rho,
-               draw_clf=None, winner_clf=None):
-    """Ensemble (XGBoost + RandomForest + Dixon-Coles [+ cascade draw]) → (p_home, p_draw, p_away)."""
+               ordinal=None):
+    """Ensemble (XGBoost + RandomForest + Dixon-Coles [+ logit ordenado]) → (p_home, p_draw, p_away)."""
     xp = xgb_model.predict_proba([feat_vec])[0]   # [p_away, p_draw, p_home]
     rp = rf_model.predict_proba([feat_vec])[0]     # [p_away, p_draw, p_home]
     ph_dc, pd_dc, pa_dc = _dc_predict(home, away, dc_attack, dc_defense, dc_rho)
-    if draw_clf is not None and winner_clf is not None:
-        pd_cas = draw_clf.predict_proba([feat_vec])[0][1]
-        ph_cas = (1 - pd_cas) * winner_clf.predict_proba([feat_vec])[0][1]
-        pa_cas = (1 - pd_cas) * (1 - winner_clf.predict_proba([feat_vec])[0][1])
-        p_h = (xp[2] + rp[2] + ph_dc + ph_cas) / 4
-        p_d = (xp[1] + rp[1] + pd_dc + pd_cas) / 4
-        p_a = (xp[0] + rp[0] + pa_dc + pa_cas) / 4
+    if ordinal is not None:
+        po = _ordinal_proba_batch(ordinal, [feat_vec])[0]  # [p_away, p_draw, p_home]
+        p_h = (xp[2] + rp[2] + ph_dc + po[2]) / 4
+        p_d = (xp[1] + rp[1] + pd_dc + po[1]) / 4
+        p_a = (xp[0] + rp[0] + pa_dc + po[0]) / 4
     else:
         p_h = (xp[2] + rp[2] + ph_dc) / 3
         p_d = (xp[1] + rp[1] + pd_dc) / 3
@@ -516,29 +540,29 @@ def step2_retrain():
     print("   🌲 Dixon-Coles treinando...")
     dc_attack, dc_defense, dc_rho = _train_dc(df_hist, wc_teams)
 
-    # Cascade draw model (stage 1: draw vs not-draw; stage 2: home vs away)
+    # Logit ordenado (Frank-Hall): trata o resultado como ordenado fora<empate<casa.
+    # clf_gt0 = P(y > fora) = P(empate ou casa);  clf_gt1 = P(y = casa).
     from sklearn.linear_model import LogisticRegression
-    y_draw = (y == 1).astype(int)
-    draw_clf = LogisticRegression(class_weight="balanced", C=0.5, max_iter=500, random_state=SEED)
-    draw_clf.fit(X, y_draw)
-    mask_nd = (y != 1)
-    y_winner = (y[mask_nd] == 2).astype(int)
-    winner_clf = LogisticRegression(C=0.5, max_iter=500, random_state=SEED)
-    winner_clf.fit(X[mask_nd], y_winner)
+    from sklearn.preprocessing import StandardScaler
+    ord_scaler = StandardScaler().fit(X)
+    Xs = ord_scaler.transform(X)
+    ord_c1 = LogisticRegression(C=0.5, max_iter=1000, random_state=SEED).fit(Xs, (y > 0).astype(int))
+    ord_c2 = LogisticRegression(C=0.5, max_iter=1000, random_state=SEED).fit(Xs, (y > 1).astype(int))
+    ordinal = (ord_scaler, ord_c1, ord_c2)
 
     with open(DADOS / "model_calibrated.pkl","wb") as f: pickle.dump(model, f)
     with open(DADOS / "rf_model.pkl","wb") as f:         pickle.dump(rf_model, f)
     with open(DADOS / "dc_params.pkl","wb") as f:        pickle.dump((dc_attack, dc_defense, dc_rho), f)
     with open(DADOS / "feat_cols_v2.pkl","wb") as f:     pickle.dump(FEAT_COLS, f)
-    with open(DADOS / "draw_cascade.pkl","wb") as f:     pickle.dump((draw_clf, winner_clf), f)
+    with open(DADOS / "ordinal_model.pkl","wb") as f:    pickle.dump(ordinal, f)
 
     # Salvar log para uso nos próximos passos
     log.to_pickle(DADOS / "_log_cache.pkl")
 
-    print(f"   ✅ Ensemble treinado ({len(X)} jogos): XGBoost + RF + Dixon-Coles + Cascade (ρ={dc_rho:.3f})")
+    print(f"   ✅ Ensemble treinado ({len(X)} jogos): XGBoost + RF + Dixon-Coles + Logit ordenado (ρ={dc_rho:.3f})")
     return (model, rf_model, dc_attack, dc_defense, dc_rho,
             FEAT_COLS, log, rank_map, elo_map, conf_map, squad_value_map, wc_apps_map, squad_age_map,
-            draw_clf, winner_clf)
+            ordinal)
 
 
 # ─────────────────────────────────────────────────────────
@@ -547,7 +571,7 @@ def step2_retrain():
 def step2b_retrofreeze(model, rf_model, dc_attack, dc_defense, dc_rho,
                        FEAT_COLS, log, rank_map, elo_map, conf_map,
                        squad_value_map, wc_apps_map, squad_age_map,
-                       draw_clf=None, winner_clf=None):
+                       ordinal=None):
     """Recompute ensemble pre-match probabilities for all finished Copa 2026 group games.
     Overwrites frozen_probs.json so past-game status uses the new ensemble model."""
     results_path = DADOS / "resultados_reais.json"
@@ -577,7 +601,7 @@ def step2b_retrofreeze(model, rf_model, dc_attack, dc_defense, dc_rho,
         fkey = f"{h}|{a}"
         fv = _build_feat_vec(h, a, m["date"], log, rank_map, elo_map, conf_map,
                              squad_value_map, wc_apps_map, squad_age_map, FEAT_COLS)
-        ph, pd_, pa = _ens_proba(h, a, fv, model, rf_model, dc_attack, dc_defense, dc_rho, draw_clf, winner_clf)
+        ph, pd_, pa = _ens_proba(h, a, fv, model, rf_model, dc_attack, dc_defense, dc_rho, ordinal)
         pp = _calibrate_poisson(ph, pd_, pa)
         frozen[fkey] = {
             "ph": round(ph * 100, 2),
@@ -706,7 +730,7 @@ def step4_parse_odds(games_data, outrights_raw):
 def step5_blend(model, rf_model, dc_attack, dc_defense, dc_rho,
                 FEAT_COLS, log, rank_map, elo_map, conf_map,
                 squad_value_map, wc_apps_map, squad_age_map, market_probs,
-                draw_clf=None, winner_clf=None):
+                ordinal=None):
     print("🔀 Passo 5: Calculando probabilidades blendadas (ensemble)...")
 
     df_matches = pd.read_csv(DADOS / "wc2026_matches.csv")
@@ -718,7 +742,7 @@ def step5_blend(model, rf_model, dc_attack, dc_defense, dc_rho,
                              squad_value_map, wc_apps_map, squad_age_map, FEAT_COLS)
         ph_e, pd_e, pa_e = _ens_proba(m["home_team"], m["away_team"], fv,
                                        model, rf_model, dc_attack, dc_defense, dc_rho,
-                                       draw_clf, winner_clf)
+                                       ordinal)
         mp = {"home_win": ph_e, "draw": pd_e, "away_win": pa_e}
         key=(m["home_team"],m["away_team"]); keyI=(m["away_team"],m["home_team"])
         if key in market_probs:
@@ -751,7 +775,7 @@ def step6_monte_carlo(model, rf_model, dc_attack, dc_defense, dc_rho,
                       FEAT_COLS, log, rank_map, elo_map, conf_map,
                       squad_value_map, wc_apps_map, squad_age_map,
                       df_bl, n_sims=None, save=True,
-                      draw_clf=None, winner_clf=None):
+                      ordinal=None):
     n = n_sims if n_sims is not None else N_SIMS
     print(f"🎲 Passo 6: Monte Carlo ({n:,} simulações, ensemble)...")
     if save:
@@ -843,15 +867,14 @@ def step6_monte_carlo(model, rf_model, dc_attack, dc_defense, dc_rho,
     X_ko = np.array(ko_fvs, dtype=np.float32)
     xgb_ko = model.predict_proba(X_ko)
     rf_ko  = rf_model.predict_proba(X_ko)
-    draw_ko   = draw_clf.predict_proba(X_ko)[:, 1] if draw_clf is not None else None
-    winner_ko = winner_clf.predict_proba(X_ko)[:, 1] if winner_clf is not None else None
+    ord_ko = _ordinal_proba_batch(ordinal, X_ko) if ordinal is not None else None
     _ko = {}
     for i, (home, away, date_str) in enumerate(ko_keys):
         xp=xgb_ko[i]; rp=rf_ko[i]
         ph_dc, pd_dc, pa_dc = _dc_predict(home, away, dc_attack, dc_defense, dc_rho)
-        if draw_ko is not None:
-            pd_cas=float(draw_ko[i]); ph_cas=(1-pd_cas)*float(winner_ko[i]); pa_cas=(1-pd_cas)*(1-float(winner_ko[i]))
-            ph=(xp[2]+rp[2]+ph_dc+ph_cas)/4; pd_=(xp[1]+rp[1]+pd_dc+pd_cas)/4; pa=(xp[0]+rp[0]+pa_dc+pa_cas)/4
+        if ord_ko is not None:
+            pa_o,pd_o,ph_o=ord_ko[i]
+            ph=(xp[2]+rp[2]+ph_dc+ph_o)/4; pd_=(xp[1]+rp[1]+pd_dc+pd_o)/4; pa=(xp[0]+rp[0]+pa_dc+pa_o)/4
         else:
             ph=(xp[2]+rp[2]+ph_dc)/3; pd_=(xp[1]+rp[1]+pd_dc)/3; pa=(xp[0]+rp[0]+pa_dc)/3
         s=ph+pd_+pa
@@ -1280,20 +1303,20 @@ if __name__ == "__main__":
     (model, rf_model, dc_attack, dc_defense, dc_rho,
      FEAT_COLS, log, rank_map, elo_map, conf_map,
      squad_value_map, wc_apps_map, squad_age_map,
-     draw_clf, winner_clf) = step2_retrain()
+     ordinal) = step2_retrain()
     step2b_retrofreeze(model, rf_model, dc_attack, dc_defense, dc_rho,
                        FEAT_COLS, log, rank_map, elo_map, conf_map,
                        squad_value_map, wc_apps_map, squad_age_map,
-                       draw_clf, winner_clf)
+                       ordinal)
     games_data, outrights_raw = step3_fetch_odds()
     market_probs, mkt_champion = step4_parse_odds(games_data, outrights_raw)
     df_bl = step5_blend(model, rf_model, dc_attack, dc_defense, dc_rho,
                         FEAT_COLS, log, rank_map, elo_map, conf_map,
                         squad_value_map, wc_apps_map, squad_age_map, market_probs,
-                        draw_clf, winner_clf)
+                        ordinal)
     results = step6_monte_carlo(model, rf_model, dc_attack, dc_defense, dc_rho,
                                 FEAT_COLS, log, rank_map, elo_map, conf_map,
                                 squad_value_map, wc_apps_map, squad_age_map, df_bl,
-                                draw_clf=draw_clf, winner_clf=winner_clf)
+                                ordinal=ordinal)
     step7_update_html(results, df_bl, mkt_champion)
     print("\n✅ Pronto! Faça git add . && git commit -m 'Atualiza rodada' && git push\n")
