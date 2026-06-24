@@ -412,5 +412,14 @@
     "away_score": 0,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-23",
+    "home_team": "Panamá",
+    "away_team": "Croácia",
+    "home_score": 0,
+    "away_score": 1,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]
