@@ -1,3 +1,14 @@
 {
-  "jogos": {}
+  "jogos": {
+    "Tunísia|Holanda": {
+      "home_score": 0,
+      "away_score": 2,
+      "status": "IN_PLAY"
+    },
+    "Japão|Suécia": {
+      "home_score": 0,
+      "away_score": 0,
+      "status": "IN_PLAY"
+    }
+  }
 }
