@@ -1,3 +1,14 @@
 {
-  "jogos": {}
+  "jogos": {
+    "Equador|Alemanha": {
+      "home_score": 1,
+      "away_score": 1,
+      "status": "LIVE"
+    },
+    "Curaçao|Costa do Marfim": {
+      "home_score": 0,
+      "away_score": 1,
+      "status": "LIVE"
+    }
+  }
 }
