@@ -322,5 +322,17 @@
     "pd": 23.22,
     "pa": 39.94,
     "placar_prev": "1-2"
+  },
+  "Equador|Alemanha": {
+    "ph": 29.92,
+    "pd": 24.71,
+    "pa": 45.37,
+    "placar_prev": "1-2"
+  },
+  "Curaçao|Costa do Marfim": {
+    "ph": 26.23,
+    "pd": 21.99,
+    "pa": 51.78,
+    "placar_prev": "1-2"
   }
 }

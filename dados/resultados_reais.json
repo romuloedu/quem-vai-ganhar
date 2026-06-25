@@ -484,5 +484,23 @@
     "away_score": 0,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-25",
+    "home_team": "Equador",
+    "away_team": "Alemanha",
+    "home_score": 2,
+    "away_score": 1,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-25",
+    "home_team": "Curaçao",
+    "away_team": "Costa do Marfim",
+    "home_score": 0,
+    "away_score": 2,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]
