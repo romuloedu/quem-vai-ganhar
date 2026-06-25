@@ -1,14 +1,3 @@
 {
-  "jogos": {
-    "Marrocos|Haiti": {
-      "home_score": 3,
-      "away_score": 2,
-      "status": "IN_PLAY"
-    },
-    "Escócia|Brasil": {
-      "home_score": 0,
-      "away_score": 3,
-      "status": "PAUSED"
-    }
-  }
+  "jogos": {}
 }

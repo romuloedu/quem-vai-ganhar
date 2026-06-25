@@ -38,7 +38,7 @@
   "Haiti|Escócia": {
     "ph": 9.9,
     "pd": 21.97,
-    "pa": 68.13,
+    "pa": 68.12,
     "placar_prev": "0-1"
   },
   "Austrália|Turquia": {
@@ -133,9 +133,9 @@
   },
   "Gana|Panamá": {
     "ph": 38.93,
-    "pd": 27.49,
+    "pd": 27.48,
     "pa": 33.58,
-    "placar_prev": "1-1"
+    "placar_prev": "1-0"
   },
   "Uzbequistão|Colômbia": {
     "ph": 15.09,
@@ -189,7 +189,7 @@
     "ph": 37.08,
     "pd": 26.32,
     "pa": 36.6,
-    "placar_prev": "1-1"
+    "placar_prev": "1-0"
   },
   "Holanda|Suécia": {
     "ph": 57.73,
@@ -241,7 +241,7 @@
   },
   "Argentina|Áustria": {
     "ph": 56.52,
-    "pd": 27.58,
+    "pd": 27.59,
     "pa": 15.89,
     "placar_prev": "1-0"
   },
@@ -298,5 +298,17 @@
     "pd": 23.26,
     "pa": 28.75,
     "placar_prev": "2-1"
+  },
+  "Escócia|Brasil": {
+    "ph": 20.84,
+    "pd": 26.03,
+    "pa": 53.13,
+    "placar_prev": "0-1"
+  },
+  "Marrocos|Haiti": {
+    "ph": 73.6,
+    "pd": 18.83,
+    "pa": 7.57,
+    "placar_prev": "1-0"
   }
 }

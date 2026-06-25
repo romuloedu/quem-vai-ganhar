@@ -448,5 +448,23 @@
     "away_score": 1,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-24",
+    "home_team": "Marrocos",
+    "away_team": "Haiti",
+    "home_score": 4,
+    "away_score": 2,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-24",
+    "home_team": "Escócia",
+    "away_team": "Brasil",
+    "home_score": 0,
+    "away_score": 3,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]
