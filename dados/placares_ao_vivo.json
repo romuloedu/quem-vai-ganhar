@@ -1,3 +1,14 @@
 {
-  "jogos": {}
+  "jogos": {
+    "República Tcheca|México": {
+      "home_score": 0,
+      "away_score": 0,
+      "status": "IN_PLAY"
+    },
+    "África do Sul|Coreia do Sul": {
+      "home_score": 0,
+      "away_score": 0,
+      "status": "IN_PLAY"
+    }
+  }
 }
