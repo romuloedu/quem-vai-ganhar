@@ -334,5 +334,17 @@
     "pd": 21.99,
     "pa": 51.78,
     "placar_prev": "1-2"
+  },
+  "Tunísia|Holanda": {
+    "ph": 17.6,
+    "pd": 24.1,
+    "pa": 58.3,
+    "placar_prev": "0-1"
+  },
+  "Japão|Suécia": {
+    "ph": 48.8,
+    "pd": 21.86,
+    "pa": 29.34,
+    "placar_prev": "2-1"
   }
 }

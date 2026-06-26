@@ -502,5 +502,23 @@
     "away_score": 2,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-25",
+    "home_team": "Tunísia",
+    "away_team": "Holanda",
+    "home_score": 1,
+    "away_score": 3,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
+  },
+  {
+    "date": "2026-06-25",
+    "home_team": "Japão",
+    "away_team": "Suécia",
+    "home_score": 1,
+    "away_score": 1,
+    "tournament": "FIFA World Cup",
+    "country": "USA"
   }
 ]
