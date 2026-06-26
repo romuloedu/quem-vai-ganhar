@@ -358,5 +358,17 @@
     "pd": 31.35,
     "pa": 42.76,
     "placar_prev": "0-0"
+  },
+  "Noruega|França": {
+    "ph": 24.68,
+    "pd": 28.89,
+    "pa": 46.43,
+    "placar_prev": "0-1"
+  },
+  "Senegal|Iraque": {
+    "ph": 66.59,
+    "pd": 23.3,
+    "pa": 10.1,
+    "placar_prev": "1-0"
   }
 }
