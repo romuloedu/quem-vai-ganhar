@@ -1,14 +1,3 @@
 {
-  "jogos": {
-    "Turquia|Estados Unidos": {
-      "home_score": 2,
-      "away_score": 1,
-      "status": "IN_PLAY"
-    },
-    "Paraguai|Austrália": {
-      "home_score": 0,
-      "away_score": 0,
-      "status": "IN_PLAY"
-    }
-  }
+  "jogos": {}
 }
