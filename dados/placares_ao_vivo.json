@@ -2,13 +2,13 @@
   "jogos": {
     "Uruguai|Espanha": {
       "home_score": 0,
-      "away_score": 0,
-      "status": "IN_PLAY"
+      "away_score": 1,
+      "status": "LIVE"
     },
     "Cabo Verde|Arábia Saudita": {
       "home_score": 0,
       "away_score": 0,
-      "status": "IN_PLAY"
+      "status": "LIVE"
     }
   }
 }
