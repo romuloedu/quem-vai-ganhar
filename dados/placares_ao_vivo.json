@@ -1,3 +1,14 @@
 {
-  "jogos": {}
+  "jogos": {
+    "Nova Zelândia|Bélgica": {
+      "home_score": 0,
+      "away_score": 1,
+      "status": "PAUSED"
+    },
+    "Egito|Irã": {
+      "home_score": 1,
+      "away_score": 1,
+      "status": "PAUSED"
+    }
+  }
 }
