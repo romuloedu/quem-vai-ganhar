@@ -1,69 +1,57 @@
 {
   "match_odds": {
-    "Croácia|Gana": {
-      "p_home": 0.9425,
-      "p_draw": 0.0537,
-      "p_away": 0.0038,
-      "n_bm": 11
-    },
-    "Panamá|Inglaterra": {
-      "p_home": 0.0034,
-      "p_draw": 0.0071,
-      "p_away": 0.9895,
-      "n_bm": 4
-    },
     "Colômbia|Portugal": {
-      "p_home": 0.2498,
-      "p_draw": 0.243,
-      "p_away": 0.5072,
+      "p_home": 0.2451,
+      "p_draw": 0.2455,
+      "p_away": 0.5095,
       "n_bm": 24
     },
     "RD Congo|Uzbequistão": {
-      "p_home": 0.5741,
-      "p_draw": 0.2466,
-      "p_away": 0.1793,
+      "p_home": 0.5668,
+      "p_draw": 0.2501,
+      "p_away": 0.1831,
       "n_bm": 22
     },
     "Argélia|Áustria": {
-      "p_home": 0.2734,
-      "p_draw": 0.465,
-      "p_away": 0.2616,
+      "p_home": 0.2737,
+      "p_draw": 0.4648,
+      "p_away": 0.2615,
       "n_bm": 24
     },
     "Jordânia|Argentina": {
-      "p_home": 0.0462,
-      "p_draw": 0.1058,
-      "p_away": 0.848,
+      "p_home": 0.0465,
+      "p_draw": 0.1064,
+      "p_away": 0.8472,
       "n_bm": 24
     },
     "África do Sul|Canadá": {
-      "p_home": 0.1733,
-      "p_draw": 0.2666,
-      "p_away": 0.5602,
+      "p_home": 0.1734,
+      "p_draw": 0.2667,
+      "p_away": 0.5599,
       "n_bm": 24
     },
     "Brasil|Japão": {
-      "p_home": 0.5688,
-      "p_draw": 0.2492,
-      "p_away": 0.1819,
+      "p_home": 0.572,
+      "p_draw": 0.248,
+      "p_away": 0.18,
       "n_bm": 24
     },
     "Alemanha|Paraguai": {
-      "p_home": 0.7038,
-      "p_draw": 0.1882,
+      "p_home": 0.7039,
+      "p_draw": 0.1881,
       "p_away": 0.108,
       "n_bm": 24
     },
     "Holanda|Marrocos": {
-      "p_home": 0.4505,
-      "p_draw": 0.2967,
+      "p_home": 0.4506,
+      "p_draw": 0.2966,
       "p_away": 0.2528,
       "n_bm": 23
     },
     "Costa do Marfim|Noruega": {
-      "p_home": 0.2637,
-      "p_draw": 0.2708,
-      "p_away": 0.4655,
+      "p_home": 0.2632,
+      "p_draw": 0.2709,
+      "p_away": 0.4659,
       "n_bm": 24
     },
     "França|Suécia": {
@@ -72,10 +60,16 @@
       "p_away": 0.0893,
       "n_bm": 24
     },
+    "México|Equador": {
+      "p_home": 0.4569,
+      "p_draw": 0.2999,
+      "p_away": 0.2432,
+      "n_bm": 8
+    },
     "Estados Unidos|Bosnia & Herzegovina": {
-      "p_home": 0.6923,
-      "p_draw": 0.1976,
-      "p_away": 0.1101,
+      "p_home": 0.6959,
+      "p_draw": 0.196,
+      "p_away": 0.1082,
       "n_bm": 24
     },
     "Austrália|Egito": {
@@ -85,37 +79,37 @@
       "n_bm": 24
     },
     "Argentina|Cabo Verde": {
-      "p_home": 0.8308,
-      "p_draw": 0.1205,
-      "p_away": 0.0488,
+      "p_home": 0.8322,
+      "p_draw": 0.1198,
+      "p_away": 0.048,
       "n_bm": 23
     }
   },
   "champion_odds": {
-    "França": 19.48,
-    "Argentina": 14.53,
-    "Espanha": 11.66,
-    "Inglaterra": 10.94,
-    "Portugal": 8.86,
-    "Brasil": 6.11,
-    "Holanda": 5.07,
-    "Alemanha": 4.22,
-    "Estados Unidos": 2.65,
-    "Noruega": 2.43,
-    "Bélgica": 1.67,
-    "Marrocos": 1.67,
-    "Japão": 1.6,
-    "Colômbia": 1.6,
-    "México": 1.47,
-    "Suíça": 1.13,
+    "França": 19.6,
+    "Argentina": 14.46,
+    "Espanha": 11.61,
+    "Inglaterra": 10.76,
+    "Portugal": 8.82,
+    "Brasil": 6.08,
+    "Holanda": 5.04,
+    "Alemanha": 4.2,
+    "Estados Unidos": 2.63,
+    "Noruega": 2.42,
+    "Colômbia": 1.84,
+    "Bélgica": 1.66,
+    "Marrocos": 1.66,
+    "Japão": 1.59,
+    "México": 1.46,
+    "Suíça": 1.12,
+    "Senegal": 0.59,
     "Equador": 0.6,
-    "Senegal": 0.55,
-    "Croácia": 0.55,
+    "Croácia": 0.65,
     "Costa do Marfim": 0.42,
-    "Canadá": 0.32,
+    "Canadá": 0.31,
     "Suécia": 0.28,
     "Austrália": 0.27,
-    "Áustria": 0.29,
+    "Áustria": 0.28,
     "Egito": 0.24,
     "Paraguai": 0.23,
     "Gana": 0.17,
@@ -124,9 +118,9 @@
     "Irã": 0.12,
     "Uzbequistão": 0.09,
     "Coreia do Sul": 0.13,
-    "Escócia": 0.1,
     "Cabo Verde": 0.09,
     "África do Sul": 0.12,
-    "RD Congo": 0.1
+    "RD Congo": 0.1,
+    "Escócia": 0.12
   }
 }
