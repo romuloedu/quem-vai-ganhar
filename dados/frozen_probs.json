@@ -207,7 +207,7 @@
     "ph": 49.8,
     "pd": 39.23,
     "pa": 10.97,
-    "placar_prev": "1-0"
+    "placar_prev": "0-0"
   },
   "Tunísia|Japão": {
     "ph": 19.17,
@@ -357,7 +357,7 @@
     "ph": 25.33,
     "pd": 32.4,
     "pa": 42.26,
-    "placar_prev": "0-1"
+    "placar_prev": "0-0"
   },
   "Noruega|França": {
     "ph": 22.78,
@@ -394,5 +394,11 @@
     "pd": 34.07,
     "pa": 32.22,
     "placar_prev": "0-0"
+  },
+  "Panamá|Inglaterra": {
+    "ph": 19.25,
+    "pd": 20.05,
+    "pa": 60.69,
+    "placar_prev": "1-2"
   }
 }
