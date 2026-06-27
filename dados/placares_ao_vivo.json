@@ -1,3 +1,14 @@
 {
-  "jogos": {}
+  "jogos": {
+    "Panamá|Inglaterra": {
+      "home_score": 0,
+      "away_score": 0,
+      "status": "IN_PLAY"
+    },
+    "Croácia|Gana": {
+      "home_score": 0,
+      "away_score": 0,
+      "status": "LIVE"
+    }
+  }
 }
