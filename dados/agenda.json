@@ -430,29 +430,5 @@
     "away_team": "Argentina",
     "utc": "2026-06-28T02:00:00Z",
     "stage": "GROUP_STAGE"
-  },
-  {
-    "home_team": "África do Sul",
-    "away_team": "Canadá",
-    "utc": "2026-06-28T19:00:00Z",
-    "stage": "LAST_32"
-  },
-  {
-    "home_team": "Brasil",
-    "away_team": "Japão",
-    "utc": "2026-06-29T17:00:00Z",
-    "stage": "LAST_32"
-  },
-  {
-    "home_team": "Holanda",
-    "away_team": "Marrocos",
-    "utc": "2026-06-30T01:00:00Z",
-    "stage": "LAST_32"
-  },
-  {
-    "home_team": "Estados Unidos",
-    "away_team": "Bósnia e Herzegovina",
-    "utc": "2026-07-02T00:00:00Z",
-    "stage": "LAST_32"
   }
 ]
