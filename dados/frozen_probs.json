@@ -406,5 +406,17 @@
     "pd": 17.17,
     "pa": 7.4,
     "placar_prev": "2-0"
+  },
+  "Colômbia|Portugal": {
+    "ph": 22.06,
+    "pd": 31.16,
+    "pa": 46.78,
+    "placar_prev": "0-1"
+  },
+  "RD Congo|Uzbequistão": {
+    "ph": 32.71,
+    "pd": 39.07,
+    "pa": 28.22,
+    "placar_prev": "0-0"
   }
 }
