@@ -319,12 +319,13 @@ class PipelineAtualizacao:
         ensemble: ModeloEnsemble,
         extrator: ExtratordeFeaturas,
         previsor: PrevisorResultado,
+        market_probs: dict,
     ) -> None:
-        """Monta os jogos do mata-mata (probabilidades + chance de avanço)."""
+        """Monta os jogos do mata-mata (probabilidades blendadas + chance de avanço)."""
         from copa.config import BANDEIRAS
         print("🏆 Passo 6b: Montando jogos do mata-mata...")
         construtor = ConstrutorMataMata(self.repo, ensemble, extrator, previsor)
-        jogos = construtor.construir(BANDEIRAS)
+        jogos = construtor.construir(BANDEIRAS, market_probs)
         self.repo.salvar_json("knockout_games.json", jogos)
         print(f"   ✅ {len(jogos)} confronto(s) de mata-mata definido(s)")
 
@@ -363,7 +364,7 @@ class PipelineAtualizacao:
 
         results = self.step6_monte_carlo(ensemble, extrator, df_bl)
 
-        self.step6b_mata_mata(ensemble, extrator, previsor)
+        self.step6b_mata_mata(ensemble, extrator, previsor, market_probs)
 
         self.step7_update_html(results, df_bl, mkt_champion, previsor)
 

@@ -17,6 +17,7 @@ depois que a partida acontece nem sofram vazamento do próprio resultado.
 
 import datetime
 
+from copa.config import BLEND_ALPHA
 from copa.ensemble import ModeloEnsemble
 from copa.features import ExtratordeFeaturas
 from copa.limiar_empate import PrevisorResultado
@@ -66,6 +67,32 @@ class ConstrutorMataMata:
         brt = dt - datetime.timedelta(hours=3)
         return brt.strftime("%Y-%m-%d")
 
+    @staticmethod
+    def _blend(h, a, ph, pd_, pa, market_probs):
+        """Combina probabilidades do modelo com o mercado (mesmo peso dos grupos).
+
+        Os jogos de mata-mata são decididos em partida única, onde as odds de
+        mercado são muito informativas; usamos o mesmo BLEND_ALPHA da fase de
+        grupos. Retorna (ph, pd, pa, blended) normalizados em fração.
+        """
+        mk, inv = None, False
+        if (h, a) in market_probs:
+            mk = market_probs[(h, a)]
+        elif (a, h) in market_probs:
+            mk, inv = market_probs[(a, h)], True
+        if not mk:
+            return ph, pd_, pa, False
+        if inv:
+            m_h, m_d, m_a = mk["p_away"], mk["p_draw"], mk["p_home"]
+        else:
+            m_h, m_d, m_a = mk["p_home"], mk["p_draw"], mk["p_away"]
+        al = BLEND_ALPHA
+        bh = al * m_h + (1 - al) * ph
+        bd = al * m_d + (1 - al) * pd_
+        ba = al * m_a + (1 - al) * pa
+        tot = bh + bd + ba
+        return bh / tot, bd / tot, ba / tot, True
+
     def _mapa_resultados(self) -> dict:
         """Mapeia (casa, fora) → resultado real, com avançante e pênaltis."""
         reais = self.repo.ler_json("resultados_reais.json", [])
@@ -85,11 +112,12 @@ class ConstrutorMataMata:
             mapa[(h, a)] = {"res": res, "placar": placar, "winner": win}
         return mapa
 
-    def construir(self, flags: dict) -> list[dict]:
+    def construir(self, flags: dict, market_probs: dict | None = None) -> list[dict]:
         """Monta a lista de confrontos de mata-mata definidos na agenda."""
         if not self.repo.existe("agenda.json"):
             return []
 
+        market_probs = market_probs or {}
         agenda     = self.repo.ler_json("agenda.json", [])
         result_map = self._mapa_resultados()
         snapshot   = self.repo.ler_json("knockout_probs.json", {})
@@ -106,18 +134,24 @@ class ConstrutorMataMata:
                 continue  # confronto ainda sem as duas seleções definidas
 
             codigo, rotulo, ordem = fase
-            fkey = f"{h}|{a}"
+            fkey     = f"{h}|{a}"
+            disputado = (h, a) in result_map
 
-            if fkey in snapshot:
+            # Jogo já disputado e congelado: mantém a prob. pré-jogo guardada.
+            # Jogo pendente (ou ainda sem snapshot): recalcula com odds frescas.
+            if disputado and fkey in snapshot:
                 s  = snapshot[fkey]
                 ph, pd_, pa, pp = s["ph"], s["pd"], s["pa"], s["placar_prev"]
             else:
                 fv = self.extrator.construir_vetor(h, a, m["utc"][:10], neutral=1)
                 fph, fpd, fpa = self.ensemble.prever(h, a, fv)
-                ph, pd_, pa = round(fph * 100, 2), round(fpd * 100, 2), round(fpa * 100, 2)
-                pp = self.previsor.placar_previsto(fph, fpd, fpa)
-                snapshot[fkey] = {"ph": ph, "pd": pd_, "pa": pa, "placar_prev": pp}
-                mudou = True
+                bph, bpd, bpa, _ = self._blend(h, a, fph, fpd, fpa, market_probs)
+                ph, pd_, pa = round(bph * 100, 2), round(bpd * 100, 2), round(bpa * 100, 2)
+                pp = self.previsor.placar_previsto(bph, bpd, bpa)
+                novo = {"ph": ph, "pd": pd_, "pa": pa, "placar_prev": pp}
+                if snapshot.get(fkey) != novo:
+                    snapshot[fkey] = novo
+                    mudou = True
 
             # Avanço = vitória em 90' + metade dos empates (pênaltis 50/50)
             adv_h = round(ph + pd_ / 2, 2)
