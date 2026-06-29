@@ -8,6 +8,11 @@ on:
     - cron: '*/10 15-23 * * *'  # 15:00–23:50 UTC (a cada 10 min)
     - cron: '*/10 0-7 * * *'    # 00:00–07:50 UTC (a cada 10 min)
   workflow_dispatch:
+    inputs:
+      force:
+        description: "Força recálculo do modelo e previsões mesmo sem jogo novo"
+        type: boolean
+        default: false
 
 jobs:
   atualizar:
@@ -36,8 +41,8 @@ jobs:
 
       - name: Atualizar modelo e previsões
         # Roda em resultado novo OU quando a agenda muda (ex.: confrontos do
-        # mata-mata recém-definidos), para recalcular probabilidades e chaves
-        if: steps.buscar.outputs.new_results == 'true' || steps.buscar.outputs.agenda_changed == 'true'
+        # mata-mata recém-definidos), ou ainda quando forçado manualmente
+        if: steps.buscar.outputs.new_results == 'true' || steps.buscar.outputs.agenda_changed == 'true' || inputs.force == true
         run: python scripts/atualizar.py
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
@@ -51,7 +56,7 @@ jobs:
         run: python scripts/injetar_ao_vivo.py
 
       - name: Commit e push das mudanças
-        if: steps.buscar.outputs.new_results == 'true' || steps.buscar.outputs.agenda_changed == 'true' || steps.buscar.outputs.live_changed == 'true'
+        if: steps.buscar.outputs.new_results == 'true' || steps.buscar.outputs.agenda_changed == 'true' || steps.buscar.outputs.live_changed == 'true' || inputs.force == true
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
