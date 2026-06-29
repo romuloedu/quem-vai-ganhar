@@ -88,7 +88,7 @@ def parse_match(m):
     home   = NAME_MAP.get(m["homeTeam"]["name"], m["homeTeam"]["name"])
     away   = NAME_MAP.get(m["awayTeam"]["name"], m["awayTeam"]["name"])
     score  = m["score"]["fullTime"]
-    return {
+    entry  = {
         "date":       date,
         "home_team":  home,
         "away_team":  away,
@@ -97,6 +97,20 @@ def parse_match(m):
         "tournament": "FIFA World Cup",
         "country":    "USA",
     }
+    # Mata-mata: registra a fase, o avançante (pode ser nos pênaltis) e o placar de pênaltis
+    stage = m.get("stage", "GROUP_STAGE")
+    if stage != "GROUP_STAGE":
+        entry["stage"] = stage
+        winner = m.get("score", {}).get("winner")
+        entry["winner"] = (
+            "home" if winner == "HOME_TEAM"
+            else "away" if winner == "AWAY_TEAM"
+            else None
+        )
+        pens = m.get("score", {}).get("penalties") or {}
+        if pens.get("home") is not None and pens.get("away") is not None:
+            entry["penalties"] = f"{pens['home']}-{pens['away']}"
+    return entry
 
 
 def has_game_in_window(existing):

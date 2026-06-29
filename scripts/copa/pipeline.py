@@ -23,6 +23,7 @@ from copa.ensemble import ModeloEnsemble
 from copa.odds import ClienteOdds, ParseadorOdds
 from copa.blend import BlendadorProbabilidades
 from copa.monte_carlo import SimuladorMonteCarlo
+from copa.mata_mata import ConstrutorMataMata
 from copa.html import AtualizadorHTML
 
 
@@ -311,6 +312,22 @@ class PipelineAtualizacao:
         simulador = SimuladorMonteCarlo(ensemble, extrator, self.repo)
         return simulador.simular(df_bl)
 
+    # ── Passo 6b ────────────────────────────────────────────
+
+    def step6b_mata_mata(
+        self,
+        ensemble: ModeloEnsemble,
+        extrator: ExtratordeFeaturas,
+        previsor: PrevisorResultado,
+    ) -> None:
+        """Monta os jogos do mata-mata (probabilidades + chance de avanço)."""
+        from copa.config import BANDEIRAS
+        print("🏆 Passo 6b: Montando jogos do mata-mata...")
+        construtor = ConstrutorMataMata(self.repo, ensemble, extrator, previsor)
+        jogos = construtor.construir(BANDEIRAS)
+        self.repo.salvar_json("knockout_games.json", jogos)
+        print(f"   ✅ {len(jogos)} confronto(s) de mata-mata definido(s)")
+
     # ── Passo 7 ─────────────────────────────────────────────
 
     def step7_update_html(
@@ -345,6 +362,8 @@ class PipelineAtualizacao:
         df_bl = self.step5_blend(ensemble, extrator, market_probs)
 
         results = self.step6_monte_carlo(ensemble, extrator, df_bl)
+
+        self.step6b_mata_mata(ensemble, extrator, previsor)
 
         self.step7_update_html(results, df_bl, mkt_champion, previsor)
 

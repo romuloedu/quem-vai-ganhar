@@ -497,25 +497,37 @@ let activeTeam=null;
 
 const DRAW_K=0.70; // prevê empate se p_empate >= k*max(p_casa,p_fora) — calibrado automaticamente nos jogos da Copa
 function previsao(j){const ph=+j.ph,pd=+j.pd,pa=+j.pa;if(pd>=DRAW_K*Math.max(ph,pa))return 'draw';return ph>=pa?'home':'away';}
+// Mata-mata: lado favorito a avançar (maior prob. de avanço = maior prob. de vitória em 90')
+function favAvanca(j){return (+j.advH>=+j.advA)?'home':'away';}
+// Retorna true/false se o modelo acertou (null se o jogo ainda não tem resultado)
+function acertou(j){
+  if(j.res===null||j.res===undefined)return null;
+  if(j.s!=='group')return j.winner?j.winner===favAvanca(j):null;
+  return j.res===previsao(j);
+}
 
 function buildCard(j){
-  const prev=previsao(j);
+  const isKO=j.s!=='group';
+  // previsão: grupo usa limiar de empate; mata-mata usa o favorito a avançar
+  const prev=isKO?favAvanca(j):previsao(j);
   const prevLabel={home:j.home,draw:'Empate',away:j.away}[prev];
-  const temRes=j.res!==null;
+  const temRes=j.res!==null&&j.res!==undefined;
+  const ok=acertou(j);
   const ko=kickoffOf(j);
   const koMs=ko?ko.getTime():null;
   let bClass='pending',bText='Aguardando';
-  if(temRes){bClass=j.res===prev?'hit':'miss';bText=j.res===prev?'Acertou':'Errou';}
+  if(temRes){bClass=ok?'hit':'miss';bText=ok?'Acertou':'Errou';}
   else if(koMs){
-    const maxMin=j.s==='group'?185:300;
+    const maxMin=isKO?300:185;
     const now=Date.now();
     if(now>=koMs&&now<koMs+maxMin*60000){bClass='live';bText='Em andamento';}
     else if(now>=koMs+maxMin*60000){bClass='done';bText='Finalizado';}
   }
-  const maxMin=j.s==='group'?185:300;
+  const maxMin=isKO?300:185;
   const koAttr=(!temRes&&koMs)?` data-ko="${koMs}" data-maxmin="${maxMin}"`:'';
   const isH=j.home==='Brasil', isA=j.away==='Brasil';
   const rLabel=j.r===1?'1ª Rodada':j.r===2?'2ª Rodada':'3ª Rodada';
+  const faseLabel=isKO?j.fase:`Grupo ${j.g} · ${rLabel}`;
   const liveScore=PLACARES_AO_VIVO[j.home+'|'+j.away];
   const vsHtml=temRes&&j.placar
     ?`<span class="log-score">${j.placar}</span>`
@@ -524,31 +536,48 @@ function buildCard(j){
       :`<span class="log-vs">vs</span>`;
   let resHtml='';
   if(temRes){
-    const pDesc=prev==='draw'?'Empate':prevLabel;
-    const rDesc=j.res==='draw'?'Empate':(j.res==='home'?j.home:j.away);
-    const txt=j.res===prev
-      ?`Modelo acertou · previa <b>${pDesc}</b>`
-      :`Modelo errou · previa <b>${pDesc}</b>, saiu <b>${rDesc}</b>`;
-    resHtml=`<div class="log-resultado"><span class="log-resultado-desc">${txt}</span></div>`;
+    if(isKO){
+      const actual=j.winner==='home'?j.home:(j.winner==='away'?j.away:null);
+      const txt=ok
+        ?`Modelo acertou · previa avanço de <b>${prevLabel}</b>`
+        :`Modelo errou · previa <b>${prevLabel}</b>, avançou <b>${actual||'—'}</b>`;
+      resHtml=`<div class="log-resultado"><span class="log-resultado-desc">${txt}</span></div>`;
+    }else{
+      const pDesc=prev==='draw'?'Empate':prevLabel;
+      const rDesc=j.res==='draw'?'Empate':(j.res==='home'?j.home:j.away);
+      const txt=ok
+        ?`Modelo acertou · previa <b>${pDesc}</b>`
+        :`Modelo errou · previa <b>${pDesc}</b>, saiu <b>${rDesc}</b>`;
+      resHtml=`<div class="log-resultado"><span class="log-resultado-desc">${txt}</span></div>`;
+    }
   }
-  const drawEquil=prev==='draw'&&(+j.pd)<Math.max(+j.ph,+j.pa);
-  let equilHtml='',drawTrackExtra='';
-  if(drawEquil){
-    const favP=Math.max(+j.ph,+j.pa);
-    const fav=+j.ph>=+j.pa?j.home:j.away;
-    const thrV=(favP*DRAW_K).toFixed(2);
-    const pdV=(+j.pd).toFixed(2),fpV=favP.toFixed(2);
-    equilHtml=`<p class="log-equilibrio">Empate com <b>${pdV}%</b> supera o limiar de <span class="thr-val">${thrV}%</span> (${(DRAW_K*100).toFixed(0)}% de ${fav} · ${fpV}%) — modelo prevê empate</p>`;
-    drawTrackExtra=` has-thr" style="--thr:${thrV}%`;
+  // Nota complementar do corpo do card
+  let bodyNote='',drawTrackExtra='';
+  if(isKO){
+    const favTeam=prev==='home'?j.home:j.away;
+    const favAdv=(prev==='home'?(+j.advH):(+j.advA)).toFixed(2);
+    bodyNote=`<p class="log-equilibrio">Chance de <b>${favTeam}</b> avançar: <span class="thr-val">${favAdv}%</span> <span style="color:#888">(vitória em 90' + 50% dos empates → pênaltis)</span></p>`;
+  }else{
+    const drawEquil=prev==='draw'&&(+j.pd)<Math.max(+j.ph,+j.pa);
+    if(drawEquil){
+      const favP=Math.max(+j.ph,+j.pa);
+      const fav=+j.ph>=+j.pa?j.home:j.away;
+      const thrV=(favP*DRAW_K).toFixed(2);
+      const pdV=(+j.pd).toFixed(2),fpV=favP.toFixed(2);
+      bodyNote=`<p class="log-equilibrio">Empate com <b>${pdV}%</b> supera o limiar de <span class="thr-val">${thrV}%</span> (${(DRAW_K*100).toFixed(0)}% de ${fav} · ${fpV}%) — modelo prevê empate</p>`;
+      drawTrackExtra=` has-thr" style="--thr:${thrV}%`;
+    }
   }
+  const drawLabel=isKO?"Empate (90')":'Empate';
   // In group/team modes, add the date as context
   const extraCtx=(mode!=='day')?`<span style="font-size:10px;color:#888;margin-left:6px">${fmtDate(j.date)}</span>`:'';
+  const venueHtml=`${fmtKickoff(j)?`<span class="log-time">${fmtKickoff(j)}</span> <span class="log-tz">Brasília</span>`:''}${j.venue?`${fmtKickoff(j)?' · ':''}${j.venue}`:''}`;
   const li=document.createElement('li');
   li.className='log-item';
   li.innerHTML=`
     <div class="log-head">
       <div class="log-fase-row">
-        <p class="log-fase">Grupo ${j.g} · ${rLabel}${extraCtx}</p>
+        <p class="log-fase">${faseLabel}${extraCtx}</p>
         <span class="log-badge ${bClass}"${koAttr}>${bText}</span>
       </div>
       <div class="log-times">
@@ -558,27 +587,27 @@ function buildCard(j){
         <span class="log-nome${isA?' brasil':''}">${j.away}</span>
         <span class="log-flag">${j.af}</span>
       </div>
-      <p class="log-venue">${fmtKickoff(j)?`<span class="log-time">${fmtKickoff(j)}</span> <span class="log-tz">Brasília</span> · `:''}${j.venue}</p>
+      <p class="log-venue">${venueHtml}</p>
     </div>
     <div class="log-body">
       <div class="log-probs">
         <div class="log-prow${prev==='home'?' is-prev':''}">
-          <div><span class="log-plabel${isH?' hl':''}">${j.home}</span>${prev==='home'?'<span class="log-prev-tag">previsto</span>':''}</div>
+          <div><span class="log-plabel${isH?' hl':''}">${j.home}</span>${prev==='home'?`<span class="log-prev-tag">${isKO?'avança':'previsto'}</span>`:''}</div>
           <div class="log-track"><div class="log-pfill w" data-w="${(+j.ph).toFixed(2)}%" style="width:0"></div></div>
           <span class="log-pval">${(+j.ph).toFixed(2)}%</span>
         </div>
-        <div class="log-prow${prev==='draw'?' is-prev':''}">
-          <div><span class="log-plabel">Empate</span>${prev==='draw'?'<span class="log-prev-tag">previsto</span>':''}</div>
+        <div class="log-prow${(!isKO&&prev==='draw')?' is-prev':''}">
+          <div><span class="log-plabel">${drawLabel}</span>${(!isKO&&prev==='draw')?'<span class="log-prev-tag">previsto</span>':''}</div>
           <div class="log-track${drawTrackExtra}"><div class="log-pfill d" data-w="${(+j.pd).toFixed(2)}%" style="width:0"></div></div>
           <span class="log-pval">${(+j.pd).toFixed(2)}%</span>
         </div>
         <div class="log-prow${prev==='away'?' is-prev':''}">
-          <div><span class="log-plabel${isA?' hl':''}">${j.away}</span>${prev==='away'?'<span class="log-prev-tag">previsto</span>':''}</div>
+          <div><span class="log-plabel${isA?' hl':''}">${j.away}</span>${prev==='away'?`<span class="log-prev-tag">${isKO?'avança':'previsto'}</span>`:''}</div>
           <div class="log-track"><div class="log-pfill l" data-w="${(+j.pa).toFixed(2)}%" style="width:0"></div></div>
           <span class="log-pval">${(+j.pa).toFixed(2)}%</span>
         </div>
       </div>
-      ${equilHtml}
+      ${bodyNote}
     </div>
     ${resHtml}`;
   return li;
@@ -606,8 +635,10 @@ function updateNav(){
   const dateStr=dates[idx];
   document.getElementById('date-label').textContent=fmtDate(dateStr);
   const games=JOGOS.filter(j=>j.date===dateStr);
+  const ko=games.find(j=>j.s!=='group');
+  const faseTxt=games.every(j=>j.s==='group')?'Fase de Grupos':(ko?ko.fase:'Mata-mata');
   document.getElementById('date-meta').textContent=
-    `Fase de Grupos · ${games.length} jogo${games.length>1?'s':''}`;
+    `${faseTxt} · ${games.length} jogo${games.length>1?'s':''}`;
   document.getElementById('prev-day').disabled=idx===0;
   document.getElementById('next-day').disabled=idx===dates.length-1;
   const hojeBtn=document.getElementById('hoje-btn');
@@ -672,7 +703,7 @@ document.querySelectorAll('.ftab').forEach(t=>{
 
 function updateScore(){
   let acc=0,played=0;
-  JOGOS.forEach(j=>{if(j.res!==null){played++;if(j.res===previsao(j))acc++;}});
+  JOGOS.forEach(j=>{const ok=acertou(j);if(ok!==null){played++;if(ok)acc++;}});
   const el=document.getElementById('score-strip');
   if(played===0){
     el.innerHTML='<span class="score-label">Copa começa em 11 de junho · 72 jogos com previsão do modelo</span>';

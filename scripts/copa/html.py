@@ -357,6 +357,10 @@ class AtualizadorHTML:
                 "utc":         agenda.get(frozenset((h, a)), ""),
             })
 
+        # Jogos do mata-mata (montados no Passo 6b) entram no mesmo array JOGOS
+        knockout_games = self.repo.ler_json("knockout_games.json", [])
+        todos_jogos    = group_games + knockout_games
+
         html_res_path = ROOT / "resultados.html"
         if not html_res_path.exists():
             return
@@ -364,7 +368,7 @@ class AtualizadorHTML:
         with open(html_res_path, encoding="utf-8") as f:
             html_res = f.read()
 
-        jogos_json = json.dumps(group_games, ensure_ascii=False, separators=(",", ":"))
+        jogos_json = json.dumps(todos_jogos, ensure_ascii=False, separators=(",", ":"))
         html_res = re.sub(
             r"const JOGOS=\[[^\n]*\];",
             lambda m: f"const JOGOS={jogos_json};",
@@ -401,7 +405,10 @@ class AtualizadorHTML:
 
         with open(html_res_path, "w", encoding="utf-8") as f:
             f.write(html_res)
-        print(f"   ✅ resultados.html atualizado ({len(group_games)} jogos)")
+        print(
+            f"   ✅ resultados.html atualizado "
+            f"({len(group_games)} jogos de grupo + {len(knockout_games)} de mata-mata)"
+        )
 
     def _imprimir_resumo(
         self,
