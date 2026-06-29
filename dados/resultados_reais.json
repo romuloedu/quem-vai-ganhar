@@ -646,5 +646,16 @@
     "away_score": 3,
     "tournament": "FIFA World Cup",
     "country": "USA"
+  },
+  {
+    "date": "2026-06-28",
+    "home_team": "África do Sul",
+    "away_team": "Canadá",
+    "home_score": 0,
+    "away_score": 1,
+    "tournament": "FIFA World Cup",
+    "country": "USA",
+    "stage": "LAST_32",
+    "winner": "away"
   }
 ]

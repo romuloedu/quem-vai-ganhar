@@ -1,134 +1,127 @@
 {
   "match_odds": {
-    "África do Sul|Canadá": {
-      "p_home": 0.1728,
-      "p_draw": 0.2653,
-      "p_away": 0.5618,
-      "n_bm": 25
-    },
     "Brasil|Japão": {
-      "p_home": 0.5644,
-      "p_draw": 0.2505,
-      "p_away": 0.1852,
+      "p_home": 0.5482,
+      "p_draw": 0.2624,
+      "p_away": 0.1894,
       "n_bm": 25
     },
     "Alemanha|Paraguai": {
-      "p_home": 0.7008,
-      "p_draw": 0.1902,
-      "p_away": 0.1089,
+      "p_home": 0.7061,
+      "p_draw": 0.1893,
+      "p_away": 0.1046,
       "n_bm": 25
     },
     "Holanda|Marrocos": {
-      "p_home": 0.4502,
-      "p_draw": 0.2965,
-      "p_away": 0.2533,
+      "p_home": 0.4203,
+      "p_draw": 0.3062,
+      "p_away": 0.2735,
       "n_bm": 24
     },
     "Costa do Marfim|Noruega": {
-      "p_home": 0.261,
-      "p_draw": 0.2703,
-      "p_away": 0.4687,
+      "p_home": 0.2571,
+      "p_draw": 0.2677,
+      "p_away": 0.4752,
       "n_bm": 25
     },
     "França|Suécia": {
-      "p_home": 0.747,
-      "p_draw": 0.1639,
-      "p_away": 0.0891,
+      "p_home": 0.7586,
+      "p_draw": 0.1549,
+      "p_away": 0.0864,
       "n_bm": 25
     },
     "México|Equador": {
-      "p_home": 0.4408,
-      "p_draw": 0.3106,
-      "p_away": 0.2486,
-      "n_bm": 21
+      "p_home": 0.4341,
+      "p_draw": 0.3257,
+      "p_away": 0.2402,
+      "n_bm": 25
     },
     "Inglaterra|RD Congo": {
-      "p_home": 0.7347,
-      "p_draw": 0.1782,
-      "p_away": 0.087,
-      "n_bm": 19
+      "p_home": 0.7553,
+      "p_draw": 0.1719,
+      "p_away": 0.0728,
+      "n_bm": 23
     },
     "Bélgica|Senegal": {
-      "p_home": 0.4601,
-      "p_draw": 0.2913,
-      "p_away": 0.2487,
-      "n_bm": 21
+      "p_home": 0.4327,
+      "p_draw": 0.2954,
+      "p_away": 0.2719,
+      "n_bm": 25
     },
     "Estados Unidos|Bosnia & Herzegovina": {
-      "p_home": 0.7017,
-      "p_draw": 0.1931,
-      "p_away": 0.1052,
+      "p_home": 0.6995,
+      "p_draw": 0.1932,
+      "p_away": 0.1073,
       "n_bm": 25
     },
     "Espanha|Áustria": {
-      "p_home": 0.6924,
-      "p_draw": 0.2074,
-      "p_away": 0.1002,
-      "n_bm": 11
+      "p_home": 0.7368,
+      "p_draw": 0.1778,
+      "p_away": 0.0854,
+      "n_bm": 25
     },
     "Portugal|Croácia": {
-      "p_home": 0.4987,
-      "p_draw": 0.2851,
-      "p_away": 0.2162,
-      "n_bm": 19
+      "p_home": 0.5368,
+      "p_draw": 0.2678,
+      "p_away": 0.1954,
+      "n_bm": 25
     },
     "Suíça|Argélia": {
-      "p_home": 0.5448,
-      "p_draw": 0.2671,
-      "p_away": 0.1881,
-      "n_bm": 9
+      "p_home": 0.477,
+      "p_draw": 0.286,
+      "p_away": 0.2369,
+      "n_bm": 25
     },
     "Austrália|Egito": {
-      "p_home": 0.2937,
-      "p_draw": 0.3233,
-      "p_away": 0.383,
+      "p_home": 0.2868,
+      "p_draw": 0.3264,
+      "p_away": 0.3868,
       "n_bm": 25
     },
     "Argentina|Cabo Verde": {
-      "p_home": 0.8336,
-      "p_draw": 0.12,
-      "p_away": 0.0464,
-      "n_bm": 24
+      "p_home": 0.8318,
+      "p_draw": 0.1183,
+      "p_away": 0.0499,
+      "n_bm": 25
     },
     "Colômbia|Gana": {
-      "p_home": 0.5342,
-      "p_draw": 0.2826,
-      "p_away": 0.1832,
-      "n_bm": 19
+      "p_home": 0.6286,
+      "p_draw": 0.2425,
+      "p_away": 0.1289,
+      "n_bm": 25
     }
   },
   "champion_odds": {
-    "França": 19.74,
-    "Argentina": 17.05,
-    "Inglaterra": 11.12,
-    "Espanha": 10.98,
-    "Brasil": 6.16,
-    "Portugal": 6.39,
-    "Holanda": 4.88,
-    "Alemanha": 4.08,
-    "Estados Unidos": 2.55,
-    "Colômbia": 2.37,
-    "Noruega": 2.34,
-    "Bélgica": 1.74,
-    "Marrocos": 1.74,
-    "Japão": 1.58,
-    "México": 1.51,
-    "Suíça": 1.19,
-    "Senegal": 0.58,
-    "Equador": 0.61,
-    "Croácia": 0.49,
-    "Costa do Marfim": 0.41,
-    "Áustria": 0.39,
-    "Canadá": 0.31,
-    "Suécia": 0.27,
-    "Austrália": 0.26,
-    "Egito": 0.23,
-    "Argélia": 0.18,
-    "Paraguai": 0.23,
-    "Gana": 0.17,
-    "Bosnia & Herzegovina": 0.12,
+    "França": 19.59,
+    "Argentina": 17.34,
+    "Inglaterra": 11.19,
+    "Espanha": 10.85,
+    "Brasil": 6.1,
+    "Portugal": 6.32,
+    "Holanda": 5.13,
+    "Alemanha": 4.42,
+    "Colômbia": 2.72,
+    "Estados Unidos": 2.49,
+    "Noruega": 2.3,
+    "Marrocos": 1.67,
+    "Bélgica": 1.59,
+    "México": 1.59,
+    "Japão": 1.52,
+    "Suíça": 1.09,
+    "Equador": 0.62,
+    "Senegal": 0.53,
+    "Croácia": 0.48,
+    "Costa do Marfim": 0.38,
+    "Canadá": 0.37,
+    "Suécia": 0.24,
+    "Áustria": 0.26,
+    "Egito": 0.22,
+    "Austrália": 0.22,
+    "Gana": 0.16,
+    "Argélia": 0.13,
+    "Paraguai": 0.14,
     "Cabo Verde": 0.09,
-    "África do Sul": 0.12,
-    "RD Congo": 0.12
+    "RD Congo": 0.12,
+    "Bosnia & Herzegovina": 0.12
   }
 }
