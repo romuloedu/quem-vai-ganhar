@@ -151,6 +151,24 @@ def has_game_in_window(existing):
                   f"(KO+{elapsed_min:.0f}min)")
             return True
 
+    # Descoberta de novas fases: se todos os jogos conhecidos na agenda já
+    # aconteceram mas a Copa segue em andamento, consulta a API para descobrir
+    # os confrontos do mata-mata recém-definidos — eles só entram na agenda
+    # depois que as seleções são conhecidas, então sem este gatilho ficaríamos
+    # presos com a agenda da fase de grupos e nunca buscaríamos o mata-mata.
+    kickoffs = []
+    for m in agenda:
+        try:
+            kickoffs.append(datetime.datetime.fromisoformat(m["utc"].replace("Z", "+00:00")))
+        except Exception:
+            continue
+    if kickoffs and max(kickoffs) <= now:
+        # Há um próximo jogo (mata-mata) que ainda não está na agenda. O guard de
+        # período em main() limita esta sondagem à janela da Copa.
+        print("  Descoberta: jogos conhecidos já passaram e a Copa continua — "
+              "buscando confrontos das próximas fases")
+        return True
+
     return False
 
 
