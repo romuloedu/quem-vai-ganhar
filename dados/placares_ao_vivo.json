@@ -1,9 +1,9 @@
 {
   "jogos": {
     "Alemanha|Paraguai": {
-      "home_score": 2,
-      "away_score": 1,
-      "status": "PAUSED"
+      "home_score": 5,
+      "away_score": 5,
+      "status": "IN_PLAY"
     }
   }
 }
