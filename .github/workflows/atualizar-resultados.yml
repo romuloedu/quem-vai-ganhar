@@ -35,7 +35,9 @@ jobs:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
 
       - name: Atualizar modelo e previsões
-        if: steps.buscar.outputs.new_results == 'true'
+        # Roda em resultado novo OU quando a agenda muda (ex.: confrontos do
+        # mata-mata recém-definidos), para recalcular probabilidades e chaves
+        if: steps.buscar.outputs.new_results == 'true' || steps.buscar.outputs.agenda_changed == 'true'
         run: python scripts/atualizar.py
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
