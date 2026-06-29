@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jogos Copa 2026 · Previsões e Resultados</title>
+<title>Jogos Copa 2026 · Previsões e Resultados de Todas as Fases</title>
 <meta name="description" content="Calendário de jogos da Copa do Mundo 2026 com previsões do modelo e resultados em tempo real.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -363,9 +363,9 @@ footer{background:#0a0a0a;border-top:1px solid #1a1a1a;padding:28px 0}
 <header>
   <div class="wrap">
     <p class="kicker">Copa do Mundo 2026</p>
-    <h1>Fase de grupos.<br>Previsões e <span>resultados.</span></h1>
+    <h1>Da fase de grupos à final.<br>Previsões e <span>resultados.</span></h1>
     <p class="header-sub">Antes de cada jogo, estimamos a chance de cada resultado. Veja o que previmos e compare com o que aconteceu.</p>
-    <p class="header-intro">Os 72 jogos da fase de grupos, com as probabilidades calculadas antes do apito inicial. Conforme os resultados chegam, você vê onde o modelo acertou e onde o futebol resolveu fazer diferente.</p>
+    <p class="header-intro">Todos os jogos da Copa — fase de grupos e mata-mata — com as probabilidades calculadas antes do apito inicial. No mata-mata também mostramos a chance de cada seleção se classificar. Conforme os resultados chegam, você vê onde o modelo acertou e onde o futebol resolveu fazer diferente.</p>
   </div>
 </header>
 
@@ -556,7 +556,7 @@ function buildCard(j){
   if(isKO){
     const favTeam=prev==='home'?j.home:j.away;
     const favAdv=(prev==='home'?(+j.advH):(+j.advA)).toFixed(2);
-    bodyNote=`<p class="log-equilibrio">Chance de <b>${favTeam}</b> avançar: <span class="thr-val">${favAdv}%</span> <span style="color:#888">(vitória em 90' + 50% dos empates → pênaltis)</span></p>`;
+    bodyNote=`<p class="log-equilibrio"><b>${favTeam}</b> se classifica em <span class="thr-val">${favAdv}%</span> dos cenários<br><span style="color:#888">Conta a chance de vencer nos 90 minutos mais metade dos empates — no mata-mata, jogo empatado vai para prorrogação e pênaltis (~50% de avanço para cada lado).</span></p>`;
   }else{
     const drawEquil=prev==='draw'&&(+j.pd)<Math.max(+j.ph,+j.pa);
     if(drawEquil){
@@ -706,7 +706,7 @@ function updateScore(){
   JOGOS.forEach(j=>{const ok=acertou(j);if(ok!==null){played++;if(ok)acc++;}});
   const el=document.getElementById('score-strip');
   if(played===0){
-    el.innerHTML='<span class="score-label">Copa começa em 11 de junho · 72 jogos com previsão do modelo</span>';
+    el.innerHTML='<span class="score-label">Copa começa em 11 de junho · todos os jogos com previsão do modelo</span>';
   }else{
     const pct=(acc/played*100).toFixed(2);
     el.innerHTML=`<span class="score-num">${acc}/${played}</span><span class="score-label">&nbsp;previsões corretas&nbsp;·&nbsp;${pct}% de acertos</span>`;
