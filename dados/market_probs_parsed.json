@@ -1,27 +1,27 @@
 {
   "match_odds": {
     "Holanda|Marrocos": {
-      "p_home": 0.4005,
-      "p_draw": 0.3113,
-      "p_away": 0.2882,
+      "p_home": 0.4006,
+      "p_draw": 0.3099,
+      "p_away": 0.2895,
       "n_bm": 24
     },
     "Costa do Marfim|Noruega": {
-      "p_home": 0.2621,
+      "p_home": 0.262,
       "p_draw": 0.2733,
-      "p_away": 0.4646,
+      "p_away": 0.4647,
       "n_bm": 25
     },
     "França|Suécia": {
-      "p_home": 0.7483,
-      "p_draw": 0.1588,
-      "p_away": 0.093,
+      "p_home": 0.7491,
+      "p_draw": 0.1583,
+      "p_away": 0.0926,
       "n_bm": 25
     },
     "México|Equador": {
-      "p_home": 0.4348,
-      "p_draw": 0.3277,
-      "p_away": 0.2375,
+      "p_home": 0.4349,
+      "p_draw": 0.3278,
+      "p_away": 0.2373,
       "n_bm": 25
     },
     "Inglaterra|RD Congo": {
@@ -37,21 +37,21 @@
       "n_bm": 25
     },
     "Estados Unidos|Bosnia & Herzegovina": {
-      "p_home": 0.7028,
-      "p_draw": 0.1916,
-      "p_away": 0.1056,
+      "p_home": 0.7005,
+      "p_draw": 0.1926,
+      "p_away": 0.1069,
       "n_bm": 25
     },
     "Espanha|Áustria": {
       "p_home": 0.7374,
-      "p_draw": 0.1788,
+      "p_draw": 0.1787,
       "p_away": 0.0839,
       "n_bm": 25
     },
     "Portugal|Croácia": {
-      "p_home": 0.5405,
+      "p_home": 0.5406,
       "p_draw": 0.268,
-      "p_away": 0.1915,
+      "p_away": 0.1914,
       "n_bm": 25
     },
     "Suíça|Argélia": {
@@ -67,9 +67,9 @@
       "n_bm": 25
     },
     "Argentina|Cabo Verde": {
-      "p_home": 0.8279,
-      "p_draw": 0.1218,
-      "p_away": 0.0503,
+      "p_home": 0.8261,
+      "p_draw": 0.123,
+      "p_away": 0.0509,
       "n_bm": 25
     },
     "Colômbia|Gana": {
@@ -80,12 +80,12 @@
     }
   },
   "champion_odds": {
-    "França": 23.54,
-    "Argentina": 18.69,
-    "Inglaterra": 11.26,
-    "Espanha": 10.99,
+    "França": 23.52,
+    "Argentina": 18.67,
+    "Inglaterra": 11.25,
+    "Espanha": 10.98,
     "Brasil": 7.55,
-    "Portugal": 5.94,
+    "Portugal": 6.04,
     "Holanda": 4.77,
     "Colômbia": 2.79,
     "Estados Unidos": 2.45,
@@ -98,9 +98,9 @@
     "Senegal": 0.55,
     "Croácia": 0.46,
     "Costa do Marfim": 0.38,
-    "Paraguai": 0.34,
-    "Suécia": 0.33,
+    "Paraguai": 0.33,
     "Canadá": 0.37,
+    "Suécia": 0.3,
     "Áustria": 0.24,
     "Egito": 0.23,
     "Austrália": 0.23,
