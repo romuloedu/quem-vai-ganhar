@@ -586,16 +586,25 @@ function buildCard(j){
       resHtml=`<div class="log-resultado"><span class="log-resultado-desc">${txt}</span></div>`;
     }
   }
-  // Nota complementar do corpo do card
-  let bodyNote='',drawTrackExtra='';
+  // Barras de probabilidade + nota complementar.
+  // Grupo: vitória / empate / derrota. Mata-mata: chance de cada lado avançar
+  // (empate em 90' não é desfecho final, então não tem barra própria).
+  let probsHtml,bodyNote='',drawTrackExtra='';
   if(isKO){
-    const favTeam=prev==='home'?j.home:j.away;
-    const favAdv=(prev==='home'?(+j.advH):(+j.advA)).toFixed(2);
-    if(isThird){
-      bodyNote=`<p class="log-equilibrio"><b>${favTeam}</b> leva o 3º lugar em <span class="thr-val">${favAdv}%</span> dos cenários<br><span style="color:#888">Jogo único: chance de vencer nos 90 minutos mais metade dos empates (decididos na prorrogação e pênaltis).</span></p>`;
-    }else{
-      bodyNote=`<p class="log-equilibrio"><b>${favTeam}</b> se classifica em <span class="thr-val">${favAdv}%</span> dos cenários<br><span style="color:#888">Conta a chance de vencer nos 90 minutos mais metade dos empates — no mata-mata, jogo empatado vai para prorrogação e pênaltis (~50% de avanço para cada lado).</span></p>`;
-    }
+    const favIsHome=prev==='home';
+    const tagTxt=isThird?'vence':'avança';
+    probsHtml=`
+        <div class="log-prow${favIsHome?' is-prev':''}">
+          <div><span class="log-plabel${isH?' hl':''}">${j.home}</span>${favIsHome?`<span class="log-prev-tag">${tagTxt}</span>`:''}</div>
+          <div class="log-track"><div class="log-pfill w" data-w="${(+j.advH).toFixed(2)}%" style="width:0"></div></div>
+          <span class="log-pval">${(+j.advH).toFixed(2)}%</span>
+        </div>
+        <div class="log-prow${!favIsHome?' is-prev':''}">
+          <div><span class="log-plabel${isA?' hl':''}">${j.away}</span>${!favIsHome?`<span class="log-prev-tag">${tagTxt}</span>`:''}</div>
+          <div class="log-track"><div class="log-pfill l" data-w="${(+j.advA).toFixed(2)}%" style="width:0"></div></div>
+          <span class="log-pval">${(+j.advA).toFixed(2)}%</span>
+        </div>`;
+    bodyNote=`<p class="log-equilibrio" style="color:#888">${isThird?'Chance de vencer':'Chance de avançar'} = vitória nos 90 minutos + metade dos empates, decididos na prorrogação e pênaltis (~50% para cada lado).</p>`;
   }else{
     const drawEquil=prev==='draw'&&(+j.pd)<Math.max(+j.ph,+j.pa);
     if(drawEquil){
@@ -606,8 +615,23 @@ function buildCard(j){
       bodyNote=`<p class="log-equilibrio">Empate com <b>${pdV}%</b> supera o limiar de <span class="thr-val">${thrV}%</span> (${(DRAW_K*100).toFixed(0)}% de ${fav} · ${fpV}%) — modelo prevê empate</p>`;
       drawTrackExtra=` has-thr" style="--thr:${thrV}%`;
     }
+    probsHtml=`
+        <div class="log-prow${prev==='home'?' is-prev':''}">
+          <div><span class="log-plabel${isH?' hl':''}">${j.home}</span>${prev==='home'?'<span class="log-prev-tag">previsto</span>':''}</div>
+          <div class="log-track"><div class="log-pfill w" data-w="${(+j.ph).toFixed(2)}%" style="width:0"></div></div>
+          <span class="log-pval">${(+j.ph).toFixed(2)}%</span>
+        </div>
+        <div class="log-prow${prev==='draw'?' is-prev':''}">
+          <div><span class="log-plabel">Empate</span>${prev==='draw'?'<span class="log-prev-tag">previsto</span>':''}</div>
+          <div class="log-track${drawTrackExtra}"><div class="log-pfill d" data-w="${(+j.pd).toFixed(2)}%" style="width:0"></div></div>
+          <span class="log-pval">${(+j.pd).toFixed(2)}%</span>
+        </div>
+        <div class="log-prow${prev==='away'?' is-prev':''}">
+          <div><span class="log-plabel${isA?' hl':''}">${j.away}</span>${prev==='away'?'<span class="log-prev-tag">previsto</span>':''}</div>
+          <div class="log-track"><div class="log-pfill l" data-w="${(+j.pa).toFixed(2)}%" style="width:0"></div></div>
+          <span class="log-pval">${(+j.pa).toFixed(2)}%</span>
+        </div>`;
   }
-  const drawLabel=isKO?"Empate (90')":'Empate';
   // In group/team modes, add the date as context
   const extraCtx=(mode!=='day')?`<span style="font-size:10px;color:#888;margin-left:6px">${fmtDate(j.date)}</span>`:'';
   const venueHtml=`${fmtKickoff(j)?`<span class="log-time">${fmtKickoff(j)}</span> <span class="log-tz">Brasília</span>`:''}${j.venue?`${fmtKickoff(j)?' · ':''}${j.venue}`:''}`;
@@ -629,22 +653,7 @@ function buildCard(j){
       <p class="log-venue">${venueHtml}</p>
     </div>
     <div class="log-body">
-      <div class="log-probs">
-        <div class="log-prow${prev==='home'?' is-prev':''}">
-          <div><span class="log-plabel${isH?' hl':''}">${j.home}</span>${prev==='home'?`<span class="log-prev-tag">${isKO?(isThird?'vence':'avança'):'previsto'}</span>`:''}</div>
-          <div class="log-track"><div class="log-pfill w" data-w="${(+j.ph).toFixed(2)}%" style="width:0"></div></div>
-          <span class="log-pval">${(+j.ph).toFixed(2)}%</span>
-        </div>
-        <div class="log-prow${(!isKO&&prev==='draw')?' is-prev':''}">
-          <div><span class="log-plabel">${drawLabel}</span>${(!isKO&&prev==='draw')?'<span class="log-prev-tag">previsto</span>':''}</div>
-          <div class="log-track${drawTrackExtra}"><div class="log-pfill d" data-w="${(+j.pd).toFixed(2)}%" style="width:0"></div></div>
-          <span class="log-pval">${(+j.pd).toFixed(2)}%</span>
-        </div>
-        <div class="log-prow${prev==='away'?' is-prev':''}">
-          <div><span class="log-plabel${isA?' hl':''}">${j.away}</span>${prev==='away'?`<span class="log-prev-tag">${isKO?(isThird?'vence':'avança'):'previsto'}</span>`:''}</div>
-          <div class="log-track"><div class="log-pfill l" data-w="${(+j.pa).toFixed(2)}%" style="width:0"></div></div>
-          <span class="log-pval">${(+j.pa).toFixed(2)}%</span>
-        </div>
+      <div class="log-probs">${probsHtml}
       </div>
       ${bodyNote}
     </div>
