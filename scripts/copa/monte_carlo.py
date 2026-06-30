@@ -37,6 +37,108 @@ class SimuladorMonteCarlo:
         self.extrator   = extrator
         self.repo       = repositorio
 
+    def _simular_pos_grupos(
+        self,
+        ko_fix: dict,
+        ko_order: list,
+        expect: dict,
+        sim_m,
+        all_teams: list,
+        n: int,
+    ) -> dict:
+        """Simula só o mata-mata, partindo dos confrontos reais e fixando resultados.
+
+        • Times eliminados (fora das oitavas) ficam com probabilidade zero.
+        • Cada rodada já decidida usa o vencedor real; o que falta é simulado.
+        • Quando a próxima rodada já está definida na agenda, usamos os confrontos
+          reais; senão, emparelhamos os vencedores na ordem do chaveamento.
+        """
+        reais = self.repo.ler_json("resultados_reais.json", [])
+        real_adv: dict = {}
+        for r in reais:
+            if not r.get("stage"):
+                continue  # só jogos de mata-mata
+            h, a = r["home_team"], r["away_team"]
+            w = r.get("winner")
+            if w == "home":
+                real_adv[(h, a)] = h
+            elif w == "away":
+                real_adv[(h, a)] = a
+            else:
+                try:
+                    hs, as_ = int(r["home_score"]), int(r["away_score"])
+                    if hs != as_:
+                        real_adv[(h, a)] = h if hs > as_ else a
+                except (TypeError, ValueError):
+                    pass
+
+        def winner_real(h, a):
+            return real_adv.get((h, a)) or real_adv.get((a, h))
+
+        date_of = {
+            "LAST_32": DATES["round32"], "LAST_16": DATES["r16"],
+            "QUARTER_FINALS": DATES["qf"], "SEMI_FINALS": DATES["sf"],
+            "FINAL": DATES["final"],
+        }
+        ch  = {t: 0 for t in all_teams}
+        fn  = {t: 0 for t in all_teams}
+        sf  = {t: 0 for t in all_teams}
+        qf  = {t: 0 for t in all_teams}
+        r16 = {t: 0 for t in all_teams}
+        r32 = {t: 0 for t in all_teams}
+        ga  = {t: 0 for t in all_teams}
+        win = {"LAST_32": r32, "LAST_16": r16, "QUARTER_FINALS": qf,
+               "SEMI_FINALS": sf, "FINAL": ch}
+
+        # Times vivos = os 32 das oitavas; todos já saíram da fase de grupos (100%)
+        alive = set()
+        for m in ko_fix["LAST_32"]:
+            alive.add(m["home_team"]); alive.add(m["away_team"])
+        for t in alive:
+            ga[t] = n
+
+        BR, ARG = "Brasil", "Argentina"
+        clasico = {"round32": 0, "round16": 0, "quarter": 0, "semi": 0, "final": 0, "any": 0}
+        cl_key  = {"LAST_32": "round32", "LAST_16": "round16", "QUARTER_FINALS": "quarter",
+                   "SEMI_FINALS": "semi", "FINAL": "final"}
+
+        for _ in range(n):
+            current = [(m["home_team"], m["away_team"]) for m in ko_fix["LAST_32"]]
+            for idx, stage in enumerate(ko_order):
+                winners = []
+                for h, a in current:
+                    w = winner_real(h, a) or sim_m(h, a, date_of[stage], True)
+                    win[stage][w] += 1
+                    if stage == "SEMI_FINALS":
+                        fn[w] += 1  # vencer a semi = chegar à final
+                    if {h, a} == {BR, ARG}:
+                        clasico[cl_key[stage]] += 1; clasico["any"] += 1
+                    winners.append(w)
+                if stage == "FINAL":
+                    break
+                nxt = ko_order[idx + 1]
+                if len(ko_fix[nxt]) == expect[nxt]:
+                    current = [(m["home_team"], m["away_team"]) for m in ko_fix[nxt]]
+                else:
+                    current = [(winners[i], winners[i + 1])
+                               for i in range(0, len(winners) - 1, 2)]
+
+        def pct(d: dict) -> dict:
+            return {k: round(v / n * 100, 2) for k, v in d.items()}
+
+        return {
+            "champion":         pct(ch),
+            "final":            pct(fn),
+            "semi":             pct(sf),
+            "quarter":          pct(qf),
+            "round16":          pct(r16),
+            "round32":          pct(r32),
+            "group_adv":        pct(ga),
+            "brasil_argentina": {k: round(v / n * 100, 2) for k, v in clasico.items()},
+            "n_sims":           n,
+            "blend_alpha":      BLEND_ALPHA,
+        }
+
     def simular(
         self,
         df_bl: pd.DataFrame,
@@ -136,6 +238,27 @@ class SimuladorMonteCarlo:
                 gfd[h] += hg;       gfd[a] += ag
             ranking = sorted(teams, key=lambda t: (pts[t], gd[t], gfd[t]), reverse=True)
             return ranking, pts, gd
+
+        # ── Mata-mata em andamento: condiciona ao chaveamento e resultados reais ──
+        # Se as oitavas (LAST_32) já estão definidas, a fase de grupos acabou: em vez
+        # de re-sortear os grupos (o que ressuscitaria times eliminados), partimos dos
+        # 16 confrontos reais e fixamos os resultados que já aconteceram.
+        agenda_all = self.repo.ler_json("agenda.json", [])
+        KO_ORDER = ["LAST_32", "LAST_16", "QUARTER_FINALS", "SEMI_FINALS", "FINAL"]
+        EXPECT   = {"LAST_32": 16, "LAST_16": 8, "QUARTER_FINALS": 4, "SEMI_FINALS": 2, "FINAL": 1}
+
+        def _fix(stage: str) -> list:
+            ms = [m for m in agenda_all
+                  if m.get("stage") == stage and m.get("home_team") and m.get("away_team")]
+            return sorted(ms, key=lambda m: (m.get("id") or 0, m.get("utc") or ""))
+
+        ko_fix = {st: _fix(st) for st in KO_ORDER}
+        if ko_fix["LAST_32"]:
+            resultados = self._simular_pos_grupos(ko_fix, KO_ORDER, EXPECT, sim_m, all_teams, n)
+            if salvar:
+                self.repo.salvar_json("tournament_simulation.json", resultados)
+            print("   ✅ Simulação condicionada ao chaveamento real concluída")
+            return resultados
 
         # Contadores de avanço
         ch    = {t: 0 for t in all_teams}

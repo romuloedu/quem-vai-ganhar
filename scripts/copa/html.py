@@ -61,8 +61,14 @@ class AtualizadorHTML:
 
         # Blend de odds de campeão com modelo
         if mkt_champion:
+            # Com o mata-mata em andamento, time com chance zero no modelo está
+            # eliminado — o mercado (que pode ter odds defasadas) não pode ressuscitá-lo.
+            ko_iniciado = bool(self.repo.ler_json("knockout_games.json", []))
             blended_ch: dict = {}
             for team, model_p in results["champion"].items():
+                if ko_iniciado and model_p <= 0:
+                    blended_ch[team] = 0.0
+                    continue
                 mkt_p = mkt_champion.get(team, model_p)
                 blended_ch[team] = CHAMPION_BLEND * mkt_p + (1 - CHAMPION_BLEND) * model_p
             tot = sum(blended_ch.values())

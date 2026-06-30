@@ -71,7 +71,9 @@ def update_agenda(matches):
         home = NAME_MAP.get(m["homeTeam"]["name"], m["homeTeam"]["name"])
         away = NAME_MAP.get(m["awayTeam"]["name"], m["awayTeam"]["name"])
         stage = m.get("stage", "GROUP_STAGE")
-        agenda.append({"home_team": home, "away_team": away, "utc": m["utcDate"], "stage": stage})
+        # id é usado para ordenar os confrontos do mata-mata na ordem do chaveamento
+        agenda.append({"id": m.get("id"), "home_team": home, "away_team": away,
+                       "utc": m["utcDate"], "stage": stage})
     agenda.sort(key=lambda a: (a["utc"], a["home_team"]))
 
     agenda_path = DADOS / "agenda.json"
