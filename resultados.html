@@ -70,6 +70,13 @@ header h1 span{color:#f5c518}
   font-family:'Oswald',sans-serif;
   font-size:20px;font-weight:700;color:#00a84f;line-height:1;
 }
+.calib-inner{
+  display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;
+  margin-top:7px;font-size:11.5px;color:#888;
+}
+.calib-inner .calib-metric b{color:#ccc;font-weight:600}
+.calib-inner .calib-verdict{color:#00a84f;font-weight:600}
+.calib-inner .calib-sep{color:#444}
 
 /* ── DATE NAVIGATOR ── */
 .date-nav-outer{
@@ -150,6 +157,33 @@ header h1 span{color:#f5c518}
 }
 .grupo-chip:hover{background:#222;color:#ccc}
 .grupo-chip.active{background:rgba(0,168,79,.12);color:#00a84f;border-color:rgba(0,168,79,.3)}
+
+/* ── CHAVEAMENTO (modo Chave) ── */
+#bracket-rounds{grid-template-columns:repeat(3,1fr)}
+@media(min-width:560px){#bracket-rounds{grid-template-columns:repeat(6,1fr)}}
+.grupo-chip.br-done{opacity:.7}
+.bracket-list{list-style:none;display:grid;gap:11px;max-width:540px;margin:0 auto}
+.br-round-hd{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:2px;
+  font-size:12px;color:#777;text-align:center;margin:4px 0 2px}
+.br-match{background:#1a1a1a;border:1px solid #222;border-radius:9px;overflow:hidden}
+.br-side{display:flex;align-items:center;gap:9px;padding:10px 13px}
+.br-side+.br-side{border-top:1px solid #232323}
+.br-flag{font-size:17px;line-height:1;flex-shrink:0}
+.br-name{flex:1;font-size:13.5px;color:#cfcfcf;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.br-score{font-family:'Oswald',sans-serif;font-size:15px;font-weight:700;color:#bbb;flex-shrink:0}
+.br-pct{font-family:'Oswald',sans-serif;font-size:12.5px;color:#888;flex-shrink:0;min-width:46px;text-align:right}
+.br-side.win{background:rgba(0,168,79,.09)}
+.br-side.win .br-name{color:#f0f0ee;font-weight:600}
+.br-side.win .br-pct{color:#00a84f;font-weight:600}
+.br-side.win .br-score{color:#f0f0ee}
+.br-side.brasil .br-name{color:#ffd24a}
+.br-side.tbd .br-name{color:#5e5e5e;font-style:italic}
+.br-meta{display:flex;justify-content:space-between;align-items:center;
+  padding:6px 13px;font-size:10.5px;color:#888;background:#141414;border-top:1px solid #232323}
+.br-meta .br-ok{color:#00a84f;font-weight:600}
+.br-meta .br-miss{color:#d05a4a;font-weight:600}
+.br-meta .br-live{color:#f5c518;font-weight:600}
+.br-empty{text-align:center;color:#888;font-size:14px;padding:40px 0}
 
 /* ── TEAM SELECT (modo Por Seleção) ── */
 .team-select-wrap{padding:16px 0 0}
@@ -372,6 +406,7 @@ footer{background:#0a0a0a;border-top:1px solid #1a1a1a;padding:28px 0}
 <div class="score-strip">
   <div class="wrap">
     <div class="score-inner" id="score-strip"></div>
+    <div class="calib-inner" id="calib-strip"></div>
   </div>
 </div>
 
@@ -410,6 +445,7 @@ footer{background:#0a0a0a;border-top:1px solid #1a1a1a;padding:28px 0}
   <div class="wrap">
     <div class="filter-tabs">
       <button class="ftab active" data-mode="day" id="tab-day">Por Dia</button>
+      <button class="ftab" data-mode="bracket" id="tab-bracket">Chave</button>
       <button class="ftab" data-mode="group" id="tab-group">Por Grupo</button>
       <button class="ftab" data-mode="team" id="tab-team">Por Seleção</button>
     </div>
@@ -420,6 +456,9 @@ footer{background:#0a0a0a;border-top:1px solid #1a1a1a;padding:28px 0}
       <div class="team-select-wrap">
         <select class="team-select" id="team-select"><option value="">Escolha uma seleção</option></select>
       </div>
+    </div>
+    <div id="filter-bracket-extra" style="display:none">
+      <div class="grupo-grid" id="bracket-rounds"></div>
     </div>
   </div>
 </div>
@@ -491,9 +530,10 @@ let idx=dates.findIndex(d=>d>=today);
 if(idx===-1)idx=dates.length-1;
 if(idx<0)idx=0;
 
-let mode='day'; // 'day' | 'group' | 'team'
+let mode='day'; // 'day' | 'bracket' | 'group' | 'team'
 let activeGroup=null;
 let activeTeam=null;
+let activeRound=null;
 
 const DRAW_K=0.75; // prevê empate se p_empate >= k*max(p_casa,p_fora) — calibrado automaticamente nos jogos da Copa
 function previsao(j){const ph=+j.ph,pd=+j.pd,pa=+j.pa;if(pd>=DRAW_K*Math.max(ph,pa))return 'draw';return ph>=pa?'home':'away';}
@@ -508,6 +548,7 @@ function acertou(j){
 
 function buildCard(j){
   const isKO=j.s!=='group';
+  const isThird=j.s==='3rd';   // disputa de 3º lugar: jogo único, sem "avançar"
   // previsão: grupo usa limiar de empate; mata-mata usa o favorito a avançar
   const prev=isKO?favAvanca(j):previsao(j);
   const prevLabel={home:j.home,draw:'Empate',away:j.away}[prev];
@@ -538,9 +579,11 @@ function buildCard(j){
   if(temRes){
     if(isKO){
       const actual=j.winner==='home'?j.home:(j.winner==='away'?j.away:null);
+      const verbo=isThird?'vitória de':'avanço de';
+      const verboPast=isThird?'venceu':'avançou';
       const txt=ok
-        ?`Modelo acertou · previa avanço de <b>${prevLabel}</b>`
-        :`Modelo errou · previa <b>${prevLabel}</b>, avançou <b>${actual||'—'}</b>`;
+        ?`Modelo acertou · previa ${verbo} <b>${prevLabel}</b>`
+        :`Modelo errou · previa <b>${prevLabel}</b>, ${verboPast} <b>${actual||'—'}</b>`;
       resHtml=`<div class="log-resultado"><span class="log-resultado-desc">${txt}</span></div>`;
     }else{
       const pDesc=prev==='draw'?'Empate':prevLabel;
@@ -556,7 +599,11 @@ function buildCard(j){
   if(isKO){
     const favTeam=prev==='home'?j.home:j.away;
     const favAdv=(prev==='home'?(+j.advH):(+j.advA)).toFixed(2);
-    bodyNote=`<p class="log-equilibrio"><b>${favTeam}</b> se classifica em <span class="thr-val">${favAdv}%</span> dos cenários<br><span style="color:#888">Conta a chance de vencer nos 90 minutos mais metade dos empates — no mata-mata, jogo empatado vai para prorrogação e pênaltis (~50% de avanço para cada lado).</span></p>`;
+    if(isThird){
+      bodyNote=`<p class="log-equilibrio"><b>${favTeam}</b> leva o 3º lugar em <span class="thr-val">${favAdv}%</span> dos cenários<br><span style="color:#888">Jogo único: chance de vencer nos 90 minutos mais metade dos empates (decididos na prorrogação e pênaltis).</span></p>`;
+    }else{
+      bodyNote=`<p class="log-equilibrio"><b>${favTeam}</b> se classifica em <span class="thr-val">${favAdv}%</span> dos cenários<br><span style="color:#888">Conta a chance de vencer nos 90 minutos mais metade dos empates — no mata-mata, jogo empatado vai para prorrogação e pênaltis (~50% de avanço para cada lado).</span></p>`;
+    }
   }else{
     const drawEquil=prev==='draw'&&(+j.pd)<Math.max(+j.ph,+j.pa);
     if(drawEquil){
@@ -592,7 +639,7 @@ function buildCard(j){
     <div class="log-body">
       <div class="log-probs">
         <div class="log-prow${prev==='home'?' is-prev':''}">
-          <div><span class="log-plabel${isH?' hl':''}">${j.home}</span>${prev==='home'?`<span class="log-prev-tag">${isKO?'avança':'previsto'}</span>`:''}</div>
+          <div><span class="log-plabel${isH?' hl':''}">${j.home}</span>${prev==='home'?`<span class="log-prev-tag">${isKO?(isThird?'vence':'avança'):'previsto'}</span>`:''}</div>
           <div class="log-track"><div class="log-pfill w" data-w="${(+j.ph).toFixed(2)}%" style="width:0"></div></div>
           <span class="log-pval">${(+j.ph).toFixed(2)}%</span>
         </div>
@@ -602,7 +649,7 @@ function buildCard(j){
           <span class="log-pval">${(+j.pd).toFixed(2)}%</span>
         </div>
         <div class="log-prow${prev==='away'?' is-prev':''}">
-          <div><span class="log-plabel${isA?' hl':''}">${j.away}</span>${prev==='away'?`<span class="log-prev-tag">${isKO?'avança':'previsto'}</span>`:''}</div>
+          <div><span class="log-plabel${isA?' hl':''}">${j.away}</span>${prev==='away'?`<span class="log-prev-tag">${isKO?(isThird?'vence':'avança'):'previsto'}</span>`:''}</div>
           <div class="log-track"><div class="log-pfill l" data-w="${(+j.pa).toFixed(2)}%" style="width:0"></div></div>
           <span class="log-pval">${(+j.pa).toFixed(2)}%</span>
         </div>
@@ -653,11 +700,12 @@ function setMode(m){
   document.getElementById('date-nav-outer').style.display=isDay?'':'none';
   document.getElementById('filter-group-extra').style.display=m==='group'?'':'none';
   document.getElementById('filter-team-extra').style.display=m==='team'?'':'none';
+  document.getElementById('filter-bracket-extra').style.display=m==='bracket'?'':'none';
   document.querySelectorAll('.ftab').forEach(t=>t.classList.toggle('active',t.dataset.mode===m));
   if(m==='day'){renderDay();updateNav();}
   else if(m==='group'){
     if(!activeGroup)activeGroup='A';
-    document.querySelectorAll('.grupo-chip').forEach(c=>c.classList.toggle('active',c.dataset.g===activeGroup));
+    document.querySelectorAll('.grupo-chip[data-g]').forEach(c=>c.classList.toggle('active',c.dataset.g===activeGroup));
     renderGames(JOGOS.filter(j=>j.g===activeGroup).sort(byKO));
   }
   else if(m==='team'){
@@ -665,6 +713,88 @@ function setMode(m){
     if(sel)renderGames(JOGOS.filter(j=>j.home===sel||j.away===sel).sort(byKO));
     else renderGames([]);
   }
+  else if(m==='bracket'){
+    if(!activeRound)activeRound=defaultRound();
+    renderBracket(activeRound);
+  }
+}
+
+// ── Chaveamento (modo Chave) ──
+const ROUND_DEFS=[
+  {code:'r32',  label:'16-avos', n:16},
+  {code:'r16',  label:'Oitavas', n:8},
+  {code:'qf',   label:'Quartas', n:4},
+  {code:'sf',   label:'Semi',    n:2},
+  {code:'final',label:'Final',   n:1},
+  {code:'3rd',  label:'3º lugar',n:1},
+];
+function koGames(code){
+  return JOGOS.filter(j=>j.s===code).sort((a,b)=>(a.mid||0)-(b.mid||0)||new Date(a.utc||0)-new Date(b.utc||0));
+}
+function defaultRound(){
+  // primeira rodada com jogo ainda não decidido; senão a última com jogos
+  for(const r of ROUND_DEFS){
+    const g=koGames(r.code);
+    if(g.length&&g.some(j=>j.res===null||j.res===undefined))return r.code;
+  }
+  for(let i=ROUND_DEFS.length-1;i>=0;i--){if(koGames(ROUND_DEFS[i].code).length)return ROUND_DEFS[i].code;}
+  return 'r32';
+}
+function brSide(flag,name,extra,cls){
+  return `<div class="br-side ${cls||''}"><span class="br-flag">${flag||'⚪'}</span>`
+    +`<span class="br-name">${name}</span>${extra||''}</div>`;
+}
+function brMatch(j){
+  const fav=favAvanca(j); // 'home'|'away'
+  const played=j.res!==null&&j.res!==undefined;
+  const live=PLACARES_AO_VIVO[j.home+'|'+j.away];
+  const winSide=played?(j.winner==='home'?'home':(j.winner==='away'?'away':null)):fav;
+  const hCls=(winSide==='home'?'win ':'')+(j.home==='Brasil'?'brasil':'');
+  const aCls=(winSide==='away'?'win ':'')+(j.away==='Brasil'?'brasil':'');
+  let hExtra,aExtra;
+  if(played&&j.placar){
+    const [hs,as_]=j.placar.split(' ')[0].split('-');
+    hExtra=`<span class="br-score">${hs}</span>`;aExtra=`<span class="br-score">${as_}</span>`;
+  }else if(live){
+    hExtra=`<span class="br-score">${live.home_score}</span>`;aExtra=`<span class="br-score">${live.away_score}</span>`;
+  }else{
+    hExtra=`<span class="br-pct">${(+j.advH).toFixed(0)}%</span>`;
+    aExtra=`<span class="br-pct">${(+j.advA).toFixed(0)}%</span>`;
+  }
+  let meta;
+  const ok=acertou(j);
+  if(played){
+    const adv=j.winner==='home'?j.home:(j.winner==='away'?j.away:'—');
+    meta=`<span>avançou: <b style="color:#ccc">${adv}</b></span>`
+      +`<span class="${ok?'br-ok':'br-miss'}">${ok?'✓ modelo acertou':'✗ modelo errou'}</span>`;
+  }else if(live){
+    meta=`<span class="br-live">● ao vivo</span><span>favorito: ${fav==='home'?j.home:j.away}</span>`;
+  }else{
+    meta=`<span>${fmtDate(j.date)}${fmtKickoff(j)?' · '+fmtKickoff(j):''}</span>`
+      +`<span>favorito: ${fav==='home'?j.home:j.away}</span>`;
+  }
+  return `<li class="br-match">${brSide(j.hf,j.home,hExtra,hCls)}${brSide(j.af,j.away,aExtra,aCls)}<div class="br-meta">${meta}</div></li>`;
+}
+function brPlaceholder(){
+  return `<li class="br-match">${brSide('','A definir','','tbd')}${brSide('','A definir','','tbd')}`
+    +`<div class="br-meta"><span>aguardando classificação</span><span></span></div></li>`;
+}
+function renderBracket(code){
+  activeRound=code;
+  document.querySelectorAll('#bracket-rounds .grupo-chip').forEach(c=>c.classList.toggle('active',c.dataset.round===code));
+  const el=document.getElementById('games-list');
+  const def=ROUND_DEFS.find(r=>r.code===code);
+  const games=koGames(code);
+  if(!koGames('r32').length){
+    el.innerHTML='<li class="br-empty">O mata-mata ainda não começou.<br>Os confrontos aparecem aqui assim que as oitavas forem definidas.</li>';
+    return;
+  }
+  let html='<div class="bracket-list">';
+  games.forEach(j=>html+=brMatch(j));
+  for(let i=games.length;i<def.n;i++)html+=brPlaceholder();
+  html+='</div>';
+  el.innerHTML=html;
+  requestAnimationFrame(()=>{el.querySelectorAll('[data-w]').forEach(b=>{b.style.width=b.dataset.w;});});
 }
 
 // Build group chips
@@ -675,10 +805,21 @@ grupos.forEach(g=>{
   btn.className='grupo-chip';btn.dataset.g=g;btn.textContent=g;
   btn.addEventListener('click',()=>{
     activeGroup=g;
-    document.querySelectorAll('.grupo-chip').forEach(c=>c.classList.toggle('active',c.dataset.g===g));
+    document.querySelectorAll('.grupo-chip[data-g]').forEach(c=>c.classList.toggle('active',c.dataset.g===g));
     renderGames(JOGOS.filter(j=>j.g===g).sort(byKO));
   });
   gc.appendChild(btn);
+});
+
+// Build bracket round chips
+const brc=document.getElementById('bracket-rounds');
+ROUND_DEFS.forEach(r=>{
+  const g=koGames(r.code);
+  const done=g.length>0&&g.every(j=>j.res!==null&&j.res!==undefined);
+  const btn=document.createElement('button');
+  btn.className='grupo-chip'+(done?' br-done':'');btn.dataset.round=r.code;btn.textContent=r.label;
+  btn.addEventListener('click',()=>renderBracket(r.code));
+  brc.appendChild(btn);
 });
 
 // Build team select
@@ -711,6 +852,38 @@ function updateScore(){
     const pct=(acc/played*100).toFixed(2);
     el.innerHTML=`<span class="score-num">${acc}/${played}</span><span class="score-label">&nbsp;previsões corretas&nbsp;·&nbsp;${pct}% de acertos</span>`;
   }
+  updateCalib();
+}
+
+// Indicador de calibração: Brier score 3-vias sobre os jogos disputados
+// (vitória/empate/derrota no tempo normal). Quanto menor, melhor; aleatório ≈ 0.67.
+function updateCalib(){
+  const el=document.getElementById('calib-strip');
+  if(!el)return;
+  let n=0,brier=0,binPrev=0,binReal=0,binN=0;
+  JOGOS.forEach(j=>{
+    if(j.res===null||j.res===undefined)return;
+    const p={home:+j.ph/100,draw:+j.pd/100,away:+j.pa/100};
+    ['home','draw','away'].forEach(c=>{
+      const y=j.res===c?1:0;
+      brier+=(p[c]-y)*(p[c]-y);
+      // confiabilidade: para previsões "confiantes" (≥50%), com que frequência acertam
+      if(p[c]>=0.5){binPrev+=p[c];binReal+=y;binN++;}
+    });
+    n++;
+  });
+  if(n===0){el.innerHTML='';return;}
+  const b=(brier/n);
+  const verdict=b<=0.50?'bem calibrado':(b<=0.60?'calibração razoável':'calibração fraca');
+  let conf='';
+  if(binN>0){
+    const pv=(binPrev/binN*100).toFixed(0),rv=(binReal/binN*100).toFixed(0);
+    conf=`<span class="calib-sep">·</span><span class="calib-metric">quando prevê ≥50%, acerta <b>${rv}%</b> (média ${pv}%)</span>`;
+  }
+  el.innerHTML=`<span class="calib-metric">Qualidade das previsões (${n} jogos):</span>`
+    +`<span class="calib-metric">Brier <b>${b.toFixed(3)}</b> <span style="color:#666">(menor é melhor; aleatório 0,67)</span></span>`
+    +`<span class="calib-sep">·</span><span class="calib-verdict">${verdict}</span>`
+    +conf;
 }
 
 function displayUpdateTime(){

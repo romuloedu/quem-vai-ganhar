@@ -160,6 +160,7 @@ class ConstrutorMataMata:
             real = result_map.get((h, a), {})
             jogos.append({
                 "id":          idc,
+                "mid":         m.get("id"),   # id da API, ordena o chaveamento
                 "g":           None,
                 "s":           codigo,
                 "fase":        rotulo,
