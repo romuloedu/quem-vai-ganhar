@@ -267,6 +267,21 @@ header h1 span{color:#f5c518}
 .cpct.warn{color:#e07b39}
 .cpct.concluido{color:#666;font-size:16px}
 .citem.concluido .cfase{color:#5e5e5e}
+
+/* ── RIVAIS DO BRASIL ── */
+.rivais{display:grid;gap:10px}
+.rival{display:flex;gap:14px;align-items:flex-start;background:#141414;border:1px solid #232323;border-radius:12px;padding:14px 16px}
+.rival.out{opacity:.72;background:#121212;border-style:dashed}
+.rival-flag{font-size:30px;line-height:1;flex-shrink:0}
+.rival.out .rival-flag{filter:grayscale(.85)}
+.rival-body{flex:1;min-width:0}
+.rival-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rival-name{font-family:'Oswald',sans-serif;font-size:17px;font-weight:600;color:#f0f0ee}
+.rival.out .rival-name{text-decoration:line-through;text-decoration-color:#d05a4a;color:#8a8a8a}
+.rival-badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:3px 8px;border-radius:20px;white-space:nowrap}
+.rival-badge.vivo{background:rgba(0,168,79,.15);color:#37c46f}
+.rival-badge.out{background:rgba(208,90,74,.15);color:#d05a4a}
+.rival-reason{font-size:13px;color:#9a9a9a;line-height:1.55;margin-top:6px}
 .crisco-div{
   padding:16px 0 4px;
 }
@@ -692,6 +707,15 @@ footer{
   </div>
 </section>
 
+<section class="sec" id="s-rivais">
+  <div class="wrap">
+    <p class="sec-kicker verde">🇧🇷 Brasil · Os rivais de sempre</p>
+    <h2 class="sec-title">Quem pode tirar<br>o sonho do hexa.</h2>
+    <p class="sec-body">Pela história das Copas, estes são os adversários mais perigosos para o Brasil. Os que já caíram aparecem riscados — mas valem pelo peso histórico.</p>
+    <div class="rivais" id="rivais"></div>
+  </div>
+</section>
+
 <section class="sec" id="s5">
   <div class="wrap">
     <p class="sec-kicker">Fase de grupos</p>
@@ -901,6 +925,43 @@ function buildCaminho(){
       ${f.insight&&!done?`<p class="cinsight">${f.insight}</p>`:''}`;
     el.appendChild(li);
   });
+}
+
+/* ── rivais do brasil ── */
+const RIVAIS=[
+  {team:'Argentina', reason:'O maior clássico do futebol. Rival sul-americano de sempre — e atual campeã mundial (2022).'},
+  {team:'França',    reason:'Algoz em duas Copas: eliminou o Brasil na final de 1998 (0×3) e nas quartas de 2006 (0×1).'},
+  {team:'Alemanha',  reason:'O 7×1 de 2014. Tetracampeã, mira o 5º título — que igualaria o penta brasileiro.'},
+  {team:'Holanda',   reason:'Algoz histórico: venceu o Brasil em 1974 (0×2) e nas quartas de 2010 (1×2).'},
+  {team:'Espanha',   reason:'Nº 1 do ranking FIFA e campeã de 2010 — a maior força europeia do momento.'},
+  {team:'Uruguai',   reason:'O Maracanaço de 1950: a final perdida em casa, a maior dor do nosso futebol.'},
+  {team:'Itália',    reason:'Tetracampeã e algoz de 1982 — mas ficou fora desta Copa.'},
+];
+function buildRivais(){
+  const el=document.getElementById('rivais');
+  if(!el)return;
+  const linha=RIVAIS.map(r=>{
+    const t=D.teams.find(x=>x.team===r.team);
+    const naCopa=!!t;
+    const vivo=naCopa&&t.p_champion>0;
+    const flag=t?t.flag:'🏳️';
+    let badge;
+    if(!naCopa)      badge='<span class="rival-badge out">Fora da Copa</span>';
+    else if(vivo)    badge=`<span class="rival-badge vivo">na disputa · ${(+t.p_champion).toFixed(2)}% de título</span>`;
+    else             badge='<span class="rival-badge out">Eliminado</span>';
+    return {r,t,naCopa,vivo,flag,badge,
+            ord:(vivo?2:(naCopa?1:0)), ch:t?+t.p_champion:-1};
+  });
+  // vivos primeiro (mais perigosos no topo), depois eliminados, depois ausentes
+  linha.sort((a,b)=>b.ord-a.ord||b.ch-a.ch);
+  el.innerHTML=linha.map(x=>`
+    <div class="rival${x.vivo?'':' out'}">
+      <span class="rival-flag">${x.flag}</span>
+      <div class="rival-body">
+        <div class="rival-head"><span class="rival-name">${x.r.team}</span>${x.badge}</div>
+        <p class="rival-reason">${x.r.reason}</p>
+      </div>
+    </div>`).join('');
 }
 
 /* ── grupos ── */
@@ -1141,6 +1202,7 @@ buildConf();
 buildJogos();
 buildCaminho();
 buildClassico();
+buildRivais();
 buildGrupos();
 displayUpdateTime();
 
