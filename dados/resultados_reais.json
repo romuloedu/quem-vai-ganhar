@@ -680,5 +680,17 @@
     "stage": "LAST_32",
     "winner": null,
     "penalties": "5-5"
+  },
+  {
+    "date": "2026-06-30",
+    "home_team": "Holanda",
+    "away_team": "Marrocos",
+    "home_score": 3,
+    "away_score": 4,
+    "tournament": "FIFA World Cup",
+    "country": "USA",
+    "stage": "LAST_32",
+    "winner": null,
+    "penalties": "3-3"
   }
 ]
