@@ -604,7 +604,6 @@ function buildCard(j){
           <div class="log-track"><div class="log-pfill l" data-w="${(+j.advA).toFixed(2)}%" style="width:0"></div></div>
           <span class="log-pval">${(+j.advA).toFixed(2)}%</span>
         </div>`;
-    bodyNote=`<p class="log-equilibrio" style="color:#888">${isThird?'Chance de vencer':'Chance de avançar'} = vitória nos 90 minutos + metade dos empates, decididos na prorrogação e pênaltis (~50% para cada lado).</p>`;
   }else{
     const drawEquil=prev==='draw'&&(+j.pd)<Math.max(+j.ph,+j.pa);
     if(drawEquil){
