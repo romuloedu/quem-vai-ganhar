@@ -692,5 +692,16 @@
     "stage": "LAST_32",
     "winner": null,
     "penalties": "3-3"
+  },
+  {
+    "date": "2026-06-30",
+    "home_team": "Costa do Marfim",
+    "away_team": "Noruega",
+    "home_score": 1,
+    "away_score": 2,
+    "tournament": "FIFA World Cup",
+    "country": "USA",
+    "stage": "LAST_32",
+    "winner": "away"
   }
 ]
