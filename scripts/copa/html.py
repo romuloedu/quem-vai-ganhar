@@ -163,6 +163,17 @@ class AtualizadorHTML:
         )
 
         updated_at = datetime.datetime.now(datetime.timezone.utc).isoformat()
+
+        # Histórico da chance de título do Brasil ao longo da Copa.
+        # Registra um ponto sempre que o valor muda — assim mostramos a evolução
+        # mesmo depois que as fases iniciais já viraram 100%.
+        historico = self.repo.ler_json("historico_titulo.json", [])
+        ch_atual  = round(brasil_path["champion"], 2)
+        if not historico or historico[-1].get("ch") != ch_atual:
+            historico.append({"t": updated_at, "ch": ch_atual})
+            historico = historico[-400:]  # limita o tamanho do arquivo
+            self.repo.salvar_json("historico_titulo.json", historico)
+
         slim = {
             "teams":        teams_list,
             "groups_info":  groups_info,
@@ -170,6 +181,7 @@ class AtualizadorHTML:
             "brasil_path":  brasil_path,
             "conf_summary": conf_summary,
             "clasico_final": results.get("brasil_argentina", {}).get("final", 0),
+            "historico":    historico,
             "updated_at":   updated_at,
         }
         self.repo.salvar_json("slim_data.json", slim, separators=(",", ":"))
