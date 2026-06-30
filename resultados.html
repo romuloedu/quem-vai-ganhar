@@ -152,7 +152,7 @@ header h1 span{color:#f5c518}
 .grupo-chip.active{background:rgba(0,168,79,.12);color:#00a84f;border-color:rgba(0,168,79,.3)}
 
 /* ── CHAVEAMENTO (modo Chave) — bracket completo, scroll horizontal ── */
-.bk-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:6px 0 18px}
+.bk-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:6px 0 18px;max-width:100%}
 .bk-grid{display:flex;gap:8px;align-items:stretch;min-width:max-content}
 .bk-col{display:flex;flex-direction:column;min-width:138px;flex:0 0 auto}
 .bk-col-hd{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1.5px;
@@ -196,7 +196,8 @@ header h1 span{color:#f5c518}
 
 /* ── GAMES LIST ── */
 main{padding:16px 0 48px}
-.games-list{list-style:none;display:grid;gap:12px}
+.games-list{list-style:none;display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.games-list>li{min-width:0}
 
 /* ── LOG ITEMS ── */
 .log-item{background:#1a1a1a;overflow:hidden}
@@ -710,7 +711,8 @@ function setMode(m){
 
 // ── Chaveamento (modo Chave): bracket completo em uma tela, scroll horizontal ──
 function koGames(code){
-  return JOGOS.filter(j=>j.s===code).sort((a,b)=>(a.mid||0)-(b.mid||0)||new Date(a.utc||0)-new Date(b.utc||0));
+  // ordena por data/hora do jogo (mais intuitivo que o id da API)
+  return JOGOS.filter(j=>j.s===code).sort((a,b)=>new Date(a.utc||0)-new Date(b.utc||0)||(a.mid||0)-(b.mid||0));
 }
 function bkSide(flag,name,val,cls){
   return `<div class="bk-side ${cls||''}"><span class="bk-flag">${flag||'⚪'}</span>`
