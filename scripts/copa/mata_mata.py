@@ -73,7 +73,8 @@ class ConstrutorMataMata:
 
         Os jogos de mata-mata são decididos em partida única, onde as odds de
         mercado são muito informativas; usamos o mesmo BLEND_ALPHA da fase de
-        grupos. Retorna (ph, pd, pa, blended) normalizados em fração.
+        grupos. Retorna (ph, pd, pa, mercado) — mercado é o tripleto (m_h, m_d,
+        m_a) usado, ou None quando não há odds para o jogo.
         """
         mk, inv = None, False
         if (h, a) in market_probs:
@@ -81,7 +82,7 @@ class ConstrutorMataMata:
         elif (a, h) in market_probs:
             mk, inv = market_probs[(a, h)], True
         if not mk:
-            return ph, pd_, pa, False
+            return ph, pd_, pa, None
         if inv:
             m_h, m_d, m_a = mk["p_away"], mk["p_draw"], mk["p_home"]
         else:
@@ -91,7 +92,7 @@ class ConstrutorMataMata:
         bd = al * m_d + (1 - al) * pd_
         ba = al * m_a + (1 - al) * pa
         tot = bh + bd + ba
-        return bh / tot, bd / tot, ba / tot, True
+        return bh / tot, bd / tot, ba / tot, (m_h, m_d, m_a)
 
     def _mapa_resultados(self) -> dict:
         """Mapeia (casa, fora) → resultado real, com avançante e pênaltis."""
@@ -145,10 +146,16 @@ class ConstrutorMataMata:
             else:
                 fv = self.extrator.construir_vetor(h, a, m["utc"][:10], neutral=1)
                 fph, fpd, fpa = self.ensemble.prever(h, a, fv)
-                bph, bpd, bpa, _ = self._blend(h, a, fph, fpd, fpa, market_probs)
+                bph, bpd, bpa, mkt = self._blend(h, a, fph, fpd, fpa, market_probs)
                 ph, pd_, pa = round(bph * 100, 2), round(bpd * 100, 2), round(bpa * 100, 2)
                 pp = self.previsor.placar_previsto(bph, bpd, bpa)
-                novo = {"ph": ph, "pd": pd_, "pa": pa, "placar_prev": pp}
+                # Guarda também modelo e mercado separados (pré-jogo) para permitir
+                # varrer o peso do blend (α) depois, com os resultados reais.
+                novo = {
+                    "ph": ph, "pd": pd_, "pa": pa, "placar_prev": pp,
+                    "modelo":  [round(fph * 100, 2), round(fpd * 100, 2), round(fpa * 100, 2)],
+                    "mercado": [round(mkt[0] * 100, 2), round(mkt[1] * 100, 2), round(mkt[2] * 100, 2)] if mkt else None,
+                }
                 if snapshot.get(fkey) != novo:
                     snapshot[fkey] = novo
                     mudou = True
