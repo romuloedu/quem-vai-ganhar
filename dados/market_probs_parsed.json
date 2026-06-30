@@ -1,33 +1,33 @@
 {
   "match_odds": {
     "Holanda|Marrocos": {
-      "p_home": 0.4006,
-      "p_draw": 0.3099,
-      "p_away": 0.2895,
+      "p_home": 0.4028,
+      "p_draw": 0.3115,
+      "p_away": 0.2857,
       "n_bm": 24
     },
     "Costa do Marfim|Noruega": {
       "p_home": 0.262,
-      "p_draw": 0.2733,
-      "p_away": 0.4647,
+      "p_draw": 0.2734,
+      "p_away": 0.4646,
       "n_bm": 25
     },
     "França|Suécia": {
       "p_home": 0.7491,
-      "p_draw": 0.1583,
+      "p_draw": 0.1584,
       "p_away": 0.0926,
       "n_bm": 25
     },
     "México|Equador": {
-      "p_home": 0.4349,
-      "p_draw": 0.3278,
+      "p_home": 0.4346,
+      "p_draw": 0.3281,
       "p_away": 0.2373,
       "n_bm": 25
     },
     "Inglaterra|RD Congo": {
-      "p_home": 0.7524,
-      "p_draw": 0.1751,
-      "p_away": 0.0725,
+      "p_home": 0.7523,
+      "p_draw": 0.175,
+      "p_away": 0.0726,
       "n_bm": 23
     },
     "Bélgica|Senegal": {
@@ -49,9 +49,9 @@
       "n_bm": 25
     },
     "Portugal|Croácia": {
-      "p_home": 0.5406,
+      "p_home": 0.5404,
       "p_draw": 0.268,
-      "p_away": 0.1914,
+      "p_away": 0.1915,
       "n_bm": 25
     },
     "Suíça|Argélia": {
@@ -67,8 +67,8 @@
       "n_bm": 25
     },
     "Argentina|Cabo Verde": {
-      "p_home": 0.8261,
-      "p_draw": 0.123,
+      "p_home": 0.8262,
+      "p_draw": 0.1229,
       "p_away": 0.0509,
       "n_bm": 25
     },
@@ -80,22 +80,22 @@
     }
   },
   "champion_odds": {
-    "França": 23.52,
-    "Argentina": 18.67,
-    "Inglaterra": 11.25,
-    "Espanha": 10.98,
-    "Brasil": 7.55,
-    "Portugal": 6.04,
-    "Holanda": 4.77,
-    "Colômbia": 2.79,
-    "Estados Unidos": 2.45,
-    "Noruega": 1.99,
-    "Marrocos": 1.63,
-    "Bélgica": 1.5,
-    "México": 1.44,
+    "França": 23.41,
+    "Argentina": 18.58,
+    "Inglaterra": 11.2,
+    "Espanha": 10.92,
+    "Brasil": 7.51,
+    "Portugal": 6.01,
+    "Holanda": 5.15,
+    "Colômbia": 2.77,
+    "Estados Unidos": 2.44,
+    "Noruega": 1.98,
+    "Marrocos": 1.7,
+    "Bélgica": 1.49,
+    "México": 1.43,
     "Suíça": 1.0,
     "Equador": 0.63,
-    "Senegal": 0.55,
+    "Senegal": 0.54,
     "Croácia": 0.46,
     "Costa do Marfim": 0.38,
     "Paraguai": 0.33,
