@@ -182,7 +182,7 @@ footer a:hover{color:#f0f0ee}
     <p class="section-num">Visão geral</p>
     <h2>O que estamos tentando prever?</h2>
     <p>Antes de cada jogo, o modelo calcula três probabilidades: a chance de a seleção da casa vencer, a chance de empate e a chance de a visitante vencer. É uma estimativa. Futebol tem muita aleatoriedade e qualquer modelo vai errar bastante.</p>
-    <p>Para chegar nesses números, combinamos três algoritmos diferentes e ainda consultamos as cotações do mercado de apostas. O número final que aparece no site é uma mistura entre o que o modelo calcula e o que o mercado precifica.</p>
+    <p>Para chegar nesses números, combinamos quatro algoritmos diferentes e ainda consultamos as cotações do mercado de apostas. O número final que aparece no site é uma mistura entre o que o modelo calcula e o que o mercado precifica.</p>
   </div>
 
   <!-- PIPELINE DIAGRAM -->
@@ -281,7 +281,7 @@ footer a:hover{color:#f0f0ee}
       <rect x="44" y="623" width="24" height="24" rx="2" fill="#00a84f"/>
       <text x="56" y="639" text-anchor="middle" font-family="Oswald,sans-serif" font-size="13" font-weight="700" fill="#111">5</text>
       <text x="80" y="633" font-family="Oswald,sans-serif" font-size="9" fill="#00a84f" letter-spacing="2">PASSO 5</text>
-      <text x="80" y="650" font-family="'Source Sans 3',Arial,sans-serif" font-size="13.5" font-weight="600" fill="#f0f0ee">Blend 65% modelo + 35% odds de mercado por partida</text>
+      <text x="80" y="650" font-family="'Source Sans 3',Arial,sans-serif" font-size="13.5" font-weight="600" fill="#f0f0ee">Blend 65% mercado + 35% modelo por partida</text>
 
       <line x1="290" y1="666" x2="290" y2="684" stroke="#555" stroke-width="1.5" marker-end="url(#arw)"/>
 
@@ -333,7 +333,7 @@ footer a:hover{color:#f0f0ee}
       <span class="feat-chip">Média de idade do elenco</span>
       <span class="feat-chip">Diferencial de ranking</span>
     </div>
-    <p style="margin-top:16px">No total, são <strong>36 variáveis</strong> por partida que entram no modelo de machine learning.</p>
+    <p style="margin-top:16px">No total, são <strong>38 variáveis</strong> por partida que entram no modelo de machine learning.</p>
   </div>
 
   <!-- 3. FEATURES EXPLICADAS -->
@@ -406,7 +406,7 @@ footer a:hover{color:#f0f0ee}
     <p>Exemplo: se o XGBoost diz que o Brasil tem 55% de chance de vencer, o Random Forest diz 50%, o Dixon-Coles diz 53% e o logit ordenado diz 51%, o número final é 52,25%.</p>
     <p>O logit ordenado existe porque empate é o resultado mais difícil de prever. Os modelos de 3 classes (vitória, empate, derrota) tendem a subestimá-lo, pois ele representa só ~25% dos jogos e aparece de forma diluída no treinamento. Tratar o resultado como uma escala ordenada (derrota → empate → vitória) modela melhor essa faixa do meio — em testes fora da amostra, foi a abordagem com melhor calibração geral.</p>
     <p>Quando os quatro concordam, há mais confiança. Quando discordam muito, é sinal de que o jogo é genuinamente difícil de prever.</p>
-    <p style="margin-top:20px"><strong>Um detalhe sobre como anunciamos a previsão.</strong> Mesmo bem calibrado, o empate quase nunca é a probabilidade mais alta das três — então simplesmente escolher "a maior" praticamente nunca aponta empate. Para corrigir isso, anunciamos empate quando sua probabilidade chega perto da do favorito (a partir de 75% dela). Esse limiar foi calibrado em testes fora da amostra: é o ponto que mais acerta empates sem derrubar a acurácia geral.</p>
+    <p style="margin-top:20px"><strong>Um detalhe sobre como anunciamos a previsão.</strong> Mesmo bem calibrado, o empate quase nunca é a probabilidade mais alta das três — então simplesmente escolher "a maior" praticamente nunca aponta empate. Para corrigir isso, anunciamos empate quando sua probabilidade chega perto da do favorito. Esse limiar é <strong>recalibrado automaticamente</strong> a cada rodada com os resultados reais da Copa — o valor histórico (75% da chance do favorito) serve só de ponto de partida enquanto há poucos jogos.</p>
   </div>
 
   <!-- 6. ODDS BLENDING -->
@@ -414,8 +414,8 @@ footer a:hover{color:#f0f0ee}
     <p class="section-num">Etapa 5 · Mercado</p>
     <h2>Por que misturamos com odds de apostas?</h2>
     <p>Casas de apostas recebem muita aposta e ajustam as cotações o tempo todo. Com tanto dinheiro em jogo, as odds acabam sendo uma referência razoável de probabilidade. Não é perfeito, mas é informação que vale considerar.</p>
-    <p>Por isso, o número final mistura o nosso modelo com o mercado: <strong>65% modelo / 35% mercado</strong> nos jogos da fase de grupos. Para a chance de campeão, o mercado pesa um pouco mais: <strong>55% modelo / 45% mercado</strong>.</p>
-    <p>Antes de misturar, retiramos a margem da casa de apostas das odds. Quando não temos odds disponíveis, usamos só o modelo.</p>
+    <p>Por isso, o número final de cada jogo mistura o nosso modelo com o mercado: <strong>65% mercado / 35% modelo</strong> — tanto na fase de grupos quanto no mata-mata. Para a chance de ser campeão, o peso é mais parelho: <strong>55% modelo / 45% mercado</strong>.</p>
+    <p>Antes de misturar, retiramos a margem da casa de apostas das odds. Quando não há odds disponíveis para um jogo (comum em fases ainda não definidas), usamos só o modelo.</p>
   </div>
 
   <!-- 7. MONTE CARLO -->
@@ -424,27 +424,28 @@ footer a:hover{color:#f0f0ee}
     <h2>Como calculamos as chances de campeão?</h2>
     <p>Para saber a chance de cada seleção ganhar a Copa, precisamos simular o torneio inteiro: fase de grupos, oitavas, quartas, semis e final. Não dá pra calcular isso diretamente porque tudo depende de tudo: quem passa do grupo A afeta quem enfrenta nas oitavas, e por aí vai.</p>
     <p>A saída é a <strong>simulação de Monte Carlo</strong>: jogamos o torneio inteiro <strong>100 mil vezes</strong>. Em cada rodada, os resultados são sorteados conforme as probabilidades do modelo. No final, a chance de cada seleção ser campeã é simplesmente em quantas dessas 100 mil simulações ela ganhou.</p>
+    <p>Um ponto importante: a simulação <strong>parte sempre da situação real</strong>. Tudo o que já aconteceu entra como fato fixo — só o que falta é sorteado. Quando a fase de grupos acaba, a simulação começa direto da <strong>chave real do mata-mata</strong>: seleções já eliminadas ficam com <strong>0%</strong> e cada time parte exatamente do seu lugar no chaveamento.</p>
 
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-body">
-          <p class="step-title">Simula a fase de grupos</p>
-          <p class="step-desc">Para cada jogo que ainda não aconteceu, sorteia um resultado (vitória / empate / derrota) conforme as probabilidades calculadas. Jogos já jogados ficam com o resultado real.</p>
+          <p class="step-title">Parte do que já aconteceu</p>
+          <p class="step-desc">Resultados já decididos (jogos de grupo e de mata-mata) entram como fatos fixos. Só os jogos que ainda não rolaram são sorteados — vitória / empate / derrota conforme as probabilidades calculadas.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-body">
-          <p class="step-title">Classifica os grupos</p>
-          <p class="step-desc">Com todos os resultados em mãos, calcula pontuação e saldo de gols de cada seleção. Define quem passa em 1º e 2º de cada grupo, com critérios de desempate.</p>
+          <p class="step-title">Monta o chaveamento</p>
+          <p class="step-desc">Na fase de grupos, calcula pontos e saldo para definir os classificados. Com os grupos encerrados, usa direto a chave real — os confrontos do mata-mata que já conhecemos.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-body">
-          <p class="step-title">Simula o mata-mata</p>
-          <p class="step-desc">Monta os confrontos do mata-mata conforme a chave da FIFA. Para cada jogo, calcula as probabilidades entre as duas seleções que chegaram até ali e sorteia o vencedor.</p>
+          <p class="step-title">Avança até a final</p>
+          <p class="step-desc">Segue os confrontos reais já definidos; para as fases ainda em aberto, emparelha os vencedores na ordem da chave. Sorteia cada jogo, rodada a rodada, até sair o campeão.</p>
         </div>
       </div>
       <div class="step">
