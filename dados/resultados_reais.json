@@ -668,5 +668,17 @@
     "country": "USA",
     "stage": "LAST_32",
     "winner": "home"
+  },
+  {
+    "date": "2026-06-29",
+    "home_team": "Alemanha",
+    "away_team": "Paraguai",
+    "home_score": 5,
+    "away_score": 6,
+    "tournament": "FIFA World Cup",
+    "country": "USA",
+    "stage": "LAST_32",
+    "winner": null,
+    "penalties": "5-5"
   }
 ]

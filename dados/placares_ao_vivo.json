@@ -1,9 +1,3 @@
 {
-  "jogos": {
-    "Alemanha|Paraguai": {
-      "home_score": 5,
-      "away_score": 5,
-      "status": "IN_PLAY"
-    }
-  }
+  "jogos": {}
 }
