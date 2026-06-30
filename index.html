@@ -256,6 +256,7 @@ header h1 span{color:#f5c518}
 .ctrack{height:8px;background:#1e1e1e;border-radius:2px;overflow:hidden}
 .cfill{height:100%;background:#2e2e2e;border-radius:2px;transition:width 1.1s cubic-bezier(.4,0,.2,1)}
 .cfill.ativo{background:#00a84f}
+.cfill.concluido{background:#3a3a3a}
 .cfill.hexa{background:linear-gradient(90deg,#00a84f,#f5c518)}
 .cpct{
   font-family:'Oswald',sans-serif;
@@ -264,6 +265,8 @@ header h1 span{color:#f5c518}
 }
 .cpct.hexa{color:#f5c518;font-size:26px}
 .cpct.warn{color:#e07b39}
+.cpct.concluido{color:#666;font-size:16px}
+.citem.concluido .cfase{color:#5e5e5e}
 .crisco-div{
   padding:16px 0 4px;
 }
@@ -287,19 +290,6 @@ header h1 span{color:#f5c518}
   font-size:12px;color:#777;
   padding-bottom:2px;margin-top:-6px;
 }
-
-/* ── EVOLUÇÃO DA CHANCE DE TÍTULO ── */
-.evo-card{margin-top:28px;background:#141414;border:1px solid #232323;border-radius:12px;padding:18px 18px 14px}
-.evo-hd{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:12px}
-.evo-title{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1.5px;font-size:12px;color:#aaa}
-.evo-now{font-family:'Oswald',sans-serif;font-size:22px;font-weight:700;color:#f5c518;line-height:1}
-.evo-chart svg{display:block;width:100%;height:auto;overflow:visible}
-.evo-foot{margin-top:10px;font-size:11.5px;color:#777;line-height:1.5}
-.evo-dot{fill:#f5c518}
-.evo-line{fill:none;stroke:#f5c518;stroke-width:2}
-.evo-area{fill:url(#evoGrad)}
-.evo-axis{stroke:#2a2a2a;stroke-width:1}
-.evo-lbl{fill:#666;font-size:10px;font-family:'Source Sans 3',sans-serif}
 
 /* ── GRUPOS ── */
 .grupos{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
@@ -672,14 +662,6 @@ footer{
     <!-- DYN:s4_title --><h2 class="sec-title">Se essa Copa fosse jogada<br>100 vezes, o Brasil venceria 9.</h2><!-- /DYN -->
     <p class="sec-body">A cada fase que passa, os adversários ficam mais pesados. As chances de continuar vão caindo.</p>
     <ul class="caminho" id="caminho"></ul>
-    <div class="evo-card" id="evo-card" style="display:none">
-      <div class="evo-hd">
-        <span class="evo-title">Evolução da chance de título</span>
-        <span class="evo-now" id="evo-now"></span>
-      </div>
-      <div class="evo-chart" id="evo-chart"></div>
-      <p class="evo-foot" id="evo-foot"></p>
-    </div>
   </div>
 </section>
 
@@ -897,8 +879,9 @@ function buildCaminho(){
   fases.forEach(f=>{
     const p=bp[f.key];
     const isH=!!f.hexa;
-    const isWarn=!isH&&p<50&&!sepAdded;
-    const fc=isH?'hexa':p>=50?'ativo':'';
+    const done=!isH&&p>=99.95;          // fase já garantida (Brasil passou)
+    const isWarn=!isH&&!done&&p<50&&!sepAdded;
+    const fc=done?'concluido':(isH?'hexa':p>=50?'ativo':'');
     if(isWarn){
       sepAdded=true;
       const sep=document.createElement('li');
@@ -907,58 +890,17 @@ function buildCaminho(){
       el.appendChild(sep);
     }
     const li=document.createElement('li');
-    li.className='citem';
+    li.className='citem'+(done?' concluido':'');
+    const pctHtml=done
+      ?'<span class="cpct concluido">✓</span>'
+      :`<span class="cpct${isH?' hexa':isWarn?' warn':''}">${p}%</span>`;
     li.innerHTML=`
       <span class="cfase${isH?' hexa':''}">${f.label}</span>
       <div class="ctrack"><div class="cfill ${fc}" data-w="${p}%" style="width:0"></div></div>
-      <span class="cpct${isH?' hexa':isWarn?' warn':''}">${p}%</span>
-      ${f.insight?`<p class="cinsight">${f.insight}</p>`:''}`;
+      ${pctHtml}
+      ${f.insight&&!done?`<p class="cinsight">${f.insight}</p>`:''}`;
     el.appendChild(li);
   });
-}
-
-/* ── evolução da chance de título ── */
-function buildEvolucao(){
-  const card=document.getElementById('evo-card');
-  if(!card)return;
-  const hist=(D.historico||[]).filter(p=>p&&typeof p.ch==='number');
-  if(hist.length<2)return; // sem histórico suficiente, mantém escondido
-  card.style.display='';
-  const W=320,H=120,padL=8,padR=8,padT=10,padB=18;
-  const xs=hist.map(p=>new Date(p.t).getTime());
-  const ys=hist.map(p=>p.ch);
-  const x0=xs[0],x1=xs[xs.length-1]||(x0+1);
-  let ymin=Math.min(...ys),ymax=Math.max(...ys);
-  if(ymax-ymin<1){ymax+=1;ymin=Math.max(0,ymin-1);}
-  const pad=(ymax-ymin)*0.15;ymax+=pad;ymin=Math.max(0,ymin-pad);
-  const sx=t=>padL+((t-x0)/((x1-x0)||1))*(W-padL-padR);
-  const sy=v=>padT+(1-(v-ymin)/((ymax-ymin)||1))*(H-padT-padB);
-  let line='';
-  hist.forEach((p,i)=>{line+=(i?'L':'M')+sx(xs[i]).toFixed(1)+' '+sy(p.ch).toFixed(1)+' ';});
-  const lastX=sx(xs[xs.length-1]),lastY=sy(ys[ys.length-1]);
-  const area=`M${sx(x0).toFixed(1)} ${H-padB} `
-    +hist.map((p,i)=>'L'+sx(xs[i]).toFixed(1)+' '+sy(p.ch).toFixed(1)).join(' ')
-    +` L${lastX.toFixed(1)} ${H-padB} Z`;
-  const fmtD=t=>new Date(t).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',timeZone:'America/Sao_Paulo'});
-  document.getElementById('evo-chart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Evolução da chance de título do Brasil ao longo da Copa">
-    <defs><linearGradient id="evoGrad" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0" stop-color="#f5c518" stop-opacity=".28"/><stop offset="1" stop-color="#f5c518" stop-opacity="0"/>
-    </linearGradient></defs>
-    <line class="evo-axis" x1="${padL}" y1="${H-padB}" x2="${W-padR}" y2="${H-padB}"/>
-    <path class="evo-area" d="${area}"/>
-    <path class="evo-line" d="${line.trim()}"/>
-    <circle class="evo-dot" cx="${lastX.toFixed(1)}" cy="${lastY.toFixed(1)}" r="3"/>
-    <text class="evo-lbl" x="${padL}" y="${(sy(ymax)+3).toFixed(1)}">${ymax.toFixed(0)}%</text>
-    <text class="evo-lbl" x="${padL}" y="${(sy(ymin)).toFixed(1)}">${ymin.toFixed(0)}%</text>
-    <text class="evo-lbl" x="${padL}" y="${H-5}">${fmtD(x0)}</text>
-    <text class="evo-lbl" x="${W-padR}" y="${H-5}" text-anchor="end">${fmtD(x1)}</text>
-  </svg>`;
-  const now=ys[ys.length-1],first=ys[0],diff=now-first;
-  document.getElementById('evo-now').textContent=now.toFixed(2)+'%';
-  const cor=diff>=0?'#00a84f':'#d05a4a',seta=diff>=0?'▲':'▼';
-  document.getElementById('evo-foot').innerHTML=`Desde o início do acompanhamento: `
-    +`<span style="color:${cor};font-weight:600">${seta} ${Math.abs(diff).toFixed(2)} ponto(s)</span>. `
-    +`Atualiza a cada rodada conforme os resultados saem.`;
 }
 
 /* ── grupos ── */
@@ -1198,7 +1140,6 @@ buildRanking();
 buildConf();
 buildJogos();
 buildCaminho();
-buildEvolucao();
 buildClassico();
 buildGrupos();
 displayUpdateTime();
