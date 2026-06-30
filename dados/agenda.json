@@ -614,5 +614,12 @@
     "away_team": "Gana",
     "utc": "2026-07-04T01:30:00Z",
     "stage": "LAST_32"
+  },
+  {
+    "id": 537376,
+    "home_team": "Canadá",
+    "away_team": "Marrocos",
+    "utc": "2026-07-04T17:00:00Z",
+    "stage": "LAST_16"
   }
 ]
