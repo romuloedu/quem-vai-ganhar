@@ -74,6 +74,31 @@ def update_agenda(matches):
         # id é usado para ordenar os confrontos do mata-mata na ordem do chaveamento
         agenda.append({"id": m.get("id"), "home_team": home, "away_team": away,
                        "utc": m["utcDate"], "stage": stage})
+
+    # Fallback manual: confrontos do mata-mata já conhecidos (ex.: app oficial)
+    # que a API ainda não publicou. A API tem PRECEDÊNCIA — se o par (em qualquer
+    # ordem) já veio da API, a entrada manual é ignorada. Assim que a API publicar
+    # o jogo, passamos a usar os dados dela automaticamente.
+    manual_path = DADOS / "mata_mata_manual.json"
+    if manual_path.exists():
+        pares = {(a["home_team"], a["away_team"]) for a in agenda}
+        pares |= {(a["away_team"], a["home_team"]) for a in agenda}
+        try:
+            manual = json.load(open(manual_path)).get("fixtures", [])
+        except Exception:
+            manual = []
+        add = 0
+        for f in manual:
+            h, a = f.get("home_team"), f.get("away_team")
+            if not h or not a or (h, a) in pares:
+                continue
+            agenda.append({"id": None, "home_team": h, "away_team": a,
+                           "utc": f["utc"], "stage": f.get("stage", "LAST_16"),
+                           "manual": True})
+            pares.add((h, a)); pares.add((a, h)); add += 1
+        if add:
+            print(f"  Fallback manual: {add} confronto(s) de mata-mata adicionado(s) (API ainda não publicou)")
+
     agenda.sort(key=lambda a: (a["utc"], a["home_team"]))
 
     agenda_path = DADOS / "agenda.json"

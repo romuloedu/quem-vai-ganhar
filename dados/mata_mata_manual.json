@@ -1,0 +1,8 @@
+{
+  "_nota": "Fallback: confrontos do mata-mata ja conhecidos (fonte: app oficial da FIFA/Apple) que a API ainda nao publicou. A API tem precedencia — assim que o mesmo par vier de la, esta entrada e ignorada automaticamente. Nomes em PT-BR, igual aos da agenda. utc em UTC (Brasilia = UTC-3).",
+  "fixtures": [
+    {"stage": "LAST_16", "home_team": "Canadá",   "away_team": "Marrocos", "utc": "2026-07-04T17:00:00Z"},
+    {"stage": "LAST_16", "home_team": "Paraguai", "away_team": "França",   "utc": "2026-07-04T21:00:00Z"},
+    {"stage": "LAST_16", "home_team": "Brasil",   "away_team": "Noruega",  "utc": "2026-07-05T20:00:00Z"}
+  ]
+}

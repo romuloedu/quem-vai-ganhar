@@ -621,5 +621,21 @@
     "away_team": "Marrocos",
     "utc": "2026-07-04T17:00:00Z",
     "stage": "LAST_16"
+  },
+  {
+    "id": null,
+    "home_team": "Paraguai",
+    "away_team": "França",
+    "utc": "2026-07-04T21:00:00Z",
+    "stage": "LAST_16",
+    "manual": true
+  },
+  {
+    "id": null,
+    "home_team": "Brasil",
+    "away_team": "Noruega",
+    "utc": "2026-07-05T20:00:00Z",
+    "stage": "LAST_16",
+    "manual": true
   }
 ]
