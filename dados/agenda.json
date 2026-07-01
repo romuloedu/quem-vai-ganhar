@@ -623,19 +623,17 @@
     "stage": "LAST_16"
   },
   {
-    "id": null,
+    "id": 537375,
     "home_team": "Paraguai",
     "away_team": "França",
     "utc": "2026-07-04T21:00:00Z",
-    "stage": "LAST_16",
-    "manual": true
+    "stage": "LAST_16"
   },
   {
-    "id": null,
+    "id": 537377,
     "home_team": "Brasil",
     "away_team": "Noruega",
     "utc": "2026-07-05T20:00:00Z",
-    "stage": "LAST_16",
-    "manual": true
+    "stage": "LAST_16"
   }
 ]
