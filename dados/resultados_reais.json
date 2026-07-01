@@ -725,5 +725,16 @@
     "country": "USA",
     "stage": "LAST_32",
     "winner": "home"
+  },
+  {
+    "date": "2026-07-01",
+    "home_team": "Inglaterra",
+    "away_team": "RD Congo",
+    "home_score": 2,
+    "away_score": 1,
+    "tournament": "FIFA World Cup",
+    "country": "USA",
+    "stage": "LAST_32",
+    "winner": "home"
   }
 ]
