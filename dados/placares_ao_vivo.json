@@ -1,3 +1,9 @@
 {
-  "jogos": {}
+  "jogos": {
+    "Estados Unidos|Bósnia e Herzegovina": {
+      "home_score": 1,
+      "away_score": 0,
+      "status": "IN_PLAY"
+    }
+  }
 }
