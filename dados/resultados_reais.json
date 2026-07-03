@@ -769,5 +769,16 @@
     "country": "USA",
     "stage": "LAST_32",
     "winner": "home"
+  },
+  {
+    "date": "2026-07-02",
+    "home_team": "Portugal",
+    "away_team": "Croácia",
+    "home_score": 2,
+    "away_score": 2,
+    "tournament": "FIFA World Cup",
+    "country": "USA",
+    "stage": "LAST_32",
+    "winner": null
   }
 ]
