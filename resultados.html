@@ -545,11 +545,14 @@ function buildCard(j){
   const prev=isKO?favAvanca(j):previsao(j);
   const prevLabel={home:j.home,draw:'Empate',away:j.away}[prev];
   const temRes=j.res!==null&&j.res!==undefined;
+  // Mata-mata disputado mas sem avançante informado (ex.: pênaltis não resolvidos na API)
+  const semAvanco=isKO&&temRes&&!j.winner;
   const ok=acertou(j);
   const ko=kickoffOf(j);
   const koMs=ko?ko.getTime():null;
   let bClass='pending',bText='Aguardando';
-  if(temRes){bClass=ok?'hit':'miss';bText=ok?'Acertou':'Errou';}
+  if(temRes&&!semAvanco){bClass=ok?'hit':'miss';bText=ok?'Acertou':'Errou';}
+  else if(semAvanco){bClass='pending';bText='Pênaltis';}
   else if(koMs){
     const maxMin=isKO?300:185;
     const now=Date.now();
@@ -573,9 +576,13 @@ function buildCard(j){
       const actual=j.winner==='home'?j.home:(j.winner==='away'?j.away:null);
       const verbo=isThird?'vitória de':'avanço de';
       const verboPast=isThird?'venceu':'avançou';
-      const txt=ok
-        ?`Modelo acertou · previa ${verbo} <b>${prevLabel}</b>`
-        :`Modelo errou · previa <b>${prevLabel}</b>, ${verboPast} <b>${actual||'—'}</b>`;
+      let txt;
+      if(semAvanco)
+        txt=`${isThird?'Empate':'Empate no tempo normal'} — decidido nos pênaltis · avançante a confirmar (previa ${verbo} <b>${prevLabel}</b>)`;
+      else
+        txt=ok
+          ?`Modelo acertou · previa ${verbo} <b>${prevLabel}</b>`
+          :`Modelo errou · previa <b>${prevLabel}</b>, ${verboPast} <b>${actual||'—'}</b>`;
       resHtml=`<div class="log-resultado"><span class="log-resultado-desc">${txt}</span></div>`;
     }else{
       const pDesc=prev==='draw'?'Empate':prevLabel;

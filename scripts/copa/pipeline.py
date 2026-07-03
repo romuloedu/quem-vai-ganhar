@@ -338,6 +338,34 @@ class PipelineAtualizacao:
         atualizador = AtualizadorHTML(self.repo, previsor)
         atualizador.atualizar_index(results, df_bl, mkt_champion)
 
+    # ── Correções manuais ───────────────────────────────────
+
+    def _aplicar_correcoes_manuais(self) -> None:
+        """Completa/corrige resultados que a API deixou incompletos.
+
+        Ex.: jogo de mata-mata decidido nos pênaltis em que a API não informou o
+        avançante (winner). As correções ficam em dados/resultados_manual.json e
+        só preenchem campos de jogos que já vieram da API — sem inventar jogos.
+        """
+        if not self.repo.existe("resultados_manual.json"):
+            return
+        correcoes = self.repo.ler_json("resultados_manual.json", {}).get("correcoes", [])
+        if not correcoes:
+            return
+        reais = self.repo.ler_json("resultados_reais.json", [])
+        idx = {(r["home_team"], r["away_team"]): r for r in reais}
+        mudou = 0
+        for c in correcoes:
+            r = idx.get((c.get("home_team"), c.get("away_team")))
+            if r is None:
+                continue  # jogo ainda não veio da API — aguarda
+            for campo in ("winner", "penalties", "home_score", "away_score"):
+                if campo in c and r.get(campo) != c[campo]:
+                    r[campo] = c[campo]; mudou += 1
+        if mudou:
+            self.repo.salvar_json("resultados_reais.json", reais)
+            print(f"🩹 Correções manuais aplicadas ({mudou} campo(s))")
+
     # ── Ponto de entrada ────────────────────────────────────
 
     def executar(self) -> None:
@@ -345,6 +373,8 @@ class PipelineAtualizacao:
         random.seed(SEED)
         np.random.seed(SEED)
         print("\n🚀 ATUALIZAÇÃO COPA 2026\n")
+
+        self._aplicar_correcoes_manuais()
 
         # Passo 0: precisa de um PrevisorResultado com k fallback para congelar
         previsor_fallback = PrevisorResultado(k=0.75)

@@ -1,0 +1,6 @@
+{
+  "_nota": "Correcoes/complementos manuais de resultados que a API deixou incompletos ou errados (ex.: gol anulado, avancante nos penaltis nao informado). So preenche/corrige campos de jogos que JA vieram da API. Nomes em PT-BR, iguais aos de resultados_reais.json. winner: 'home' ou 'away'.",
+  "correcoes": [
+    {"stage": "LAST_32", "home_team": "Portugal", "away_team": "Croácia", "home_score": 2, "away_score": 1, "winner": "home"}
+  ]
+}

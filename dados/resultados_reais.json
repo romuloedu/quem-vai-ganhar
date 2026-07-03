@@ -775,11 +775,11 @@
     "home_team": "Portugal",
     "away_team": "Croácia",
     "home_score": 2,
-    "away_score": 2,
+    "away_score": 1,
     "tournament": "FIFA World Cup",
     "country": "USA",
     "stage": "LAST_32",
-    "winner": null
+    "winner": "home"
   },
   {
     "date": "2026-07-03",
