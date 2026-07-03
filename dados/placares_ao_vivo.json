@@ -1,3 +1,9 @@
 {
-  "jogos": {}
+  "jogos": {
+    "Argentina|Cabo Verde": {
+      "home_score": 1,
+      "away_score": 0,
+      "status": "IN_PLAY"
+    }
+  }
 }
