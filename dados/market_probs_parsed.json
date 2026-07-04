@@ -1,71 +1,70 @@
 {
   "match_odds": {
-    "Argentina|Cabo Verde": {
-      "p_home": 0.8496,
-      "p_draw": 0.1089,
-      "p_away": 0.0415,
-      "n_bm": 25
-    },
     "Colômbia|Gana": {
-      "p_home": 0.6703,
-      "p_draw": 0.2182,
-      "p_away": 0.1116,
-      "n_bm": 25
+      "p_home": 0.6678,
+      "p_draw": 0.2222,
+      "p_away": 0.1099,
+      "n_bm": 24
     },
     "Canadá|Marrocos": {
-      "p_home": 0.2056,
-      "p_draw": 0.286,
-      "p_away": 0.5083,
-      "n_bm": 25
+      "p_home": 0.205,
+      "p_draw": 0.2836,
+      "p_away": 0.5114,
+      "n_bm": 24
     },
     "Paraguai|França": {
-      "p_home": 0.0571,
-      "p_draw": 0.1381,
-      "p_away": 0.8048,
-      "n_bm": 25
+      "p_home": 0.0536,
+      "p_draw": 0.1351,
+      "p_away": 0.8112,
+      "n_bm": 24
     },
     "Brasil|Noruega": {
-      "p_home": 0.5221,
-      "p_draw": 0.2575,
-      "p_away": 0.2204,
-      "n_bm": 25
+      "p_home": 0.5244,
+      "p_draw": 0.2571,
+      "p_away": 0.2185,
+      "n_bm": 24
     },
     "México|Inglaterra": {
-      "p_home": 0.3042,
-      "p_draw": 0.2991,
-      "p_away": 0.3967,
-      "n_bm": 25
+      "p_home": 0.3076,
+      "p_draw": 0.299,
+      "p_away": 0.3933,
+      "n_bm": 24
     },
     "Portugal|Espanha": {
-      "p_home": 0.2364,
-      "p_draw": 0.2638,
-      "p_away": 0.4998,
-      "n_bm": 25
+      "p_home": 0.2365,
+      "p_draw": 0.2635,
+      "p_away": 0.5,
+      "n_bm": 24
     },
     "Estados Unidos|Bélgica": {
-      "p_home": 0.3505,
-      "p_draw": 0.2837,
-      "p_away": 0.3657,
-      "n_bm": 25
+      "p_home": 0.3473,
+      "p_draw": 0.2839,
+      "p_away": 0.3687,
+      "n_bm": 24
+    },
+    "Argentina|Egito": {
+      "p_home": 0.7128,
+      "p_draw": 0.1902,
+      "p_away": 0.097,
+      "n_bm": 11
     }
   },
   "champion_odds": {
-    "França": 31.16,
-    "Argentina": 17.45,
-    "Espanha": 12.72,
-    "Inglaterra": 8.14,
-    "Brasil": 6.66,
-    "Portugal": 6.43,
-    "México": 3.16,
-    "Colômbia": 2.73,
-    "Estados Unidos": 2.73,
-    "Marrocos": 2.78,
-    "Noruega": 2.06,
-    "Bélgica": 1.68,
-    "Suíça": 1.21,
-    "Egito": 0.3,
-    "Canadá": 0.27,
-    "Cabo Verde": 0.15,
+    "França": 31.93,
+    "Argentina": 16.68,
+    "Espanha": 12.86,
+    "Inglaterra": 8.05,
+    "Brasil": 6.73,
+    "Portugal": 6.5,
+    "México": 3.04,
+    "Colômbia": 2.85,
+    "Estados Unidos": 2.68,
+    "Marrocos": 2.72,
+    "Noruega": 1.97,
+    "Bélgica": 1.7,
+    "Suíça": 1.31,
+    "Egito": 0.33,
+    "Canadá": 0.28,
     "Paraguai": 0.19,
     "Gana": 0.17
   }
