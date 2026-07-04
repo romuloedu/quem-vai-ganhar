@@ -644,10 +644,31 @@
     "stage": "LAST_16"
   },
   {
+    "id": 537379,
+    "home_team": "Portugal",
+    "away_team": "Espanha",
+    "utc": "2026-07-06T19:00:00Z",
+    "stage": "LAST_16"
+  },
+  {
     "id": 537380,
     "home_team": "Estados Unidos",
     "away_team": "Bélgica",
     "utc": "2026-07-07T00:00:00Z",
+    "stage": "LAST_16"
+  },
+  {
+    "id": 537381,
+    "home_team": "Argentina",
+    "away_team": "Egito",
+    "utc": "2026-07-07T16:00:00Z",
+    "stage": "LAST_16"
+  },
+  {
+    "id": 537382,
+    "home_team": "Suíça",
+    "away_team": "Colômbia",
+    "utc": "2026-07-07T20:00:00Z",
     "stage": "LAST_16"
   }
 ]
