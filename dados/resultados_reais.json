@@ -814,5 +814,16 @@
     "country": "USA",
     "stage": "LAST_32",
     "winner": "home"
+  },
+  {
+    "date": "2026-07-04",
+    "home_team": "Colômbia",
+    "away_team": "Gana",
+    "home_score": 1,
+    "away_score": 0,
+    "tournament": "FIFA World Cup",
+    "country": "USA",
+    "stage": "LAST_32",
+    "winner": "home"
   }
 ]
