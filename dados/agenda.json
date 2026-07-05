@@ -670,5 +670,12 @@
     "away_team": "Colômbia",
     "utc": "2026-07-07T20:00:00Z",
     "stage": "LAST_16"
+  },
+  {
+    "id": 537383,
+    "home_team": "França",
+    "away_team": "Marrocos",
+    "utc": "2026-07-09T20:00:00Z",
+    "stage": "QUARTER_FINALS"
   }
 ]
