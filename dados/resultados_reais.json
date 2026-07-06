@@ -858,5 +858,16 @@
     "country": "USA",
     "stage": "LAST_16",
     "winner": "away"
+  },
+  {
+    "date": "2026-07-06",
+    "home_team": "México",
+    "away_team": "Inglaterra",
+    "home_score": 2,
+    "away_score": 3,
+    "tournament": "FIFA World Cup",
+    "country": "USA",
+    "stage": "LAST_16",
+    "winner": "away"
   }
 ]
