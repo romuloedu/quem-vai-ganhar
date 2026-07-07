@@ -902,5 +902,16 @@
     "country": "USA",
     "stage": "LAST_16",
     "winner": "home"
+  },
+  {
+    "date": "2026-07-07",
+    "home_team": "Suíça",
+    "away_team": "Colômbia",
+    "home_score": 0,
+    "away_score": 0,
+    "tournament": "FIFA World Cup",
+    "country": "USA",
+    "stage": "LAST_16",
+    "winner": null
   }
 ]
