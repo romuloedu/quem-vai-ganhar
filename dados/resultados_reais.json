@@ -880,5 +880,16 @@
     "country": "USA",
     "stage": "LAST_16",
     "winner": "away"
+  },
+  {
+    "date": "2026-07-07",
+    "home_team": "Estados Unidos",
+    "away_team": "Bélgica",
+    "home_score": 1,
+    "away_score": 4,
+    "tournament": "FIFA World Cup",
+    "country": "USA",
+    "stage": "LAST_16",
+    "winner": "away"
   }
 ]

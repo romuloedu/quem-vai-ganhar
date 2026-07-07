@@ -1,9 +1,3 @@
 {
-  "jogos": {
-    "Estados Unidos|Bélgica": {
-      "home_score": 1,
-      "away_score": 3,
-      "status": "IN_PLAY"
-    }
-  }
+  "jogos": {}
 }
