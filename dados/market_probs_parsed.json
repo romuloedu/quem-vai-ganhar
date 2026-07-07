@@ -1,46 +1,39 @@
 {
   "match_odds": {
-    "Argentina|Egito": {
-      "p_home": 0.3956,
-      "p_draw": 0.3221,
-      "p_away": 0.2822,
-      "n_bm": 16
-    },
     "Suíça|Colômbia": {
-      "p_home": 0.2638,
-      "p_draw": 0.3104,
-      "p_away": 0.4258,
+      "p_home": 0.2677,
+      "p_draw": 0.3168,
+      "p_away": 0.4155,
       "n_bm": 25
     },
     "França|Marrocos": {
-      "p_home": 0.6099,
+      "p_home": 0.6097,
       "p_draw": 0.2415,
-      "p_away": 0.1486,
+      "p_away": 0.1488,
       "n_bm": 25
     },
     "Espanha|Bélgica": {
-      "p_home": 0.5921,
-      "p_draw": 0.2396,
-      "p_away": 0.1684,
+      "p_home": 0.5947,
+      "p_draw": 0.2379,
+      "p_away": 0.1674,
       "n_bm": 25
     },
     "Noruega|Inglaterra": {
-      "p_home": 0.2387,
-      "p_draw": 0.2602,
-      "p_away": 0.5011,
+      "p_home": 0.235,
+      "p_draw": 0.2593,
+      "p_away": 0.5057,
       "n_bm": 25
     }
   },
   "champion_odds": {
-    "França": 33.21,
-    "Espanha": 19.89,
-    "Inglaterra": 16.58,
-    "Argentina": 11.81,
-    "Noruega": 6.52,
-    "Colômbia": 4.39,
-    "Marrocos": 2.78,
+    "França": 31.82,
+    "Espanha": 19.65,
+    "Argentina": 17.8,
+    "Inglaterra": 15.46,
+    "Noruega": 5.31,
+    "Colômbia": 3.49,
+    "Marrocos": 2.77,
     "Bélgica": 2.62,
-    "Suíça": 1.38,
-    "Egito": 0.82
+    "Suíça": 1.07
   }
 }
