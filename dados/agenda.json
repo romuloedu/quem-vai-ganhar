@@ -691,5 +691,12 @@
     "away_team": "Inglaterra",
     "utc": "2026-07-11T21:00:00Z",
     "stage": "QUARTER_FINALS"
+  },
+  {
+    "id": 537386,
+    "home_team": "Argentina",
+    "away_team": "Suíça",
+    "utc": "2026-07-12T01:00:00Z",
+    "stage": "QUARTER_FINALS"
   }
 ]
