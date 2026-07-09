@@ -913,5 +913,16 @@
     "country": "USA",
     "stage": "LAST_16",
     "winner": null
+  },
+  {
+    "date": "2026-07-09",
+    "home_team": "França",
+    "away_team": "Marrocos",
+    "home_score": 2,
+    "away_score": 0,
+    "tournament": "FIFA World Cup",
+    "country": "USA",
+    "stage": "QUARTER_FINALS",
+    "winner": "home"
   }
 ]
