@@ -1,3 +1,9 @@
 {
-  "jogos": {}
+  "jogos": {
+    "Espanha|Bélgica": {
+      "home_score": 1,
+      "away_score": 1,
+      "status": "PAUSED"
+    }
+  }
 }
