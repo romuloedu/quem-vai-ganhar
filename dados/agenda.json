@@ -698,5 +698,12 @@
     "away_team": "Suíça",
     "utc": "2026-07-12T01:00:00Z",
     "stage": "QUARTER_FINALS"
+  },
+  {
+    "id": 537387,
+    "home_team": "França",
+    "away_team": "Espanha",
+    "utc": "2026-07-14T19:00:00Z",
+    "stage": "SEMI_FINALS"
   }
 ]

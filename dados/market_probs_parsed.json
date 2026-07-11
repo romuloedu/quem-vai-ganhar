@@ -1,30 +1,30 @@
 {
   "match_odds": {
     "Noruega|Inglaterra": {
-      "p_home": 0.2342,
-      "p_draw": 0.2581,
-      "p_away": 0.5077,
-      "n_bm": 24
+      "p_home": 0.2312,
+      "p_draw": 0.2556,
+      "p_away": 0.5132,
+      "n_bm": 23
     },
     "Argentina|Suíça": {
-      "p_home": 0.5682,
-      "p_draw": 0.2665,
-      "p_away": 0.1653,
+      "p_home": 0.5633,
+      "p_draw": 0.2709,
+      "p_away": 0.1658,
       "n_bm": 24
     },
     "França|Espanha": {
-      "p_home": 0.4342,
-      "p_draw": 0.2879,
-      "p_away": 0.2779,
-      "n_bm": 13
+      "p_home": 0.4089,
+      "p_draw": 0.2944,
+      "p_away": 0.2967,
+      "n_bm": 23
     }
   },
   "champion_odds": {
-    "França": 36.62,
-    "Espanha": 21.81,
-    "Argentina": 17.2,
-    "Inglaterra": 16.46,
-    "Noruega": 5.75,
-    "Suíça": 2.16
+    "França": 37.54,
+    "Espanha": 21.68,
+    "Argentina": 16.94,
+    "Inglaterra": 16.36,
+    "Noruega": 5.47,
+    "Suíça": 1.99
   }
 }
