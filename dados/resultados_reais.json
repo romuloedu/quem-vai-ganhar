@@ -935,5 +935,16 @@
     "country": "USA",
     "stage": "QUARTER_FINALS",
     "winner": "home"
+  },
+  {
+    "date": "2026-07-11",
+    "home_team": "Noruega",
+    "away_team": "Inglaterra",
+    "home_score": 1,
+    "away_score": 2,
+    "tournament": "FIFA World Cup",
+    "country": "USA",
+    "stage": "QUARTER_FINALS",
+    "winner": "away"
   }
 ]
