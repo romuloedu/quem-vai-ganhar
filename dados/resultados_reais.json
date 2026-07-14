@@ -957,5 +957,16 @@
     "country": "USA",
     "stage": "QUARTER_FINALS",
     "winner": "home"
+  },
+  {
+    "date": "2026-07-14",
+    "home_team": "França",
+    "away_team": "Espanha",
+    "home_score": 0,
+    "away_score": 2,
+    "tournament": "FIFA World Cup",
+    "country": "USA",
+    "stage": "SEMI_FINALS",
+    "winner": "away"
   }
 ]
