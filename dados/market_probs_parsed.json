@@ -1,22 +1,22 @@
 {
   "match_odds": {
     "França|Espanha": {
-      "p_home": 0.4121,
-      "p_draw": 0.2944,
-      "p_away": 0.2935,
-      "n_bm": 24
+      "p_home": 0.1892,
+      "p_draw": 0.282,
+      "p_away": 0.5288,
+      "n_bm": 15
     },
     "Inglaterra|Argentina": {
-      "p_home": 0.3791,
-      "p_draw": 0.311,
-      "p_away": 0.3098,
-      "n_bm": 21
+      "p_home": 0.3489,
+      "p_draw": 0.328,
+      "p_away": 0.3231,
+      "n_bm": 24
     }
   },
   "champion_odds": {
-    "França": 37.42,
-    "Espanha": 22.37,
-    "Inglaterra": 21.54,
-    "Argentina": 18.67
+    "Espanha": 35.22,
+    "Inglaterra": 23.89,
+    "França": 22.03,
+    "Argentina": 18.86
   }
 }

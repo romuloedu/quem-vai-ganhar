@@ -705,5 +705,12 @@
     "away_team": "Espanha",
     "utc": "2026-07-14T19:00:00Z",
     "stage": "SEMI_FINALS"
+  },
+  {
+    "id": 537388,
+    "home_team": "Inglaterra",
+    "away_team": "Argentina",
+    "utc": "2026-07-15T19:00:00Z",
+    "stage": "SEMI_FINALS"
   }
 ]
