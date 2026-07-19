@@ -1,14 +1,7 @@
 {
-  "match_odds": {
-    "Espanha|Argentina": {
-      "p_home": 0.4175,
-      "p_draw": 0.3146,
-      "p_away": 0.2679,
-      "n_bm": 25
-    }
-  },
+  "match_odds": {},
   "champion_odds": {
-    "Espanha": 58.26,
-    "Argentina": 41.74
+    "Argentina": 2.76,
+    "Espanha": 97.24
   }
 }

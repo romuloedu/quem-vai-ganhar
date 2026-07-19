@@ -792,9 +792,9 @@
     "pa": 31.71,
     "advH": 53.86,
     "advA": 46.14,
-    "res": null,
-    "placar": null,
-    "winner": null,
+    "res": "home",
+    "placar": "1-0",
+    "winner": "home",
     "placar_prev": "1-1",
     "time": "",
     "utc": "2026-07-19T19:00:00Z"

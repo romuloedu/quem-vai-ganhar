@@ -990,5 +990,16 @@
     "country": "USA",
     "stage": "THIRD_PLACE",
     "winner": "away"
+  },
+  {
+    "date": "2026-07-19",
+    "home_team": "Espanha",
+    "away_team": "Argentina",
+    "home_score": 1,
+    "away_score": 0,
+    "tournament": "FIFA World Cup",
+    "country": "USA",
+    "stage": "FINAL",
+    "winner": "home"
   }
 ]
