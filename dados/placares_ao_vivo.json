@@ -1,9 +1,3 @@
 {
-  "jogos": {
-    "França|Inglaterra": {
-      "home_score": 4,
-      "away_score": 5,
-      "status": "IN_PLAY"
-    }
-  }
+  "jogos": {}
 }

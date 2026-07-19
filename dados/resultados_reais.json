@@ -979,5 +979,16 @@
     "country": "USA",
     "stage": "SEMI_FINALS",
     "winner": "away"
+  },
+  {
+    "date": "2026-07-18",
+    "home_team": "França",
+    "away_team": "Inglaterra",
+    "home_score": 4,
+    "away_score": 6,
+    "tournament": "FIFA World Cup",
+    "country": "USA",
+    "stage": "THIRD_PLACE",
+    "winner": "away"
   }
 ]
